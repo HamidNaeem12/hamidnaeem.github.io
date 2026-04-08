@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Hamid Naeem | Law-Tech & AI Governance Specialist</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #1f2937;
+      --accent: #06b6d4;
+      --danger: #ef4444;
+      --success: #10b981;
+      --text-light: #f3f4f6;
+      --text-dark: #1f2937;
+      --bg-dark: #0f172a;
+      --bg-light: #f8fafc;
+      --border: #e5e7eb;
+    }
+
+    [data-theme="dark"] {
+      --text-light: #1f2937;
+      --text-dark: #f3f4f6;
+      --bg-dark: #1e293b;
+      --bg-light: #0f172a;
+      --border: #334155;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(248, 250, 252, 0.95);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 1rem 2rem;
+    }
+
+    [data-theme="dark"] nav {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg);
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header .content {
+      max-width: 800px;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    header .tagline {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1.5rem;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+    }
+
+    header .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    section h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text h3 {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    [data-theme="dark"] .about-text p {
+      color: #aaa;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-item {
+      background: var(--bg-light);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    [data-theme="dark"] .skill-item {
+      background: var(--bg-dark);
+    }
+
+    .skill-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .skill-item p {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    /* Experience Section */
+    .experience-item {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 0.5rem;
+      border-left: 4px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    [data-theme="dark"] .experience-item {
+      background: var(--bg-dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .experience-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+
+    .experience-header h3 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .experience-date {
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .experience-role {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-location {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .experience-item ul {
+      margin-left: 1.5rem;
+    }
+
+    .experience-item li {
+      margin-bottom: 0.75rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    [data-theme="dark"] .experience-item li {
+      color: #aaa;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    [data-theme="dark"] .project-card {
+      background: var(--bg-dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      padding: 2rem;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .project-header h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.3rem;
+      font-size: 0.8rem;
+      width: fit-content;
+      margin-top: 0.5rem;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-content p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    [data-theme="dark"] .project-content p {
+      color: #aaa;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-links a {
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.3rem;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .project-links a:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Certifications */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border-top: 4px solid var(--accent);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="dark"] .cert-item {
+      background: var(--bg-dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .cert-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .cert-item p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    [data-theme="dark"] .cert-item p {
+      color: #aaa;
+    }
+
+    /* Contact Section */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-text h4 {
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+    }
+
+    .contact-text p {
+      color: #666;
+    }
+
+    [data-theme="dark"] .contact-text p {
+      color: #aaa;
+    }
+
+    .contact-text a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .contact-text a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.3rem;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: white;
+      transition: border-color 0.3s;
+    }
+
+    [data-theme="dark"] .form-group input,
+    [data-theme="dark"] .form-group textarea {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      border-color: var(--border);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .social-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav .nav-links {
+        gap: 1rem;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      header .tagline {
+        font-size: 1.25rem;
+      }
+
+      .about-content,
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 3rem 1rem;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+
+      .experience-header {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#home" class="logo">HN</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header id="home">
+    <div class="content">
+      <h1>Muhammad Hamid Naeem</h1>
+      <p class="tagline">Building the Law-Tech Interface</p>
+      <p class="subtitle">AI Governance & Policy Specialist | LL.B + Data Science | Published Author</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+        <a href="#projects" class="btn btn-secondary">View My Work</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>The Law-Tech Intersection</h3>
+          <p>The legal system is being rewritten by technologies it does not yet fully understand. I work at that fault line — treating AI not as a tool, but as a jurisdictional problem that challenges how law defines responsibility, rights, and control.</p>
+          
+          <p>My training spans law (LL.B) and data science (BS) as a single framework for understanding algorithmic systems and how legal systems must respond to them. This approach has taken me across legal environments in the USA, UAE, India, and Pakistan.</p>
+
+          <p>I've built and scaled a legal platform connecting professionals across jurisdictions, published work on criminal justice and legal accessibility, and I'm focused on how AI governance is evolving from comparative regulatory models to the deeper question of how law adapts when decision-making is no longer purely human.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-item">
+            <h4>⚖️ Legal Expertise</h4>
+            <p>Constitutional law, criminal procedure, civil litigation, AI governance, policy drafting</p>
+          </div>
+          <div class="skill-item">
+            <h4>📊 Data & Tech</h4>
+            <p>Data analytics, Python, Excel, Looker Studio, legal tech platforms</p>
+          </div>
+          <div class="skill-item">
+            <h4>🌍 Global Perspective</h4>
+            <p>Cross-jurisdictional legal research, comparative regulatory analysis, international advocacy</p>
+          </div>
+          <div class="skill-item">
+            <h4>✍️ Communication</h4>
+            <p>Legal writing, policy documents, published articles, technical content</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" style="background: var(--bg-light);">
+    <div class="container">
+      <h2>Experience</h2>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>Lex Lata Consultants and Law Chambers</h3>
+            <div class="experience-role">Legal Intern</div>
+          </div>
+          <span class="experience-date">Feb 2026 - Present</span>
+        </div>
+        <div class="experience-location">📍 Islamabad, Pakistan</div>
+        <ul>
+          <li>Developing legal research and advisory capabilities in commercial and corporate law</li>
+          <li>Working with experienced practitioners on real-world legal matters and client counseling</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>Veritas and Vows (Founder)</h3>
+            <div class="experience-role">Founder & Editorial Lead</div>
+          </div>
+          <span class="experience-date">Jul 2025 - Present</span>
+        </div>
+        <div class="experience-location">📍 Faisalabad, Pakistan</div>
+        <ul>
+          <li>Built a legal knowledge platform from zero to 570+ professional followers across Pakistan, US, and UK</li>
+          <li>Lead 5-person editorial team producing original analysis on AI governance, constitutional law, and human rights policy</li>
+          <li>Achieved 128+ impressions per post with consistent cross-border audience engagement</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>Published Author - "Your First Legal Connection"</h3>
+            <div class="experience-role">Author</div>
+          </div>
+          <span class="experience-date">Aug 2025 - Present</span>
+        </div>
+        <div class="experience-location">📍 Amazon Kindle & Paperback</div>
+        <ul>
+          <li>Self-published 97-page practical guide on networking and mentorship for early law students</li>
+          <li>Managed end-to-end publishing: research, writing, formatting, and Amazon listing</li>
+          <li>Available on Amazon Kindle and Paperback formats</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>Legal Pathway Society</h3>
+            <div class="experience-role">Legal Intern - AI Governance Research</div>
+          </div>
+          <span class="experience-date">Jul - Oct 2025</span>
+        </div>
+        <div class="experience-location">📍 United States (Remote)</div>
+        <ul>
+          <li>Co-authored policy document comparing AI governance frameworks across US and EU jurisdictions</li>
+          <li>Drafted 3 policy documents supporting civil legal services for underrepresented communities</li>
+          <li>Completed 6 research assignments in 17-intern international cohort under Founder Gabriella Gornitzky</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>NyayaSarthak</h3>
+            <div class="experience-role">Legal Intern</div>
+          </div>
+          <span class="experience-date">Sep 2025</span>
+        </div>
+        <div class="experience-location">📍 New Delhi, India</div>
+        <ul>
+          <li>Drafted civil law documents: sale deed, rent deed, divorce petition, loan recovery petition</li>
+          <li>Gained exposure to Indian civil law standards under structured weekly supervision</li>
+          <li>Built practical drafting skills across property, family, and civil recovery law</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>Haji Law Chamber</h3>
+            <div class="experience-role">Legal Assistant</div>
+          </div>
+          <span class="experience-date">Jun - Aug 2025</span>
+        </div>
+        <div class="experience-location">📍 Samundri, Punjab, Pakistan</div>
+        <ul>
+          <li>Drafted 5-6 legal documents including family suit petitions and legal notices</li>
+          <li>Assisted on 4 active cases: divorce, child custody, and criminal matters</li>
+          <li>Managed files and communications for 19+ clients ensuring organized documentation</li>
+        </ul>
+      </div>
+
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <h3>Excelerate (Data Analytics Internship)</h3>
+            <div class="experience-role">Data Analytics Intern</div>
+          </div>
+          <span class="experience-date">Apr - May 2025</span>
+        </div>
+        <div class="experience-location">📍 Dubai, UAE (Remote)</div>
+        <ul>
+          <li>Analyzed 3 datasets producing 3 analytical reports with actionable insights</li>
+          <li>Built capstone dashboard in Excel & Looker Studio showcasing end-to-end analytics workflow</li>
+          <li>Collaborated in diverse 8-member international team across multiple time zones</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Your First Legal Connection</h3>
+            <span class="project-tag">Published Work</span>
+          </div>
+          <div class="project-content">
+            <p>A 97-page guide on networking and mentorship for early-career law students. Self-published on Amazon, demonstrating end-to-end publishing capability and expertise in legal career development.</p>
+            <div class="project-links">
+              <a href="https://amazon.com" target="_blank">View on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>AI Governance Research</h3>
+            <span class="project-tag">Policy</span>
+          </div>
+          <div class="project-content">
+            <p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions. Submitted to organizational leadership at Legal Pathway Society, focusing on jurisdictional approaches to algorithmic governance.</p>
+            <div class="project-links">
+              <a href="#contact">Request Copy</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Veritas & Vows Platform</h3>
+            <span class="project-tag">Legal Tech</span>
+          </div>
+          <div class="project-content">
+            <p>Built a legal knowledge platform connecting 570+ professionals. Led editorial team producing original analysis on AI governance, constitutional law, and human rights with cross-border reach (PK, US, UK).</p>
+            <div class="project-links">
+              <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Data Analytics Capstone</h3>
+            <span class="project-tag">Analytics</span>
+          </div>
+          <div class="project-content">
+            <p>Built interactive dashboard in Excel & Looker Studio analyzing real-world datasets. Delivered 3 analytical reports with actionable insights for strategic decision-making in international setting.</p>
+            <div class="project-links">
+              <a href="#contact">Portfolio Request</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Criminal Justice Article</h3>
+            <span class="project-tag">Legal Writing</span>
+          </div>
+          <div class="project-content">
+            <p>Published legal analysis: "Unpacking Justice: A Deep Dive into PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials" - examining landmark Pakistani jurisprudence.</p>
+            <div class="project-links">
+              <a href="#contact">View Article</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Legal Drafting Portfolio</h3>
+            <span class="project-tag">Technical Writing</span>
+          </div>
+          <div class="project-content">
+            <p>Drafted 10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India. Demonstrates technical legal writing and procedural accuracy.</p>
+            <div class="project-links">
+              <a href="#contact">Request Samples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" style="background: var(--bg-light);">
+    <div class="container">
+      <h2>Certifications & Programs</h2>
+      <div class="certs-grid">
+        <div class="cert-item">
+          <h4>Google Data Analytics Professional Certificate</h4>
+          <p>Comprehensive training in data analysis, visualization, and reporting</p>
+        </div>
+        <div class="cert-item">
+          <h4>Google Prompting Essentials</h4>
+          <p>AI prompting and effective interaction with language models</p>
+        </div>
+        <div class="cert-item">
+          <h4>McKinsey.org Forward Program</h4>
+          <p>Advanced leadership and strategic thinking training</p>
+        </div>
+        <div class="cert-item">
+          <h4>C++ Essentials</h4>
+          <p>Programming fundamentals and software development</p>
+        </div>
+        <div class="cert-item">
+          <h4>Project Management: The Basics for Success</h4>
+          <p>Project planning, execution, and team coordination</p>
+        </div>
+        <div class="cert-item">
+          <h4>Aspire Leaders Program</h4>
+          <p>Global leadership and personal development (Oct-Dec 2025)</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; text-align: center;">
+        <h3 style="color: var(--primary); margin-bottom: 1rem;">Professional Memberships</h3>
+        <p>American Bar Association (ABA) | American Psychological Association (APA)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">Let's Connect</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-text">
+              <h4>Phone</h4>
+              <p><a href="tel:+923094498176">+92 309 4498176</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🔗</div>
+            <div class="contact-text">
+              <h4>LinkedIn</h4>
+              <p><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">linkedin.com/in/hamidnaeemadvocate</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📝</div>
+            <div class="contact-text">
+              <h4>Substack</h4>
+              <p><a href="https://hamidnaeem.substack.com" target="_blank">hamidnaeem.substack.com</a></p>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--border);">
+            <h4 style="color: var(--primary); margin-bottom: 1rem;">Languages</h4>
+            <p>🇬🇧 English (Full Professional) | 🇵🇰 Urdu (Native) | 🇮🇳 Punjabi & Hindi</p>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3 style="color: var(--primary);">Send Me a Message</h3>
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">LinkedIn</a>
+        <a href="https://hamidnaeem.substack.com" target="_blank">Substack</a>
+        <a href="https://github.com/hamidnaeem" target="_blank">GitHub</a>
+        <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
+      </div>
+      <p>&copy; 2026 Muhammad Hamid Naeem. All rights reserved.</p>
+      <p style="font-size: 0.9rem; color: #aaa;">Building the law-tech interface | AI Governance & Policy</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      const toggle = document.querySelector('.theme-toggle');
+      toggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    }
+
+    // Load saved theme
+    window.addEventListener('load', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const toggle = document.querySelector('.theme-toggle');
+      toggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Form submission
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      
+      // For now, just show a success message
+      // In production, you'd send this to a backend service
+      alert('Thank you for reaching out! I will get back to you soon.');
+      form.reset();
+    }
+  </script>
+</body>
+</html>
