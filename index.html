@@ -3,1060 +3,427 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Hamid Naeem | Law-Tech & AI Governance Specialist</title>
+  <title>Muhammad Hamid Naeem | Law-Tech & AI Governance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1e40af;
-      --secondary: #1f2937;
-      --accent: #06b6d4;
-      --danger: #ef4444;
-      --success: #10b981;
-      --text-light: #f3f4f6;
-      --text-dark: #1f2937;
-      --bg-dark: #0f172a;
-      --bg-light: #f8fafc;
-      --border: #e5e7eb;
-    }
-
-    [data-theme="dark"] {
-      --text-light: #1f2937;
-      --text-dark: #f3f4f6;
-      --bg-dark: #1e293b;
-      --bg-light: #0f172a;
-      --border: #334155;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6;
-      color: var(--text-dark);
-      background: var(--bg-light);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    /* Navigation */
-    nav {
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(248, 250, 252, 0.95);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 1rem 2rem;
-    }
-
-    [data-theme="dark"] nav {
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    nav .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    nav .logo {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    nav .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      list-style: none;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-size: 0.95rem;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    .theme-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.25rem;
-      color: var(--text-dark);
-      transition: transform 0.3s;
-    }
-
-    .theme-toggle:hover {
-      transform: rotate(20deg);
-    }
-
-    /* Header */
-    header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 5rem 2rem;
-      text-align: center;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    header .content {
-      max-width: 800px;
-    }
-
-    header h1 {
-      font-size: 3.5rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-
-    header .tagline {
-      font-size: 1.5rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1.5rem;
-    }
-
-    header .subtitle {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 2rem;
-    }
-
-    header .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--primary);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Sections */
-    section {
-      padding: 5rem 2rem;
-    }
-
-    section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      text-align: center;
-      color: var(--primary);
-      position: relative;
-      padding-bottom: 1rem;
-    }
-
-    section h2:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 2px;
-    }
-
-    /* About Section */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .about-text h3 {
-      font-size: 1.5rem;
-      color: var(--secondary);
-      margin-bottom: 1rem;
-    }
-
-    .about-text p {
-      font-size: 1.05rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-      color: #555;
-    }
-
-    [data-theme="dark"] .about-text p {
-      color: #aaa;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-
-    .skill-item {
-      background: var(--bg-light);
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      border-left: 4px solid var(--primary);
-    }
-
-    [data-theme="dark"] .skill-item {
-      background: var(--bg-dark);
-    }
-
-    .skill-item h4 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .skill-item p {
-      color: var(--text-dark);
-      font-size: 0.95rem;
-    }
-
-    /* Experience Section */
-    .experience-item {
-      background: white;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border-radius: 0.5rem;
-      border-left: 4px solid var(--primary);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    [data-theme="dark"] .experience-item {
-      background: var(--bg-dark);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .experience-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .experience-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      margin-bottom: 1rem;
-    }
-
-    .experience-header h3 {
-      font-size: 1.3rem;
-      color: var(--primary);
-      margin: 0;
-    }
-
-    .experience-date {
-      background: var(--primary);
-      color: white;
-      padding: 0.4rem 0.8rem;
-      border-radius: 0.3rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .experience-role {
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .experience-location {
-      color: var(--text-dark);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .experience-item ul {
-      margin-left: 1.5rem;
-    }
-
-    .experience-item li {
-      margin-bottom: 0.75rem;
-      color: #666;
-      line-height: 1.6;
-    }
-
-    [data-theme="dark"] .experience-item li {
-      color: #aaa;
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      background: white;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    [data-theme="dark"] .project-card {
-      background: var(--bg-dark);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    }
-
-    .project-header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      color: white;
-      padding: 2rem;
-      min-height: 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .project-header h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-tag {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0.3rem 0.7rem;
-      border-radius: 0.3rem;
-      font-size: 0.8rem;
-      width: fit-content;
-      margin-top: 0.5rem;
-    }
-
-    .project-content {
-      padding: 1.5rem;
-    }
-
-    .project-content p {
-      color: #666;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    [data-theme="dark"] .project-content p {
-      color: #aaa;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .project-links a {
-      padding: 0.5rem 1rem;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      border-radius: 0.3rem;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
-
-    .project-links a:hover {
-      background: var(--primary-dark);
-    }
-
-    /* Certifications */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .cert-item {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      border-top: 4px solid var(--accent);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    [data-theme="dark"] .cert-item {
-      background: var(--bg-dark);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .cert-item h4 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      font-size: 1.05rem;
-    }
-
-    .cert-item p {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    [data-theme="dark"] .cert-item p {
-      color: #aaa;
-    }
-
-    /* Contact Section */
-    .contact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .contact-item {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .contact-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .contact-text h4 {
-      color: var(--primary);
-      margin-bottom: 0.3rem;
-      font-size: 1.05rem;
-    }
-
-    .contact-text p {
-      color: #666;
-    }
-
-    [data-theme="dark"] .contact-text p {
-      color: #aaa;
-    }
-
-    .contact-text a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .contact-text a:hover {
-      text-decoration: underline;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group label {
-      font-weight: 500;
-      color: var(--text-dark);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      padding: 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 0.3rem;
-      font-family: inherit;
-      font-size: 1rem;
-      color: var(--text-dark);
-      background: white;
-      transition: border-color 0.3s;
-    }
-
-    [data-theme="dark"] .form-group input,
-    [data-theme="dark"] .form-group textarea {
-      background: var(--bg-dark);
-      color: var(--text-light);
-      border-color: var(--border);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--secondary);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    footer p {
-      margin: 0.5rem 0;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      margin: 1.5rem 0;
-    }
-
-    .social-links a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-      font-weight: 500;
-    }
-
-    .social-links a:hover {
-      color: var(--accent);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav .nav-links {
-        gap: 1rem;
-      }
-
-      header h1 {
-        font-size: 2.5rem;
-      }
-
-      header .tagline {
-        font-size: 1.25rem;
-      }
-
-      .about-content,
-      .contact-content {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 3rem 1rem;
-      }
-
-      section h2 {
-        font-size: 2rem;
-      }
-
-      .experience-header {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+      --ink:       #111111;
+      --ink-mid:   #333333;
+      --ink-light: #666666;
+      --ink-faint: #999999;
+      --rule:      #dddddd;
+      --rule-dk:   #bbbbbb;
+      --paper:     #faf9f7;
+      --white:     #ffffff;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'IBM Plex Sans', sans-serif;
+      --mono:      'IBM Plex Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--white); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 3rem; height: 60px; }
+    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+    .nav-links a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); }
+
+    /* MOBILE NAV */
+    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+    .mob-close { position: absolute; top: 1.2rem; right: 2rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--ink-mid); font-family: var(--serif); }
+
+    /* HERO */
+    #home { min-height: 100vh; display: flex; align-items: flex-end; padding: 0 3rem 5rem; border-bottom: 1px solid var(--rule); background: var(--white); }
+    .hero-inner { max-width: 820px; }
+    .hero-meta { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; opacity: 0; animation: rise 0.7s 0.2s forwards; }
+    .hero-name { font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 2rem; opacity: 0; animation: rise 0.8s 0.35s forwards; }
+    .hero-name em { font-style: italic; color: var(--ink-mid); }
+    .hero-rule { width: 40px; height: 1px; background: var(--ink); margin-bottom: 2rem; opacity: 0; animation: rise 0.6s 0.5s forwards; }
+    .hero-desc { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; font-style: italic; color: var(--ink-light); line-height: 1.75; max-width: 580px; margin-bottom: 1rem; opacity: 0; animation: rise 0.7s 0.6s forwards; }
+    .hero-sub { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 2.5rem; opacity: 0; animation: rise 0.6s 0.75s forwards; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: rise 0.6s 0.9s forwards; }
+
+    /* BUTTONS */
+    .btn-ink { display: inline-block; padding: 0.7rem 1.75rem; background: var(--ink); color: var(--white); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); transition: background 0.2s; cursor: pointer; }
+    .btn-ink:hover { background: var(--ink-mid); }
+    .btn-line { display: inline-block; padding: 0.7rem 1.75rem; background: transparent; color: var(--ink-mid); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--rule-dk); transition: border-color 0.2s, color 0.2s; }
+    .btn-line:hover { border-color: var(--ink-mid); color: var(--ink); }
+
+    /* SECTION CHROME */
+    section { padding: 6rem 3rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .sec-hd { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+    .sec-num { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em; color: var(--ink-faint); flex-shrink: 0; }
+    .sec-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.1; }
+    .sec-title em { font-style: italic; color: var(--ink-mid); }
+
+    /* ABOUT */
+    #about { background: var(--paper); }
+    .about-grid { display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 1rem; line-height: 1.85; color: var(--ink-mid); margin-bottom: 1.4rem; }
+    .about-text p:first-child { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--ink); line-height: 1.75; }
+    .aside-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+    .skill-entry { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+    .skill-entry:last-child { border-bottom: none; }
+    .skill-entry h4 { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 0.3rem; }
+    .skill-entry p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.55; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .exp-row { display: grid; grid-template-columns: 175px 1fr; gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
+    .exp-row:last-child { border-bottom: none; }
+    .exp-date { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; color: var(--ink-faint); line-height: 1.7; margin-bottom: 0.5rem; }
+    .exp-badge { display: inline-block; font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.18rem 0.5rem; }
+    .exp-right h3 { font-family: var(--serif); font-size: 1.12rem; font-weight: 400; color: var(--ink); margin-bottom: 0.2rem; }
+    .exp-role { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.2rem; }
+    .exp-loc { font-size: 0.8rem; color: var(--ink-faint); margin-bottom: 0.9rem; }
+    .exp-right ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .exp-right li { font-size: 0.89rem; color: var(--ink-light); line-height: 1.65; padding-left: 1rem; position: relative; }
+    .exp-right li::before { content: '·'; position: absolute; left: 0; color: var(--ink-faint); }
+
+    /* PROJECTS */
+    #projects { background: var(--paper); }
+    .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    .proj-card { padding: 2rem 1.75rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--white); transition: background 0.2s; }
+    .proj-card:hover { background: var(--paper); }
+    .proj-n { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--ink-faint); margin-bottom: 1rem; }
+    .proj-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); line-height: 1.35; margin-bottom: 0.75rem; }
+    .proj-card p { font-size: 0.83rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.2rem; }
+    .proj-tag { font-family: var(--mono); font-size: 0.59rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); border-bottom: 1px solid var(--rule-dk); padding-bottom: 0.1rem; }
+
+    /* CREDENTIALS */
+    #certifications { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); margin-bottom: 2.5rem; }
+    .cred-card { padding: 1.5rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .cred-card h4 { font-family: var(--serif); font-size: 0.95rem; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; line-height: 1.4; }
+    .cred-card p { font-size: 0.77rem; color: var(--ink-faint); }
+    .mem-bar { border: 1px solid var(--rule); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; background: var(--paper); }
+    .mem-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+    .mem-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .mem-pill { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.25rem 0.7rem; }
+
+    /* CONTACT */
+    #contact { background: var(--paper); }
+    .contact-grid { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; align-items: start; }
+    .ct-item { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+    .ct-item:last-child { border-bottom: none; }
+    .ct-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.3rem; }
+    .ct-val, .ct-val a { font-size: 0.9rem; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+    .ct-val a:hover { color: var(--ink); }
+    .cf { display: flex; flex-direction: column; gap: 1.1rem; }
+    .cf-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .cf-field label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+    .cf-field input, .cf-field textarea { background: var(--white); border: 1px solid var(--rule); border-bottom-color: var(--rule-dk); padding: 0.7rem 0.9rem; font-family: var(--sans); font-size: 0.9rem; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s; -webkit-appearance: none; width: 100%; }
+    .cf-field input:focus, .cf-field textarea:focus { border-color: var(--ink); }
+    .cf-field textarea { resize: vertical; min-height: 110px; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: var(--paper); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: rgba(250,249,247,0.45); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,249,247,0.4); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--paper); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      section { padding: 4rem 1.5rem; }
+      #home { padding: 0 1.5rem 4rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .exp-row { grid-template-columns: 1fr; gap: 0.6rem; }
+      .exp-left { display: flex; align-items: center; gap: 0.75rem; }
+      .proj-grid, .cred-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
     }
   </style>
 </head>
-<body data-theme="light">
-  <!-- Navigation -->
-  <nav>
-    <div class="container">
-      <a href="#home" class="logo">HN</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-      </ul>
-    </div>
-  </nav>
+<body>
 
-  <!-- Header -->
-  <header id="home">
-    <div class="content">
-      <h1>Muhammad Hamid Naeem</h1>
-      <p class="tagline">Building the Law-Tech Interface</p>
-      <p class="subtitle">AI Governance & Policy Specialist | LL.B + Data Science | Published Author</p>
-      <div class="cta-buttons">
-        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-        <a href="#projects" class="btn btn-secondary">View My Work</a>
+<nav>
+  <a href="#home" class="nav-logo">Muhammad Hamid Naeem</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-burger" onclick="document.querySelector('.mob-nav').classList.add('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-nav">
+  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">✕</button>
+  <a href="#about" onclick="document.querySelector('.mob-nav').classList.remove('open')">About</a>
+  <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
+  <a href="#projects" onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
+  <a href="#certifications" onclick="document.querySelector('.mob-nav').classList.remove('open')">Credentials</a>
+  <a href="#contact" onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
+</div>
+
+<section id="home">
+  <div class="hero-inner">
+    <p class="hero-meta">LL.B · Data Science · AI Governance Specialist</p>
+    <h1 class="hero-name">Muhammad<br><em>Hamid Naeem</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-desc">Building the law-tech interface — where algorithmic systems meet legal accountability.</p>
+    <p class="hero-sub">Islamabad · Published Author · Cross-Jurisdictional Practice: PK · US · IN · AE</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-ink">Get In Touch</a>
+      <a href="#projects" class="btn-line">View Work</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">About <em>Me</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>The legal system is being rewritten by technologies it does not yet fully understand. I work at that fault line — treating AI not as a tool, but as a jurisdictional problem that challenges how law defines responsibility, rights, and control.</p>
+        <p>My training spans law (LL.B) and data science (BS) as a single framework for understanding algorithmic systems and how legal structures must respond. This approach has taken me across legal environments in the USA, UAE, India, and Pakistan.</p>
+        <p>I've built and scaled a legal platform connecting professionals across jurisdictions, published work on criminal justice and legal accessibility, and I'm focused on how AI governance is evolving from comparative regulatory models to the deeper question of how law adapts when decision-making is no longer purely human.</p>
+      </div>
+      <div>
+        <div class="aside-label">Areas of Practice</div>
+        <div class="skill-entry"><h4>Legal Expertise</h4><p>Constitutional law, criminal procedure, civil litigation, AI governance, policy drafting</p></div>
+        <div class="skill-entry"><h4>Data & Technology</h4><p>Python, data analytics, Excel, Looker Studio, legal tech platforms</p></div>
+        <div class="skill-entry"><h4>Global Practice</h4><p>Cross-jurisdictional research, comparative regulatory analysis, international advocacy</p></div>
+        <div class="skill-entry"><h4>Communication</h4><p>Legal writing, policy documents, published articles, editorial leadership</p></div>
+        <div class="skill-entry"><h4>Languages</h4><p>English (Full Professional) · Urdu (Native) · Punjabi · Hindi</p></div>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- About Section -->
-  <section id="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <h3>The Law-Tech Intersection</h3>
-          <p>The legal system is being rewritten by technologies it does not yet fully understand. I work at that fault line — treating AI not as a tool, but as a jurisdictional problem that challenges how law defines responsibility, rights, and control.</p>
-          
-          <p>My training spans law (LL.B) and data science (BS) as a single framework for understanding algorithmic systems and how legal systems must respond to them. This approach has taken me across legal environments in the USA, UAE, India, and Pakistan.</p>
-
-          <p>I've built and scaled a legal platform connecting professionals across jurisdictions, published work on criminal justice and legal accessibility, and I'm focused on how AI governance is evolving from comparative regulatory models to the deeper question of how law adapts when decision-making is no longer purely human.</p>
-        </div>
-
-        <div class="skills-grid">
-          <div class="skill-item">
-            <h4>⚖️ Legal Expertise</h4>
-            <p>Constitutional law, criminal procedure, civil litigation, AI governance, policy drafting</p>
-          </div>
-          <div class="skill-item">
-            <h4>📊 Data & Tech</h4>
-            <p>Data analytics, Python, Excel, Looker Studio, legal tech platforms</p>
-          </div>
-          <div class="skill-item">
-            <h4>🌍 Global Perspective</h4>
-            <p>Cross-jurisdictional legal research, comparative regulatory analysis, international advocacy</p>
-          </div>
-          <div class="skill-item">
-            <h4>✍️ Communication</h4>
-            <p>Legal writing, policy documents, published articles, technical content</p>
-          </div>
-        </div>
-      </div>
+<section id="experience">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Experi<em>ence</em></h2>
     </div>
-  </section>
 
-  <!-- Experience Section -->
-  <section id="experience" style="background: var(--bg-light);">
-    <div class="container">
-      <h2>Experience</h2>
-
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>Lex Lata Consultants and Law Chambers</h3>
-            <div class="experience-role">Legal Intern</div>
-          </div>
-          <span class="experience-date">Feb 2026 - Present</span>
-        </div>
-        <div class="experience-location">📍 Islamabad, Pakistan</div>
+    <div class="exp-row">
+      <div class="exp-left">
+        <div class="exp-date">Feb 2026 — Present</div>
+        <span class="exp-badge">Current</span>
+      </div>
+      <div class="exp-right">
+        <h3>Lex Lata Consultants &amp; Law Chambers</h3>
+        <div class="exp-role">Legal Intern</div>
+        <div class="exp-loc">Islamabad, Pakistan</div>
         <ul>
           <li>Developing legal research and advisory capabilities in commercial and corporate law</li>
           <li>Working with experienced practitioners on real-world legal matters and client counseling</li>
         </ul>
       </div>
+    </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>Veritas and Vows (Founder)</h3>
-            <div class="experience-role">Founder & Editorial Lead</div>
-          </div>
-          <span class="experience-date">Jul 2025 - Present</span>
-        </div>
-        <div class="experience-location">📍 Faisalabad, Pakistan</div>
+    <div class="exp-row">
+      <div class="exp-left"><div class="exp-date">Jul 2025 — Present</div></div>
+      <div class="exp-right">
+        <h3>Veritas and Vows</h3>
+        <div class="exp-role">Founder &amp; Editorial Lead</div>
+        <div class="exp-loc">Faisalabad, Pakistan</div>
         <ul>
           <li>Built a legal knowledge platform from zero to 570+ professional followers across Pakistan, US, and UK</li>
-          <li>Lead 5-person editorial team producing original analysis on AI governance, constitutional law, and human rights policy</li>
+          <li>Leads 5-person editorial team producing original analysis on AI governance, constitutional law, and human rights</li>
           <li>Achieved 128+ impressions per post with consistent cross-border audience engagement</li>
         </ul>
       </div>
+    </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>Published Author - "Your First Legal Connection"</h3>
-            <div class="experience-role">Author</div>
-          </div>
-          <span class="experience-date">Aug 2025 - Present</span>
-        </div>
-        <div class="experience-location">📍 Amazon Kindle & Paperback</div>
+    <div class="exp-row">
+      <div class="exp-left"><div class="exp-date">Aug 2025 — Present</div></div>
+      <div class="exp-right">
+        <h3>Your First Legal Connection</h3>
+        <div class="exp-role">Published Author</div>
+        <div class="exp-loc">Amazon Kindle &amp; Paperback</div>
         <ul>
           <li>Self-published 97-page practical guide on networking and mentorship for early law students</li>
           <li>Managed end-to-end publishing: research, writing, formatting, and Amazon listing</li>
-          <li>Available on Amazon Kindle and Paperback formats</li>
         </ul>
       </div>
+    </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>Legal Pathway Society</h3>
-            <div class="experience-role">Legal Intern - AI Governance Research</div>
-          </div>
-          <span class="experience-date">Jul - Oct 2025</span>
-        </div>
-        <div class="experience-location">📍 United States (Remote)</div>
+    <div class="exp-row">
+      <div class="exp-left"><div class="exp-date">Jul – Oct 2025</div></div>
+      <div class="exp-right">
+        <h3>Legal Pathway Society</h3>
+        <div class="exp-role">Legal Intern — AI Governance Research</div>
+        <div class="exp-loc">United States (Remote)</div>
         <ul>
           <li>Co-authored policy document comparing AI governance frameworks across US and EU jurisdictions</li>
           <li>Drafted 3 policy documents supporting civil legal services for underrepresented communities</li>
-          <li>Completed 6 research assignments in 17-intern international cohort under Founder Gabriella Gornitzky</li>
+          <li>Completed 6 research assignments in a 17-intern international cohort</li>
         </ul>
       </div>
+    </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>NyayaSarthak</h3>
-            <div class="experience-role">Legal Intern</div>
-          </div>
-          <span class="experience-date">Sep 2025</span>
-        </div>
-        <div class="experience-location">📍 New Delhi, India</div>
+    <div class="exp-row">
+      <div class="exp-left"><div class="exp-date">Sep 2025</div></div>
+      <div class="exp-right">
+        <h3>NyayaSarthak</h3>
+        <div class="exp-role">Legal Intern</div>
+        <div class="exp-loc">New Delhi, India</div>
         <ul>
           <li>Drafted civil law documents: sale deed, rent deed, divorce petition, loan recovery petition</li>
-          <li>Gained exposure to Indian civil law standards under structured weekly supervision</li>
           <li>Built practical drafting skills across property, family, and civil recovery law</li>
         </ul>
       </div>
+    </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>Haji Law Chamber</h3>
-            <div class="experience-role">Legal Assistant</div>
-          </div>
-          <span class="experience-date">Jun - Aug 2025</span>
-        </div>
-        <div class="experience-location">📍 Samundri, Punjab, Pakistan</div>
+    <div class="exp-row">
+      <div class="exp-left"><div class="exp-date">Jun – Aug 2025</div></div>
+      <div class="exp-right">
+        <h3>Haji Law Chamber</h3>
+        <div class="exp-role">Legal Assistant</div>
+        <div class="exp-loc">Samundri, Punjab, Pakistan</div>
         <ul>
-          <li>Drafted 5-6 legal documents including family suit petitions and legal notices</li>
+          <li>Drafted 5–6 legal documents including family suit petitions and legal notices</li>
           <li>Assisted on 4 active cases: divorce, child custody, and criminal matters</li>
-          <li>Managed files and communications for 19+ clients ensuring organized documentation</li>
+          <li>Managed files and communications for 19+ clients</li>
         </ul>
       </div>
+    </div>
 
-      <div class="experience-item">
-        <div class="experience-header">
-          <div>
-            <h3>Excelerate (Data Analytics Internship)</h3>
-            <div class="experience-role">Data Analytics Intern</div>
-          </div>
-          <span class="experience-date">Apr - May 2025</span>
-        </div>
-        <div class="experience-location">📍 Dubai, UAE (Remote)</div>
+    <div class="exp-row">
+      <div class="exp-left"><div class="exp-date">Apr – May 2025</div></div>
+      <div class="exp-right">
+        <h3>Excelerate</h3>
+        <div class="exp-role">Data Analytics Intern</div>
+        <div class="exp-loc">Dubai, UAE (Remote)</div>
         <ul>
           <li>Analyzed 3 datasets producing 3 analytical reports with actionable insights</li>
-          <li>Built capstone dashboard in Excel & Looker Studio showcasing end-to-end analytics workflow</li>
+          <li>Built capstone dashboard in Excel &amp; Looker Studio showcasing end-to-end analytics workflow</li>
           <li>Collaborated in diverse 8-member international team across multiple time zones</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Your First Legal Connection</h3>
-            <span class="project-tag">Published Work</span>
-          </div>
-          <div class="project-content">
-            <p>A 97-page guide on networking and mentorship for early-career law students. Self-published on Amazon, demonstrating end-to-end publishing capability and expertise in legal career development.</p>
-            <div class="project-links">
-              <a href="https://amazon.com" target="_blank">View on Amazon</a>
-            </div>
-          </div>
-        </div>
+<section id="projects">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Featured <em>Work</em></h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card"><div class="proj-n">01</div><h3>Your First Legal Connection</h3><p>97-page guide on networking and mentorship for early-career law students. Self-published on Amazon, end-to-end from research to listing.</p><span class="proj-tag">Published Work</span></div>
+      <div class="proj-card"><div class="proj-n">02</div><h3>AI Governance Research</h3><p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions, submitted to Legal Pathway Society leadership.</p><span class="proj-tag">Policy</span></div>
+      <div class="proj-card"><div class="proj-n">03</div><h3>Veritas &amp; Vows Platform</h3><p>Legal knowledge platform connecting 570+ professionals. Editorial coverage of AI governance, constitutional law, and human rights.</p><span class="proj-tag">Legal Tech</span></div>
+      <div class="proj-card"><div class="proj-n">04</div><h3>Data Analytics Capstone</h3><p>Interactive dashboard in Excel &amp; Looker Studio. 3 analytical reports delivering actionable insights for strategic decision-making.</p><span class="proj-tag">Analytics</span></div>
+      <div class="proj-card"><div class="proj-n">05</div><h3>Criminal Justice Article</h3><p>"Unpacking Justice: A Deep Dive into PLD 1966 SC 708 and the Pursuit of Truth in Criminal Trials" — landmark Pakistani jurisprudence.</p><span class="proj-tag">Legal Writing</span></div>
+      <div class="proj-card"><div class="proj-n">06</div><h3>Legal Drafting Portfolio</h3><p>10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India.</p><span class="proj-tag">Technical Writing</span></div>
+    </div>
+  </div>
+</section>
 
-        <div class="project-card">
-          <div class="project-header">
-            <h3>AI Governance Research</h3>
-            <span class="project-tag">Policy</span>
-          </div>
-          <div class="project-content">
-            <p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions. Submitted to organizational leadership at Legal Pathway Society, focusing on jurisdictional approaches to algorithmic governance.</p>
-            <div class="project-links">
-              <a href="#contact">Request Copy</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Veritas & Vows Platform</h3>
-            <span class="project-tag">Legal Tech</span>
-          </div>
-          <div class="project-content">
-            <p>Built a legal knowledge platform connecting 570+ professionals. Led editorial team producing original analysis on AI governance, constitutional law, and human rights with cross-border reach (PK, US, UK).</p>
-            <div class="project-links">
-              <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">Learn More</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Data Analytics Capstone</h3>
-            <span class="project-tag">Analytics</span>
-          </div>
-          <div class="project-content">
-            <p>Built interactive dashboard in Excel & Looker Studio analyzing real-world datasets. Delivered 3 analytical reports with actionable insights for strategic decision-making in international setting.</p>
-            <div class="project-links">
-              <a href="#contact">Portfolio Request</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Criminal Justice Article</h3>
-            <span class="project-tag">Legal Writing</span>
-          </div>
-          <div class="project-content">
-            <p>Published legal analysis: "Unpacking Justice: A Deep Dive into PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials" - examining landmark Pakistani jurisprudence.</p>
-            <div class="project-links">
-              <a href="#contact">View Article</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Legal Drafting Portfolio</h3>
-            <span class="project-tag">Technical Writing</span>
-          </div>
-          <div class="project-content">
-            <p>Drafted 10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India. Demonstrates technical legal writing and procedural accuracy.</p>
-            <div class="project-links">
-              <a href="#contact">Request Samples</a>
-            </div>
-          </div>
-        </div>
+<section id="certifications">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Creden<em>tials</em></h2>
+    </div>
+    <div class="cred-grid">
+      <div class="cred-card"><h4>Google Data Analytics Professional Certificate</h4><p>Data analysis, visualization, and reporting</p></div>
+      <div class="cred-card"><h4>Google Prompting Essentials</h4><p>AI prompting and language model interaction</p></div>
+      <div class="cred-card"><h4>McKinsey Forward Program</h4><p>Advanced leadership and strategic thinking</p></div>
+      <div class="cred-card"><h4>C++ Essentials</h4><p>Programming fundamentals</p></div>
+      <div class="cred-card"><h4>Project Management: The Basics for Success</h4><p>Planning, execution, and team coordination</p></div>
+      <div class="cred-card"><h4>Aspire Leaders Program</h4><p>Global leadership development · Oct–Dec 2025</p></div>
+    </div>
+    <div class="mem-bar">
+      <span class="mem-label">Memberships</span>
+      <div class="mem-pills">
+        <span class="mem-pill">American Bar Association</span>
+        <span class="mem-pill">American Psychological Association</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Certifications Section -->
-  <section id="certifications" style="background: var(--bg-light);">
-    <div class="container">
-      <h2>Certifications & Programs</h2>
-      <div class="certs-grid">
-        <div class="cert-item">
-          <h4>Google Data Analytics Professional Certificate</h4>
-          <p>Comprehensive training in data analysis, visualization, and reporting</p>
-        </div>
-        <div class="cert-item">
-          <h4>Google Prompting Essentials</h4>
-          <p>AI prompting and effective interaction with language models</p>
-        </div>
-        <div class="cert-item">
-          <h4>McKinsey.org Forward Program</h4>
-          <p>Advanced leadership and strategic thinking training</p>
-        </div>
-        <div class="cert-item">
-          <h4>C++ Essentials</h4>
-          <p>Programming fundamentals and software development</p>
-        </div>
-        <div class="cert-item">
-          <h4>Project Management: The Basics for Success</h4>
-          <p>Project planning, execution, and team coordination</p>
-        </div>
-        <div class="cert-item">
-          <h4>Aspire Leaders Program</h4>
-          <p>Global leadership and personal development (Oct-Dec 2025)</p>
-        </div>
-      </div>
-
-      <div style="margin-top: 4rem; text-align: center;">
-        <h3 style="color: var(--primary); margin-bottom: 1rem;">Professional Memberships</h3>
-        <p>American Bar Association (ABA) | American Psychological Association (APA)</p>
-      </div>
+<section id="contact">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Get In <em>Touch</em></h2>
     </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="container">
-      <h2>Get In Touch</h2>
-      <div class="contact-content">
-        <div class="contact-info">
-          <h3 style="color: var(--primary); margin-bottom: 1rem;">Let's Connect</h3>
-
-          <div class="contact-item">
-            <div class="contact-icon">📧</div>
-            <div class="contact-text">
-              <h4>Email</h4>
-              <p><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">📱</div>
-            <div class="contact-text">
-              <h4>Phone</h4>
-              <p><a href="tel:+923094498176">+92 309 4498176</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">🔗</div>
-            <div class="contact-text">
-              <h4>LinkedIn</h4>
-              <p><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">linkedin.com/in/hamidnaeemadvocate</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">📝</div>
-            <div class="contact-text">
-              <h4>Substack</h4>
-              <p><a href="https://hamidnaeem.substack.com" target="_blank">hamidnaeem.substack.com</a></p>
-            </div>
-          </div>
-
-          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--border);">
-            <h4 style="color: var(--primary); margin-bottom: 1rem;">Languages</h4>
-            <p>🇬🇧 English (Full Professional) | 🇵🇰 Urdu (Native) | 🇮🇳 Punjabi & Hindi</p>
-          </div>
-        </div>
-
-        <div class="contact-form">
-          <h3 style="color: var(--primary);">Send Me a Message</h3>
-          <form onsubmit="handleSubmit(event)">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-          </form>
-        </div>
+    <div class="contact-grid">
+      <div>
+        <div class="ct-item"><div class="ct-label">Email</div><div class="ct-val"><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></div></div>
+        <div class="ct-item"><div class="ct-label">Phone</div><div class="ct-val"><a href="tel:+923094498176">+92 309 4498176</a></div></div>
+        <div class="ct-item"><div class="ct-label">LinkedIn</div><div class="ct-val"><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">hamidnaeemadvocate</a></div></div>
+        <div class="ct-item"><div class="ct-label">Substack</div><div class="ct-val"><a href="https://hamidnaeem.substack.com" target="_blank">hamidnaeem.substack.com</a></div></div>
+        <div class="ct-item"><div class="ct-label">Location</div><div class="ct-val">Islamabad, Pakistan</div></div>
       </div>
+      <form class="cf" onsubmit="handleSubmit(event)">
+        <div class="cf-field"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
+        <div class="cf-field"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
+        <div class="cf-field"><label for="subject">Subject</label><input type="text" id="subject" name="subject" required></div>
+        <div class="cf-field"><label for="msg">Message</label><textarea id="msg" name="message" required></textarea></div>
+        <button type="submit" class="btn-ink" style="width:100%;padding:0.85rem;">Send Message</button>
+      </form>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="social-links">
-        <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">LinkedIn</a>
-        <a href="https://hamidnaeem.substack.com" target="_blank">Substack</a>
-        <a href="https://github.com/hamidnaeem" target="_blank">GitHub</a>
-        <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
-      </div>
-      <p>&copy; 2026 Muhammad Hamid Naeem. All rights reserved.</p>
-      <p style="font-size: 0.9rem; color: #aaa;">Building the law-tech interface | AI Governance & Policy</p>
-    </div>
-  </footer>
+<footer>
+  <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">LinkedIn</a>
+    <a href="https://hamidnaeem.substack.com" target="_blank">Substack</a>
+    <a href="https://github.com/hamidnaeem" target="_blank">GitHub</a>
+    <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
+  </div>
+</footer>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      const toggle = document.querySelector('.theme-toggle');
-      toggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
-    }
-
-    // Load saved theme
-    window.addEventListener('load', () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      const toggle = document.querySelector('.theme-toggle');
-      toggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
-    });
-
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Form submission
-    function handleSubmit(e) {
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
       e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-      
-      // For now, just show a success message
-      // In production, you'd send this to a backend service
-      alert('Thank you for reaching out! I will get back to you soon.');
-      form.reset();
-    }
-  </script>
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('Thank you for reaching out. I will get back to you shortly.');
+    e.target.reset();
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+        io.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.exp-row, .proj-card, .cred-card, .skill-entry').forEach(el => {
+    el.style.cssText += 'opacity:0;transform:translateY(12px);transition:opacity 0.55s ease,transform 0.55s ease;';
+    io.observe(el);
+  });
+</script>
 </body>
 </html>
