@@ -13,9 +13,10 @@
       --ink-mid:   #333333;
       --ink-light: #666666;
       --ink-faint: #999999;
-      --rule:      #dddddd;
-      --rule-dk:   #bbbbbb;
+      --rule:      #e0ddd8;
+      --rule-dk:   #c0bdb8;
       --paper:     #faf9f7;
+      --warm:      #f4f1ec;
       --white:     #ffffff;
       --serif:     'Playfair Display', Georgia, serif;
       --sans:      'IBM Plex Sans', sans-serif;
@@ -24,128 +25,169 @@
     html { scroll-behavior: smooth; }
     body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--white); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 3rem; height: 60px; }
-    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 3rem; height: 60px; }
+    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; }
     .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-    .nav-links a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--ink); }
     .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); }
+    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); transition: all 0.3s; }
 
-    /* MOBILE NAV */
+    /* ── MOBILE NAV ── */
     .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
     .mob-nav.open { display: flex; }
-    .mob-nav a { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--ink); text-decoration: none; }
-    .mob-close { position: absolute; top: 1.2rem; right: 2rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--ink-mid); font-family: var(--serif); }
+    .mob-nav a { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .mob-nav a:hover { color: var(--ink-light); }
+    .mob-close { position: absolute; top: 1.2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-mid); font-family: var(--serif); line-height: 1; }
 
-    /* HERO */
-    #home { min-height: 100vh; display: flex; align-items: flex-end; padding: 0 3rem 5rem; border-bottom: 1px solid var(--rule); background: var(--white); }
-    .hero-inner { max-width: 820px; }
-    .hero-meta { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; opacity: 0; animation: rise 0.7s 0.2s forwards; }
-    .hero-name { font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 2rem; opacity: 0; animation: rise 0.8s 0.35s forwards; }
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+    }
+    #home::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 1px;
+      background: var(--rule);
+    }
+    .hero-inner { max-width: 700px; }
+    .hero-kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.75rem; opacity: 0; animation: rise 0.6s 0.15s forwards; }
+    .hero-name { font-family: var(--serif); font-size: clamp(2.6rem, 6.5vw, 5.5rem); font-weight: 400; line-height: 1.06; color: var(--ink); margin-bottom: 1.75rem; opacity: 0; animation: rise 0.75s 0.3s forwards; }
     .hero-name em { font-style: italic; color: var(--ink-mid); }
-    .hero-rule { width: 40px; height: 1px; background: var(--ink); margin-bottom: 2rem; opacity: 0; animation: rise 0.6s 0.5s forwards; }
-    .hero-desc { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400; font-style: italic; color: var(--ink-light); line-height: 1.75; max-width: 580px; margin-bottom: 1rem; opacity: 0; animation: rise 0.7s 0.6s forwards; }
-    .hero-sub { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 2.5rem; opacity: 0; animation: rise 0.6s 0.75s forwards; }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: rise 0.6s 0.9s forwards; }
+    .hero-divider { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; opacity: 0; animation: rise 0.6s 0.5s forwards; }
+    .hero-divider span { width: 32px; height: 1px; background: var(--ink); display: block; }
+    .hero-divider p { font-family: var(--serif); font-size: clamp(0.95rem, 1.8vw, 1.1rem); font-style: italic; color: var(--ink-light); line-height: 1.6; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: rise 0.6s 0.65s forwards; }
 
-    /* BUTTONS */
-    .btn-ink { display: inline-block; padding: 0.7rem 1.75rem; background: var(--ink); color: var(--white); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); transition: background 0.2s; cursor: pointer; }
-    .btn-ink:hover { background: var(--ink-mid); }
-    .btn-line { display: inline-block; padding: 0.7rem 1.75rem; background: transparent; color: var(--ink-mid); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--rule-dk); transition: border-color 0.2s, color 0.2s; }
+    /* ── BUTTONS ── */
+    .btn-ink { display: inline-block; padding: 0.7rem 1.75rem; background: var(--ink); color: var(--white); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); transition: background 0.2s; cursor: pointer; }
+    .btn-ink:hover { background: var(--ink-mid); border-color: var(--ink-mid); }
+    .btn-line { display: inline-block; padding: 0.7rem 1.75rem; background: transparent; color: var(--ink-mid); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--rule-dk); transition: all 0.2s; }
     .btn-line:hover { border-color: var(--ink-mid); color: var(--ink); }
 
-    /* SECTION CHROME */
+    /* ── SECTION ── */
     section { padding: 6rem 3rem; }
     .container { max-width: 960px; margin: 0 auto; }
-    .sec-hd { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
-    .sec-num { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em; color: var(--ink-faint); flex-shrink: 0; }
-    .sec-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.1; }
+    .sec-hd { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+    .sec-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; color: var(--ink-faint); flex-shrink: 0; }
+    .sec-title { font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 400; color: var(--ink); line-height: 1.1; }
     .sec-title em { font-style: italic; color: var(--ink-mid); }
 
-    /* ABOUT */
+    /* ── ABOUT ── */
     #about { background: var(--paper); }
-    .about-grid { display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: start; }
-    .about-text p { font-size: 1rem; line-height: 1.85; color: var(--ink-mid); margin-bottom: 1.4rem; }
-    .about-text p:first-child { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--ink); line-height: 1.75; }
-    .aside-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
-    .skill-entry { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+    .about-grid { display: grid; grid-template-columns: 1fr 320px; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 1rem; line-height: 1.9; color: var(--ink-mid); margin-bottom: 1.4rem; }
+    .about-text p:first-child { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--ink); line-height: 1.8; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .aside-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+    .skill-entry { padding: 0.85rem 0; border-bottom: 1px solid var(--rule); }
     .skill-entry:last-child { border-bottom: none; }
-    .skill-entry h4 { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 0.3rem; }
-    .skill-entry p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.55; }
+    .skill-entry h4 { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 0.3rem; }
+    .skill-entry p { font-size: 0.83rem; color: var(--ink-light); line-height: 1.55; }
 
-    /* EXPERIENCE */
-    #experience { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .exp-row { display: grid; grid-template-columns: 175px 1fr; gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--rule); }
+    /* ── SERVICES ── */
+    #services { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); }
+    .svc-card { background: var(--white); padding: 2.25rem 2rem; }
+    .svc-icon { font-size: 1.4rem; margin-bottom: 1.25rem; display: block; line-height: 1; }
+    .svc-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); margin-bottom: 0.75rem; line-height: 1.3; }
+    .svc-card p { font-size: 0.86rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 1.25rem; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .svc-list li { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.05em; color: var(--ink-faint); padding-left: 0.8rem; position: relative; }
+    .svc-list li::before { content: '—'; position: absolute; left: 0; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--paper); }
+    .exp-row { display: grid; grid-template-columns: 175px 1fr; gap: 3rem; padding: 2.25rem 0; border-bottom: 1px solid var(--rule); }
     .exp-row:last-child { border-bottom: none; }
-    .exp-date { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em; color: var(--ink-faint); line-height: 1.7; margin-bottom: 0.5rem; }
-    .exp-badge { display: inline-block; font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.18rem 0.5rem; }
-    .exp-right h3 { font-family: var(--serif); font-size: 1.12rem; font-weight: 400; color: var(--ink); margin-bottom: 0.2rem; }
-    .exp-role { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.2rem; }
-    .exp-loc { font-size: 0.8rem; color: var(--ink-faint); margin-bottom: 0.9rem; }
+    .exp-date { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.05em; color: var(--ink-faint); line-height: 1.7; margin-bottom: 0.5rem; }
+    .exp-badge { display: inline-block; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.15rem 0.45rem; }
+    .exp-right h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.2rem; }
+    .exp-role { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.2rem; }
+    .exp-loc { font-size: 0.8rem; color: var(--ink-faint); margin-bottom: 0.85rem; }
     .exp-right ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .exp-right li { font-size: 0.89rem; color: var(--ink-light); line-height: 1.65; padding-left: 1rem; position: relative; }
+    .exp-right li { font-size: 0.88rem; color: var(--ink-light); line-height: 1.65; padding-left: 1rem; position: relative; }
     .exp-right li::before { content: '·'; position: absolute; left: 0; color: var(--ink-faint); }
 
-    /* PROJECTS */
-    #projects { background: var(--paper); }
-    .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
-    .proj-card { padding: 2rem 1.75rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--white); transition: background 0.2s; }
-    .proj-card:hover { background: var(--paper); }
-    .proj-n { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--ink-faint); margin-bottom: 1rem; }
-    .proj-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); line-height: 1.35; margin-bottom: 0.75rem; }
-    .proj-card p { font-size: 0.83rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.2rem; }
-    .proj-tag { font-family: var(--mono); font-size: 0.59rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); border-bottom: 1px solid var(--rule-dk); padding-bottom: 0.1rem; }
+    /* ── PROJECTS ── */
+    #projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); }
+    .proj-card { background: var(--paper); padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 0; transition: background 0.2s; }
+    .proj-card:hover { background: var(--warm); }
+    .proj-n { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--ink-faint); margin-bottom: 0.9rem; }
+    .proj-card h3 { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--ink); line-height: 1.35; margin-bottom: 0.7rem; }
+    .proj-card p { font-size: 0.82rem; color: var(--ink-light); line-height: 1.65; flex: 1; margin-bottom: 1.25rem; }
+    .proj-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+    .proj-tag { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+    .proj-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--ink-mid); text-decoration: none; border-bottom: 1px solid var(--rule-dk); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .proj-link:hover { color: var(--ink); border-color: var(--ink); }
 
-    /* CREDENTIALS */
-    #certifications { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); margin-bottom: 2.5rem; }
-    .cred-card { padding: 1.5rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    /* ── CREDENTIALS ── */
+    #certifications { background: var(--paper); }
+    .cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2.5rem; }
+    .cred-card { background: var(--white); padding: 1.5rem; }
     .cred-card h4 { font-family: var(--serif); font-size: 0.95rem; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; line-height: 1.4; }
-    .cred-card p { font-size: 0.77rem; color: var(--ink-faint); }
-    .mem-bar { border: 1px solid var(--rule); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; background: var(--paper); }
-    .mem-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+    .cred-card p { font-size: 0.76rem; color: var(--ink-faint); }
+    .mem-bar { border: 1px solid var(--rule); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; background: var(--warm); }
+    .mem-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
     .mem-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .mem-pill { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.25rem 0.7rem; }
+    .mem-pill { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em; color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.25rem 0.7rem; background: var(--white); }
 
-    /* CONTACT */
-    #contact { background: var(--paper); }
-    .contact-grid { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; align-items: start; }
-    .ct-item { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+    /* ── CONTACT ── */
+    #contact { background: var(--white); border-top: 1px solid var(--rule); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-intro { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--ink-light); line-height: 1.8; margin-bottom: 2.5rem; }
+    .ct-item { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
     .ct-item:last-child { border-bottom: none; }
-    .ct-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.3rem; }
+    .ct-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.3rem; }
     .ct-val, .ct-val a { font-size: 0.9rem; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
     .ct-val a:hover { color: var(--ink); }
     .cf { display: flex; flex-direction: column; gap: 1.1rem; }
+    .cf-note { font-size: 0.8rem; color: var(--ink-faint); font-style: italic; margin-bottom: 0.5rem; line-height: 1.6; }
     .cf-field { display: flex; flex-direction: column; gap: 0.4rem; }
-    .cf-field label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
-    .cf-field input, .cf-field textarea { background: var(--white); border: 1px solid var(--rule); border-bottom-color: var(--rule-dk); padding: 0.7rem 0.9rem; font-family: var(--sans); font-size: 0.9rem; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s; -webkit-appearance: none; width: 100%; }
-    .cf-field input:focus, .cf-field textarea:focus { border-color: var(--ink); }
+    .cf-field label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+    .cf-field input, .cf-field textarea { background: var(--paper); border: 1px solid var(--rule); border-bottom-color: var(--rule-dk); padding: 0.7rem 0.9rem; font-family: var(--sans); font-size: 0.9rem; font-weight: 300; color: var(--ink); outline: none; transition: border-color 0.2s, background 0.2s; -webkit-appearance: none; width: 100%; }
+    .cf-field input:focus, .cf-field textarea:focus { border-color: var(--ink); background: var(--white); }
     .cf-field textarea { resize: vertical; min-height: 110px; }
 
-    /* FOOTER */
-    footer { background: var(--ink); color: var(--paper); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .footer-copy { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: rgba(250,249,247,0.45); }
-    .footer-links { display: flex; gap: 2rem; }
-    .footer-links a { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,249,247,0.4); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--paper); }
+    /* ── FOOTER ── */
+    footer { background: var(--ink); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: rgba(250,249,247,0.4); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,249,247,0.38); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(250,249,247,0.85); }
 
     @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* RESPONSIVE */
-    @media (max-width: 800px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 820px) {
       nav { padding: 0 1.5rem; }
       .nav-links { display: none; }
       .nav-burger { display: flex; }
       section { padding: 4rem 1.5rem; }
-      #home { padding: 0 1.5rem 4rem; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .exp-row { grid-template-columns: 1fr; gap: 0.6rem; }
+      #home { padding: 7rem 1.5rem 4rem; min-height: auto; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .exp-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .exp-left { display: flex; align-items: center; gap: 0.75rem; }
-      .proj-grid, .cred-grid { grid-template-columns: 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .cred-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       footer { flex-direction: column; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .footer-links { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .cred-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -155,9 +197,9 @@
   <a href="#home" class="nav-logo">Muhammad Hamid Naeem</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Work</a></li>
-    <li><a href="#certifications">Credentials</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="nav-burger" onclick="document.querySelector('.mob-nav').classList.add('open')" aria-label="Menu">
@@ -168,19 +210,21 @@
 <div class="mob-nav">
   <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">✕</button>
   <a href="#about" onclick="document.querySelector('.mob-nav').classList.remove('open')">About</a>
+  <a href="#services" onclick="document.querySelector('.mob-nav').classList.remove('open')">Services</a>
   <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
   <a href="#projects" onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
-  <a href="#certifications" onclick="document.querySelector('.mob-nav').classList.remove('open')">Credentials</a>
   <a href="#contact" onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
 </div>
 
+<!-- HERO -->
 <section id="home">
   <div class="hero-inner">
-    <p class="hero-meta">LL.B · Data Science · AI Governance Specialist</p>
+    <p class="hero-kicker">LL.B · Data Science · AI Governance</p>
     <h1 class="hero-name">Muhammad<br><em>Hamid Naeem</em></h1>
-    <div class="hero-rule"></div>
-    <p class="hero-desc">Building the law-tech interface — where algorithmic systems meet legal accountability.</p>
-    <p class="hero-sub">Islamabad · Published Author · Cross-Jurisdictional Practice: PK · US · IN · AE</p>
+    <div class="hero-divider">
+      <span></span>
+      <p>Building the law-tech interface — where algorithmic systems meet legal accountability.</p>
+    </div>
     <div class="hero-btns">
       <a href="#contact" class="btn-ink">Get In Touch</a>
       <a href="#projects" class="btn-line">View Work</a>
@@ -188,6 +232,7 @@
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="sec-hd">
@@ -196,26 +241,75 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>The legal system is being rewritten by technologies it does not yet fully understand. I work at that fault line — treating AI not as a tool, but as a jurisdictional problem that challenges how law defines responsibility, rights, and control.</p>
-        <p>My training spans law (LL.B) and data science (BS) as a single framework for understanding algorithmic systems and how legal structures must respond. This approach has taken me across legal environments in the USA, UAE, India, and Pakistan.</p>
-        <p>I've built and scaled a legal platform connecting professionals across jurisdictions, published work on criminal justice and legal accessibility, and I'm focused on how AI governance is evolving from comparative regulatory models to the deeper question of how law adapts when decision-making is no longer purely human.</p>
+        <p>The legal system is being rewritten by technologies it doesn't yet fully understand. I work at that fault line — treating AI not as a tool, but as a jurisdictional problem that challenges how law defines responsibility, rights, and control.</p>
+        <p>My background spans law (LL.B) and data science — not as separate tracks, but as a single framework for understanding algorithmic systems and how legal structures must respond to them. That combination has taken me across legal environments in the USA, UAE, India, and Pakistan.</p>
+        <p>I've built and scaled a legal knowledge platform, published a book for early-career law students, and spent time doing real legal work — drafting documents, assisting on active cases, and researching AI policy for international organizations. I care about making law clearer, more accessible, and better prepared for what's coming.</p>
       </div>
       <div>
         <div class="aside-label">Areas of Practice</div>
         <div class="skill-entry"><h4>Legal Expertise</h4><p>Constitutional law, criminal procedure, civil litigation, AI governance, policy drafting</p></div>
         <div class="skill-entry"><h4>Data & Technology</h4><p>Python, data analytics, Excel, Looker Studio, legal tech platforms</p></div>
         <div class="skill-entry"><h4>Global Practice</h4><p>Cross-jurisdictional research, comparative regulatory analysis, international advocacy</p></div>
-        <div class="skill-entry"><h4>Communication</h4><p>Legal writing, policy documents, published articles, editorial leadership</p></div>
         <div class="skill-entry"><h4>Languages</h4><p>English (Full Professional) · Urdu (Native) · Punjabi · Hindi</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="experience">
+<!-- SERVICES -->
+<section id="services">
   <div class="container">
     <div class="sec-hd">
       <span class="sec-num">02</span>
+      <h2 class="sec-title">What I <em>Offer</em></h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <span class="svc-icon">⚖️</span>
+        <h3>AI Governance &amp; Policy Consulting</h3>
+        <p>I help organizations understand and navigate the evolving landscape of AI regulation — from EU and US frameworks to comparative jurisdictional analysis.</p>
+        <ul class="svc-list">
+          <li>Regulatory gap analysis</li>
+          <li>Policy document drafting</li>
+          <li>AI compliance frameworks</li>
+          <li>Comparative jurisdiction research</li>
+        </ul>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-icon">📄</span>
+        <h3>Legal Research &amp; Drafting</h3>
+        <p>Precise, well-researched legal documents and case analysis across family law, property, civil recovery, and criminal procedure in Pakistan and India.</p>
+        <ul class="svc-list">
+          <li>Petitions &amp; legal notices</li>
+          <li>Sale &amp; rent deeds</li>
+          <li>Case research &amp; briefs</li>
+          <li>Corporate &amp; commercial memos</li>
+        </ul>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-icon">✍️</span>
+        <h3>Legal Content &amp; Writing</h3>
+        <p>Clear, authoritative legal writing for platforms, publications, and organizations — turning complex legal ideas into content people can actually use.</p>
+        <ul class="svc-list">
+          <li>Legal articles &amp; analysis</li>
+          <li>Newsletter &amp; editorial content</li>
+          <li>Policy explainers</li>
+          <li>Book &amp; publication writing</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">03</span>
       <h2 class="sec-title">Experi<em>ence</em></h2>
     </div>
 
@@ -283,7 +377,7 @@
         <div class="exp-role">Legal Intern</div>
         <div class="exp-loc">New Delhi, India</div>
         <ul>
-          <li>Drafted civil law documents: sale deed, rent deed, divorce petition, loan recovery petition</li>
+          <li>Drafted civil documents: sale deed, rent deed, divorce petition, loan recovery petition</li>
           <li>Built practical drafting skills across property, family, and civil recovery law</li>
         </ul>
       </div>
@@ -310,36 +404,93 @@
         <div class="exp-role">Data Analytics Intern</div>
         <div class="exp-loc">Dubai, UAE (Remote)</div>
         <ul>
-          <li>Analyzed 3 datasets producing 3 analytical reports with actionable insights</li>
+          <li>Analyzed 3 datasets producing analytical reports with actionable insights</li>
           <li>Built capstone dashboard in Excel &amp; Looker Studio showcasing end-to-end analytics workflow</li>
-          <li>Collaborated in diverse 8-member international team across multiple time zones</li>
+          <li>Collaborated in a diverse 8-member international team across multiple time zones</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="sec-hd">
-      <span class="sec-num">03</span>
+      <span class="sec-num">04</span>
       <h2 class="sec-title">Featured <em>Work</em></h2>
     </div>
     <div class="proj-grid">
-      <div class="proj-card"><div class="proj-n">01</div><h3>Your First Legal Connection</h3><p>97-page guide on networking and mentorship for early-career law students. Self-published on Amazon, end-to-end from research to listing.</p><span class="proj-tag">Published Work</span></div>
-      <div class="proj-card"><div class="proj-n">02</div><h3>AI Governance Research</h3><p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions, submitted to Legal Pathway Society leadership.</p><span class="proj-tag">Policy</span></div>
-      <div class="proj-card"><div class="proj-n">03</div><h3>Veritas &amp; Vows Platform</h3><p>Legal knowledge platform connecting 570+ professionals. Editorial coverage of AI governance, constitutional law, and human rights.</p><span class="proj-tag">Legal Tech</span></div>
-      <div class="proj-card"><div class="proj-n">04</div><h3>Data Analytics Capstone</h3><p>Interactive dashboard in Excel &amp; Looker Studio. 3 analytical reports delivering actionable insights for strategic decision-making.</p><span class="proj-tag">Analytics</span></div>
-      <div class="proj-card"><div class="proj-n">05</div><h3>Criminal Justice Article</h3><p>"Unpacking Justice: A Deep Dive into PLD 1966 SC 708 and the Pursuit of Truth in Criminal Trials" — landmark Pakistani jurisprudence.</p><span class="proj-tag">Legal Writing</span></div>
-      <div class="proj-card"><div class="proj-n">06</div><h3>Legal Drafting Portfolio</h3><p>10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India.</p><span class="proj-tag">Technical Writing</span></div>
+
+      <div class="proj-card">
+        <div class="proj-n">01</div>
+        <h3>Your First Legal Connection</h3>
+        <p>97-page guide on networking and mentorship for early-career law students. Self-published on Amazon, end-to-end from research to listing.</p>
+        <div class="proj-footer">
+          <span class="proj-tag">Published Work</span>
+          <a href="https://www.amazon.in/Your-First-Legal-Connection-Networking-ebook/dp/B0FKZBX5ZT" target="_blank" rel="noopener" class="proj-link">View on Amazon →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-n">02</div>
+        <h3>AI Governance Research</h3>
+        <p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions, submitted to Legal Pathway Society leadership.</p>
+        <div class="proj-footer">
+          <span class="proj-tag">Policy</span>
+          <a href="#contact" class="proj-link">Request Copy →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-n">03</div>
+        <h3>Veritas &amp; Vows Platform</h3>
+        <p>Legal knowledge platform connecting 570+ professionals. Editorial coverage of AI governance, constitutional law, and human rights.</p>
+        <div class="proj-footer">
+          <span class="proj-tag">Legal Tech</span>
+          <a href="https://www.linkedin.com/company/veritas-and-vows" target="_blank" rel="noopener" class="proj-link">View on LinkedIn →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-n">04</div>
+        <h3>Data Analytics Capstone</h3>
+        <p>Interactive dashboard in Excel &amp; Looker Studio. Three analytical reports delivering actionable insights for strategic decision-making.</p>
+        <div class="proj-footer">
+          <span class="proj-tag">Analytics</span>
+          <a href="#contact" class="proj-link">Request Access →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-n">05</div>
+        <h3>Criminal Justice Article</h3>
+        <p>"Unpacking Justice: A Deep Dive into PLD 1966 SC 708 and the Pursuit of Truth in Criminal Trials" — landmark Pakistani jurisprudence.</p>
+        <div class="proj-footer">
+          <span class="proj-tag">Legal Writing</span>
+          <a href="#contact" class="proj-link">Request Article →</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-n">06</div>
+        <h3>Legal Drafting Portfolio</h3>
+        <p>10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India.</p>
+        <div class="proj-footer">
+          <span class="proj-tag">Technical Writing</span>
+          <a href="#contact" class="proj-link">Request Samples →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- CREDENTIALS -->
 <section id="certifications">
   <div class="container">
     <div class="sec-hd">
-      <span class="sec-num">04</span>
+      <span class="sec-num">05</span>
       <h2 class="sec-title">Creden<em>tials</em></h2>
     </div>
     <div class="cred-grid">
@@ -360,27 +511,32 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <div class="sec-hd">
-      <span class="sec-num">05</span>
+      <span class="sec-num">06</span>
       <h2 class="sec-title">Get In <em>Touch</em></h2>
     </div>
     <div class="contact-grid">
       <div>
+        <p class="contact-intro">Whether you need legal research, AI policy analysis, or just want to connect — I'd genuinely like to hear from you.</p>
         <div class="ct-item"><div class="ct-label">Email</div><div class="ct-val"><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></div></div>
         <div class="ct-item"><div class="ct-label">Phone</div><div class="ct-val"><a href="tel:+923094498176">+92 309 4498176</a></div></div>
         <div class="ct-item"><div class="ct-label">LinkedIn</div><div class="ct-val"><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank">hamidnaeemadvocate</a></div></div>
         <div class="ct-item"><div class="ct-label">Substack</div><div class="ct-val"><a href="https://hamidnaeem.substack.com" target="_blank">hamidnaeem.substack.com</a></div></div>
         <div class="ct-item"><div class="ct-label">Location</div><div class="ct-val">Islamabad, Pakistan</div></div>
       </div>
-      <form class="cf" onsubmit="handleSubmit(event)">
-        <div class="cf-field"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
-        <div class="cf-field"><label for="email">Email</label><input type="email" id="email" name="email" required></div>
-        <div class="cf-field"><label for="subject">Subject</label><input type="text" id="subject" name="subject" required></div>
-        <div class="cf-field"><label for="msg">Message</label><textarea id="msg" name="message" required></textarea></div>
-        <button type="submit" class="btn-ink" style="width:100%;padding:0.85rem;">Send Message</button>
-      </form>
+      <div>
+        <p class="cf-note">Fill in the form and I'll get back to you within 24–48 hours. Clicking send will open Gmail with your message pre-filled.</p>
+        <form class="cf" id="contactForm">
+          <div class="cf-field"><label for="c-name">Name</label><input type="text" id="c-name" required></div>
+          <div class="cf-field"><label for="c-email">Your Email</label><input type="email" id="c-email" required></div>
+          <div class="cf-field"><label for="c-subject">Subject</label><input type="text" id="c-subject" required></div>
+          <div class="cf-field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+          <button type="submit" class="btn-ink" style="width:100%;padding:0.85rem;">Send via Gmail</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -396,20 +552,30 @@
 </footer>
 
 <script>
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
       e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
+      const t = document.querySelector(href);
       if (t) t.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  function handleSubmit(e) {
+  // Gmail contact form
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Thank you for reaching out. I will get back to you shortly.');
-    e.target.reset();
-  }
+    const name    = document.getElementById('c-name').value.trim();
+    const email   = document.getElementById('c-email').value.trim();
+    const subject = document.getElementById('c-subject').value.trim();
+    const msg     = document.getElementById('c-msg').value.trim();
+    const body    = `Hi Hamid,\n\n${msg}\n\n---\nFrom: ${name}\nReply to: ${email}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=hamidnaeem2223ab@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(gmailUrl, '_blank');
+  });
 
+  // Scroll reveal
   const io = new IntersectionObserver(entries => {
     entries.forEach(el => {
       if (el.isIntersecting) {
@@ -418,10 +584,10 @@
         io.unobserve(el.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.07 });
 
-  document.querySelectorAll('.exp-row, .proj-card, .cred-card, .skill-entry').forEach(el => {
-    el.style.cssText += 'opacity:0;transform:translateY(12px);transition:opacity 0.55s ease,transform 0.55s ease;';
+  document.querySelectorAll('.exp-row, .proj-card, .cred-card, .skill-entry, .svc-card').forEach(el => {
+    el.style.cssText += 'opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease;';
     io.observe(el);
   });
 </script>
