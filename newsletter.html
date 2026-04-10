@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Gavel — Newsletter | Muhammad Hamid Naeem</title>
+  <meta name="description" content="Digital Gavel — law, technology, and justice in a data-driven world. Subscribe to Muhammad Hamid Naeem's newsletter on AI governance and legal tech.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --ink:       #111111;
+      --ink-mid:   #333333;
+      --ink-light: #666666;
+      --ink-faint: #999999;
+      --rule:      #e0ddd8;
+      --rule-dk:   #c0bdb8;
+      --paper:     #faf9f7;
+      --warm:      #f4f1ec;
+      --white:     #ffffff;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'IBM Plex Sans', sans-serif;
+      --mono:      'IBM Plex Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 3rem; height: 60px; }
+    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+    .nav-links a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); }
+    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); text-decoration: none; }
+    .mob-close { position: absolute; top: 1.2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-mid); font-family: var(--serif); }
+
+    /* HERO */
+    .nl-hero { padding: 9rem 3rem 5rem; background: var(--white); border-bottom: 1px solid var(--rule); }
+    .nl-hero-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: end; }
+    .nl-kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; opacity: 0; animation: rise 0.6s 0.1s forwards; }
+    .nl-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400; line-height: 1.05; color: var(--ink); margin-bottom: 1.25rem; opacity: 0; animation: rise 0.7s 0.25s forwards; }
+    .nl-title em { font-style: italic; color: var(--ink-mid); }
+    .nl-tagline { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--ink-light); line-height: 1.75; margin-bottom: 2rem; opacity: 0; animation: rise 0.6s 0.4s forwards; }
+    .nl-meta { display: flex; gap: 2rem; opacity: 0; animation: rise 0.6s 0.55s forwards; }
+    .nl-stat { }
+    .nl-stat-n { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--ink); line-height: 1; margin-bottom: 0.2rem; }
+    .nl-stat-l { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+    .nl-cta-box { border: 1px solid var(--rule-dk); padding: 2rem; background: var(--warm); opacity: 0; animation: rise 0.6s 0.5s forwards; }
+    .nl-cta-box h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; }
+    .nl-cta-box p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.5rem; }
+    .btn-ink { display: inline-block; padding: 0.75rem 1.75rem; background: var(--ink); color: var(--white); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); transition: background 0.2s; width: 100%; text-align: center; }
+    .btn-ink:hover { background: var(--ink-mid); }
+
+    /* ISSUES */
+    .issues-section { padding: 5rem 3rem; background: var(--paper); }
+    .container { max-width: 960px; margin: 0 auto; }
+    .sec-hd { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+    .sec-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; color: var(--ink-faint); flex-shrink: 0; }
+    .sec-title { font-family: var(--serif); font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 400; color: var(--ink); }
+    .sec-title em { font-style: italic; color: var(--ink-mid); }
+
+    .issue-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2px; }
+    .issue-card { background: var(--white); padding: 2rem 2rem; display: flex; flex-direction: column; transition: background 0.2s; text-decoration: none; }
+    .issue-card:hover { background: var(--warm); }
+    .issue-card.featured { background: var(--ink); }
+    .issue-card.featured:hover { background: #222; }
+    .issue-n { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--ink-faint); margin-bottom: 0.9rem; }
+    .issue-card.featured .issue-n { color: rgba(255,255,255,0.35); }
+    .issue-tag { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--rule-dk); padding: 0.15rem 0.5rem; display: inline-block; margin-bottom: 1rem; width: fit-content; }
+    .issue-card.featured .issue-tag { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.2); }
+    .issue-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); line-height: 1.35; margin-bottom: 0.75rem; flex: 1; }
+    .issue-card.featured h3 { color: var(--white); font-size: 1.35rem; }
+    .issue-card p { font-size: 0.83rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.25rem; }
+    .issue-card.featured p { color: rgba(255,255,255,0.55); }
+    .issue-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--rule); }
+    .issue-card.featured .issue-footer { border-top-color: rgba(255,255,255,0.15); }
+    .issue-date { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--ink-faint); }
+    .issue-card.featured .issue-date { color: rgba(255,255,255,0.35); }
+    .issue-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--ink-mid); border-bottom: 1px solid var(--rule-dk); padding-bottom: 1px; }
+    .issue-card.featured .issue-link { color: rgba(255,255,255,0.7); border-bottom-color: rgba(255,255,255,0.3); }
+
+    .issues-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); border-top: none; }
+
+    /* ABOUT STRIP */
+    .about-strip { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 4rem 3rem; }
+    .about-strip-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 4rem; }
+    .about-strip-text { flex: 1; }
+    .about-strip-text h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; }
+    .about-strip-text p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.75; }
+    .about-strip-links { display: flex; flex-direction: column; gap: 0.6rem; flex-shrink: 0; }
+    .strip-link { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.08em; color: var(--ink-mid); text-decoration: none; border-bottom: 1px solid var(--rule-dk); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .strip-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* FOOTER */
+    footer { background: var(--ink); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: rgba(250,249,247,0.4); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,249,247,0.38); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(250,249,247,0.85); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 820px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nl-hero { padding: 7rem 1.5rem 3rem; }
+      .nl-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .issue-featured { grid-template-columns: 1fr; }
+      .issues-grid { grid-template-columns: 1fr; }
+      .issues-section { padding: 3rem 1.5rem; }
+      .about-strip { padding: 3rem 1.5rem; }
+      .about-strip-inner { flex-direction: column; gap: 2rem; align-items: flex-start; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Muhammad Hamid Naeem</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Work</a></li>
+    <li><a href="calculator.html">Calculator</a></li>
+    <li><a href="newsletter.html" class="active">Newsletter</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="nav-burger" onclick="document.querySelector('.mob-nav').classList.add('open')" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-nav">
+  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">✕</button>
+  <a href="index.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Home</a>
+  <a href="calculator.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
+  <a href="newsletter.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
+  <a href="blog.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Blog</a>
+  <a href="index.html#contact" onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="nl-hero">
+  <div class="nl-hero-inner">
+    <div>
+      <p class="nl-kicker">Newsletter · Est. 2025</p>
+      <h1 class="nl-title">The Digital<br><em>Gavel</em></h1>
+      <p class="nl-tagline">Law, technology, and justice in a data-driven world — exploring the fault lines where algorithmic systems meet legal accountability.</p>
+      <div class="nl-meta">
+        <div class="nl-stat">
+          <div class="nl-stat-n">6</div>
+          <div class="nl-stat-l">Issues Published</div>
+        </div>
+        <div class="nl-stat">
+          <div class="nl-stat-n">570+</div>
+          <div class="nl-stat-l">Subscribers</div>
+        </div>
+        <div class="nl-stat">
+          <div class="nl-stat-n">3</div>
+          <div class="nl-stat-l">Countries Reached</div>
+        </div>
+      </div>
+    </div>
+    <div class="nl-cta-box">
+      <h3>Subscribe to Digital Gavel</h3>
+      <p>Get new issues on AI governance, constitutional law, and legal tech — delivered directly to your inbox.</p>
+      <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="btn-ink">Subscribe on Substack →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ISSUES -->
+<section class="issues-section">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">Recent <em>Issues</em></h2>
+    </div>
+
+    <!-- Featured -->
+    <div class="issue-featured">
+      <a href="https://digitalgavel.substack.com/p/the-agentic-liability-crisis-who" target="_blank" rel="noopener noreferrer" class="issue-card featured">
+        <div class="issue-n">Latest Issue</div>
+        <span class="issue-tag">AI Governance</span>
+        <h3>The Agentic Liability Crisis: Who Sues a Hallucination?</h3>
+        <p>As AI shifts from generating text to executing decisions, the law faces its most urgent test yet — who bears responsibility when an autonomous agent causes harm?</p>
+        <div class="issue-footer">
+          <span class="issue-date">Apr 2026</span>
+          <span class="issue-link">Read on Substack →</span>
+        </div>
+      </a>
+      <a href="https://digitalgavel.substack.com/p/pakistans-national-ai-policy-2025" target="_blank" rel="noopener noreferrer" class="issue-card">
+        <div class="issue-n">Issue 05</div>
+        <span class="issue-tag">Policy</span>
+        <h3>Pakistan's National AI Policy 2025: Blueprint for Progress or Digital Mirage?</h3>
+        <p>Pakistan's newly launched National AI Policy 2025 promises a digital revolution — examining what it delivers and where it falls short on regulatory depth.</p>
+        <div class="issue-footer">
+          <span class="issue-date">Oct 2025</span>
+          <span class="issue-link">Read on Substack →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Grid -->
+    <div class="issues-grid">
+      <a href="https://digitalgavel.substack.com/p/ai-in-the-courtroom-promise-or-peril" target="_blank" rel="noopener noreferrer" class="issue-card">
+        <div class="issue-n">Issue 04</div>
+        <span class="issue-tag">Legal Tech</span>
+        <h3>AI in the Courtroom: Promise or Peril?</h3>
+        <p>When algorithms enter the halls of justice, who safeguards fairness — and what happens when the model is wrong?</p>
+        <div class="issue-footer">
+          <span class="issue-date">Sep 2025</span>
+          <span class="issue-link">Read →</span>
+        </div>
+      </a>
+
+      <a href="https://digitalgavel.substack.com/p/digital-rights-in-a-data-driven-world" target="_blank" rel="noopener noreferrer" class="issue-card">
+        <div class="issue-n">Issue 03</div>
+        <span class="issue-tag">Rights</span>
+        <h3>Digital Rights in a Data-Driven World: Why Privacy is the New Civil Liberty</h3>
+        <p>How law and technology collide in the struggle for digital freedoms in the post-surveillance era.</p>
+        <div class="issue-footer">
+          <span class="issue-date">Sep 2025</span>
+          <span class="issue-link">Read →</span>
+        </div>
+      </a>
+
+      <a href="https://digitalgavel.substack.com/p/the-transatlantic-split" target="_blank" rel="noopener noreferrer" class="issue-card">
+        <div class="issue-n">Issue 02</div>
+        <span class="issue-tag">Comparative Law</span>
+        <h3>The Transatlantic Split</h3>
+        <p>Is AI framing a "transformation" or a "taking"? Comparing the EU and US regulatory philosophies on algorithmic governance.</p>
+        <div class="issue-footer">
+          <span class="issue-date">Aug 2025</span>
+          <span class="issue-link">Read →</span>
+        </div>
+      </a>
+
+      <a href="https://digitalgavel.substack.com/p/the-four-fifths-audit" target="_blank" rel="noopener noreferrer" class="issue-card">
+        <div class="issue-n">Issue 01</div>
+        <span class="issue-tag">Data & Law</span>
+        <h3>The "Four-Fifths" Audit: Using Python to Cross-Examine the Judiciary</h3>
+        <p>A data-driven audit applying the four-fifths rule to judicial appointment patterns — where law meets statistical scrutiny.</p>
+        <div class="issue-footer">
+          <span class="issue-date">Aug 2025</span>
+          <span class="issue-link">Read →</span>
+        </div>
+      </a>
+
+      <a href="https://digitalgavel.substack.com/p/welcome-to-the-digital-gavel" target="_blank" rel="noopener noreferrer" class="issue-card">
+        <div class="issue-n">Issue 00</div>
+        <span class="issue-tag">Introduction</span>
+        <h3>Welcome to The Digital Gavel</h3>
+        <p>An introduction to the newsletter — why law and technology must be understood together, and what this publication sets out to do.</p>
+        <div class="issue-footer">
+          <span class="issue-date">Jul 2025</span>
+          <span class="issue-link">Read →</span>
+        </div>
+      </a>
+
+      <div class="issue-card" style="background: var(--warm); justify-content: center; align-items: center; text-align: center; min-height: 220px;">
+        <p style="font-family: var(--serif); font-style: italic; color: var(--ink-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;">New issues published regularly. Subscribe to never miss one.</p>
+        <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="btn-ink" style="width: auto; display: inline-block;">Subscribe →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip">
+  <div class="about-strip-inner">
+    <div class="about-strip-text">
+      <h3>About Digital Gavel</h3>
+      <p>Digital Gavel is a newsletter at the intersection of law, technology, and public policy — written by Muhammad Hamid Naeem, an LL.B student and AI governance researcher. Each issue examines a pressing legal-tech question with analytical depth and accessible clarity, aimed at practitioners, students, and policy thinkers.</p>
+    </div>
+    <div class="about-strip-links">
+      <a href="https://digitalgavel.substack.com/archive" target="_blank" rel="noopener noreferrer" class="strip-link">Full Archive on Substack →</a>
+      <a href="blog.html" class="strip-link">Read Articles →</a>
+      <a href="index.html#contact" class="strip-link">Get In Touch →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
+    <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const t = document.querySelector(href);
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)'; io.unobserve(el.target); }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.issue-card').forEach(el => {
+    el.style.cssText += 'opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease;';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
