@@ -167,7 +167,52 @@
       opacity: 0.55;
     }
 
-    .hero-inner { max-width: 780px; position: relative; z-index: 1; }
+    /* ─── HERO PHOTO ─── */
+    .hero-photo-wrap {
+      position: absolute;
+      bottom: 5.5rem;
+      right: 3.5rem;
+      z-index: 2;
+      opacity: 0;
+      animation: rise 0.7s 0.55s forwards;
+    }
+    .hero-photo-wrap img {
+      width: 220px;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(18%) contrast(1.04);
+      border: 1px solid var(--rule-dk);
+    }
+    .hero-photo-placeholder {
+      width: 220px;
+      height: 280px;
+      background: var(--warm);
+      border: 1px solid var(--rule-dk);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .hero-photo-placeholder span:first-child {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--ink-ghost);
+      line-height: 1;
+    }
+    .hero-photo-placeholder span:last-child {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .hero-inner { max-width: 680px; position: relative; z-index: 1; }
 
     .hero-kicker {
       font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.22em;
@@ -282,6 +327,7 @@
       background: var(--white); padding: 2.75rem 2.25rem;
       transition: background 0.3s;
       position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
     }
     .svc-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -298,12 +344,22 @@
       color: var(--ink); margin-bottom: 0.85rem; line-height: 1.25;
     }
     .svc-card p { font-size: 0.87rem; color: var(--ink-light); line-height: 1.75; margin-bottom: 1.5rem; }
-    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
     .svc-list li {
       font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em;
       color: var(--ink-faint); padding-left: 1rem; position: relative;
     }
     .svc-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+    /* NEW: CTA link at bottom of each service card */
+    .svc-cta {
+      display: inline-block;
+      margin-top: 1.75rem;
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid transparent; padding-bottom: 1px;
+      transition: border-color 0.2s; width: fit-content;
+    }
+    .svc-cta:hover { border-bottom-color: var(--gold); }
 
     /* ─── EXPERIENCE ─── */
     #experience { background: var(--paper); }
@@ -382,6 +438,14 @@
       transition: border-color 0.2s;
     }
     .proj-link:hover { border-bottom-color: var(--gold); }
+    /* Dimmed style for links that require action */
+    .proj-link-muted {
+      font-family: var(--mono); font-size: 0.61rem; letter-spacing: 0.08em;
+      color: var(--ink-faint); text-decoration: none;
+      border-bottom: 1px solid transparent; padding-bottom: 1px;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .proj-link-muted:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
     /* ─── CREDENTIALS ─── */
     #certifications { background: var(--paper); }
@@ -441,6 +505,27 @@
     }
     .ct-val a:hover { color: var(--paper); }
 
+    /* NEW: Book a call strip */
+    .book-strip {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(184,146,42,0.35);
+      background: rgba(184,146,42,0.06);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .book-strip p {
+      font-family: var(--serif); font-size: 0.9rem; font-style: italic;
+      color: rgba(249,247,243,0.5); line-height: 1.5; flex: 1;
+    }
+    .book-strip a {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      border: 1px solid var(--gold); padding: 0.6rem 1.2rem;
+      transition: all 0.25s; white-space: nowrap;
+    }
+    .book-strip a:hover { background: var(--gold); color: var(--ink); }
+
     .cf { display: flex; flex-direction: column; gap: 1.25rem; }
     .cf-note { font-size: 0.8rem; color: rgba(249,247,243,0.35); font-style: italic; margin-bottom: 0.25rem; line-height: 1.65; }
     .cf-field { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -462,8 +547,12 @@
     }
     .cf-field textarea { resize: vertical; min-height: 120px; }
 
+    /* Contact form send options */
+    .cf-send-options {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+    }
     .btn-ink-inv {
-      display: inline-block; padding: 0.8rem 2rem; width: 100%;
+      display: inline-block; padding: 0.8rem 1.5rem; flex: 1;
       background: var(--gold); color: var(--white);
       font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
       text-transform: uppercase; text-decoration: none;
@@ -471,6 +560,16 @@
       text-align: center;
     }
     .btn-ink-inv:hover { background: transparent; color: var(--gold); }
+    /* Secondary: plain mailto fallback */
+    .btn-mailto {
+      display: inline-block; padding: 0.8rem 1.5rem; flex: 1;
+      background: transparent; color: rgba(249,247,243,0.45);
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12); transition: all 0.25s; cursor: pointer;
+      text-align: center;
+    }
+    .btn-mailto:hover { border-color: rgba(255,255,255,0.3); color: var(--paper); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -520,10 +619,12 @@
       .contact-grid { grid-template-columns: 1fr; gap: 3.5rem; }
       footer { flex-direction: column; text-align: center; padding: 2rem 1.75rem; }
       .footer-links { justify-content: center; }
+      .hero-photo-wrap { display: none; }
     }
     @media (max-width: 480px) {
       .cred-grid { grid-template-columns: 1fr; }
       .hero-name { font-size: 3rem; }
+      .cf-send-options { flex-direction: column; }
     }
   </style>
 </head>
@@ -571,6 +672,18 @@
       <a href="#projects" class="btn-line">View Work</a>
     </div>
   </div>
+
+  <!--
+    PHOTO INSTRUCTIONS:
+    Replace the placeholder below with your actual photo.
+    1. Add your photo file (e.g. hamid.jpg) to your repo root
+    2. Replace the .hero-photo-placeholder div with:
+       <img src="hamid.jpg" alt="Muhammad Hamid Naeem">
+    Recommended: square or portrait crop, at least 440×560px
+  -->
+ <div class="hero-photo-wrap">
+  <img src="og-image.png" alt="Muhammad Hamid Naeem">
+</div>
 </section>
 
 <!-- ABOUT -->
@@ -616,6 +729,7 @@
           <li>AI compliance frameworks</li>
           <li>Comparative jurisdiction research</li>
         </ul>
+        <a href="#contact" class="svc-cta">Discuss a project →</a>
       </div>
 
       <div class="svc-card reveal">
@@ -628,6 +742,7 @@
           <li>Case research &amp; briefs</li>
           <li>Corporate &amp; commercial memos</li>
         </ul>
+        <a href="#contact" class="svc-cta">Request drafting →</a>
       </div>
 
       <div class="svc-card reveal">
@@ -640,6 +755,7 @@
           <li>Policy explainers</li>
           <li>Book &amp; publication writing</li>
         </ul>
+        <a href="#contact" class="svc-cta">Commission writing →</a>
       </div>
 
     </div>
@@ -792,7 +908,11 @@
         <p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions, submitted to Legal Pathway Society leadership.</p>
         <div class="proj-footer">
           <span class="proj-tag">Policy</span>
-          <a href="#contact" class="proj-link">Request Copy →</a>
+          <!--
+            TODO: Upload this PDF to Google Drive → Share → "Anyone with the link" → Copy link
+            Then replace href="#contact" with the actual Drive link and change class to proj-link
+          -->
+          <a href="#contact" class="proj-link-muted" title="Upload to Google Drive and replace this link">View Document →</a>
         </div>
       </div>
 
@@ -812,7 +932,12 @@
         <p>Interactive dashboard in Excel &amp; Looker Studio. Three analytical reports delivering actionable insights for strategic decision-making.</p>
         <div class="proj-footer">
           <span class="proj-tag">Analytics</span>
-          <a href="#contact" class="proj-link">Request Access →</a>
+          <!--
+            TODO: Share your Looker Studio dashboard (top-right → Share → "Anyone with the link")
+            OR export Excel as PDF and host on Google Drive.
+            Then replace href and class below.
+          -->
+          <a href="#contact" class="proj-link-muted" title="Share Looker Studio link and replace this">View Dashboard →</a>
         </div>
       </div>
 
@@ -822,7 +947,11 @@
         <p>"Unpacking Justice: A Deep Dive into PLD 1966 SC 708 and the Pursuit of Truth in Criminal Trials" — landmark Pakistani jurisprudence.</p>
         <div class="proj-footer">
           <span class="proj-tag">Legal Writing</span>
-          <a href="#contact" class="proj-link">Request Article →</a>
+          <!--
+            TODO: Publish this on your Substack (digitalgavel.substack.com) as a free post,
+            then replace with the direct post URL and class="proj-link"
+          -->
+          <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="proj-link">Read on Substack →</a>
         </div>
       </div>
 
@@ -832,7 +961,11 @@
         <p>10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India.</p>
         <div class="proj-footer">
           <span class="proj-tag">Technical Writing</span>
-          <a href="#contact" class="proj-link">Request Samples →</a>
+          <!--
+            TODO: Create a PDF sampler (3–4 anonymised documents) → upload to Google Drive
+            Then replace href and class below.
+          -->
+          <a href="#contact" class="proj-link-muted" title="Host PDF sampler and replace this link">View Samples →</a>
         </div>
       </div>
 
@@ -895,9 +1028,17 @@
           <div class="ct-label">Location</div>
           <div class="ct-val">Islamabad, Pakistan</div>
         </div>
+        <!--
+          OPTIONAL: Add a Calendly / cal.com free account and replace the href below.
+          Even a basic scheduling link dramatically improves conversion for serious enquiries.
+        -->
+        <div class="book-strip">
+          <p>Prefer to schedule a call directly?</p>
+          <a href="mailto:hamidnaeem2223ab@gmail.com?subject=Call%20Request&body=Hi%20Hamid%2C%20I%27d%20like%20to%20schedule%20a%20call%20to%20discuss..." target="_blank" rel="noopener noreferrer">Schedule a call →</a>
+        </div>
       </div>
       <div>
-        <p class="cf-note">Fill in the form and I'll get back to you within 24–48 hours. Clicking send will open Gmail with your message pre-filled.</p>
+        <p class="cf-note">Fill in the form and I'll get back to you within 24–48 hours.</p>
         <div class="cf" id="contactForm">
           <div class="cf-field">
             <label for="c-name">Name</label>
@@ -915,7 +1056,10 @@
             <label for="c-msg">Message</label>
             <textarea id="c-msg" required placeholder="Your message…"></textarea>
           </div>
-          <button type="button" class="btn-ink-inv" onclick="sendViaGmail()">Send via Gmail →</button>
+          <div class="cf-send-options">
+            <button type="button" class="btn-ink-inv" onclick="sendViaGmail()">Send via Gmail →</button>
+            <button type="button" class="btn-mailto" onclick="sendViaMailto()">Open in Mail app</button>
+          </div>
         </div>
       </div>
     </div>
@@ -943,18 +1087,31 @@
     });
   });
 
-  function sendViaGmail() {
+  function getFormValues() {
     const name    = document.getElementById('c-name').value.trim();
     const email   = document.getElementById('c-email').value.trim();
     const subject = document.getElementById('c-subject').value.trim();
     const msg     = document.getElementById('c-msg').value.trim();
     if (!name || !email || !subject || !msg) {
       alert('Please fill in all fields before sending.');
-      return;
+      return null;
     }
-    const body = `Hi Hamid,\n\n${msg}\n\n---\nFrom: ${name}\nReply to: ${email}`;
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=hamidnaeem2223ab@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(gmailUrl, '_blank');
+    return { name, email, subject, msg };
+  }
+
+  function sendViaGmail() {
+    const v = getFormValues();
+    if (!v) return;
+    const body = `Hi Hamid,\n\n${v.msg}\n\n---\nFrom: ${v.name}\nReply to: ${v.email}`;
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=hamidnaeem2223ab@gmail.com&su=${encodeURIComponent(v.subject)}&body=${encodeURIComponent(body)}`;
+    window.open(url, '_blank');
+  }
+
+  function sendViaMailto() {
+    const v = getFormValues();
+    if (!v) return;
+    const body = `Hi Hamid,\n\n${v.msg}\n\n---\nFrom: ${v.name}\nReply to: ${v.email}`;
+    window.location.href = `mailto:hamidnaeem2223ab@gmail.com?subject=${encodeURIComponent(v.subject)}&body=${encodeURIComponent(body)}`;
   }
 
   const observer = new IntersectionObserver(entries => {
