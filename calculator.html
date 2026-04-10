@@ -4,109 +4,187 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Limitation Act Calculator | Muhammad Hamid Naeem</title>
-  <meta name="description" content="A reference tool for Pakistani legal practitioners. Calculate limitation deadlines under the Limitation Act 1908 (Pakistan) — First Schedule.">
+  <meta name="description" content="Work out filing deadlines under the First Schedule of the Limitation Act 1908 (Pakistan). Built for Pakistani legal practitioners as a quick reference tool.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --ink:       #111111;
-      --ink-mid:   #333333;
-      --ink-light: #666666;
-      --ink-faint: #999999;
-      --rule:      #e0ddd8;
-      --rule-dk:   #c0bdb8;
-      --paper:     #faf9f7;
-      --warm:      #f4f1ec;
-      --white:     #ffffff;
-      --serif:     'Playfair Display', Georgia, serif;
-      --sans:      'IBM Plex Sans', sans-serif;
-      --mono:      'IBM Plex Mono', monospace;
-      --green:     #1a6b3a;
-      --green-bg:  #edf7f1;
-      --amber:     #7a4f0d;
-      --amber-bg:  #fef6e4;
-      --red:       #8b1a1a;
-      --red-bg:    #fdf0f0;
+      --ink:        #111111;
+      --ink-mid:    #333333;
+      --ink-light:  #666666;
+      --ink-faint:  #999999;
+      --rule:       #e0ddd8;
+      --rule-dk:    #c0bdb8;
+      --paper:      #faf9f7;
+      --warm:       #f4f1ec;
+      --white:      #ffffff;
+      --serif:      'Playfair Display', Georgia, serif;
+      --sans:       'IBM Plex Sans', sans-serif;
+      --mono:       'IBM Plex Mono', monospace;
+      --green:      #1a6b3a;
+      --green-bg:   #edf7f1;
+      --amber:      #7a4f0d;
+      --amber-bg:   #fef6e4;
+      --red:        #8b1a1a;
+      --red-bg:     #fdf0f0;
     }
+
     html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
     /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 3rem; height: 60px; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 3rem; height: 60px;
+    }
     .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; }
     .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-    .nav-links a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-light); text-decoration: none;
+      transition: color 0.2s;
+    }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
     .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); }
-    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mob-nav {
+      display: none; position: fixed; inset: 0; background: var(--white);
+      z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
     .mob-nav.open { display: flex; }
     .mob-nav a { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); text-decoration: none; }
     .mob-close { position: absolute; top: 1.2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-mid); font-family: var(--serif); }
 
     /* HERO */
-    .calc-hero { padding: 9rem 3rem 4rem; background: var(--white); border-bottom: 1px solid var(--rule); }
+    .calc-hero {
+      padding: 9rem 3rem 4rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+    }
     .calc-hero-inner { max-width: 700px; }
-    .hero-kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; opacity: 0; animation: rise 0.6s 0.1s forwards; }
-    .hero-title { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 400; line-height: 1.08; color: var(--ink); margin-bottom: 1.25rem; opacity: 0; animation: rise 0.7s 0.25s forwards; }
+    .hero-kicker {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem;
+      opacity: 0; animation: rise 0.6s 0.1s forwards;
+    }
+    .hero-title {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 400; line-height: 1.08; color: var(--ink); margin-bottom: 1.25rem;
+      opacity: 0; animation: rise 0.7s 0.25s forwards;
+    }
     .hero-title em { font-style: italic; color: var(--ink-mid); }
-    .hero-sub { font-size: 0.92rem; color: var(--ink-light); line-height: 1.75; max-width: 560px; opacity: 0; animation: rise 0.6s 0.4s forwards; }
+    .hero-sub {
+      font-size: 0.92rem; color: var(--ink-light); line-height: 1.75; max-width: 560px;
+      opacity: 0; animation: rise 0.6s 0.4s forwards;
+    }
 
     /* DISCLAIMER */
-    .disclaimer { background: var(--amber-bg); border-left: 3px solid var(--amber); padding: 1rem 1.25rem; margin-bottom: 2.5rem; }
-    .disclaimer p { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.03em; color: var(--amber); line-height: 1.65; }
+    .disclaimer {
+      background: var(--amber-bg);
+      border-left: 3px solid var(--amber);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .disclaimer p {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.03em;
+      color: var(--amber); line-height: 1.65;
+    }
     .disclaimer strong { font-weight: 500; }
 
-    /* CALCULATOR MAIN */
+    /* CALCULATOR */
     .calc-section { padding: 5rem 3rem; }
     .container { max-width: 960px; margin: 0 auto; }
-    .calc-layout { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: start; }
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: start;
+    }
 
     /* FORM */
-    .calc-form { }
     .form-group { margin-bottom: 2rem; }
-    .form-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 0.6rem; }
-    .form-label span { color: var(--ink-light); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: none; margin-left: 0.5rem; }
+    .form-label {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 0.6rem;
+    }
+    .form-label span {
+      color: var(--ink-light); font-size: 0.58rem; letter-spacing: 0.08em;
+      text-transform: none; margin-left: 0.5rem;
+    }
     select, input[type="date"], input[type="number"] {
-      width: 100%; background: var(--white); border: 1px solid var(--rule); border-bottom-color: var(--rule-dk);
-      padding: 0.8rem 1rem; font-family: var(--sans); font-size: 0.9rem; font-weight: 300;
+      width: 100%; background: var(--white); border: 1px solid var(--rule);
+      border-bottom-color: var(--rule-dk); padding: 0.8rem 1rem;
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 300;
       color: var(--ink); outline: none; transition: border-color 0.2s, background 0.2s;
       -webkit-appearance: none; appearance: none; cursor: pointer;
     }
-    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+    }
     select:focus, input:focus { border-color: var(--ink); background: var(--white); }
-    .source-note { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.05em; color: var(--ink-faint); margin-top: 0.5rem; line-height: 1.55; }
+    .source-note {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.05em;
+      color: var(--ink-faint); margin-top: 0.5rem; line-height: 1.55;
+    }
     .source-note strong { color: var(--ink-light); font-weight: 400; }
 
-    .calc-btn { width: 100%; padding: 0.9rem; background: var(--ink); color: var(--white); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--ink); cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; }
+    .calc-btn {
+      width: 100%; padding: 0.9rem; background: var(--ink); color: var(--white);
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em;
+      text-transform: uppercase; border: 1px solid var(--ink); cursor: pointer;
+      transition: background 0.2s; margin-top: 0.5rem;
+    }
     .calc-btn:hover { background: var(--ink-mid); }
 
     /* RESULT PANEL */
-    .result-panel { border: 1px solid var(--rule); background: var(--white); position: sticky; top: 80px; }
-    .result-header { padding: 1.5rem; border-bottom: 1px solid var(--rule); background: var(--warm); }
+    .result-panel {
+      border: 1px solid var(--rule);
+      background: var(--white);
+      position: sticky; top: 80px;
+    }
+    .result-header {
+      padding: 1.5rem; border-bottom: 1px solid var(--rule); background: var(--warm);
+    }
     .result-header h3 { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--ink); }
     .result-body { padding: 1.5rem; }
-    .result-empty { font-family: var(--serif); font-size: 0.9rem; font-style: italic; color: var(--ink-faint); line-height: 1.7; text-align: center; padding: 2rem 0; }
+    .result-empty {
+      font-family: var(--serif); font-size: 0.9rem; font-style: italic;
+      color: var(--ink-faint); line-height: 1.7; text-align: center; padding: 2rem 0;
+    }
 
     .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 1.5rem; }
     .metric { background: var(--paper); padding: 1rem; }
     .metric-label { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
     .metric-value { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); line-height: 1; }
+    .metric-value.sm { font-size: 0.9rem; line-height: 1.3; margin-top: 0.2rem; }
     .metric-unit { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-top: 0.2rem; }
 
     .deadline-box { padding: 1.25rem; margin-bottom: 1rem; }
-    .deadline-box.safe { background: var(--green-bg); border-left: 3px solid var(--green); }
-    .deadline-box.urgent { background: var(--amber-bg); border-left: 3px solid var(--amber); }
-    .deadline-box.expired { background: var(--red-bg); border-left: 3px solid var(--red); }
+    .deadline-box.safe  { background: var(--green-bg); border-left: 3px solid var(--green); }
+    .deadline-box.urgent{ background: var(--amber-bg); border-left: 3px solid var(--amber); }
+    .deadline-box.expired{background: var(--red-bg);   border-left: 3px solid var(--red); }
     .deadline-label { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
-    .deadline-box.safe .deadline-label { color: var(--green); }
+    .deadline-box.safe   .deadline-label { color: var(--green); }
     .deadline-box.urgent .deadline-label { color: var(--amber); }
     .deadline-box.expired .deadline-label { color: var(--red); }
     .deadline-date { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--ink); margin-bottom: 0.35rem; }
     .deadline-msg { font-size: 0.8rem; line-height: 1.6; }
-    .deadline-box.safe .deadline-msg { color: var(--green); }
+    .deadline-box.safe   .deadline-msg { color: var(--green); }
     .deadline-box.urgent .deadline-msg { color: var(--amber); }
     .deadline-box.expired .deadline-msg { color: var(--red); }
 
@@ -117,8 +195,15 @@
     .sec-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; color: var(--ink); }
     .sec-title em { font-style: italic; color: var(--ink-mid); }
     .ref-table { width: 100%; border-collapse: collapse; border: 1px solid var(--rule); }
-    .ref-table th { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); text-align: left; padding: 0.75rem 1rem; background: var(--warm); border-bottom: 1px solid var(--rule); font-weight: 400; }
-    .ref-table td { font-size: 0.85rem; color: var(--ink-light); padding: 0.85rem 1rem; border-bottom: 1px solid var(--rule); line-height: 1.55; vertical-align: top; }
+    .ref-table th {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-faint); text-align: left;
+      padding: 0.75rem 1rem; background: var(--warm); border-bottom: 1px solid var(--rule); font-weight: 400;
+    }
+    .ref-table td {
+      font-size: 0.85rem; color: var(--ink-light); padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--rule); line-height: 1.55; vertical-align: top;
+    }
     .ref-table tr:last-child td { border-bottom: none; }
     .ref-table tr:hover td { background: var(--warm); }
     .ref-table .td-type { font-family: var(--sans); font-weight: 400; color: var(--ink-mid); font-size: 0.88rem; }
@@ -126,10 +211,16 @@
     .ref-table .td-source { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint); }
 
     /* FOOTER */
-    footer { background: var(--ink); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    footer {
+      background: var(--ink); padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
     .footer-copy { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: rgba(250,249,247,0.4); }
     .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .footer-links a { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,249,247,0.38); text-decoration: none; transition: color 0.2s; }
+    .footer-links a {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(250,249,247,0.38); text-decoration: none; transition: color 0.2s;
+    }
     .footer-links a:hover { color: rgba(250,249,247,0.85); }
 
     @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
@@ -179,9 +270,9 @@
 <!-- HERO -->
 <div class="calc-hero">
   <div class="calc-hero-inner">
-    <p class="hero-kicker">Legal Tool · Limitation Act 1908 (Pakistan)</p>
+    <p class="hero-kicker">Legal tool · Limitation Act 1908 (Pakistan)</p>
     <h1 class="hero-title">Limitation<br><em>Calculator</em></h1>
-    <p class="hero-sub">Calculate filing deadlines under the First Schedule of the Limitation Act, 1908. Built for Pakistani legal practitioners as a quick reference tool.</p>
+    <p class="hero-sub">Work out filing deadlines under the First Schedule of the Limitation Act, 1908. Built for Pakistani practitioners as a quick reference — not a substitute for judgment.</p>
   </div>
 </div>
 
@@ -190,7 +281,7 @@
   <div class="container">
 
     <div class="disclaimer">
-      <p><strong>Disclaimer:</strong> This tool is for reference purposes only and does not constitute legal advice. Deadlines may vary based on court orders, condonation, and jurisdiction-specific rules. Always verify with a qualified legal practitioner and the relevant court registry.</p>
+      <p><strong>Heads up:</strong> This is a reference tool, not legal advice. Deadlines shift based on court orders, condonation applications, and local registry rules. Run the final number by a qualified practitioner before you act on it.</p>
     </div>
 
     <div class="calc-layout">
@@ -199,34 +290,34 @@
       <div class="calc-form">
 
         <div class="form-group">
-          <label class="form-label" for="case-type">Case Type</label>
+          <label class="form-label" for="case-type">Case type</label>
           <select id="case-type" onchange="updateSourceNote()">
-            <option value="civil_general">Civil Suit (General)</option>
-            <option value="first_appeal">First Appeal (Civil)</option>
-            <option value="civil_revision">Civil Revision</option>
-            <option value="criminal_appeal">Criminal Appeal (High Court)</option>
-            <option value="death_sentence">Death Sentence Appeal</option>
-            <option value="money_suit">Money Recovery Suit</option>
-            <option value="possession_suit">Suit for Possession (Immovable Property)</option>
-            <option value="mortgage_suit">Mortgage Suit (Foreclosure)</option>
-            <option value="contract_breach">Breach of Contract</option>
-            <option value="tort_compensation">Compensation for Tort / Negligence</option>
+            <option value="civil_general">Civil suit (general)</option>
+            <option value="first_appeal">First appeal (civil)</option>
+            <option value="civil_revision">Civil revision</option>
+            <option value="criminal_appeal">Criminal appeal — High Court</option>
+            <option value="death_sentence">Death sentence appeal</option>
+            <option value="money_suit">Money recovery suit</option>
+            <option value="possession_suit">Possession suit (immovable property)</option>
+            <option value="mortgage_suit">Mortgage suit (foreclosure)</option>
+            <option value="contract_breach">Breach of contract</option>
+            <option value="tort_compensation">Tort / negligence compensation</option>
           </select>
           <div class="source-note" id="source-note"></div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="start-date">Date of Order / Decree / Cause of Action</label>
+          <label class="form-label" for="start-date">Date of order, decree, or cause of action</label>
           <input type="date" id="start-date" max="">
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="copy-days">Days to Obtain Certified Copies <span>Section 12 exclusion — enter 0 if not applicable</span></label>
+          <label class="form-label" for="copy-days">Days to obtain certified copies <span>— s.12 exclusion; enter 0 if not applicable</span></label>
           <input type="number" id="copy-days" min="0" max="365" value="0" step="1">
-          <div class="source-note">Under Section 12 of the Limitation Act, time spent obtaining certified copies of the judgment or decree is excluded from the limitation period.</div>
+          <div class="source-note">Section 12 lets you exclude the time spent getting certified copies of the judgment or decree. If you haven't needed to do that, leave this at 0.</div>
         </div>
 
-        <button class="calc-btn" onclick="calculate()">Calculate Deadline</button>
+        <button class="calc-btn" onclick="calculate()">Calculate deadline</button>
       </div>
 
       <!-- RESULT -->
@@ -235,7 +326,7 @@
           <h3>Result</h3>
         </div>
         <div class="result-body" id="result-body">
-          <p class="result-empty">Fill in the details on the left and press Calculate Deadline to see your result.</p>
+          <p class="result-empty">Fill in the fields and hit calculate.</p>
         </div>
       </div>
 
@@ -248,28 +339,28 @@
   <div class="container">
     <div class="sec-hd">
       <span class="sec-num">Ref</span>
-      <h2 class="sec-title">Limitation <em>Periods</em></h2>
+      <h2 class="sec-title">Limitation <em>periods</em></h2>
     </div>
     <table class="ref-table" aria-label="Limitation periods reference table">
       <thead>
         <tr>
-          <th>Case Type</th>
+          <th>Case type</th>
           <th>Period</th>
-          <th>Statutory Source</th>
+          <th>Statutory source</th>
           <th>Notes</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td class="td-type">Civil Suit (General)</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 120, First Schedule</td><td>Residual period where no specific article governs</td></tr>
-        <tr><td class="td-type">First Appeal (Civil)</td><td class="td-days">30 days</td><td class="td-source">Art. 156, First Schedule</td><td>From date of decree or order appealed against</td></tr>
-        <tr><td class="td-type">Civil Revision</td><td class="td-days">90 days</td><td class="td-source">Art. 163, First Schedule</td><td>From date of the order sought to be revised</td></tr>
-        <tr><td class="td-type">Criminal Appeal (High Court)</td><td class="td-days">60 days</td><td class="td-source">Cr.P.C § 417 / HC Rules</td><td>From date of judgment or order</td></tr>
-        <tr><td class="td-type">Death Sentence Appeal</td><td class="td-days">7 days</td><td class="td-source">Cr.P.C § 410</td><td>Extremely short — obtain certified copy immediately</td></tr>
-        <tr><td class="td-type">Money Recovery Suit</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 116, First Schedule</td><td>From date debt became due and payable</td></tr>
-        <tr><td class="td-type">Suit for Possession (Property)</td><td class="td-days">12 years (4380 days)</td><td class="td-source">Art. 144, First Schedule</td><td>From date of dispossession</td></tr>
-        <tr><td class="td-type">Mortgage Suit (Foreclosure)</td><td class="td-days">30 years (10950 days)</td><td class="td-source">Art. 148, First Schedule</td><td>From date mortgage becomes enforceable</td></tr>
-        <tr><td class="td-type">Breach of Contract</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 115, First Schedule</td><td>From date of breach</td></tr>
-        <tr><td class="td-type">Compensation for Tort / Negligence</td><td class="td-days">1 year (365 days)</td><td class="td-source">Art. 18, First Schedule</td><td>From date act or omission causing damage occurred</td></tr>
+        <tr><td class="td-type">Civil suit (general)</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 120, First Schedule</td><td>Residual period — applies where no specific article covers the case</td></tr>
+        <tr><td class="td-type">First appeal (civil)</td><td class="td-days">30 days</td><td class="td-source">Art. 156, First Schedule</td><td>Runs from the date of the decree or order being appealed</td></tr>
+        <tr><td class="td-type">Civil revision</td><td class="td-days">90 days</td><td class="td-source">Art. 163, First Schedule</td><td>Runs from the date of the order sought to be revised</td></tr>
+        <tr><td class="td-type">Criminal appeal — HC</td><td class="td-days">60 days</td><td class="td-source">Cr.P.C § 417 / HC Rules</td><td>From date of judgment or order</td></tr>
+        <tr><td class="td-type">Death sentence appeal</td><td class="td-days">7 days</td><td class="td-source">Cr.P.C § 410</td><td>Get the certified copy the same day — this window closes fast</td></tr>
+        <tr><td class="td-type">Money recovery suit</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 116, First Schedule</td><td>From date the debt became due and payable</td></tr>
+        <tr><td class="td-type">Possession suit (property)</td><td class="td-days">12 years (4380 days)</td><td class="td-source">Art. 144, First Schedule</td><td>From date of dispossession</td></tr>
+        <tr><td class="td-type">Mortgage suit (foreclosure)</td><td class="td-days">30 years (10950 days)</td><td class="td-source">Art. 148, First Schedule</td><td>From date mortgage becomes enforceable</td></tr>
+        <tr><td class="td-type">Breach of contract</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 115, First Schedule</td><td>From date of breach</td></tr>
+        <tr><td class="td-type">Tort / negligence</td><td class="td-days">1 year (365 days)</td><td class="td-source">Art. 18, First Schedule</td><td>From date the act or omission causing damage occurred</td></tr>
       </tbody>
     </table>
   </div>
@@ -286,29 +377,29 @@
 </footer>
 
 <script>
-  // Set today as max date
   const today = new Date();
-  document.getElementById('start-date').max = today.toISOString().split('T')[0];
-  document.getElementById('start-date').value = today.toISOString().split('T')[0];
+  const todayStr = today.toISOString().split('T')[0];
+  document.getElementById('start-date').max = todayStr;
+  document.getElementById('start-date').value = todayStr;
 
   const LIMITATION_DATA = {
-    civil_general:    { days: 1095, source: 'First Schedule, Article 120', notes: '3-year residual period where no specific article governs.' },
-    first_appeal:     { days: 30,   source: 'First Schedule, Article 156', notes: 'Period runs from date of decree or order appealed against.' },
-    civil_revision:   { days: 90,   source: 'First Schedule, Article 163', notes: 'Period runs from date of order sought to be revised.' },
-    criminal_appeal:  { days: 60,   source: 'Cr.P.C Section 417 / HC Rules', notes: 'Period runs from date of judgment or order.' },
-    death_sentence:   { days: 7,    source: 'Cr.P.C Section 410', notes: 'Extremely short period — obtain certified copy immediately.' },
-    money_suit:       { days: 1095, source: 'First Schedule, Article 116', notes: 'From date the debt became due and payable.' },
-    possession_suit:  { days: 4380, source: 'First Schedule, Article 144', notes: 'From date of dispossession of the property.' },
-    mortgage_suit:    { days: 10950,source: 'First Schedule, Article 148', notes: 'From date mortgage becomes enforceable.' },
-    contract_breach:  { days: 1095, source: 'First Schedule, Article 115', notes: 'From date of breach of contract.' },
-    tort_compensation:{ days: 365,  source: 'First Schedule, Article 18',  notes: 'From date act or omission causing damage occurred.' },
+    civil_general:     { days: 1095,  source: 'First Schedule, Art. 120', notes: '3-year residual period. Applies where no specific article governs the suit.' },
+    first_appeal:      { days: 30,    source: 'First Schedule, Art. 156', notes: 'Runs from the date of the decree or order being appealed against.' },
+    civil_revision:    { days: 90,    source: 'First Schedule, Art. 163', notes: 'Runs from the date of the order you want revised.' },
+    criminal_appeal:   { days: 60,    source: 'Cr.P.C § 417 / HC Rules', notes: 'Runs from the date of the judgment or order.' },
+    death_sentence:    { days: 7,     source: 'Cr.P.C § 410',            notes: 'Seven days. Get the certified copy the same day — do not wait.' },
+    money_suit:        { days: 1095,  source: 'First Schedule, Art. 116', notes: 'From the date the debt became due and payable.' },
+    possession_suit:   { days: 4380,  source: 'First Schedule, Art. 144', notes: '12 years from the date of dispossession.' },
+    mortgage_suit:     { days: 10950, source: 'First Schedule, Art. 148', notes: '30 years from the date the mortgage becomes enforceable.' },
+    contract_breach:   { days: 1095,  source: 'First Schedule, Art. 115', notes: 'From the date of the breach.' },
+    tort_compensation: { days: 365,   source: 'First Schedule, Art. 18',  notes: 'From the date the act or omission causing damage occurred.' },
   };
 
   function updateSourceNote() {
-    const key = document.getElementById('case-type').value;
+    const key   = document.getElementById('case-type').value;
     const entry = LIMITATION_DATA[key];
     document.getElementById('source-note').innerHTML =
-      `<strong>Statutory basis:</strong> ${entry.source} &nbsp;·&nbsp; ${entry.notes}`;
+      `<strong>${entry.source}</strong> &nbsp;·&nbsp; ${entry.notes}`;
   }
   updateSourceNote();
 
@@ -317,42 +408,39 @@
   }
 
   function calculate() {
-    const key = document.getElementById('case-type').value;
+    const key      = document.getElementById('case-type').value;
     const startVal = document.getElementById('start-date').value;
     const copyDays = parseInt(document.getElementById('copy-days').value) || 0;
 
-    if (!startVal) {
-      alert('Please enter a date of order or decree.');
-      return;
-    }
+    if (!startVal) { alert('Please enter a start date.'); return; }
 
-    const entry = LIMITATION_DATA[key];
+    const entry     = LIMITATION_DATA[key];
     const startDate = new Date(startVal);
     const totalDays = entry.days + copyDays;
-    const deadline = new Date(startDate);
+    const deadline  = new Date(startDate);
     deadline.setDate(deadline.getDate() + totalDays);
 
-    const todayMidnight = new Date();
-    todayMidnight.setHours(0, 0, 0, 0);
-    const daysLeft = Math.round((deadline - todayMidnight) / (1000 * 60 * 60 * 24));
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const daysLeft = Math.round((deadline - now) / (1000 * 60 * 60 * 24));
 
     let statusClass, statusLabel, statusMsg;
     if (daysLeft > 14) {
       statusClass = 'safe';
       statusLabel = `${daysLeft} days remaining`;
-      statusMsg = 'Action required before the deadline. You have sufficient time — but do not delay.';
+      statusMsg   = "You have time — but don't sit on it.";
     } else if (daysLeft > 0) {
       statusClass = 'urgent';
       statusLabel = `Only ${daysLeft} day${daysLeft === 1 ? '' : 's'} remaining`;
-      statusMsg = 'Urgent — file immediately. Consider applying for condonation if there is any risk of delay.';
+      statusMsg   = 'File now. Consider a condonation application if there\'s any risk of delay.';
     } else if (daysLeft === 0) {
       statusClass = 'urgent';
       statusLabel = 'Deadline is today';
-      statusMsg = 'File today without further delay.';
+      statusMsg   = 'File today. Do not delay.';
     } else {
       statusClass = 'expired';
       statusLabel = `Time-barred by ${Math.abs(daysLeft)} day${Math.abs(daysLeft) === 1 ? '' : 's'}`;
-      statusMsg = 'The limitation period has expired. Condonation of delay may be required under Section 5 of the Limitation Act.';
+      statusMsg   = 'The limitation period has passed. A condonation application under s.5 may be your only option.';
     }
 
     const caseLabel = document.getElementById('case-type').options[document.getElementById('case-type').selectedIndex].text;
@@ -360,23 +448,23 @@
     document.getElementById('result-body').innerHTML = `
       <div class="metrics">
         <div class="metric">
-          <div class="metric-label">Statutory Period</div>
+          <div class="metric-label">Statutory period</div>
           <div class="metric-value">${entry.days}</div>
           <div class="metric-unit">days</div>
         </div>
         <div class="metric">
-          <div class="metric-label">Sec. 12 Exclusion</div>
+          <div class="metric-label">s.12 exclusion</div>
           <div class="metric-value">${copyDays}</div>
           <div class="metric-unit">days</div>
         </div>
         <div class="metric">
-          <div class="metric-label">Total Period</div>
+          <div class="metric-label">Total period</div>
           <div class="metric-value">${totalDays}</div>
           <div class="metric-unit">days</div>
         </div>
         <div class="metric">
-          <div class="metric-label">From</div>
-          <div class="metric-value" style="font-size:0.9rem; line-height:1.3; margin-top:0.2rem;">${formatDate(startDate)}</div>
+          <div class="metric-label">Starting from</div>
+          <div class="metric-value sm">${formatDate(startDate)}</div>
           <div class="metric-unit">&nbsp;</div>
         </div>
       </div>
