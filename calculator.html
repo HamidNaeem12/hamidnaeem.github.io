@@ -272,7 +272,7 @@
   <div class="calc-hero-inner">
     <p class="hero-kicker">Legal tool · Limitation Act 1908 (Pakistan)</p>
     <h1 class="hero-title">Limitation<br><em>Calculator</em></h1>
-    <p class="hero-sub">Work out filing deadlines under the First Schedule of the Limitation Act, 1908. Built for Pakistani practitioners as a quick reference — not a substitute for judgment.</p>
+    <p class="hero-sub">Pick a case type, enter the relevant date, and get your filing deadline under the First Schedule of the Limitation Act, 1908. Quick reference for Pakistani practitioners — not a replacement for checking the statute yourself.</p>
   </div>
 </div>
 
@@ -281,7 +281,7 @@
   <div class="container">
 
     <div class="disclaimer">
-      <p><strong>Heads up:</strong> This is a reference tool, not legal advice. Deadlines shift based on court orders, condonation applications, and local registry rules. Run the final number by a qualified practitioner before you act on it.</p>
+      <p><strong>Before you rely on this:</strong> Deadlines move. Court orders, condonation applications, and local registry practice can all shift the date you get here. Verify with a qualified practitioner before acting on any result.</p>
     </div>
 
     <div class="calc-layout">
@@ -314,7 +314,7 @@
         <div class="form-group">
           <label class="form-label" for="copy-days">Days to obtain certified copies <span>— s.12 exclusion; enter 0 if not applicable</span></label>
           <input type="number" id="copy-days" min="0" max="365" value="0" step="1">
-          <div class="source-note">Section 12 lets you exclude the time spent getting certified copies of the judgment or decree. If you haven't needed to do that, leave this at 0.</div>
+          <div class="source-note">Section 12 lets you exclude the time you spent getting certified copies of the judgment or decree. If that doesn't apply to your matter, leave this at 0.</div>
         </div>
 
         <button class="calc-btn" onclick="calculate()">Calculate deadline</button>
@@ -355,7 +355,7 @@
         <tr><td class="td-type">First appeal (civil)</td><td class="td-days">30 days</td><td class="td-source">Art. 156, First Schedule</td><td>Runs from the date of the decree or order being appealed</td></tr>
         <tr><td class="td-type">Civil revision</td><td class="td-days">90 days</td><td class="td-source">Art. 163, First Schedule</td><td>Runs from the date of the order sought to be revised</td></tr>
         <tr><td class="td-type">Criminal appeal — HC</td><td class="td-days">60 days</td><td class="td-source">Cr.P.C § 417 / HC Rules</td><td>From date of judgment or order</td></tr>
-        <tr><td class="td-type">Death sentence appeal</td><td class="td-days">7 days</td><td class="td-source">Cr.P.C § 410</td><td>Get the certified copy the same day — this window closes fast</td></tr>
+        <tr><td class="td-type">Death sentence appeal</td><td class="td-days">7 days</td><td class="td-source">Cr.P.C § 410</td><td>Seven days. Get the certified copy the same day — do not wait</td></tr>
         <tr><td class="td-type">Money recovery suit</td><td class="td-days">3 years (1095 days)</td><td class="td-source">Art. 116, First Schedule</td><td>From date the debt became due and payable</td></tr>
         <tr><td class="td-type">Possession suit (property)</td><td class="td-days">12 years (4380 days)</td><td class="td-source">Art. 144, First Schedule</td><td>From date of dispossession</td></tr>
         <tr><td class="td-type">Mortgage suit (foreclosure)</td><td class="td-days">30 years (10950 days)</td><td class="td-source">Art. 148, First Schedule</td><td>From date mortgage becomes enforceable</td></tr>
@@ -432,15 +432,15 @@
     } else if (daysLeft > 0) {
       statusClass = 'urgent';
       statusLabel = `Only ${daysLeft} day${daysLeft === 1 ? '' : 's'} remaining`;
-      statusMsg   = 'File now. Consider a condonation application if there\'s any risk of delay.';
+      statusMsg   = "File now. If there's any chance of delay, get your condonation application ready.";
     } else if (daysLeft === 0) {
       statusClass = 'urgent';
       statusLabel = 'Deadline is today';
-      statusMsg   = 'File today. Do not delay.';
+      statusMsg   = 'File today. Do not wait until tomorrow.';
     } else {
       statusClass = 'expired';
       statusLabel = `Time-barred by ${Math.abs(daysLeft)} day${Math.abs(daysLeft) === 1 ? '' : 's'}`;
-      statusMsg   = 'The limitation period has passed. A condonation application under s.5 may be your only option.';
+      statusMsg   = 'The limitation period has passed. A condonation application under s.5 may be your only option — get advice immediately.';
     }
 
     const caseLabel = document.getElementById('case-type').options[document.getElementById('case-type').selectedIndex].text;
