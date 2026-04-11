@@ -82,7 +82,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── NOISE TEXTURE OVERLAY ─── */
     body::before {
       content: '';
       position: fixed;
@@ -94,7 +93,6 @@
       opacity: 0.6;
     }
 
-    /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(249, 247, 243, 0.92);
@@ -126,7 +124,6 @@
     }
     .nav-burger span { display: block; width: 22px; height: 1px; background: var(--ink); transition: all 0.3s; }
 
-    /* ─── MOBILE NAV ─── */
     .mob-nav {
       display: none; position: fixed; inset: 0; background: var(--paper);
       z-index: 200; flex-direction: column; align-items: center;
@@ -147,7 +144,6 @@
     }
     .mob-close:hover { color: var(--ink); }
 
-    /* ─── HERO ─── */
     #home {
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: flex-end;
@@ -157,7 +153,6 @@
       position: relative; overflow: hidden;
     }
 
-    /* Large decorative letterform */
     #home::after {
       content: '§';
       position: absolute; top: -0.1em; right: -0.05em;
@@ -201,7 +196,6 @@
       opacity: 0; animation: rise 0.6s 0.6s forwards;
     }
 
-    /* ─── BUTTONS ─── */
     .btn-ink {
       display: inline-block; padding: 0.75rem 2rem;
       background: var(--ink); color: var(--white);
@@ -228,7 +222,6 @@
     }
     .btn-line:hover { border-color: var(--ink-mid); color: var(--ink); }
 
-    /* ─── SECTION SHELL ─── */
     section { padding: 7rem 3.5rem; }
     .container { max-width: 1020px; margin: 0 auto; }
 
@@ -249,7 +242,6 @@
     }
     .sec-title em { font-style: italic; font-weight: 400; color: var(--ink-mid); }
 
-    /* ─── ABOUT ─── */
     #about { background: var(--paper); }
     .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 6rem; align-items: start; }
     .about-text p {
@@ -275,7 +267,6 @@
     }
     .skill-entry p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.6; }
 
-    /* ─── SERVICES ─── */
     #services { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); }
     .svc-card {
@@ -305,7 +296,6 @@
     }
     .svc-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
 
-    /* ─── EXPERIENCE ─── */
     #experience { background: var(--paper); }
     .exp-row {
       display: grid; grid-template-columns: 190px 1fr; gap: 3.5rem;
@@ -343,7 +333,6 @@
     }
     .exp-right li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-size: 1rem; }
 
-    /* ─── PROJECTS ─── */
     #projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); }
     .proj-card {
@@ -383,7 +372,6 @@
     }
     .proj-link:hover { border-bottom-color: var(--gold); }
 
-    /* ─── CREDENTIALS ─── */
     #certifications { background: var(--paper); }
     .cred-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -417,7 +405,6 @@
       background: var(--white);
     }
 
-    /* ─── CONTACT ─── */
     #contact { background: var(--ink); border-top: 1px solid var(--rule); }
     #contact .sec-title { color: var(--paper); }
     #contact .sec-title em { color: var(--ink-ghost); }
@@ -472,7 +459,6 @@
     }
     .btn-ink-inv:hover { background: transparent; color: var(--gold); }
 
-    /* ─── FOOTER ─── */
     footer {
       background: var(--ink); border-top: 1px solid rgba(255,255,255,0.07);
       padding: 2rem 3.5rem;
@@ -496,14 +482,12 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── SCROLL REVEAL ─── */
     .reveal {
       opacity: 0; transform: translateY(16px);
       transition: opacity 0.55s ease, transform 0.55s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 860px) {
       nav { padding: 0 1.75rem; }
       .nav-links { display: none; }
@@ -564,7 +548,7 @@
     <p class="hero-kicker">LL.B · Data Science · AI Governance</p>
     <h1 class="hero-name">Muhammad<br><em>Hamid Naeem</em></h1>
     <div class="hero-rule">
-      <p>Building the law-tech interface — where algorithmic systems meet legal accountability.</p>
+      <p>Law student. Data analyst. Figuring out what happens when AI runs into legal systems that weren't built for it.</p>
     </div>
     <div class="hero-btns">
       <a href="#contact" class="btn-ink"><span>Get In Touch</span></a>
@@ -582,9 +566,9 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>The legal system is being rewritten by technologies it doesn't yet fully understand. I work at that fault line — treating AI not as a tool, but as a jurisdictional problem that challenges how law defines responsibility, rights, and control.</p>
-        <p>My background spans law (LL.B) and data science — not as separate tracks, but as a single framework for understanding algorithmic systems and how legal structures must respond to them. That combination has taken me across legal environments in the USA, UAE, India, and Pakistan.</p>
-        <p>I've built and scaled a legal knowledge platform, published a book for early-career law students, and spent time doing real legal work — drafting documents, assisting on active cases, and researching AI policy for international organizations. I care about making law clearer, more accessible, and better prepared for what's coming.</p>
+        <p>AI is a legal problem most lawyers haven't caught up to yet. I find that genuinely interesting — and I've spent the last year trying to understand how legal systems built for human actors respond when the actor is an algorithm.</p>
+        <p>My background is law (LL.B) and data science. Not as separate tracks — I just got interested in both, and they turned out to be more connected than people expect. That mix has taken me across legal environments in Pakistan, India, the UAE, and the US, working on everything from family law cases to AI governance policy.</p>
+        <p>I've also published a book for law students on networking, run a legal platform now read by 570+ professionals, and drafted real documents for clients with active cases. The work has been practical more than theoretical, which I prefer.</p>
       </div>
       <div>
         <div class="aside-label">Areas of Practice</div>
@@ -609,7 +593,7 @@
       <div class="svc-card reveal">
         <span class="svc-icon" aria-hidden="true">⚖️</span>
         <h3>AI Governance &amp; Policy Consulting</h3>
-        <p>I help organizations understand and navigate the evolving landscape of AI regulation — from EU and US frameworks to comparative jurisdictional analysis.</p>
+        <p>Most organizations don't have a clear picture of where they sit in the AI regulatory landscape — across the EU AI Act, US executive orders, or what Pakistan is quietly developing. I can help map that out and put it on paper.</p>
         <ul class="svc-list">
           <li>Regulatory gap analysis</li>
           <li>Policy document drafting</li>
@@ -621,7 +605,7 @@
       <div class="svc-card reveal">
         <span class="svc-icon" aria-hidden="true">📄</span>
         <h3>Legal Research &amp; Drafting</h3>
-        <p>Precise, well-researched legal documents and case analysis across family law, property, civil recovery, and criminal procedure in Pakistan and India.</p>
+        <p>Legal documents for family law, property, civil recovery, and criminal procedure in Pakistan and India — written to be used, not filed away. I've drafted for active cases and real clients, not just practice problems.</p>
         <ul class="svc-list">
           <li>Petitions &amp; legal notices</li>
           <li>Sale &amp; rent deeds</li>
@@ -633,7 +617,7 @@
       <div class="svc-card reveal">
         <span class="svc-icon" aria-hidden="true">✍️</span>
         <h3>Legal Content &amp; Writing</h3>
-        <p>Clear, authoritative legal writing for platforms, publications, and organizations — turning complex legal ideas into content people can actually use.</p>
+        <p>Legal writing for platforms, publications, and organizations. The goal is always the same: take something genuinely complex and make it readable without making it wrong.</p>
         <ul class="svc-list">
           <li>Legal articles &amp; analysis</li>
           <li>Newsletter &amp; editorial content</li>
@@ -664,8 +648,8 @@
         <div class="exp-role">Legal Intern</div>
         <div class="exp-loc">Islamabad, Pakistan</div>
         <ul>
-          <li>Developing legal research and advisory capabilities in commercial and corporate law</li>
-          <li>Working with experienced practitioners on real-world legal matters and client counseling</li>
+          <li>Working on commercial and corporate legal matters alongside experienced practitioners</li>
+          <li>Involved in client counseling and real-world legal research on active matters</li>
         </ul>
       </div>
     </div>
@@ -679,9 +663,9 @@
         <div class="exp-role">Founder &amp; Editorial Lead</div>
         <div class="exp-loc">Faisalabad, Pakistan</div>
         <ul>
-          <li>Built a legal knowledge platform from zero to 570+ professional followers across Pakistan, US, and UK</li>
-          <li>Leads 5-person editorial team producing original analysis on AI governance, constitutional law, and human rights</li>
-          <li>Achieved 128+ impressions per post with consistent cross-border audience engagement</li>
+          <li>Started a legal knowledge platform that now has 570+ professional followers across Pakistan, the US, and the UK</li>
+          <li>Runs a 5-person editorial team covering AI governance, constitutional law, and human rights</li>
+          <li>Posts average 128+ impressions each with consistent engagement from readers across borders</li>
         </ul>
       </div>
     </div>
@@ -695,8 +679,8 @@
         <div class="exp-role">Published Author</div>
         <div class="exp-loc">Amazon Kindle &amp; Paperback</div>
         <ul>
-          <li>Self-published 97-page practical guide on networking and mentorship for early law students</li>
-          <li>Managed end-to-end publishing: research, writing, formatting, and Amazon listing</li>
+          <li>Wrote and self-published a 97-page guide on networking and mentorship for early law students</li>
+          <li>Handled everything: research, writing, formatting, and getting it listed on Amazon</li>
         </ul>
       </div>
     </div>
@@ -710,9 +694,9 @@
         <div class="exp-role">Legal Intern — AI Governance Research</div>
         <div class="exp-loc">United States (Remote)</div>
         <ul>
-          <li>Co-authored policy document comparing AI governance frameworks across US and EU jurisdictions</li>
+          <li>Co-authored a policy document comparing AI governance frameworks in the US and EU</li>
           <li>Drafted 3 policy documents supporting civil legal services for underrepresented communities</li>
-          <li>Completed 6 research assignments in a 17-intern international cohort</li>
+          <li>Completed 6 research assignments as part of a 17-intern international cohort</li>
         </ul>
       </div>
     </div>
@@ -726,8 +710,8 @@
         <div class="exp-role">Legal Intern</div>
         <div class="exp-loc">New Delhi, India</div>
         <ul>
-          <li>Drafted civil documents: sale deed, rent deed, divorce petition, loan recovery petition</li>
-          <li>Built practical drafting skills across property, family, and civil recovery law</li>
+          <li>Drafted a sale deed, rent deed, divorce petition, and loan recovery petition</li>
+          <li>Hands-on drafting practice across property, family, and civil recovery law</li>
         </ul>
       </div>
     </div>
@@ -742,8 +726,8 @@
         <div class="exp-loc">Samundri, Punjab, Pakistan</div>
         <ul>
           <li>Drafted 5–6 legal documents including family suit petitions and legal notices</li>
-          <li>Assisted on 4 active cases: divorce, child custody, and criminal matters</li>
-          <li>Managed files and communications for 19+ clients</li>
+          <li>Assisted on 4 active cases covering divorce, child custody, and criminal matters</li>
+          <li>Managed files and client communications for 19+ clients</li>
         </ul>
       </div>
     </div>
@@ -757,9 +741,9 @@
         <div class="exp-role">Data Analytics Intern</div>
         <div class="exp-loc">Dubai, UAE (Remote)</div>
         <ul>
-          <li>Analyzed 3 datasets producing analytical reports with actionable insights</li>
-          <li>Built capstone dashboard in Excel &amp; Looker Studio showcasing end-to-end analytics workflow</li>
-          <li>Collaborated in a diverse 8-member international team across multiple time zones</li>
+          <li>Analyzed 3 datasets and wrote reports with concrete findings and recommendations</li>
+          <li>Built a capstone dashboard in Excel and Looker Studio covering the full analytics workflow</li>
+          <li>Worked in an 8-member international team spread across multiple time zones</li>
         </ul>
       </div>
     </div>
@@ -779,7 +763,7 @@
       <div class="proj-card reveal">
         <div class="proj-n">01</div>
         <h3>Your First Legal Connection</h3>
-        <p>97-page guide on networking and mentorship for early-career law students. Self-published on Amazon, end-to-end from research to listing.</p>
+        <p>97-page guide on networking and mentorship for law students starting out. Self-published on Amazon — written, formatted, and listed entirely by me.</p>
         <div class="proj-footer">
           <span class="proj-tag">Published Work</span>
           <a href="https://www.amazon.in/Your-First-Legal-Connection-Networking-ebook/dp/B0FKZBX5ZT" target="_blank" rel="noopener noreferrer" class="proj-link">View on Amazon →</a>
@@ -789,7 +773,7 @@
       <div class="proj-card reveal">
         <div class="proj-n">02</div>
         <h3>AI Governance Research</h3>
-        <p>Comparative analysis of AI regulatory frameworks across US and EU jurisdictions, submitted to Legal Pathway Society leadership.</p>
+        <p>A side-by-side look at how the US and EU are approaching AI regulation — what's different, what's missing, and where the gaps actually matter. Submitted to Legal Pathway Society leadership.</p>
         <div class="proj-footer">
           <span class="proj-tag">Policy</span>
           <a href="#contact" class="proj-link">Request Copy →</a>
@@ -799,7 +783,7 @@
       <div class="proj-card reveal">
         <div class="proj-n">03</div>
         <h3>Veritas &amp; Vows Platform</h3>
-        <p>Legal knowledge platform connecting 570+ professionals. Editorial coverage of AI governance, constitutional law, and human rights.</p>
+        <p>A legal knowledge platform I built from scratch. Now at 570+ professional readers, with editorial coverage of AI governance, constitutional law, and human rights.</p>
         <div class="proj-footer">
           <span class="proj-tag">Legal Tech</span>
           <a href="https://www.linkedin.com/company/veritas-and-vows" target="_blank" rel="noopener noreferrer" class="proj-link">View on LinkedIn →</a>
@@ -809,7 +793,7 @@
       <div class="proj-card reveal">
         <div class="proj-n">04</div>
         <h3>Data Analytics Capstone</h3>
-        <p>Interactive dashboard in Excel &amp; Looker Studio. Three analytical reports delivering actionable insights for strategic decision-making.</p>
+        <p>An interactive dashboard in Excel and Looker Studio, covering three datasets end-to-end — from raw data to findings worth acting on.</p>
         <div class="proj-footer">
           <span class="proj-tag">Analytics</span>
           <a href="#contact" class="proj-link">Request Access →</a>
@@ -819,7 +803,7 @@
       <div class="proj-card reveal">
         <div class="proj-n">05</div>
         <h3>Criminal Justice Article</h3>
-        <p>"Unpacking Justice: A Deep Dive into PLD 1966 SC 708 and the Pursuit of Truth in Criminal Trials" — landmark Pakistani jurisprudence.</p>
+        <p>"Unpacking Justice: A Deep Dive into PLD 1966 SC 708 and the Pursuit of Truth in Criminal Trials" — a close reading of landmark Pakistani jurisprudence.</p>
         <div class="proj-footer">
           <span class="proj-tag">Legal Writing</span>
           <a href="#contact" class="proj-link">Request Article →</a>
@@ -829,7 +813,7 @@
       <div class="proj-card reveal">
         <div class="proj-n">06</div>
         <h3>Legal Drafting Portfolio</h3>
-        <p>10+ legal documents across family law, property law, civil recovery, and criminal procedure in Pakistan and India.</p>
+        <p>10+ documents across family law, property, civil recovery, and criminal procedure in Pakistan and India — written for actual cases, not hypotheticals.</p>
         <div class="proj-footer">
           <span class="proj-tag">Technical Writing</span>
           <a href="#contact" class="proj-link">Request Samples →</a>
@@ -874,7 +858,7 @@
     </div>
     <div class="contact-grid">
       <div>
-        <p class="contact-intro">Whether you need legal research, AI policy analysis, or just want to connect — I'd genuinely like to hear from you.</p>
+        <p class="contact-intro">If you need legal research, AI policy work, or just want to talk about where law and technology are heading — I'm happy to hear from you.</p>
         <div class="ct-item">
           <div class="ct-label">Email</div>
           <div class="ct-val"><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></div>
