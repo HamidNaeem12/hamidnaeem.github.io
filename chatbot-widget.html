@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Land Revenue Act 1967 — Legal Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #0F6E56;
+    --green-mid: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-pale: #f0faf6;
+    --gold: #BA7517;
+    --gold-light: #FAEEDA;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --border: #d8d8d8;
+    --surface: #ffffff;
+    --bg: #f7f8f6;
+    --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    max-width: 640px;
+    width: 100%;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+  }
+
+  .header-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-mid);
+  }
+
+  .header h1 {
+    font-family: 'Lora', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .header p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── Chat container ── */
+  .chat-container {
+    width: 100%;
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Chat header bar ── */
+  .chat-topbar {
+    background: var(--green-dark);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chat-topbar-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+
+  .chat-topbar-title {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .chat-topbar-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 1px;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    background: #5DCAA5;
+    border-radius: 50%;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ── Messages area ── */
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 360px;
+    max-height: 460px;
+    background: var(--bg);
+  }
+
+  /* ── Individual message ── */
+  .message {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    animation: fadeUp 0.25s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .message.user {
+    flex-direction: row-reverse;
+  }
+
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .avatar.bot {
+    background: var(--green-dark);
+    color: #fff;
+  }
+
+  .avatar.user {
+    background: var(--gold);
+    color: #fff;
+  }
+
+  .bubble {
+    max-width: 82%;
+    padding: 11px 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-primary);
+  }
+
+  .message.bot .bubble {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top-left-radius: 3px;
+  }
+
+  .message.user .bubble {
+    background: var(--green-dark);
+    color: #fff;
+    border-top-right-radius: 3px;
+  }
+
+  .bubble .disclaimer {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .message.user .bubble .disclaimer {
+    border-top-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── Typing indicator ── */
+  .typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .typing-dots {
+    display: flex; gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    border-top-left-radius: 3px;
+    padding: 12px 16px;
+  }
+
+  .typing-dots span {
+    width: 6px; height: 6px;
+    background: var(--green-mid);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* ── Suggestions ── */
+  .suggestions {
+    padding: 12px 20px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .suggestion-label {
+    width: 100%;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+
+  .suggestion-btn {
+    background: var(--green-pale);
+    border: 1px solid #b5ddd0;
+    color: var(--green-dark);
+    font-size: 12px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .suggestion-btn:hover {
+    background: var(--green-light);
+    border-color: var(--green-mid);
+  }
+
+  /* ── Input area ── */
+  .input-area {
+    padding: 14px 16px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .input-area textarea {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+    max-height: 100px;
+    overflow-y: auto;
+    color: var(--text-primary);
+    background: var(--bg);
+    transition: border-color 0.15s;
+  }
+
+  .input-area textarea:focus {
+    border-color: var(--green-mid);
+    background: #fff;
+  }
+
+  .input-area textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .send-btn {
+    width: 40px; height: 40px;
+    background: var(--green-dark);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .send-btn:hover { background: var(--green-mid); }
+  .send-btn:active { transform: scale(0.95); }
+  .send-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  .send-btn svg {
+    width: 16px; height: 16px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .footer a {
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 500px) {
+    body { padding: 1rem 0.5rem; }
+    .header h1 { font-size: 1.3rem; }
+    .messages { min-height: 280px; max-height: 380px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">AI Legal Assistant</div>
+  <h1>Land Revenue Act 1967</h1>
+  <p>Ask questions about the Act for judiciary exam prep or legal practice reference. Answers cite exact section numbers.</p>
+</div>
+
+<div class="chat-container">
+  <div class="chat-topbar">
+    <div class="chat-topbar-icon">⚖️</div>
+    <div>
+      <div class="chat-topbar-title">LRA 1967 Assistant</div>
+      <div class="chat-topbar-sub">Pakistan Land Revenue Law</div>
+    </div>
+    <div class="status-dot"></div>
+  </div>
+
+  <div class="messages" id="messages">
+    <div class="message bot">
+      <div class="avatar bot">LR</div>
+      <div class="bubble">
+        Assalam-o-Alaikum! I'm your Land Revenue Act 1967 Assistant.<br><br>
+        Ask me anything about the Act — mutations, jamabandi, settlement, appeals, village officers, or any provision. I'll cite the exact section in every answer.<br><br>
+        <em style="font-size:13px; color:#666;">You can write in English or Roman Urdu.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="suggestions" id="suggestions">
+    <div class="suggestion-label">Try asking</div>
+    <button class="suggestion-btn" onclick="useSuggestion(this)">What is a mutation?</button>
+    <button class="suggestion-btn" onclick="useSuggestion(this)">What is jamabandi?</button>
+    <button class="suggestion-btn" onclick="useSuggestion(this)">Duties of a Patwari</button>
+    <button class="suggestion-btn" onclick="useSuggestion(this)">How is land revenue collected?</button>
+    <button class="suggestion-btn" onclick="useSuggestion(this)">Appeal procedure under the Act</button>
+    <button class="suggestion-btn" onclick="useSuggestion(this)">What is shamlat land?</button>
+  </div>
+
+  <div class="input-area">
+    <textarea
+      id="userInput"
+      placeholder="Type your question about the Land Revenue Act 1967..."
+      rows="1"
+      onkeydown="handleKey(event)"
+      oninput="autoResize(this)"
+    ></textarea>
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="footer">
+  Built by <a href="https://hamidnaeem.me" target="_blank">Hamid Naeem</a> &nbsp;·&nbsp;
+  For educational purposes only &nbsp;·&nbsp; Not legal advice
+</div>
+
+<script>
+  const API_URL = 'https://land-revenue-chatbot.vercel.app/api/chat';
+  const messagesEl = document.getElementById('messages');
+  const inputEl = document.getElementById('userInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const suggestionsEl = document.getElementById('suggestions');
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  function useSuggestion(btn) {
+    inputEl.value = btn.textContent;
+    autoResize(inputEl);
+    suggestionsEl.style.display = 'none';
+    sendMessage();
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addMessage(role, text) {
+    const wrap = document.createElement('div');
+    wrap.className = `message ${role}`;
+
+    const avatar = document.createElement('div');
+    avatar.className = `avatar ${role}`;
+    avatar.textContent = role === 'bot' ? 'LR' : 'You';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+
+    if (role === 'bot') {
+      const disclaimerMarker = '⚠️ This is for educational purposes only and does not constitute legal advice.';
+      if (text.includes(disclaimerMarker)) {
+        const parts = text.split(disclaimerMarker);
+        bubble.innerHTML = formatText(parts[0].trim());
+        const disc = document.createElement('div');
+        disc.className = 'disclaimer';
+        disc.textContent = disclaimerMarker;
+        bubble.appendChild(disc);
+      } else {
+        bubble.innerHTML = formatText(text);
+      }
+    } else {
+      bubble.textContent = text;
+    }
+
+    wrap.appendChild(avatar);
+    wrap.appendChild(bubble);
+    messagesEl.appendChild(wrap);
+    scrollToBottom();
+    return wrap;
+  }
+
+  function formatText(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>');
+  }
+
+  function showTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'message bot typing-indicator';
+    wrap.id = 'typing';
+
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar bot';
+    avatar.textContent = 'LR';
+
+    const dots = document.createElement('div');
+    dots.className = 'typing-dots';
+    dots.innerHTML = '<span></span><span></span><span></span>';
+
+    wrap.appendChild(avatar);
+    wrap.appendChild(dots);
+    messagesEl.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('typing');
+    if (el) el.remove();
+  }
+
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+
+    suggestionsEl.style.display = 'none';
+    addMessage('user', text);
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+
+    showTyping();
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await res.json();
+      removeTyping();
+
+      if (data.answer) {
+        addMessage('bot', data.answer);
+      } else {
+        addMessage('bot', 'Sorry, I could not get a response. Please try again.');
+      }
+    } catch (err) {
+      removeTyping();
+      addMessage('bot', 'Connection error. Please check your internet and try again.');
+    }
+
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
+</script>
+</body>
+</html>
