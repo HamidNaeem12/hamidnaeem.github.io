@@ -66,11 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html { scroll-behavior: smooth; }
 
     body {
-      <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH3MQVKF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    
       font-family: var(--sans);
       background: var(--paper);
       color: var(--ink);
@@ -428,11 +423,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     /* ── CONTACT ── */
-    contact { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); }
-    contact .sec-title { color: var(--paper); }
-    contact .sec-title em { color: rgba(255,255,255,0.35); }
-    contact .sec-n { color: var(--red); }
-    contact .sec-hd { border-bottom-color: rgba(255,255,255,0.08); }
+    #contact { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); }
+    #contact .sec-title { color: var(--paper); }
+    #contact .sec-title em { color: rgba(255,255,255,0.35); }
+    #contact .sec-n { color: var(--red); }
+    #contact .sec-hd { border-bottom-color: rgba(255,255,255,0.08); }
 
     .contact-layout {
       display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
@@ -550,18 +545,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </head>
 <body>
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH3MQVKF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <nav>
-  <a href="home" class="nav-logo">Muhammad Hamid Naeem</a>
+  <a href="#home" class="nav-logo">Muhammad Hamid Naeem</a>
   <ul class="nav-links">
-    <li><a href="about">#About</a></li>
-    <li><a href="services">#Focus</a></li>
-    <li><a href="experience">#Experience</a></li>
-    <li><a href="projects">#Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Focus</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Work</a></li>
     <li><a href="calculator">Calculator</a></li>
     <li><a href="blog">Writing</a></li>
     <li><a href="newsletter">Newsletter</a></li>
-    <li><a href="contact">#Contact</a></li>
-    
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="nav-burger" onclick="document.querySelector('.mob-nav').classList.add('open')" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -574,9 +573,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="#services"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Focus</a>
   <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
   <a href="#projects"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
-  <a href="calculator">Calculator</a>
-  <a href="blog">Writing</a>
-  <a href="newsletter">Newsletter</a>
+  <a href="calculator"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
+  <a href="blog"        onclick="document.querySelector('.mob-nav').classList.remove('open')">Writing</a>
+  <a href="newsletter"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
   <a href="#contact"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
 </div>
 
@@ -617,8 +616,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="hero-btns">
-      <a href="contact" class="btn-solid">Hire me for research</a>
-      <a href="projects" class="btn-ghost">Read the work</a>
+      <a href="#contact" class="btn-solid">Hire me for research</a>
+      <a href="#projects" class="btn-ghost">Read the work</a>
     </div>
   </div>
   <div class="hero-foot">
