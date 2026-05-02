@@ -254,7 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     .sec-title em { font-style: italic; color: var(--ink-mid); }
 
     /* ── ABOUT ── */
-    #about { background: var(--paper); }
+    about { background: var(--paper); }
     .about-layout {
       display: grid; grid-template-columns: 1fr 260px; gap: 5rem; align-items: start;
     }
@@ -276,7 +276,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     .aside-row p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; }
 
     /* ── FOCUS AREAS ── */
-    #services { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    services { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .svc-list-layout { display: flex; flex-direction: column; }
     .svc-item {
       display: grid; grid-template-columns: 220px 1fr 200px;
@@ -310,7 +310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     /* ── EXPERIENCE ── */
-    #experience { background: var(--paper); }
+    experience { background: var(--paper); }
     .exp-row {
       display: grid; grid-template-columns: 180px 1fr;
       padding: 2rem 0;
@@ -351,7 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     /* ── PROJECTS ── */
-    #projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .proj-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -395,7 +395,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     .proj-link:hover { border-bottom-color: var(--red); }
 
     /* ── CREDENTIALS ── */
-    #certifications { background: var(--paper); }
+    certifications { background: var(--paper); }
     .cred-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1px; background: var(--rule);
@@ -428,11 +428,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     /* ── CONTACT ── */
-    #contact { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); }
-    #contact .sec-title { color: var(--paper); }
-    #contact .sec-title em { color: rgba(255,255,255,0.35); }
-    #contact .sec-n { color: var(--red); }
-    #contact .sec-hd { border-bottom-color: rgba(255,255,255,0.08); }
+    contact { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); }
+    contact .sec-title { color: var(--paper); }
+    contact .sec-title em { color: rgba(255,255,255,0.35); }
+    contact .sec-n { color: var(--red); }
+    contact .sec-hd { border-bottom-color: rgba(255,255,255,0.08); }
 
     .contact-layout {
       display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
@@ -524,7 +524,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       .nav-links { display: none; }
       .nav-burger { display: flex; }
       section { padding: 4rem 1.5rem; }
-      #home { padding: 0 1.5rem; }
+      home { padding: 0 1.5rem; }
       .hero-bg-text { display: none; }
       .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .svc-item { grid-template-columns: 60px 1fr; }
@@ -574,7 +574,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="services"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Focus</a>
   <a href="experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
   <a href="projects"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
-  <a href="calculator.html">Calculator</a>
+  <a href="calculator">Calculator</a>
   <a href="blog">Writing</a>
   <a href="newsletter">Newsletter</a>
   <a href="#contact"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
@@ -617,8 +617,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="hero-btns">
-      <a href="#contact" class="btn-solid">Hire me for research</a>
-      <a href="#projects" class="btn-ghost">Read the work</a>
+      <a href="contact" class="btn-solid">Hire me for research</a>
+      <a href="projects" class="btn-ghost">Read the work</a>
     </div>
   </div>
   <div class="hero-foot">
@@ -637,7 +637,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="about-layout">
       <div class="about-body">
-        <!-- HUMANIZED: removed "interesting question" setup, direct opinion lead -->
         <p class="lead">AI regulation is moving fast. Most organizations are somewhere between "we should probably look into this" and "we have no idea what we're doing." I write the analysis that helps close that gap.</p>
         <p>My background is LL.B plus hands-on data work — Python, dashboards, legal datasets. That combination is rarer than it should be. I can read a model card and a statute in the same sitting and tell you what the mismatch actually means.</p>
         <p>Over the past year I've worked in Pakistan, India, the UAE, and the US. Civil litigation, family law, comparative regulatory research, policy drafting. I've built a legal platform read by 570+ professionals across three continents and published a book. None of it was handed to me.</p>
@@ -681,7 +680,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="svc-num">02</div>
         <div class="svc-content">
           <h3>Legal research &amp; litigation support</h3>
-          <!-- HUMANIZED: stakes-first rewrite — "documents that go before courts" -->
           <p>I draft for real cases — petitions, legal notices, plaints, sale deeds — across Pakistan and India. Not practice problems, not simulations. Documents that go before courts and get filed with clients' names on them. That changes how carefully you write.</p>
         </div>
         <div class="svc-tags">
