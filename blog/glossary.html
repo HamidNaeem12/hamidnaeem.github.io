@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Guide — Muhammad Hamid Naeem</title>
+  <meta name="description" content="A plain-language field guide to AI governance, legal tech, and data privacy terminology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0d0b;
+      --surface: #161411;
+      --border: #252218;
+      --text: #ede9e0;
+      --muted: #6e6a5e;
+      --accent: #a08fbd;
+      --accent-dim: #5c4e72;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(14,13,11,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a.logo { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text); text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    nav ul a:hover, nav ul a.active { color: var(--text); }
+
+    .hero {
+      padding: 9rem 3rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .hero h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.85;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 3rem 0;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--accent-dim); color: var(--text); }
+    .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(160,143,189,0.06); }
+
+    /* GLOSSARY */
+    .glossary {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 3rem 6rem;
+    }
+
+    .term-group {
+      margin-bottom: 0.5rem;
+    }
+
+    .term-item {
+      border: 1px solid var(--border);
+      margin-bottom: 2px;
+      background: var(--surface);
+    }
+
+    .term-header {
+      padding: 1.2rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .term-header:hover { background: #1a1712; }
+
+    .term-header-left { display: flex; align-items: baseline; gap: 1rem; }
+
+    .term-word {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    .term-cat {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      padding: 0.1rem 0.4rem;
+    }
+
+    .term-toggle {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      transition: transform 0.25s;
+    }
+
+    .term-item.open .term-toggle { transform: rotate(45deg); }
+
+    .term-body {
+      display: none;
+      padding: 0 1.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .term-item.open .term-body { display: block; }
+
+    .term-def {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-top: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .term-nuance {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .term-nuance strong { color: var(--accent); font-style: normal; font-size: 0.8rem; font-family: 'Instrument Sans', sans-serif; letter-spacing: 0.06em; }
+
+    .section-label-row {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 2rem 0 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p { font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: var(--muted); }
+    footer .links { display: flex; gap: 1.5rem; }
+    footer .links a { font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer .links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      .hero, .filter-bar, .glossary { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="https://hamidnaeem.me">Muhammad Hamid Naeem</a>
+    <ul>
+      <li><a href="https://hamidnaeem.me/#about">About</a></li>
+      <li><a href="https://hamidnaeem.me/#projects">Work</a></li>
+      <li><a href="/blog/" class="active">Writing</a></li>
+      <li><a href="https://hamidnaeem.me/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="breadcrumb"><a href="/blog/">Writing</a> &nbsp;/&nbsp; Field Guide</p>
+    <h1>The Field Guide</h1>
+    <p>Terms, frameworks, and concepts for the law–AI–tech space — explained plainly. The jargon explained without condescension, the distinctions that actually matter in practice.</p>
+  </section>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterTerms('all', this)">All</button>
+    <button class="filter-btn" onclick="filterTerms('AI Governance', this)">AI Governance</button>
+    <button class="filter-btn" onclick="filterTerms('Data Privacy', this)">Data Privacy</button>
+    <button class="filter-btn" onclick="filterTerms('Legal Tech', this)">Legal Tech</button>
+    <button class="filter-btn" onclick="filterTerms('Concepts', this)">Concepts</button>
+  </div>
+
+  <div class="glossary" id="glossary">
+
+    <div class="section-label-row">AI Governance</div>
+
+    <div class="term-item" data-cat="AI Governance">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">High-Risk AI System</span>
+          <span class="term-cat">AI Governance</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">Under the EU AI Act, a "high-risk AI system" is one listed in Annex III — covering areas like biometric identification, critical infrastructure, employment decisions, access to education, law enforcement, and administration of justice. Being high-risk triggers obligations around data quality, transparency, human oversight, accuracy, and mandatory conformity assessments before market placement.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — Most discourse about "regulating AI" treats all AI systems as equivalent. The EU Act's risk categorization is far more surgical. An HR recruitment tool screening CVs is high-risk; a spam filter is not. The legal obligations differ enormously. Understand the risk tier before you analyze the compliance requirements.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="AI Governance">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">GPAI Model</span>
+          <span class="term-cat">AI Governance</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">General Purpose AI (GPAI) models are AI systems with broad applicability across many tasks — large language models like GPT-4 or Claude being the clearest examples. The EU AI Act introduced a separate regulatory tier for GPAI models, with additional obligations for those deemed to have "systemic risk" (trained above a compute threshold of 10²⁵ FLOPs).</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — GPAI regulation was the most contested addition to the EU AI Act. The original text didn't cover foundation models at all. Understanding this distinction matters when advising companies on compliance: deploying a GPAI model in a high-risk context creates a layered obligation problem — both the model provider and the deployer carry duties.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="AI Governance">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Algorithmic Accountability</span>
+          <span class="term-cat">AI Governance</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">The principle that automated or algorithmic decision-making systems should be auditable, their outputs explainable, and the entities deploying them responsible for the consequences. In legal contexts, this often attaches to Article 22 of the GDPR (rights related to automated decision-making) and equivalent provisions in national data protection laws.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — "Accountability" in AI means different things in different documents. In the NIST AI RMF it is a governance posture. In the GDPR it refers to a specific legal obligation. In journalistic usage it often means "someone should be blamed." Clarify which meaning is operative before building any argument around it.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="AI Governance">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Regulatory Sandbox</span>
+          <span class="term-cat">AI Governance</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">A supervised testing environment where companies can deploy AI systems under relaxed regulatory requirements to allow for innovation before full compliance is required. The EU AI Act mandates that member states establish AI regulatory sandboxes. Pakistan's fintech sector has used sandbox models through the State Bank — the concept is not new, but its application to AI is recent.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — Sandboxes often sound more permissive than they are. Participation typically requires active disclosure, regulatory supervision, and explicit commitments about how findings will be used. They are testing environments, not exemption zones.</p>
+      </div>
+    </div>
+
+    <div class="section-label-row">Data Privacy</div>
+
+    <div class="term-item" data-cat="Data Privacy">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Lawful Basis</span>
+          <span class="term-cat">Data Privacy</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">Under GDPR Article 6, every processing of personal data requires one of six lawful bases: consent, contract, legal obligation, vital interests, public task, or legitimate interests. Consent is often incorrectly assumed to be the only basis — most organizational data processing actually rests on contract or legitimate interests.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — Choosing the wrong lawful basis is a common compliance failure. If you rely on consent but then process data in ways that would be hard to withdraw (e.g., data embedded in a trained model), you have a structural problem. The basis chosen also determines what rights the data subject can exercise.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="Data Privacy">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Data Minimisation</span>
+          <span class="term-cat">Data Privacy</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">The GDPR principle (Article 5(1)(c)) that personal data collected must be adequate, relevant, and limited to what is necessary for the specified purpose. Collecting more data than needed — even if it might be useful later — violates this principle.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — In AI development, training datasets are often assembled on the assumption that more data is always better. Data minimisation creates a legal floor below that assumption. It also creates genuine tension with machine learning best practices that organizations need to think through explicitly.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="Data Privacy">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">DPIA</span>
+          <span class="term-cat">Data Privacy</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">Data Protection Impact Assessment. A mandatory process under GDPR Article 35 for processing that is "likely to result in a high risk" to individuals' rights and freedoms — including systematic automated processing, large-scale processing of special categories, or systematic monitoring of public areas. The DPIA must document the nature of processing, necessity, proportionality, and risk mitigation measures.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — DPIAs are often treated as a box-ticking exercise. A well-conducted DPIA is actually a useful internal governance tool that forces clarity about what data is processed and why. Supervisory authorities often ask to see DPIAs in investigations — they reveal a lot about how seriously an organization has thought through its data practices.</p>
+      </div>
+    </div>
+
+    <div class="section-label-row">Legal Tech</div>
+
+    <div class="term-item" data-cat="Legal Tech">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">eDiscovery</span>
+          <span class="term-cat">Legal Tech</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">The electronic discovery process: identifying, collecting, and producing electronically stored information (ESI) in litigation or regulatory proceedings. In large matters, eDiscovery involves AI-assisted review tools (TAR — technology-assisted review) that use predictive coding to categorize documents for relevance and privilege.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — eDiscovery is where legal tech adoption has been most mature for decades. The case law on what AI-assisted review must demonstrate to satisfy disclosure obligations is well-developed in US and UK courts. It's a useful proxy for understanding how courts reason about AI tools in legal practice generally.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="Legal Tech">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Smart Contract</span>
+          <span class="term-cat">Legal Tech</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">Self-executing code stored on a blockchain that automatically performs contractual terms when specified conditions are met. "Smart contract" is a misnomer — they are not contracts in the legal sense and are not smart in any meaningful way. They are conditional transaction programs.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — The legal enforceability of smart contracts varies by jurisdiction and depends heavily on whether the underlying code accurately represents the parties' intentions. In Pakistan, the Contract Act 1872 principles still apply — a smart contract that executes incorrectly doesn't automatically create a legally different result from a traditional contract breach.</p>
+      </div>
+    </div>
+
+    <div class="section-label-row">Concepts</div>
+
+    <div class="term-item" data-cat="Concepts">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Regulatory Capture</span>
+          <span class="term-cat">Concepts</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">The process by which a regulatory agency, created to act in the public interest, increasingly advances the commercial or political interests of the industry it is supposed to regulate. Originates in public choice theory. In AI governance contexts, regulatory capture is a recurring concern about industry-led standard-setting bodies.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — When industry bodies produce AI safety standards and also lobby regulators about AI safety standards, the independence question matters. Identifying whose interests a given framework actually serves is a necessary step before deciding how much weight to give it.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="Concepts">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Brussels Effect</span>
+          <span class="term-cat">Concepts</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">The phenomenon by which EU regulations de facto become global standards because multinational companies find it more efficient to apply the stricter EU standard everywhere than to maintain separate compliance frameworks. Named and theorized by Anu Bradford. GDPR is the clearest example — its influence on data protection laws in Pakistan, India, and elsewhere is substantial despite having no extraterritorial legal force in those jurisdictions.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — Understanding the Brussels Effect explains why studying EU AI governance matters even if you practice in Islamabad. The EU AI Act will shape how global technology companies design their systems — and those systems will be deployed in Pakistan regardless of what Pakistani law says.</p>
+      </div>
+    </div>
+
+    <div class="term-item" data-cat="Concepts">
+      <div class="term-header" onclick="toggleTerm(this)">
+        <div class="term-header-left">
+          <span class="term-word">Principle of Proportionality</span>
+          <span class="term-cat">Concepts</span>
+        </div>
+        <span class="term-toggle">+</span>
+      </div>
+      <div class="term-body">
+        <p class="term-def">A legal principle requiring that measures taken must be suitable to achieve their objective, necessary (no less restrictive alternative achieves the same result), and proportionate in the strict sense (the benefits outweigh the harms caused). Applies in EU law, Pakistani constitutional law, international human rights law, and data protection contexts.</p>
+        <p class="term-nuance"><strong>Why it matters</strong> — Proportionality arguments appear in almost every domain covered by this field guide. A data collection practice that fails proportionality fails regardless of consent. An AI regulation that restricts a use case more than necessary to achieve its safety objective may fail proportionality review. Learning to build proportionality arguments is foundational.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Muhammad Hamid Naeem</p>
+    <div class="links">
+      <a href="https://linkedin.com/in/hamidnaeemadvocate">LinkedIn</a>
+      <a href="https://digitalgavel.substack.com">Substack</a>
+      <a href="https://hamidnaeem.me/#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTerm(header) {
+      const item = header.closest('.term-item');
+      item.classList.toggle('open');
+    }
+
+    function filterTerms(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const items = document.querySelectorAll('.term-item');
+      items.forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      const rows = document.querySelectorAll('.section-label-row');
+      rows.forEach(row => {
+        if (cat === 'all') {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
