@@ -1,448 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Resources — Muhammad Hamid Naeem</title>
-  <meta name="description" content="Curated AI governance, legal tech, and policy resources — courses, frameworks, tools, and reading lists for legal professionals navigating the AI landscape." />
-  <style>
-    /* ── Reset & base ─────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Governance Resources — Muhammad Hamid Naeem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f7f4ef;--white:#fdfcfa;
+  --ink:#18150f;--mid:#52493e;--faint:#a09484;--line:#e0d9cf;
+  --rust:#9b3d1a;--rust2:#c4622d;
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'Source Serif 4','Times New Roman',serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --W:760px;--nav:54px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.8;-webkit-font-smoothing:antialiased}
 
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --border: #1e1e1e;
-      --border-light: #2a2a2a;
-      --text: #e8e8e8;
-      --text-muted: #6b6b6b;
-      --text-dim: #444;
-      --accent: #c8a96e;
-      --accent-dim: rgba(200,169,110,0.12);
-      --accent-dim2: rgba(200,169,110,0.06);
-      --font-serif: 'Georgia', 'Times New Roman', serif;
-      --font-mono: 'Courier New', monospace;
-      --max: 860px;
-      --nav-h: 56px;
-    }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav);background:rgba(247,244,239,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;z-index:100}
+.logo{font-family:var(--serif);font-size:.9rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:1.6rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.59rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.on{color:var(--rust)}
+.burger{display:none;background:none;border:none;color:var(--ink);cursor:pointer;font-size:1.1rem}
+.mnav{display:none;position:fixed;inset:0;background:var(--cream);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mnav.open{display:flex}
+.mnav a{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.mclose{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;color:var(--faint);cursor:pointer;font-family:var(--mono);font-size:.7rem}
 
-    html { scroll-behavior: smooth; }
+/* LAYOUT */
+main{padding-top:calc(var(--nav) + 4rem);padding-bottom:6rem}
+.wrap{max-width:var(--W);margin:0 auto;padding:0 1.8rem}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-serif);
-      font-size: 17px;
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-    }
+/* HERO */
+.hero{margin-bottom:4rem}
+.kicker{font-family:var(--mono);font-size:.61rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:1.3rem;display:flex;align-items:center;gap:.6rem}
+.kicker::before{content:'';display:block;width:1.4rem;height:1px;background:var(--rust)}
+h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:400;line-height:1.13;letter-spacing:-.02em;margin-bottom:1.4rem}
+h1 em{font-style:italic;color:var(--rust)}
+.intro{font-family:var(--body);font-style:italic;font-size:.97rem;line-height:1.85;color:var(--mid);max-width:530px;border-left:2px solid var(--line);padding-left:1.1rem}
+.hr{height:1px;background:var(--line);margin:2.2rem 0}
+.stats{display:flex;gap:2.8rem;flex-wrap:wrap}
+.sn{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--rust);line-height:1}
+.sl{font-family:var(--mono);font-size:.59rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:.2rem}
 
-    /* ── Nav ──────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      z-index: 100;
-    }
+/* SECTIONS */
+.sec{margin-bottom:4rem}
+.sh{display:flex;align-items:baseline;gap:.9rem;padding-bottom:.8rem;border-bottom:1px solid var(--ink);margin-bottom:0}
+.sn2{font-family:var(--mono);font-size:.57rem;color:var(--faint);letter-spacing:.1em}
+.st{font-family:var(--serif);font-size:1.28rem;font-weight:400}
+.st em{font-style:italic;color:var(--rust)}
 
-    .nav-logo {
-      font-family: var(--font-serif);
-      font-size: 0.95rem;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-    }
+/* ROWS */
+.row{display:grid;grid-template-columns:1.6rem 1fr .9rem;gap:.8rem;align-items:start;padding:1.15rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:all .15s;position:relative;border-radius:2px}
+.row:hover{background:var(--white);padding-left:.7rem;padding-right:.7rem;margin:0 -.7rem}
+.row:hover .arr{color:var(--rust);transform:translate(2px,-2px)}
+.rn{font-family:var(--mono);font-size:.57rem;color:var(--faint);padding-top:.22rem}
+.rtop{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.25rem}
+.rtitle{font-family:var(--serif);font-size:.96rem;font-weight:600;color:var(--ink)}
+.tag{font-family:var(--mono);font-size:.54rem;letter-spacing:.07em;text-transform:uppercase;padding:.09rem .36rem;border-radius:2px}
+.tf{color:#3d6b3d;background:rgba(61,107,61,.09);border:1px solid rgba(61,107,61,.2)}
+.tp{color:#4a5e7a;background:rgba(74,94,122,.09);border:1px solid rgba(74,94,122,.2)}
+.td{color:var(--rust);background:rgba(155,61,26,.09);border:1px solid rgba(155,61,26,.2)}
+.tt{color:#6b4e8a;background:rgba(107,78,138,.09);border:1px solid rgba(107,78,138,.2)}
+.tg{color:var(--faint);background:rgba(160,148,132,.09);border:1px solid var(--line)}
+.rnote{font-family:var(--body);font-size:.87rem;color:var(--mid);line-height:1.66}
+.arr{font-size:.78rem;color:var(--faint);padding-top:.24rem;transition:color .15s,transform .15s}
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+/* PEOPLE */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.pc{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.15rem 1.3rem;text-decoration:none;color:inherit;transition:background .15s}
+.pc:hover{background:var(--white)}
+.pn{font-family:var(--serif);font-size:.91rem;font-weight:600;margin-bottom:.2rem}
+.pd{font-family:var(--body);font-size:.81rem;color:var(--faint);line-height:1.5}
 
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
+/* NOTE */
+.note{margin-top:3rem;padding:1.4rem 1.5rem;border-left:3px solid var(--rust2);background:var(--white)}
+.note p{font-family:var(--body);font-style:italic;font-size:.88rem;color:var(--mid);line-height:1.72}
+.note strong{font-style:normal;color:var(--rust);font-weight:400}
 
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--accent); }
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:1.8rem 1.8rem;display:flex;justify-content:space-between;align-items:center;max-width:var(--W);margin:0 auto;flex-wrap:wrap;gap:.8rem}
+footer p{font-family:var(--mono);font-size:.59rem;color:var(--faint);letter-spacing:.05em}
+.fl{display:flex;gap:1.5rem}
+.fl a{font-family:var(--mono);font-size:.59rem;color:var(--faint);text-decoration:none;letter-spacing:.07em;text-transform:uppercase;transition:color .15s}
+.fl a:hover{color:var(--rust)}
 
-    .nav-hamburger {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
+/* ANIMATIONS */
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{animation:up .6s ease .08s both}
+.sec:nth-child(1){animation:up .5s ease .18s both}
+.sec:nth-child(2){animation:up .5s ease .26s both}
+.sec:nth-child(3){animation:up .5s ease .34s both}
+.sec:nth-child(4){animation:up .5s ease .42s both}
+.sec:nth-child(5){animation:up .5s ease .50s both}
+.sec:nth-child(6){animation:up .5s ease .58s both}
 
-    /* Mobile nav overlay */
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 200;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    .nav-mobile.open { display: flex; }
-
-    .nav-mobile a {
-      color: var(--text);
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .nav-close {
-      position: absolute;
-      top: 1.2rem; right: 1.5rem;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    /* ── Page layout ──────────────────────────────────────── */
-    main {
-      padding-top: calc(var(--nav-h) + 5rem);
-      padding-bottom: 6rem;
-    }
-
-    .container {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* ── Hero ─────────────────────────────────────────────── */
-    .hero {
-      margin-bottom: 5rem;
-    }
-
-    .hero-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.4rem;
-    }
-
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: normal;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.6rem;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-note {
-      color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.8;
-      max-width: 620px;
-      border-left: 2px solid var(--border-light);
-      padding-left: 1.2rem;
-      margin-top: 2rem;
-    }
-
-    /* Stats strip */
-    .stats-strip {
-      display: flex;
-      gap: 3rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-
-    .stat-item {}
-
-    .stat-num {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      color: var(--accent);
-      display: block;
-    }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    /* ── Section structure ────────────────────────────────── */
-    .section {
-      margin-bottom: 5rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-num {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-      flex-shrink: 0;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      font-weight: normal;
-      letter-spacing: -0.01em;
-    }
-
-    .section-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    /* ── Resource cards ───────────────────────────────────── */
-    .resource-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .resource-card {
-      background: var(--bg);
-      padding: 1.6rem 1.8rem;
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      transition: background 0.2s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .resource-card:hover {
-      background: var(--surface);
-    }
-
-    .resource-card:hover .card-arrow { color: var(--accent); }
-
-    .card-index {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      min-width: 2rem;
-      padding-top: 0.2rem;
-      flex-shrink: 0;
-    }
-
-    .card-body { flex: 1; min-width: 0; }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.4rem;
-      flex-wrap: wrap;
-    }
-
-    .card-title {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: normal;
-      color: var(--text);
-    }
-
-    .card-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-dim);
-      padding: 0.15rem 0.5rem;
-      border: 1px solid rgba(200,169,110,0.2);
-    }
-
-    .card-tag.free { color: #7db87d; background: rgba(125,184,125,0.1); border-color: rgba(125,184,125,0.2); }
-    .card-tag.paid { color: #a0b4d0; background: rgba(160,180,208,0.1); border-color: rgba(160,180,208,0.2); }
-    .card-tag.doc  { color: #c08080; background: rgba(192,128,128,0.1); border-color: rgba(192,128,128,0.2); }
-    .card-tag.tool { color: #b09fd0; background: rgba(176,159,208,0.1); border-color: rgba(176,159,208,0.2); }
-
-    .card-note {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-top: 0.3rem;
-    }
-
-    .card-arrow {
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      padding-top: 0.25rem;
-      flex-shrink: 0;
-      transition: color 0.2s;
-    }
-
-    /* ── People list ──────────────────────────────────────── */
-    .people-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .person-card {
-      background: var(--bg);
-      padding: 1.4rem 1.6rem;
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s;
-    }
-
-    .person-card:hover { background: var(--surface); }
-
-    .person-name {
-      font-family: var(--font-serif);
-      font-size: 0.95rem;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    .person-desc {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-      line-height: 1.5;
-    }
-
-    /* ── Disclaimer ───────────────────────────────────────── */
-    .disclaimer {
-      margin-top: 4rem;
-      padding: 1.4rem 1.6rem;
-      border: 1px solid var(--border-light);
-      background: var(--accent-dim2);
-    }
-
-    .disclaimer p {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      letter-spacing: 0.02em;
-    }
-
-    .disclaimer strong {
-      color: var(--accent);
-      font-weight: normal;
-    }
-
-    /* ── Footer ───────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: var(--max);
-      margin: 0 auto;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    footer p {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .footer-links a {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--accent); }
-
-    /* ── Responsive ───────────────────────────────────────── */
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: block; }
-
-      .people-grid { grid-template-columns: 1fr; }
-
-      .stats-strip { gap: 2rem; }
-
-      .resource-card { padding: 1.2rem 1rem; }
-      .card-index { display: none; }
-
-      footer { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* ── Fade in ──────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero, .section {
-      animation: fadeUp 0.5s ease both;
-    }
-
-    .section:nth-child(2) { animation-delay: 0.07s; }
-    .section:nth-child(3) { animation-delay: 0.14s; }
-    .section:nth-child(4) { animation-delay: 0.21s; }
-    .section:nth-child(5) { animation-delay: 0.28s; }
-    .section:nth-child(6) { animation-delay: 0.35s; }
-    .section:nth-child(7) { animation-delay: 0.42s; }
-  </style>
+/* RESPONSIVE */
+@media(max-width:600px){
+  .nav-links{display:none}.burger{display:block}
+  .pgrid{grid-template-columns:1fr}
+  .rn{display:none}.row{grid-template-columns:1fr .9rem}
+  h1{font-size:1.9rem}
+  footer{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
 
-<!-- ── Nav ──────────────────────────────────────────────── -->
 <nav>
-  <a href="https://hamidnaeem.me" class="nav-logo">Muhammad Hamid Naeem</a>
+  <a href="https://hamidnaeem.me" class="logo">Muhammad Hamid Naeem</a>
   <ul class="nav-links">
     <li><a href="https://hamidnaeem.me#about">About</a></li>
     <li><a href="https://hamidnaeem.me#services">Focus</a></li>
@@ -450,437 +121,243 @@
     <li><a href="https://hamidnaeem.me#projects">Work</a></li>
     <li><a href="https://hamidnaeem.me/calculator.html">Calculator</a></li>
     <li><a href="https://hamidnaeem.me/newsletter.html">Newsletter</a></li>
-    <li><a href="#" class="active">Resources</a></li>
+    <li><a href="#" class="on">Resources</a></li>
     <li><a href="https://hamidnaeem.me#contact">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.add('open')">☰</button>
+  <button class="burger" onclick="document.querySelector('.mnav').classList.add('open')">☰</button>
 </nav>
 
-<!-- Mobile nav -->
-<div class="nav-mobile">
-  <button class="nav-close" onclick="document.querySelector('.nav-mobile').classList.remove('open')">Close ✕</button>
-  <a href="https://hamidnaeem.me#about" onclick="document.querySelector('.nav-mobile').classList.remove('open')">About</a>
-  <a href="https://hamidnaeem.me#projects" onclick="document.querySelector('.nav-mobile').classList.remove('open')">Work</a>
+<div class="mnav">
+  <button class="mclose" onclick="document.querySelector('.mnav').classList.remove('open')">Close ✕</button>
+  <a href="https://hamidnaeem.me#about" onclick="document.querySelector('.mnav').classList.remove('open')">About</a>
+  <a href="https://hamidnaeem.me#projects" onclick="document.querySelector('.mnav').classList.remove('open')">Work</a>
   <a href="https://hamidnaeem.me/calculator.html">Calculator</a>
   <a href="https://hamidnaeem.me/newsletter.html">Newsletter</a>
   <a href="#">Resources</a>
-  <a href="https://hamidnaeem.me#contact" onclick="document.querySelector('.nav-mobile').classList.remove('open')">Contact</a>
+  <a href="https://hamidnaeem.me#contact" onclick="document.querySelector('.mnav').classList.remove('open')">Contact</a>
 </div>
 
-<!-- ── Main ─────────────────────────────────────────────── -->
-<main>
-  <div class="container">
+<main><div class="wrap">
 
-    <!-- Hero -->
-    <section class="hero">
-      <p class="hero-label">Resource library · AI & Legal Tech</p>
-      <h1>The reading list I wish<br>I had when I <em>started</em></h1>
-      <p class="hero-note">
-        Most people approaching AI from a legal background don't know where to begin. Most people approaching AI from a technical background don't know what legal actually means. This list is for both — curated from what I've actually used, read, and found worth the time. My take is next to each one. Nothing here is paid placement.
-      </p>
-      <div class="stats-strip">
-        <div class="stat-item">
-          <span class="stat-num">6</span>
-          <span class="stat-label">Categories</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">30+</span>
-          <span class="stat-label">Resources</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">Updated</span>
-          <span class="stat-label">Regularly</span>
-        </div>
-      </div>
-    </section>
+<!-- HERO -->
+<section class="hero">
+  <p class="kicker">AI Governance · Policy · Legal Tech</p>
+  <h1>What I actually read<br>to stay <em>sharp</em></h1>
+  <p class="intro">Not a beginner's guide. This is the stack I use working at the intersection of law, policy, and AI governance — primary sources, serious institutions, and the people worth following when you want analysis, not hype.</p>
+  <div class="hr"></div>
+  <div class="stats">
+    <div><span class="sn">6</span><span class="sl">Categories</span></div>
+    <div><span class="sn">30+</span><span class="sl">Resources</span></div>
+    <div><span class="sn">0</span><span class="sl">Paid placements</span></div>
+  </div>
+</section>
 
-    <!-- 01 Start Here -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <h2 class="section-title">Start <em>here</em></h2>
-      </div>
-      <div class="resource-grid">
+<!-- 01 FOUNDATIONS -->
+<section class="sec">
+  <div class="sh"><span class="sn2">01</span><h2 class="st">Technical <em>foundations</em></h2></div>
 
-        <a class="resource-card" href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" rel="noopener">
-          <span class="card-index">01</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">But what is a neural network? — 3Blue1Brown</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Video</span>
-            </div>
-            <p class="card-note">The best visual explanation of how neural networks actually work. Not dumbed down, not intimidating. If you watch one thing before reading any policy document, make it this. The rest of the series is equally good.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank" rel="noopener">
+    <span class="rn">01</span>
+    <div><div class="rtop"><span class="rtitle">But what is a neural network? — 3Blue1Brown</span><span class="tag tf">Free</span><span class="tag tg">Video</span></div>
+    <p class="rnote">The clearest visual explanation of how neural networks function. Before engaging with AI regulation, you need to understand what you're regulating. This is where to start — not dumbed down, not gatekept.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://www.technologyreview.com/2023/01/27/1067338/explained-what-is-generative-ai/" target="_blank" rel="noopener">
-          <span class="card-index">02</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">What is generative AI? — MIT Technology Review</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Article</span>
-            </div>
-            <p class="card-note">Clear, no-jargon explainer from a source that doesn't have an agenda to sell you anything. Covers generative AI specifically — which is the piece most governance discussions are actually about.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/" target="_blank" rel="noopener">
+    <span class="rn">02</span>
+    <div><div class="rtop"><span class="rtitle">What is ChatGPT doing? — Stephen Wolfram</span><span class="tag tf">Free</span><span class="tag tg">Long read</span></div>
+    <p class="rnote">Mechanically explains how large language models produce text. If you use "hallucination" as a policy term without understanding why it happens mechanically, read this first. Long, rigorous, worth every minute.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/" target="_blank" rel="noopener">
-          <span class="card-index">03</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">What is ChatGPT doing? — Stephen Wolfram</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Long read</span>
-            </div>
-            <p class="card-note">Long. Worth every minute. Goes deeper than any other accessible explanation on how LLMs produce text. If you want to understand what "hallucination" actually means mechanically — not just as a buzzword — read this.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.deeplearning.ai/courses/ai-for-everyone/" target="_blank" rel="noopener">
+    <span class="rn">03</span>
+    <div><div class="rtop"><span class="rtitle">AI For Everyone — Andrew Ng</span><span class="tag tp">Audit free</span><span class="tag tg">Course</span></div>
+    <p class="rnote">Designed for decision-makers, not engineers. Ng explains what AI can and cannot do in terms a policy practitioner can use. The section on what makes a viable AI project translates directly to procurement and governance advisory work.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://course.fast.ai/" target="_blank" rel="noopener">
-          <span class="card-index">04</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Practical Deep Learning for Coders — fast.ai</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Course</span>
-            </div>
-            <p class="card-note">You don't have to do the whole thing. Even the first two lectures give you enough to stop nodding blankly when engineers talk. For lawyers who want genuine technical literacy rather than surface familiarity.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.elementsofai.com/" target="_blank" rel="noopener">
+    <span class="rn">04</span>
+    <div><div class="rtop"><span class="rtitle">Elements of AI — University of Helsinki</span><span class="tag tf">Free</span><span class="tag tg">Course</span></div>
+    <p class="rnote">The most accessible foundation available. If you need to bring colleagues or clients up to speed before a governance conversation, this is the link to send them. Built by an institution with no commercial interest in your conclusion.</p></div>
+    <span class="arr">↗</span>
+  </a>
+</section>
 
-      </div>
-    </section>
+<!-- 02 PRIMARY SOURCES -->
+<section class="sec">
+  <div class="sh"><span class="sn2">02</span><h2 class="st">Primary <em>sources</em></h2></div>
 
-    <!-- 02 AI Governance & Policy -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2 class="section-title">AI Governance <em>&</em> Policy</h2>
-      </div>
-      <div class="resource-grid">
+  <a class="row" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">
+    <span class="rn">01</span>
+    <div><div class="rtop"><span class="rtitle">EU AI Act — Regulation 2024/1689</span><span class="tag td">Primary source</span></div>
+    <p class="rnote">Read Annex III and Article 6 before anything else — that is where the classification logic lives. The recitals carry interpretive weight that most commentary ignores. If you advise on EU-market AI compliance, there is no substitute for the actual text.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">
-          <span class="card-index">01</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">EU AI Act — Full Text</span>
-              <span class="card-tag doc">Primary source</span>
-            </div>
-            <p class="card-note">The actual legislation. Most commentary misses nuance that only shows up if you read the recitals. Annex III (high-risk systems) and Article 6 (classification rules) are the two things everyone citing this statute should actually understand.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://digital-strategy.ec.europa.eu/en/policies/ai-office" target="_blank" rel="noopener">
+    <span class="rn">02</span>
+    <div><div class="rtop"><span class="rtitle">EU AI Office — Implementation &amp; Guidance</span><span class="tag td">Primary source</span></div>
+    <p class="rnote">The enforcement body for the AI Act on GPAI models. Guidance documents here are more operationally useful than academic commentary speculating on what the Act "probably means." Track what it actually publishes.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://hai.stanford.edu/ai-index-report" target="_blank" rel="noopener">
-          <span class="card-index">02</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Stanford AI Index Report — Annual</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Report</span>
-            </div>
-            <p class="card-note">The most data-dense annual snapshot of where AI actually stands — research output, investment, policy activity, public perception. Useful for grounding any governance argument in what's actually happening rather than what feels true.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.nist.gov/artificial-intelligence/ai-risk-management-framework" target="_blank" rel="noopener">
+    <span class="rn">03</span>
+    <div><div class="rtop"><span class="rtitle">NIST AI Risk Management Framework 1.0</span><span class="tag td">Primary source</span></div>
+    <p class="rnote">The most operationally useful risk document available. The GOVERN, MAP, MEASURE, MANAGE structure gives practitioners concrete vocabulary for advising organisations on internal AI governance — regardless of jurisdiction.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" target="_blank" rel="noopener">
-          <span class="card-index">03</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">US Executive Order on AI (Oct 2023)</span>
-              <span class="card-tag doc">Primary source</span>
-            </div>
-            <p class="card-note">The reference point for US federal AI policy at the executive level. The contrast with the EU's risk-classification approach is instructive — and that contrast is where most of the comparative governance literature lives.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.oecd.org/en/topics/sub-issues/ai-principles.html" target="_blank" rel="noopener">
+    <span class="rn">04</span>
+    <div><div class="rtop"><span class="rtitle">OECD AI Principles &amp; Policy Observatory</span><span class="tag td">Framework</span></div>
+    <p class="rnote">The OECD AI Principles underpin most national AI strategies. The Observatory tracks implementation across 70+ countries — essential for comparative governance work. The live policy database is a genuine research time-saver.</p></div>
+    <span class="arr">↗</span>
+  </a>
+</section>
 
-        <a class="resource-card" href="https://gpai.ai/" target="_blank" rel="noopener">
-          <span class="card-index">04</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Global Partnership on AI (GPAI)</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Research hub</span>
-            </div>
-            <p class="card-note">Intergovernmental body producing working group reports on AI governance, responsible AI, and data governance. Less cited than it should be. The working group outputs are often more practically useful than academic papers on the same questions.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+<!-- 03 GOVERNANCE RESEARCH -->
+<section class="sec">
+  <div class="sh"><span class="sn2">03</span><h2 class="st">Governance <em>research</em></h2></div>
 
-        <a class="resource-card" href="https://ainowinstitute.org/" target="_blank" rel="noopener">
-          <span class="card-index">05</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">AI Now Institute</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Research</span>
-            </div>
-            <p class="card-note">Critical, social-science-grounded AI research. Particularly good on algorithmic accountability and the labour and civil rights dimensions of AI deployment. Useful counterweight to purely technical or purely regulatory framings.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://hai.stanford.edu/ai-index-report" target="_blank" rel="noopener">
+    <span class="rn">01</span>
+    <div><div class="rtop"><span class="rtitle">Stanford AI Index Report — Annual</span><span class="tag tf">Free</span><span class="tag tg">Report</span></div>
+    <p class="rnote">The most data-dense annual snapshot of where AI actually stands. Grounds governance arguments in empirical reality rather than lobbying narratives. The policy chapter is the one I read first each year.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-      </div>
-    </section>
+  <a class="row" href="https://cset.georgetown.edu/" target="_blank" rel="noopener">
+    <span class="rn">02</span>
+    <div><div class="rtop"><span class="rtitle">Center for Security &amp; Emerging Technology — Georgetown</span><span class="tag tf">Free</span><span class="tag tg">Think tank</span></div>
+    <p class="rnote">Rigorous, non-partisan analysis on AI talent, compute governance, and geopolitics. If your work touches export controls, AI in defence, or US-China technology competition, CSET is the reference point — not the newspaper.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-    <!-- 03 For Legal Professionals -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2 class="section-title">For Legal <em>Professionals</em></h2>
-      </div>
-      <div class="resource-grid">
+  <a class="row" href="https://ainowinstitute.org/" target="_blank" rel="noopener">
+    <span class="rn">03</span>
+    <div><div class="rtop"><span class="rtitle">AI Now Institute</span><span class="tag tf">Free</span><span class="tag tg">Research</span></div>
+    <p class="rnote">Critical, social-science-grounded research on algorithmic accountability, civil rights, and labour. Necessary counterweight to purely technical or purely regulatory framings. Their annual reports on AI in public sector deployment are required reading.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://www.americanbar.org/groups/law_practice/resources/tech-report/" target="_blank" rel="noopener">
-          <span class="card-index">01</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">ABA Legal Technology Survey Report</span>
-              <span class="card-tag free">Free (summary)</span>
-              <span class="card-tag">Report</span>
-            </div>
-            <p class="card-note">Annual survey of how lawyers are actually using technology — adoption rates, concerns, use cases. Useful for understanding where the profession is, not just where the discourse thinks it is.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://gpai.ai/" target="_blank" rel="noopener">
+    <span class="rn">04</span>
+    <div><div class="rtop"><span class="rtitle">Global Partnership on AI (GPAI)</span><span class="tag tf">Free</span><span class="tag tg">Research hub</span></div>
+    <p class="rnote">Intergovernmental body producing working group reports on responsible AI and data governance. Less cited than it deserves. The working group outputs are often more practically grounded than academic papers covering the same questions.</p></div>
+    <span class="arr">↗</span>
+  </a>
+</section>
 
-        <a class="resource-card" href="https://www.lawsociety.org.uk/topics/research/technology-and-the-law" target="_blank" rel="noopener">
-          <span class="card-index">02</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Law Society — Technology & the Law</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Guidance</span>
-            </div>
-            <p class="card-note">UK-focused but globally relevant guidance on AI use in legal practice, including ethics considerations and professional responsibility questions. Good for understanding what regulators are actually paying attention to.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+<!-- 04 LEGAL PRACTICE -->
+<section class="sec">
+  <div class="sh"><span class="sn2">04</span><h2 class="st">Legal <em>practice</em></h2></div>
 
-        <a class="resource-card" href="https://clp.law.harvard.edu/" target="_blank" rel="noopener">
-          <span class="card-index">03</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Harvard Law — Cyberlaw Clinic & LPE Project</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Academic</span>
-            </div>
-            <p class="card-note">Harvard's law and technology output — working papers, clinic reports, and commentary. Dense but reliable. Worth bookmarking for when you need a credible citation on AI liability, intellectual property, or due process questions.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.lawsociety.org.uk/topics/research/technology-and-the-law" target="_blank" rel="noopener">
+    <span class="rn">01</span>
+    <div><div class="rtop"><span class="rtitle">Law Society — Technology &amp; the Law</span><span class="tag tf">Free</span><span class="tag tg">Guidance</span></div>
+    <p class="rnote">UK-anchored but globally relevant ethics guidance on AI in legal practice. One of the clearest professional responsibility frameworks available. Useful for understanding what regulators are watching before they start enforcing it.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://futurelawyer.rice.edu/" target="_blank" rel="noopener">
-          <span class="card-index">04</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Rice University — Future Lawyer Initiative</span>
-              <span class="card-tag free">Free</span>
-              <span class="card-tag">Resource hub</span>
-            </div>
-            <p class="card-note">Practical skills and resources for law students navigating a legal market that is changing faster than law schools are updating their curricula. Specifically useful if you are in law school and trying to figure out what to actually learn.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://clp.law.harvard.edu/" target="_blank" rel="noopener">
+    <span class="rn">02</span>
+    <div><div class="rtop"><span class="rtitle">Harvard Law — Cyberlaw Clinic</span><span class="tag tf">Free</span><span class="tag tg">Academic</span></div>
+    <p class="rnote">Working papers and commentary on AI liability, copyright, due process, and platform governance. Dense but reliable for academic citations when you need weight behind an AI legal argument.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-      </div>
-    </section>
+  <a class="row" href="https://www.americanbar.org/groups/law_practice/resources/tech-report/" target="_blank" rel="noopener">
+    <span class="rn">03</span>
+    <div><div class="rtop"><span class="rtitle">ABA Legal Technology Survey — Annual</span><span class="tag tf">Free (summary)</span><span class="tag tg">Report</span></div>
+    <p class="rnote">Empirical data on how lawyers are actually adopting AI — adoption rates, use cases, ethics concerns. The gap between industry discourse and ground reality is instructive for anyone advising bar associations or legal aid organisations.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-    <!-- 04 Courses -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-num">04</span>
-        <h2 class="section-title">Courses worth <em>finishing</em></h2>
-      </div>
-      <div class="resource-grid">
+  <a class="row" href="https://www.coursera.org/learn/ai-governance" target="_blank" rel="noopener">
+    <span class="rn">04</span>
+    <div><div class="rtop"><span class="rtitle">AI Governance — University of Virginia / Coursera</span><span class="tag tp">Audit free</span><span class="tag tg">Course</span></div>
+    <p class="rnote">One of the few courses where governance is the actual subject, not an appendix to an engineering syllabus. Covers risk frameworks, ethics, and regulatory approaches in a sequence that works for practitioners.</p></div>
+    <span class="arr">↗</span>
+  </a>
+</section>
 
-        <a class="resource-card" href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener">
-          <span class="card-index">01</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Google Data Analytics Professional Certificate</span>
-              <span class="card-tag paid">Paid / Financial aid available</span>
-            </div>
-            <p class="card-note">I did this one. It teaches you to think analytically about data, not just run tools. For lawyers, the SQL and data cleaning modules are the most immediately useful. The certificate itself is recognized; the skills matter more.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+<!-- 05 TOOLS -->
+<section class="sec">
+  <div class="sh"><span class="sn2">05</span><h2 class="st">Tools worth <em>knowing</em></h2></div>
 
-        <a class="resource-card" href="https://www.deeplearning.ai/courses/ai-for-everyone/" target="_blank" rel="noopener">
-          <span class="card-index">02</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">AI For Everyone — Andrew Ng / DeepLearning.AI</span>
-              <span class="card-tag paid">Paid / Audit free</span>
-            </div>
-            <p class="card-note">Non-technical. That's the point. Ng is one of the clearest communicators in AI and this course is designed specifically for people who need to understand AI to make decisions about it, not build it. Six hours well spent.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.lexisnexis.com/en-us/products/lexis-plus-ai.page" target="_blank" rel="noopener">
+    <span class="rn">01</span>
+    <div><div class="rtop"><span class="rtitle">LexisNexis AI</span><span class="tag tt">Legal AI</span><span class="tag tp">Subscription</span></div>
+    <p class="rnote">The dominant legal research platform's AI layer. If you advise firms on AI tool adoption or risk, this is the system most practitioners encounter. Understanding its architecture matters for understanding where liability exposure actually sits.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://www.edx.org/learn/artificial-intelligence/harvard-university-cs50-s-introduction-to-artificial-intelligence-with-python" target="_blank" rel="noopener">
-          <span class="card-index">03</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">CS50 AI — Harvard / edX</span>
-              <span class="card-tag free">Free to audit</span>
-            </div>
-            <p class="card-note">More technical than the others on this list. But if you want to understand what search algorithms, machine learning, and neural networks actually do — not just what they're called — this builds it from first principles. Challenging. Worth it.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://casetext.com/" target="_blank" rel="noopener">
+    <span class="rn">02</span>
+    <div><div class="rtop"><span class="rtitle">Casetext / CoCounsel — Thomson Reuters</span><span class="tag tt">Legal AI</span><span class="tag tp">Subscription</span></div>
+    <p class="rnote">AI-assisted research and contract analysis. One of the more technically mature legal AI products. The Thomson Reuters acquisition signals where incumbents are positioning. Knowing what it can't do is as important as knowing what it can.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://www.coursera.org/learn/ai-governance" target="_blank" rel="noopener">
-          <span class="card-index">04</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">AI Governance — University of Virginia / Coursera</span>
-              <span class="card-tag paid">Paid / Audit free</span>
-            </div>
-            <p class="card-note">One of the few courses that treats governance as the central subject rather than an afterthought to an AI engineering course. Covers risk frameworks, ethics, and regulatory approaches. Directly relevant to what I work on.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://elicit.com/" target="_blank" rel="noopener">
+    <span class="rn">03</span>
+    <div><div class="rtop"><span class="rtitle">Elicit</span><span class="tag tt">Research tool</span><span class="tag tf">Free tier</span></div>
+    <p class="rnote">AI-assisted academic literature search. Surfaces papers and extracts findings. Better for policy and governance research than for case law. Useful when you need to know what the published scholarship says on a question before citing it.</p></div>
+    <span class="arr">↗</span>
+  </a>
 
-        <a class="resource-card" href="https://www.elementsofai.com/" target="_blank" rel="noopener">
-          <span class="card-index">05</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Elements of AI — University of Helsinki</span>
-              <span class="card-tag free">Free</span>
-            </div>
-            <p class="card-note">Genuinely the most accessible AI introduction I have found. Built for people with no technical background. If you have a colleague, supervisor, or client who needs to understand AI before they can have a useful conversation about it — send them here first.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+  <a class="row" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+    <span class="rn">04</span>
+    <div><div class="rtop"><span class="rtitle">Perplexity AI</span><span class="tag tt">Research tool</span><span class="tag tf">Free tier</span></div>
+    <p class="rnote">AI search with inline citations. More epistemically honest than most about uncertainty. Useful for rapid background research when you need sourced starting points, not unsourced assertions. Verify everything before you cite.</p></div>
+    <span class="arr">↗</span>
+  </a>
+</section>
 
-      </div>
-    </section>
+<!-- 06 PEOPLE -->
+<section class="sec">
+  <div class="sh"><span class="sn2">06</span><h2 class="st">People worth <em>following</em></h2></div>
+  <div class="pgrid">
+    <a class="pc" href="https://ainowinstitute.org/people/kate-crawford" target="_blank" rel="noopener">
+      <p class="pn">Kate Crawford</p>
+      <p class="pd">Author of Atlas of AI. The most serious political economy analysis of AI's material costs and power implications.</p>
+    </a>
+    <a class="pc" href="https://www.cs.princeton.edu/~arvindn/" target="_blank" rel="noopener">
+      <p class="pn">Arvind Narayanan</p>
+      <p class="pd">Princeton. Consistently honest about what AI can and cannot do. Read him before writing any capability claim into a policy document.</p>
+    </a>
+    <a class="pc" href="https://www.linkedin.com/in/timnit-gebru-14b8bb3/" target="_blank" rel="noopener">
+      <p class="pn">Timnit Gebru</p>
+      <p class="pd">AI ethics and algorithmic harm. Critical, rigorous, and correct more often than the institutions that pushed her out.</p>
+    </a>
+    <a class="pc" href="https://www.ben-evans.com/" target="_blank" rel="noopener">
+      <p class="pn">Benedict Evans</p>
+      <p class="pd">Tech strategy and structural change. Less hype, more market reality. Good antidote to governance proposals built on sci-fi assumptions.</p>
+    </a>
+    <a class="pc" href="https://yoshuabengio.org/" target="_blank" rel="noopener">
+      <p class="pn">Yoshua Bengio</p>
+      <p class="pd">Turing Award laureate turned AI safety advocate. His submissions to government inquiries are models of how technical expertise translates into policy language.</p>
+    </a>
+    <a class="pc" href="https://cset.georgetown.edu/staff/helen-toner/" target="_blank" rel="noopener">
+      <p class="pn">Helen Toner</p>
+      <p class="pd">Georgetown CSET. Former OpenAI board member. Sharp on where AI governance accountability actually sits versus where it appears to sit.</p>
+    </a>
+  </div>
+</section>
 
-    <!-- 05 Tools -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-num">05</span>
-        <h2 class="section-title">Tools legal professionals<br>are <em>encountering</em></h2>
-      </div>
-      <div class="resource-grid">
+<!-- NOTE -->
+<div class="note">
+  <p><strong>On curation:</strong> This list reflects what I use working on AI governance and legal tech. It is opinionated — I have views on what is worth your time and they are in here. Nothing is sponsored. I update when something better emerges or a link breaks. If something belongs here that isn't here, get in touch.</p>
+</div>
 
-        <a class="resource-card" href="https://www.lexisnexis.com/en-us/products/lexis-plus-ai.page" target="_blank" rel="noopener">
-          <span class="card-index">01</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">LexisNexis AI</span>
-              <span class="card-tag tool">Legal AI</span>
-              <span class="card-tag paid">Subscription</span>
-            </div>
-            <p class="card-note">The incumbent legal research database adding AI features. If you are going into practice at a firm of any size, this is the system you will encounter. Worth understanding how it works before you trust its outputs in a submission.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+</div></main>
 
-        <a class="resource-card" href="https://casetext.com/" target="_blank" rel="noopener">
-          <span class="card-index">02</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Casetext / CoCounsel</span>
-              <span class="card-tag tool">Legal AI</span>
-              <span class="card-tag paid">Subscription</span>
-            </div>
-            <p class="card-note">AI-assisted legal research and document review. Acquired by Thomson Reuters. One of the more mature legal AI tools. The document analysis features are where it earns its money. Worth knowing what it can and cannot do — especially the cannot.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
-
-        <a class="resource-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
-          <span class="card-index">03</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Perplexity AI</span>
-              <span class="card-tag tool">Research tool</span>
-              <span class="card-tag free">Free tier</span>
-            </div>
-            <p class="card-note">AI-powered search with citations. More honest about uncertainty than most. Useful for quick background research when you need sources, not just outputs. Still verify everything — but the cited format makes verification faster.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
-
-        <a class="resource-card" href="https://elicit.com/" target="_blank" rel="noopener">
-          <span class="card-index">04</span>
-          <div class="card-body">
-            <div class="card-top">
-              <span class="card-title">Elicit</span>
-              <span class="card-tag tool">Research tool</span>
-              <span class="card-tag free">Free tier</span>
-            </div>
-            <p class="card-note">AI research assistant that searches academic papers and surfaces relevant findings. Better for policy research than for case law — it lives in the academic literature layer. Useful for comparative governance work when you need to know what the scholars are saying.</p>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- 06 People -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-num">06</span>
-        <h2 class="section-title">People worth <em>reading</em></h2>
-      </div>
-      <div class="people-grid">
-
-        <a class="person-card" href="https://www.youtube.com/@3blue1brown" target="_blank" rel="noopener">
-          <p class="person-name">3Blue1Brown (Grant Sanderson)</p>
-          <p class="person-desc">Math & neural network visualizations. Best technical communicator working today.</p>
-        </a>
-
-        <a class="person-card" href="https://www.linkedin.com/in/timnit-gebru-14b8bb3/" target="_blank" rel="noopener">
-          <p class="person-name">Timnit Gebru</p>
-          <p class="person-desc">AI ethics and algorithmic harm. Critical, rigorous, and right more often than not.</p>
-        </a>
-
-        <a class="person-card" href="https://twitter.com/benedictevans" target="_blank" rel="noopener">
-          <p class="person-name">Benedict Evans</p>
-          <p class="person-desc">Tech strategy and what AI actually changes about industry. Less hype than most.</p>
-        </a>
-
-        <a class="person-card" href="https://www.linkedin.com/in/iandkerr/" target="_blank" rel="noopener">
-          <p class="person-name">Ian Kerr</p>
-          <p class="person-desc">Law and AI. One of the few legal academics who actually understands the technology.</p>
-        </a>
-
-        <a class="person-card" href="https://twitter.com/ylecun" target="_blank" rel="noopener">
-          <p class="person-name">Yann LeCun</p>
-          <p class="person-desc">Chief AI Scientist at Meta. Contrarian on AI doom, useful corrective to the hype cycle.</p>
-        </a>
-
-        <a class="person-card" href="https://aleph-one.substack.com/" target="_blank" rel="noopener">
-          <p class="person-name">Arvind Narayanan</p>
-          <p class="person-desc">Princeton CS professor. Honest about what AI can and cannot do. Worth reading before policy work.</p>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- Disclaimer -->
-    <div class="disclaimer">
-      <p><strong>A note on curation:</strong> This list reflects what I have personally found useful working at the intersection of law and AI. It is not exhaustive and it is not neutral — I have opinions about what is worth your time and I have put them here. Nothing is sponsored. I update this when something better comes along or when a link dies. If you think something belongs here that isn't here, get in touch.</p>
-    </div>
-
-  </div><!-- /container -->
-</main>
-
-<!-- ── Footer ────────────────────────────────────────────── -->
 <footer>
   <p>© 2026 Muhammad Hamid Naeem</p>
-  <div class="footer-links">
+  <div class="fl">
     <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener">Substack</a>
     <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener">GitHub</a>
