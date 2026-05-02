@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I Got Here — Muhammad Hamid Naeem</title>
+  <meta name="description" content="Navigating law, AI, and tech without a roadmap — an honest account by Muhammad Hamid Naeem." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0d0b;
+      --surface: #161411;
+      --border: #252218;
+      --text: #ede9e0;
+      --muted: #6e6a5e;
+      --accent: #8fa89a;
+      --accent-dim: #4a6558;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(14,13,11,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a.logo { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text); text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    nav ul a:hover, nav ul a.active { color: var(--text); }
+
+    .hero {
+      padding: 9rem 3rem 4rem;
+      max-width: 680px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .hero h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero .standfirst {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-style: italic;
+    }
+
+    /* ESSAY BODY */
+    .essay {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+    }
+
+    .essay h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 3rem 0 1rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .essay h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+    .essay p {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.08rem;
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 1.4rem;
+    }
+
+    .essay p.muted {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .essay strong { color: var(--text); font-weight: 500; }
+
+    .essay em { color: var(--accent); font-style: italic; }
+
+    .callout {
+      margin: 2.5rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 2px solid var(--accent);
+      background: var(--surface);
+    }
+
+    .callout p {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .lessons {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .lesson {
+      padding: 1.4rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0 1rem;
+    }
+
+    .lesson:last-child { border-bottom: none; }
+
+    .lesson-num {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      padding-top: 0.3rem;
+    }
+
+    .lesson p {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .lesson strong { color: var(--text); }
+
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p { font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: var(--muted); }
+    footer .links { display: flex; gap: 1.5rem; }
+    footer .links a { font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer .links a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      .hero, .essay { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="https://hamidnaeem.me">Muhammad Hamid Naeem</a>
+    <ul>
+      <li><a href="https://hamidnaeem.me/#about">About</a></li>
+      <li><a href="https://hamidnaeem.me/#projects">Work</a></li>
+      <li><a href="/blog/" class="active">Writing</a></li>
+      <li><a href="https://hamidnaeem.me/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="breadcrumb"><a href="/blog/">Writing</a> &nbsp;/&nbsp; How I Got Here</p>
+    <h1>Navigating law, AI, and tech — without a roadmap</h1>
+    <p class="standfirst">An honest account of building at the intersection of three fields in Pakistan, where the intersection barely exists yet.</p>
+  </section>
+
+  <article class="essay">
+
+    <h2>There is no established path</h2>
+
+    <p>When I decided I wanted to work in AI governance and legal technology, the first problem I ran into was this: no one around me was doing it. No seniors to ask, no alumni to cold-email, no obvious sequence of steps that said <em>do this, then this, then this.</em></p>
+
+    <p>The second problem was that the field itself doesn't quite exist yet in Pakistan — not in the way it does in Brussels or Washington or Singapore. There is a legal system. There is technology. There is growing activity around AI. But the overlap between all three, done seriously, is territory that is still being mapped.</p>
+
+    <p>This essay is an account of how I've navigated that so far — what I've figured out, where I've made mistakes, and what I'd tell someone starting from a similar position.</p>
+
+    <div class="callout">
+      <p>I'm writing this not because I've arrived anywhere, but because the early stages of this kind of journey are the hardest to find honest accounts of.</p>
+    </div>
+
+    <h2>Starting from law — not from tech</h2>
+
+    <p>I started from law, not from computer science. That matters because it shapes where your instincts are good and where they mislead you.</p>
+
+    <p>Lawyers are trained to read carefully, argue precisely, and work with ambiguity — skills that transfer well to AI governance work, where the ambiguities are enormous and the documents are dense. What law training doesn't give you is any intuition for how technical systems actually work, which means you can easily become someone who regulates AI without understanding it.</p>
+
+    <p>Enrolling in a Data Science degree alongside my LLB was a deliberate correction for that. Not because I needed to become a machine learning engineer, but because <strong>I couldn't afford to be the person in the room who had to take the technical claims on faith.</strong> Understanding enough to ask the right questions is a different threshold than understanding enough to build the systems — and the first threshold is what this work actually requires.</p>
+
+    <h2>The value of doing the hard work early</h2>
+
+    <p>The most formative thing I've done professionally is work on real legal matters at Lex Lata — drafting writ petitions for actual clients, appearing in Islamabad High Court proceedings, building arguments that get tested by judges, not just by professors.</p>
+
+    <p>There is a particular kind of learning that only comes from the stakes being real. When a wrong citation in a court submission has actual consequences, your attention to detail calibrates differently than it does in an academic exercise. The same applies to legal research: finding the right precedent for a live case is different from finding an interesting case for a seminar paper.</p>
+
+    <p class="muted">I'd recommend finding the version of this in whatever field you're entering — the thing where the consequences are real and the standards aren't forgiving.</p>
+
+    <h2>Cross-jurisdictional work as a genuine advantage</h2>
+
+    <p>Working across Pakistan, India, UAE, and US legal frameworks was originally a byproduct of opportunity — different internships, different research projects. It became deliberate once I realized it was genuinely rare.</p>
+
+    <p>Most people working in AI governance come from a single legal tradition. The EU AI Act experts mostly understand EU law. The US tech-law people mostly understand US law. Someone who can map GDPR obligations onto Pakistani data protection bills, or who can read an Indian court's reasoning about algorithmic accountability and connect it to EU precedent — that's a much smaller group.</p>
+
+    <p>The South Asian regulatory context specifically is underrepresented in the conversations that matter. I treat that as a positioning advantage, not an obstacle.</p>
+
+    <h2>Things I'd do differently</h2>
+
+    <div class="lessons">
+      <div class="lesson">
+        <span class="lesson-num">01</span>
+        <p><strong>Start publishing sooner.</strong> Writing publicly forces a kind of intellectual honesty that private notes don't. The Digital Gavel should have existed a year earlier than it did.</p>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num">02</span>
+        <p><strong>Read the primary texts, not the summaries.</strong> Most commentary on the EU AI Act, GDPR, NIST frameworks is imprecise at the margins — and the margins are where the interesting questions live. The habit of going to the source takes longer to build than it sounds.</p>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num">03</span>
+        <p><strong>Build in public, even when the work feels incomplete.</strong> Waiting for a project to be "ready" before sharing it is how good work stays invisible. The Land Revenue Act chatbot, the portfolio site, the legal drafting samples — shipping them mattered more than perfecting them.</p>
+      </div>
+      <div class="lesson">
+        <span class="lesson-num">04</span>
+        <p><strong>Treat credentials as proof, not currency.</strong> The Google and McKinsey certifications are useful for signaling, not for the knowledge itself. The knowledge comes from doing the work. Keep that distinction clear.</p>
+      </div>
+    </div>
+
+    <h2>What I still don't know</h2>
+
+    <p>How to scale the work without losing quality. How to position for opportunities that don't exist yet in my immediate geography. How to build the kind of institutional presence that makes the research matter beyond the people who already follow it.</p>
+
+    <p>I'm figuring these out. This page will stay honest about what I know and what I don't.</p>
+
+    <div class="callout">
+      <p>If you're navigating something similar — law school plus technical ambitions, South Asian context, AI governance interest with no clear entry point — I'm reachable. I don't have all the answers but I'll give you an honest account of what I've tried.</p>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>© 2026 Muhammad Hamid Naeem</p>
+    <div class="links">
+      <a href="https://linkedin.com/in/hamidnaeemadvocate">LinkedIn</a>
+      <a href="https://digitalgavel.substack.com">Substack</a>
+      <a href="https://hamidnaeem.me/#contact">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
