@@ -7,7 +7,6 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KH3MQVKF');</script>
-<!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muhammad Hamid Naeem | AI Governance & Legal Tech</title>
@@ -104,24 +103,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--ink); }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+    .nav-burger span { display: block; width: 22px; height: 1px; background: var(--ink); }
+
+    /* ── MOBILE NAV ── */
     .mob-nav {
       display: none; position: fixed; inset: 0; background: var(--white);
       z-index: 600; flex-direction: column; align-items: flex-start;
-      justify-content: center; gap: 2rem; padding: 3rem;
+      justify-content: center; gap: 0; padding: 0;
+      overflow-y: auto;
     }
     .mob-nav.open { display: flex; }
-    .mob-nav a {
-      font-family: var(--serif); font-size: 2.4rem; font-weight: 300; font-style: italic;
-      color: var(--ink); text-decoration: none; transition: color 0.2s;
+    .mob-nav-inner {
+      padding: 3rem 2rem;
+      display: flex; flex-direction: column; gap: 0;
+      width: 100%;
     }
-    .mob-nav a:hover { color: var(--red); }
+    .mob-nav a {
+      font-family: var(--serif); font-size: 2rem; font-weight: 300; font-style: italic;
+      color: var(--ink); text-decoration: none;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: block;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mob-nav a:first-child { border-top: 1px solid var(--rule); }
+    .mob-nav a:hover { color: var(--red); padding-left: 0.5rem; }
     .mob-close {
-      position: absolute; top: 1.5rem; right: 2rem;
+      position: fixed; top: 1.2rem; right: 1.5rem;
       background: none; border: none; cursor: pointer;
       font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--ink-muted);
+      z-index: 700; padding: 8px;
+    }
+    .mob-nav-label {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 2rem; display: block;
     }
 
     /* ── HERO ── */
@@ -209,6 +227,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
       text-transform: uppercase; text-decoration: none;
       border: 1px solid var(--ink); transition: background 0.2s, border-color 0.2s;
+      cursor: pointer; display: inline-block;
     }
     .btn-solid:hover { background: var(--red); border-color: var(--red); }
     .btn-ghost {
@@ -216,6 +235,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
       text-transform: uppercase; text-decoration: none;
       border: 1px solid var(--rule-dk); transition: border-color 0.2s, color 0.2s;
+      cursor: pointer; display: inline-block;
     }
     .btn-ghost:hover { border-color: var(--ink-mid); color: var(--ink); }
 
@@ -249,7 +269,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .sec-title em { font-style: italic; color: var(--ink-mid); }
 
     /* ── ABOUT ── */
-    about { background: var(--paper); }
+    #about { background: var(--paper); }
     .about-layout {
       display: grid; grid-template-columns: 1fr 260px; gap: 5rem; align-items: start;
     }
@@ -271,7 +291,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .aside-row p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; }
 
     /* ── FOCUS AREAS ── */
-    services { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    #services { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .svc-list-layout { display: flex; flex-direction: column; }
     .svc-item {
       display: grid; grid-template-columns: 220px 1fr 200px;
@@ -305,7 +325,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ── EXPERIENCE ── */
-    experience { background: var(--paper); }
+    #experience { background: var(--paper); }
     .exp-row {
       display: grid; grid-template-columns: 180px 1fr;
       padding: 2rem 0;
@@ -346,7 +366,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ── PROJECTS ── */
-    projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    #projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .proj-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -383,68 +403,171 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .proj-link {
       font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+      color: var(--red); text-decoration: none; background: none; border: none;
+      border-bottom: 1px solid transparent; padding-bottom: 1px;
+      transition: border-color 0.2s; cursor: pointer;
+    }
+    .proj-link:hover { border-bottom-color: var(--red); }
+
+    /* ── WRITING SECTION (card list, no article inline) ── */
+    #writing {
+      background: var(--cream);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .writing-list { display: flex; flex-direction: column; gap: 0; }
+    .writing-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s;
+    }
+    .writing-item:first-child { border-top: 1px solid var(--rule); }
+    .writing-item:hover {
+      background: var(--warm);
+      margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem;
+    }
+    .writing-meta {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem;
+      display: flex; gap: 1rem; align-items: center;
+    }
+    .writing-meta-date { color: var(--ink-ghost); }
+    .writing-item h3 {
+      font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+      color: var(--ink); line-height: 1.3; margin-bottom: 0.4rem;
+    }
+    .writing-item p {
+      font-size: 0.85rem; color: var(--ink-soft); line-height: 1.7; max-width: 600px;
+    }
+    .writing-cta {
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red); background: none;
+      border: 1px solid var(--red); padding: 0.6rem 1.25rem;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .writing-cta:hover { background: var(--red); color: var(--white); }
+
+    /* ── ARTICLE MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 800;
+      background: rgba(17,16,9,0.75);
+      backdrop-filter: blur(4px);
+      overflow-y: auto;
+      padding: 2rem 1rem;
+    }
+    .modal-overlay.open { display: block; }
+    .modal-box {
+      background: var(--white);
+      max-width: 760px; margin: 0 auto;
+      border: 1px solid var(--rule);
+      position: relative;
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; background: var(--white); z-index: 10;
+    }
+    .modal-header-label {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .modal-close {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted);
+      padding: 6px 12px; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--ink); }
+    .modal-body { padding: 2.5rem 2.5rem 3rem; }
+    .modal-body .essay-title {
+      font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300; color: var(--ink); line-height: 1.2;
+      margin-bottom: 0.5rem; letter-spacing: -0.01em;
+    }
+    .modal-body .essay-subtitle {
+      font-family: var(--serif); font-size: 1rem; font-style: italic;
+      color: var(--ink-soft); margin-bottom: 1.5rem; line-height: 1.6;
+    }
+    .modal-body .essay-meta-row {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-ghost);
+    }
+    .modal-body .essay-meta-row span { color: var(--red); }
+    .essay-content p {
+      font-size: 0.95rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.4rem;
+    }
+    .essay-content p.drop {
+      font-family: var(--serif); font-size: 1.1rem; font-style: italic;
+      color: var(--ink); line-height: 1.9; font-weight: 400;
+    }
+    .essay-content h3 {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+      color: var(--ink); margin: 2rem 0 0.65rem;
+    }
+    .essay-content h4 {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
+      color: var(--ink); margin: 1.75rem 0 0.5rem;
+    }
+    .essay-content blockquote {
+      border-left: 3px solid var(--rule-dk); padding-left: 1.25rem;
+      margin: 1.5rem 0; font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--ink-soft); line-height: 1.8;
+    }
+    .essay-content blockquote cite {
+      display: block; font-style: normal;
+      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+      color: var(--ink-muted); margin-top: 0.5rem;
+    }
+    .essay-content ol, .essay-content ul {
+      padding-left: 1.25rem; line-height: 1.8; color: var(--ink-soft); font-size: 0.92rem;
+    }
+    .essay-content li { margin-bottom: 0.5rem; }
+    .essay-content hr {
+      border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0;
+    }
+    .essay-content .steps-box {
+      background: var(--cream); border: 1px solid var(--rule);
+      padding: 1.5rem; margin: 1.5rem 0;
+    }
+    .essay-content .steps-box h5 {
+      font-family: var(--serif); font-size: 1rem; font-weight: 400;
+      color: var(--ink); margin-bottom: 0.75rem;
+    }
+    .modal-footer {
+      padding: 1.25rem 2.5rem;
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .modal-footer span {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-ghost);
+    }
+    .modal-footer a {
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
       color: var(--red); text-decoration: none;
       border-bottom: 1px solid transparent; padding-bottom: 1px;
       transition: border-color 0.2s;
     }
-    .proj-link:hover { border-bottom-color: var(--red); }
-
-    /* ── WRITING / ESSAY ── */
-    .essay-card {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      padding: 3rem 3.5rem;
-      margin-top: 0;
-    }
-    .essay-meta {
-      display: flex; align-items: center; gap: 1.5rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--rule);
-    }
-    .essay-label {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--red);
-    }
-    .essay-date {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.08em;
-      color: var(--ink-ghost);
-    }
-    .essay-title {
-      font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 300; color: var(--ink); line-height: 1.2;
-      margin-bottom: 0.5rem; letter-spacing: -0.01em;
-    }
-    .essay-subtitle {
-      font-family: var(--serif); font-size: 1rem; font-style: italic;
-      color: var(--ink-soft); margin-bottom: 2rem; line-height: 1.6;
-    }
-    .essay-body { max-width: 680px; }
-    .essay-body p {
-      font-size: 0.96rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.5rem;
-    }
-    .essay-body p.drop {
-      font-family: var(--serif); font-size: 1.12rem; font-style: italic;
-      color: var(--ink); line-height: 1.9; font-weight: 400;
-    }
-    .essay-body h4 {
-      font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
-      color: var(--ink); margin: 2rem 0 0.65rem;
-    }
-    .essay-body blockquote {
-      border-left: 2px solid var(--rule-dk); padding-left: 1.25rem;
-      margin: 1.5rem 0; font-family: var(--serif); font-style: italic;
-      font-size: 1rem; color: var(--ink-soft); line-height: 1.8;
-    }
-    .essay-placeholder {
-      background: var(--cream); border: 1px dashed var(--rule-dk);
-      padding: 2rem; text-align: center;
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-muted); line-height: 1.8;
-    }
+    .modal-footer a:hover { border-bottom-color: var(--red); }
 
     /* ── CREDENTIALS ── */
-    certifications { background: var(--paper); }
+    #certifications { background: var(--paper); }
     .cred-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1px; background: var(--rule);
@@ -567,34 +690,101 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
+    /* ══════════════════════════════════════
+       MOBILE — complete overhaul
+    ══════════════════════════════════════ */
     @media (max-width: 860px) {
-      nav { padding: 0 1.5rem; }
+      /* Nav */
+      nav { padding: 0 1.25rem; height: 54px; }
       .nav-links { display: none; }
       .nav-burger { display: flex; }
-      section { padding: 4rem 1.5rem; }
-      home { padding: 0 1.5rem; }
+
+      /* Sections */
+      section { padding: 3.5rem 1.25rem; }
+
+      /* Hero */
+      #home { padding: 0 1.25rem; min-height: 100svh; }
       .hero-bg-text { display: none; }
-      .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .svc-item { grid-template-columns: 60px 1fr; }
+      .hero-inner { padding-top: 80px; padding-bottom: 3rem; }
+      .hero-label { font-size: 0.52rem; letter-spacing: 0.14em; margin-bottom: 1.75rem; flex-wrap: wrap; }
+      .hero-label::before { display: none; }
+      .hero-name { font-size: clamp(2.6rem, 12vw, 4rem); margin-bottom: 1.75rem; }
+      .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; padding-left: 1rem; }
+      .hero-stats { gap: 1.25rem; margin-bottom: 2rem; }
+      .hero-stat-divider { display: none; }
+      .hero-stat-n { font-size: 1.6rem; }
+      .hero-stat-l { font-size: 0.46rem; }
+      .hero-btns { flex-direction: column; gap: 0.6rem; }
+      .btn-solid, .btn-ghost { text-align: center; padding: 0.85rem 1.5rem; font-size: 0.58rem; }
+      .hero-foot { flex-direction: column; align-items: flex-start; gap: 0.25rem; font-size: 0.5rem; }
+
+      /* About */
+      .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .about-body p.lead { font-size: 1.1rem; }
+
+      /* Services */
+      .svc-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.75rem 0; }
+      .svc-num { font-size: 2.5rem; }
+      .svc-content h3 { font-size: 1.2rem; }
       .svc-tags { display: none; }
-      .svc-item:hover { margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
-      .exp-row { grid-template-columns: 1fr; }
-      .exp-row:hover { margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
-      .exp-meta { display: flex; align-items: center; gap: 0.75rem; padding-right: 0; padding-bottom: 0.5rem; }
+      .svc-item:hover { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+
+      /* Experience */
+      .exp-row { grid-template-columns: 1fr; gap: 0.25rem; padding: 1.5rem 0; }
+      .exp-meta { display: flex; align-items: center; gap: 0.75rem; padding: 0 0 0.5rem; }
+      .exp-date { margin-bottom: 0; font-size: 0.52rem; }
+      .exp-row:hover { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+      .exp-body h3 { font-size: 1.05rem; }
+      .exp-body li { font-size: 0.83rem; }
+
+      /* Projects */
       .proj-grid { grid-template-columns: 1fr; }
       .proj-card.span2 { grid-column: span 1; }
+      .proj-card { padding: 1.5rem; }
+      .proj-card h3 { font-size: 1rem; }
+      .proj-card.span2 h3 { font-size: 1.1rem; }
+
+      /* Writing */
+      .writing-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .writing-item:hover { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+      .writing-cta { align-self: flex-start; }
+
+      /* Modal */
+      .modal-overlay { padding: 0; }
+      .modal-box { margin: 0; min-height: 100vh; border: none; animation: none; }
+      .modal-header { padding: 1rem 1.25rem; }
+      .modal-body { padding: 1.5rem 1.25rem 2.5rem; }
+      .modal-footer { padding: 1rem 1.25rem; }
+      .modal-body .essay-title { font-size: 1.3rem; }
+      .essay-content p { font-size: 0.9rem; }
+
+      /* Credentials */
       .cred-grid { grid-template-columns: 1fr 1fr; }
-      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-      footer { flex-direction: column; text-align: center; padding: 1.5rem; }
-      .footer-links { justify-content: center; }
-      .hero-stats { gap: 1.5rem; }
-      .hero-stat-divider { display: none; }
-      .essay-card { padding: 2rem 1.5rem; }
+      .cred-card { padding: 1.1rem; }
+      .cred-card h4 { font-size: 0.88rem; }
+
+      /* Contact */
+      .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-note { font-size: 0.95rem; }
+
+      /* Footer */
+      footer { flex-direction: column; text-align: center; padding: 1.25rem; }
+      .footer-links { justify-content: center; gap: 1.25rem; }
+
+      /* Section headers */
+      .sec-hd { margin-bottom: 2rem; }
     }
+
     @media (max-width: 480px) {
       .cred-grid { grid-template-columns: 1fr; }
-      .hero-name { font-size: 3rem; }
+      nav { padding: 0 1rem; }
+      section { padding: 3rem 1rem; }
+      #home { padding: 0 1rem; }
+      .hero-name { font-size: 2.4rem; }
+      .mem-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     }
   </style>
 </head>
@@ -603,7 +793,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH3MQVKF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 <nav>
   <a href="#home" class="nav-logo">Muhammad Hamid Naeem</a>
@@ -612,7 +801,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="#services">Focus</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Work</a></li>
-    <li><a href="blog">Writing</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="blog">Blog</a></li>
     <li><a href="calculator">Calculator</a></li>
     <li><a href="newsletter">Newsletter</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -622,33 +812,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </button>
 </nav>
 
+<!-- Mobile Nav -->
 <div class="mob-nav" role="dialog" aria-label="Mobile navigation">
   <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">Close ✕</button>
-  <a href="#about"      onclick="document.querySelector('.mob-nav').classList.remove('open')">About</a>
-  <a href="#services"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Focus</a>
-  <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
-  <a href="#projects"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
-  <a href="#writing"    onclick="document.querySelector('.mob-nav').classList.remove('open')""blog">Writing</a>
-  <a href="calculator"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
-  <a href="newsletter"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
-  <a href="#contact"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
+  <div class="mob-nav-inner">
+    <span class="mob-nav-label">Navigation</span>
+    <a href="#about"      onclick="document.querySelector('.mob-nav').classList.remove('open')">About</a>
+    <a href="#services"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Focus Areas</a>
+    <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
+    <a href="#projects"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
+    <a href="#writing"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Writing</a>
+    <a href="calculator"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
+    <a href="newsletter"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
+    <a href="#contact"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
+  </div>
 </div>
 
-<!-- ══════════════════════════════════════ HERO -->
+<!-- ══ HERO ══ -->
 <section id="home">
   <div class="hero-inner">
     <div class="hero-bg-text" aria-hidden="true">§</div>
-
-    <!-- CHANGED: label now speaks to consulting clients first -->
     <p class="hero-label">AI Governance · Regulatory Analysis · Cross-Jurisdictional Research</p>
-
     <h1 class="hero-name">
       Muhammad<br>
       <span class="line2">Hamid Naeem</span>
     </h1>
-    
-    <p class="hero-desc">Most compliance teams know AI regulation is moving fast. Few have someone who can read both the model card and the statute  and tell you exactly where the gap is. That is the work I do.</p>
-
+    <p class="hero-desc">Most compliance teams know AI regulation is moving fast. Few have someone who can read both the model card and the statute and tell you exactly where the gap is. That is the work I do.</p>
     <div class="hero-stats">
       <div class="hero-stat">
         <span class="hero-stat-n">570+</span>
@@ -670,7 +859,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="hero-stat-l">Published book</span>
       </div>
     </div>
-
     <div class="hero-btns">
       <a href="#contact" class="btn-solid">Commission research</a>
       <a href="#projects" class="btn-ghost">See the work first</a>
@@ -683,7 +871,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ ABOUT -->
+<!-- ══ ABOUT ══ -->
 <section id="about">
   <div class="container">
     <div class="sec-hd">
@@ -708,7 +896,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ SERVICES / FOCUS -->
+<!-- ══ SERVICES ══ -->
 <section id="services">
   <div class="container">
     <div class="sec-hd">
@@ -716,12 +904,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="sec-title">Areas of <em>focus</em></h2>
     </div>
     <div class="svc-list-layout">
-
       <div class="svc-item reveal">
         <div class="svc-num">01</div>
         <div class="svc-content">
           <h3>AI governance &amp; regulatory analysis</h3>
-          <p>Most organizations deploying AI have no real idea whether they're compliant. Not because they don't care because the rules are genuinely complicated and changing fast. I map where their systems sit against the EU AI Act, US executive frameworks, and the emerging Asian regulatory picture, then write it up in a way that doesn't require a law degree to act on.</p>
+          <p>Most organizations deploying AI have no real idea whether they're compliant. Not because they don't care — because the rules are genuinely complicated and changing fast. I map where their systems sit against the EU AI Act, US executive frameworks, and the emerging Asian regulatory picture, then write it up in a way that doesn't require a law degree to act on.</p>
         </div>
         <div class="svc-tags">
           <span class="svc-tag">Regulatory gap analysis</span>
@@ -730,7 +917,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="svc-tag">Comparative research</span>
         </div>
       </div>
-
       <div class="svc-item reveal">
         <div class="svc-num">02</div>
         <div class="svc-content">
@@ -744,7 +930,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="svc-tag">Sale &amp; rent deeds</span>
         </div>
       </div>
-
       <div class="svc-item reveal">
         <div class="svc-num">03</div>
         <div class="svc-content">
@@ -758,7 +943,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="svc-tag">Python · Excel</span>
         </div>
       </div>
-
       <div class="svc-item reveal">
         <div class="svc-num">04</div>
         <div class="svc-content">
@@ -772,20 +956,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="svc-tag">Research summaries</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ EXPERIENCE -->
+<!-- ══ EXPERIENCE ══ -->
 <section id="experience">
   <div class="container">
     <div class="sec-hd">
       <span class="sec-n">03</span>
       <h2 class="sec-title">Experi<em>ence</em></h2>
     </div>
-
-    <!-- CHANGED: title updated to Associate Researcher -->
     <div class="exp-row reveal">
       <div class="exp-meta">
         <span class="exp-date">Feb 2026 — Present</span>
@@ -802,7 +983,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
     <div class="exp-row reveal">
       <div class="exp-meta"><span class="exp-date">Jul 2025 — Present</span></div>
       <div class="exp-body">
@@ -816,7 +996,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
     <div class="exp-row reveal">
       <div class="exp-meta"><span class="exp-date">Aug 2025 — Present</span></div>
       <div class="exp-body">
@@ -829,7 +1008,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
     <div class="exp-row reveal">
       <div class="exp-meta"><span class="exp-date">Jul – Oct 2025</span></div>
       <div class="exp-body">
@@ -843,7 +1021,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
     <div class="exp-row reveal">
       <div class="exp-meta"><span class="exp-date">Sep 2025</span></div>
       <div class="exp-body">
@@ -856,7 +1033,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
     <div class="exp-row reveal">
       <div class="exp-meta"><span class="exp-date">Jun – Aug 2025</span></div>
       <div class="exp-body">
@@ -870,7 +1046,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
     <div class="exp-row reveal">
       <div class="exp-meta"><span class="exp-date">Apr – May 2025</span></div>
       <div class="exp-body">
@@ -884,11 +1059,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ PROJECTS -->
+<!-- ══ PROJECTS ══ -->
 <section id="projects">
   <div class="container">
     <div class="sec-hd">
@@ -896,165 +1070,176 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="sec-title">Featured <em>work</em></h2>
     </div>
     <div class="proj-grid">
-
       <div class="proj-card span2 reveal">
         <div class="proj-idx">01 — Published work</div>
         <h3>Your First Legal Connection</h3>
-        <p>I wrote this because the advice I got as a law student was either obvious or useless. 97 pages on networking and mentorship for people who don't have the right connections yet — and want to build them anyway. Self-published, handled every stage myself. It's become the starting reference I point junior students to when they ask questions I once had no good answers for.</p>
+        <p>I wrote this because the advice I got as a law student was either obvious or useless. 97 pages on networking and mentorship for people who don't have the right connections yet — and want to build them anyway. Self-published, handled every stage myself.</p>
         <div class="proj-foot">
           <span class="proj-tag">Amazon Kindle &amp; Paperback</span>
           <a href="https://www.amazon.in/Your-First-Legal-Connection-Networking-ebook/dp/B0FKZBX5ZT" target="_blank" rel="noopener noreferrer" class="proj-link">View on Amazon →</a>
         </div>
       </div>
-
       <div class="proj-card reveal">
         <div class="proj-idx">02 — Policy research</div>
         <h3>US–EU AI Governance: A Comparative Analysis</h3>
-        <p>The US and EU are both trying to regulate AI. They're doing it very differently. This paper maps where their frameworks actually agree, where they clash, and what that means if you operate across both — which most serious organizations now do. Submitted to Legal Pathway Society; available on request.</p>
+        <p>This paper maps where US and EU frameworks actually agree, where they clash, and what that means if you operate across both. Submitted to Legal Pathway Society; available on request.</p>
         <div class="proj-foot">
           <span class="proj-tag">Policy paper</span>
           <a href="#contact" class="proj-link">Request copy →</a>
         </div>
       </div>
-
       <div class="proj-card reveal">
         <div class="proj-idx">03 — Editorial platform</div>
         <h3>Veritas &amp; Vows</h3>
-        <p>I built Veritas &amp; Vows from nothing. It covers AI governance, constitutional law, and human rights — and 570+ professionals across Pakistan, the US, and the UK now read it. I didn't buy that audience. I wrote for it.</p>
+        <p>Built from nothing. Covers AI governance, constitutional law, and human rights — 570+ professionals across Pakistan, the US, and the UK read it. I didn't buy that audience. I wrote for it.</p>
         <div class="proj-foot">
           <span class="proj-tag">Content platform</span>
           <a href="https://www.linkedin.com/company/veritas-and-vows" target="_blank" rel="noopener noreferrer" class="proj-link">View on LinkedIn →</a>
         </div>
       </div>
-
       <div class="proj-card reveal">
         <div class="proj-idx">04 — Data analytics</div>
         <h3>Analytics capstone dashboard</h3>
-        <p>Three datasets, a full cleaning and analysis pipeline, and an interactive dashboard in Excel and Looker Studio. Built under real reporting constraints — the kind where findings have to inform decisions, not just look good on a slide. Available on request.</p>
+        <p>Three datasets, a full cleaning and analysis pipeline, and an interactive dashboard in Excel and Looker Studio. Built under real reporting constraints. Available on request.</p>
         <div class="proj-foot">
           <span class="proj-tag">Excel · Looker Studio</span>
           <a href="#contact" class="proj-link">Request access →</a>
         </div>
       </div>
-
-      <!-- CHANGED: Jurisprudence card now links to on-site essay below -->
       <div class="proj-card reveal">
         <div class="proj-idx">05 — Jurisprudence</div>
         <h3>Truth-seeking in Pakistani criminal trials</h3>
-        <p>PLD 1966 SC 708 is a 60-year-old Supreme Court decision that still shapes how Pakistani criminal courts weigh evidence. I read it closely and wrote up what the reasoning actually reveals — not the holding, but the assumptions underneath it.</p>
+        <p>PLD 1966 SC 708 is a 60-year-old Supreme Court decision that still shapes how Pakistani criminal courts weigh evidence. I read it closely and wrote up what the reasoning actually reveals.</p>
         <div class="proj-foot">
           <span class="proj-tag">Legal writing</span>
-          <a href="#writing" class="proj-link">Read below →</a>
+          <button class="proj-link" onclick="openModal()">Read article →</button>
         </div>
       </div>
-
       <div class="proj-card reveal">
         <div class="proj-idx">06 — Drafting portfolio</div>
         <h3>Legal drafting portfolio</h3>
-        <p>10+ documents across family law, property, civil recovery, and criminal procedure in Pakistan and India. Drafted for actual cases and real clients — not practice problems. Sale deeds, rent agreements, divorce petitions, recovery plaints, legal notices.</p>
+        <p>10+ documents across family law, property, civil recovery, and criminal procedure in Pakistan and India. Drafted for actual cases — sale deeds, rent agreements, divorce petitions, recovery plaints, legal notices.</p>
         <div class="proj-foot">
           <span class="proj-tag">Pakistan · India</span>
           <a href="#contact" class="proj-link">Request samples →</a>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ WRITING / ON-SITE ESSAY -->
-<!-- NEW SECTION: PLD 1966 essay hosted directly on-site -->
-<section id="writing" style="background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+<!-- ══ WRITING ══ — cards only, no inline article -->
+<section id="writing">
   <div class="container">
     <div class="sec-hd">
       <span class="sec-n">05</span>
       <h2 class="sec-title">Legal <em>writing</em></h2>
     </div>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-           ARTICLE HEADER & METADATA
-           ═══════════════════════════════════════════════════════════════ -->
-      <h3 class="essay-title">Unpacking Justice: A Deep Dive into PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h3>
-      <p class="essay-subtitle">What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts.</p>
-
-      <div class="essay-meta" style="margin-bottom: 2rem; color: #666; font-size: 0.9rem;">
-        <span class="meta-author" style="font-weight: bold;">By Hamid Naeem</span> 
-        <span class="meta-divider">|</span> 
-        <span class="meta-pub">Veritas and Vows</span> 
-        <span class="meta-divider">|</span> 
-        <span class="meta-date">July 14, 2025</span>
+    <div class="writing-list">
+      <div class="writing-item reveal">
+        <div>
+          <div class="writing-meta">
+            <span>Jurisprudence</span>
+            <span class="writing-meta-date">July 14, 2025</span>
+          </div>
+          <h3>Unpacking Justice: PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h3>
+          <p>What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts — the holding, and the assumptions underneath it.</p>
+        </div>
+        <button class="writing-cta" onclick="openModal()">Read article →</button>
       </div>
+      <div class="writing-item reveal">
+        <div>
+          <div class="writing-meta">
+            <span>AI Governance</span>
+            <span class="writing-meta-date">More on Substack</span>
+          </div>
+          <h3>The Digital Gavel</h3>
+          <p>Regular writing on AI governance, legal technology, and regulatory developments — published on Substack and read by practitioners across three continents.</p>
+        </div>
+        <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="writing-cta">Visit Substack →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- ═══════════════════════════════════════════════════════════════
-           ESSAY BODY CONTENT
-           ═══════════════════════════════════════════════════════════════ -->
-      <div class="essay-body">
+<!-- ══ ARTICLE MODAL ══ -->
+<div class="modal-overlay" id="article-modal" role="dialog" aria-modal="true" aria-label="Article: PLD 1966 Supreme Court 708">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-header-label">Legal writing · Jurisprudence</span>
+      <button class="modal-close" onclick="closeModal()">Close ✕</button>
+    </div>
+    <div class="modal-body">
+      <h2 class="essay-title">Unpacking Justice: A Deep Dive into PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h2>
+      <p class="essay-subtitle">What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts.</p>
+      <div class="essay-meta-row">
+        <span>By Hamid Naeem</span>
+        <span style="color:var(--ink-ghost)">·</span>
+        <span style="color:var(--ink-ghost)">Veritas and Vows</span>
+        <span style="color:var(--ink-ghost)">·</span>
+        <span style="color:var(--ink-ghost)">July 14, 2025</span>
+      </div>
+      <div class="essay-content">
         <p class="drop">At <em>Veritas and Vows</em>, we're committed to shedding light on the intricacies of the law, ensuring clarity and empowering understanding. Today, we delve into a landmark decision from the Supreme Court of Pakistan, <strong>PLD 1966 Supreme Court 708</strong>, a judgment that grappled with fundamental procedural challenges in criminal trials and offers enduring lessons on the pursuit of truth and fair legal processes.</p>
-
         <p>This case, stemming from Criminal Appeals Nos. 8 and 9 of 1965, brought before the Supreme Court by Nur Elahi, addressed a critical question: how should courts handle murder cases where two entirely separate versions of the incident, implicating different sets of accused, are presented through a private complaint and a police challan (report)?</p>
 
         <h3>The Core Dilemma: Conflicting Narratives and Procedural Sanction</h3>
         <p>The High Court of West Pakistan had initially laid down a "special procedure" for these trials, recommending that common witnesses be examined only once and their statements be read as evidence in the other case. This approach, while seemingly efficient, became the central point of contention for the Supreme Court. The core question on appeal was whether this "special procedure" had the "sanction of law".</p>
 
         <h3>Key Holdings and Their Significance</h3>
-        
+
         <h4>1. Rejection of Inter-Case Evidence Reading</h4>
         <p>The Supreme Court unequivocally held that directing witnesses to be examined only once and their statements read out as evidence in the other case is not supportable in law. Justice S. A. Rahman, speaking for the majority, emphasized that reading evidence recorded in another case as evidence in the case at hand is strictly debarred. Violation of this procedural boundary completely invalidates the legal finality of the trial.</p>
 
-        <blockquote class="legal-ratio" style="border-left: 4px solid #1a1a1a; padding-left: 1.5rem; margin: 1.5rem 0; font-style: italic; color: #333;">
-          <p><strong>The Supreme Court's Exact Rule:</strong></p>
-          <p>“Every criminal proceeding is to be decided on the material on record of that proceeding and neither record of another case nor any finding recorded there-under should affect the decision and if the Court takes into consideration evidence recorded in other case, a finding recorded there in judgment is vitiated.”</p>
-          <cite style="display: block; font-style: normal; font-weight: bold; margin-top: 0.5rem; color: #666;">— PLD 1966 Supreme Court 708, p. 710</cite>
+        <blockquote>
+          <p><strong>The Supreme Court's Exact Rule:</strong><br>"Every criminal proceeding is to be decided on the material on record of that proceeding and neither record of another case nor any finding recorded there-under should affect the decision and if the Court takes into consideration evidence recorded in other case, a finding recorded there in judgment is vitiated."</p>
+          <cite>— PLD 1966 Supreme Court 708, p. 710</cite>
         </blockquote>
 
         <p>This reinforces a cornerstone of fair trial principles: every criminal proceeding must be decided solely on the material on its own unique physical record, ensuring that findings from outside cases do not compromise judicial neutrality.</p>
 
         <h4>2. Separate Trials, Sequential Approach</h4>
         <p>The Court affirmed the High Court's view that a joint trial of two sets of accused, where they are not involved in the same transaction, contravenes <strong>Section 239 of the Code of Criminal Procedure</strong>. To navigate the complexities of two distinct versions, the majority proposed a strict sequential procedure:</p>
-        
-        <div class="procedural-steps" style="background-color: #f9f9f9; padding: 1.5rem; border-radius: 4px; margin: 1.5rem 0;">
-          <h5 style="margin-top: 0; font-size: 1.1rem; color: #1a1a1a;">The Sequential Protocol:</h5>
-          <ol style="padding-left: 1.2rem; line-height: 1.6;">
-            <li style="margin-bottom: 0.5rem;"><strong>The complaint case</strong> should be taken up first for trial.</li>
-            <li style="margin-bottom: 0.5rem;">During the complaint case, the trial judge may call witnesses mentioned in the police challan as Court witnesses under <strong>Section 540-A</strong> of the Criminal Procedure Code. This allows for cross-examination by both parties, ensuring all relevant evidence is included in one trial for a comprehensive decision.</li>
-            <li style="margin-bottom: 0.5rem;">If the first trial (complaint case) results in a conviction, the Public Prosecutor would then consider withdrawing the police challan case under <strong>Section 494</strong> of the Criminal Procedure Code.</li>
-            <li style="margin-bottom: 0.5rem;">If the first case results in an acquittal, the second trial (police challan) would proceed to its conclusion.</li>
+
+        <div class="steps-box">
+          <h5>The Sequential Protocol:</h5>
+          <ol>
+            <li>The complaint case should be taken up first for trial.</li>
+            <li>During the complaint case, the trial judge may call witnesses mentioned in the police challan as Court witnesses under <strong>Section 540-A</strong> of the Criminal Procedure Code, allowing cross-examination by both parties.</li>
+            <li>If the first trial results in a conviction, the Public Prosecutor would then consider withdrawing the police challan case under <strong>Section 494</strong> of the Criminal Procedure Code.</li>
+            <li>If the first case results in an acquittal, the second trial (police challan) would proceed to its conclusion.</li>
           </ol>
         </div>
 
         <h4>3. Dissenting View on "Consolidation" and Public Prosecutor's Role</h4>
         <p>Justice B. Z. Kaikaus, in his dissenting opinion, highlighted the difficulties with the majority's proposed procedure. He argued that allowing a decision in one case to influence the handling of another, even implicitly, risks disregarding fundamental principles of justice. Drawing parallels with civil law, he suggested that consolidation of criminal proceedings should be permissible through the inherent powers of the court, similar to <strong>Section 151 of the Civil Procedure Code</strong>.</p>
-        <p>He also contended that the Public Prosecutor should lay both stories and all related evidence before the Court, rather than taking a stance on the correctness of one version. He went as far as seeing "no bar to a joint committal of both sets of accused."</p>
+        <p>He also contended that the Public Prosecutor should lay both stories and all related evidence before the Court, rather than taking a stance on the correctness of one version.</p>
 
-        <hr style="border: 0; border-top: 1px solid #ddd; margin: 2.5rem 0;" />
+        <hr>
 
         <h3>Why This Matters Today</h3>
         <p><em>PLD 1966 Supreme Court 708</em> remains highly relevant for several critical reasons:</p>
-        <ul style="padding-left: 1.2rem; line-height: 1.6;">
-          <li style="margin-bottom: 0.75rem;"><strong>Safeguarding Fair Trial:</strong> The judgment powerfully reaffirms the principle that each case must stand on its own evidence, protecting against prejudice that could arise from findings in separate proceedings. This is crucial for upholding the integrity of the judicial process.</li>
-          <li style="margin-bottom: 0.75rem;"><strong>Navigating Parallel Proceedings:</strong> In a legal landscape where multiple complaints or versions of an incident can arise, this judgment provides a framework for managing such complexities in criminal matters, albeit with differing judicial opinions on the optimal approach.</li>
-          <li style="margin-bottom: 0.75rem;"><strong>The Role of the Public Prosecutor:</strong> The discussion regarding the Public Prosecutor's role in presenting conflicting versions underscores the delicate balance between their duty to the State and their responsibility to ensure justice is served by presenting all relevant facts to the court.</li>
-          <li style="margin-bottom: 0.75rem;"><strong>Judicial Interpretation of Procedure:</strong> The differing views within the judgment itself highlight the ongoing judicial discourse on the flexibility and limits of procedural law in ensuring substantive justice, particularly in the absence of explicit statutory provisions.</li>
+        <ul>
+          <li><strong>Safeguarding Fair Trial:</strong> The judgment powerfully reaffirms that each case must stand on its own evidence, protecting against prejudice that could arise from findings in separate proceedings.</li>
+          <li><strong>Navigating Parallel Proceedings:</strong> In a legal landscape where multiple complaints or versions of an incident can arise, this judgment provides a framework for managing such complexities in criminal matters.</li>
+          <li><strong>The Role of the Public Prosecutor:</strong> The discussion underscores the delicate balance between the prosecutor's duty to the State and their responsibility to ensure justice is served by presenting all relevant facts.</li>
+          <li><strong>Judicial Interpretation of Procedure:</strong> The differing views within the judgment highlight the ongoing judicial discourse on the flexibility and limits of procedural law in ensuring substantive justice.</li>
         </ul>
 
-        <hr style="border: 0; border-top: 1px solid #ddd; margin: 2.5rem 0;" />
+        <hr>
 
-        <p>At <em>Veritas and Vows</em>, we believe that understanding such foundational judgments is vital for legal professionals, students, and anyone interested in the machinery of justice. This case stands as a testament to the continuous effort to refine legal procedures to ensure that truth prevails and vows, both legal and societal, are honored.</p>
-        
-        <p style="margin-top: 2rem;"><em>Stay tuned for more insights from <strong>Veritas and Vows</strong> as we continue to explore the depths of legal principles and their impact on our lives.</em></p>
-      </div>
-
-
-      <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <span style="font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-ghost);">Also on LinkedIn</span>
-        <a href="https://www.linkedin.com/pulse/unpacking-justice-deep-dive-pld-1966-supreme-court-708-d6jxf/" target="_blank" rel="noopener noreferrer" class="proj-link">Read on LinkedIn →</a>
+        <p>At <em>Veritas and Vows</em>, we believe that understanding such foundational judgments is vital for legal professionals, students, and anyone interested in the machinery of justice. This case stands as a testament to the continuous effort to refine legal procedures so that truth prevails.</p>
+        <p><em>Stay tuned for more insights from <strong>Veritas and Vows</strong> as we continue to explore the depths of legal principles and their impact on our lives.</em></p>
       </div>
     </div>
-
+    <div class="modal-footer">
+      <span>Also published on LinkedIn</span>
+      <a href="https://www.linkedin.com/pulse/unpacking-justice-deep-dive-pld-1966-supreme-court-708-d6jxf/" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
+    </div>
   </div>
-</section>
+</div>
 
-<!-- ══════════════════════════════════════ CREDENTIALS -->
+<!-- ══ CREDENTIALS ══ -->
 <section id="certifications">
   <div class="container">
     <div class="sec-hd">
@@ -1079,7 +1264,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ CONTACT -->
+<!-- ══ CONTACT ══ -->
 <section id="contact">
   <div class="container">
     <div class="sec-hd">
@@ -1121,6 +1306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
+  /* ── Smooth scroll ── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const href = a.getAttribute('href');
@@ -1131,6 +1317,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   });
 
+  /* ── Article modal ── */
+  const modal = document.getElementById('article-modal');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modal.scrollTop = 0;
+    // Focus the close button for accessibility
+    modal.querySelector('.modal-close').focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click (outside modal-box)
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  /* ── Contact form ── */
   const form = document.getElementById('contact-form');
   const successMsg = document.getElementById('cf-success');
   if (form) {
@@ -1160,6 +1373,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }
 
+  /* ── Scroll reveal ── */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
@@ -1170,3 +1384,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>
 </html>
 
+Input validation errors occurred:
+description: Field required
+Done
