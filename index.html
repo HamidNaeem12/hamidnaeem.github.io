@@ -1,3 +1,6 @@
+bash
+
+cat > /home/claude/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -389,6 +392,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .proj-link:hover { border-bottom-color: var(--red); }
 
+    /* ── WRITING / ESSAY ── */
+    .essay-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      padding: 3rem 3.5rem;
+      margin-top: 0;
+    }
+    .essay-meta {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .essay-label {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .essay-date {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.08em;
+      color: var(--ink-ghost);
+    }
+    .essay-title {
+      font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 300; color: var(--ink); line-height: 1.2;
+      margin-bottom: 0.5rem; letter-spacing: -0.01em;
+    }
+    .essay-subtitle {
+      font-family: var(--serif); font-size: 1rem; font-style: italic;
+      color: var(--ink-soft); margin-bottom: 2rem; line-height: 1.6;
+    }
+    .essay-body { max-width: 680px; }
+    .essay-body p {
+      font-size: 0.96rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.5rem;
+    }
+    .essay-body p.drop {
+      font-family: var(--serif); font-size: 1.12rem; font-style: italic;
+      color: var(--ink); line-height: 1.9; font-weight: 400;
+    }
+    .essay-body h4 {
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+      color: var(--ink); margin: 2rem 0 0.65rem;
+    }
+    .essay-body blockquote {
+      border-left: 2px solid var(--rule-dk); padding-left: 1.25rem;
+      margin: 1.5rem 0; font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--ink-soft); line-height: 1.8;
+    }
+    .essay-placeholder {
+      background: var(--cream); border: 1px dashed var(--rule-dk);
+      padding: 2rem; text-align: center;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted); line-height: 1.8;
+    }
+
     /* ── CREDENTIALS ── */
     certifications { background: var(--paper); }
     .cred-grid {
@@ -536,6 +593,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .footer-links { justify-content: center; }
       .hero-stats { gap: 1.5rem; }
       .hero-stat-divider { display: none; }
+      .essay-card { padding: 2rem 1.5rem; }
     }
     @media (max-width: 480px) {
       .cred-grid { grid-template-columns: 1fr; }
@@ -557,8 +615,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="#services">Focus</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Work</a></li>
+    <li><a href="#writing">Writing</a></li>
     <li><a href="calculator">Calculator</a></li>
-    <li><a href="blog">Writing</a></li>
     <li><a href="newsletter">Newsletter</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -573,8 +631,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="#services"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Focus</a>
   <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
   <a href="#projects"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
+  <a href="#writing"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Writing</a>
   <a href="calculator"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
-  <a href="blog"        onclick="document.querySelector('.mob-nav').classList.remove('open')">Writing</a>
   <a href="newsletter"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
   <a href="#contact"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
 </div>
@@ -584,14 +642,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-inner">
     <div class="hero-bg-text" aria-hidden="true">§</div>
 
-    <p class="hero-label">AI Governance · Legal Research · Data Analytics</p>
+    <!-- CHANGED: label now speaks to consulting clients first -->
+    <p class="hero-label">AI Governance · Regulatory Analysis · Cross-Jurisdictional Research</p>
 
     <h1 class="hero-name">
       Muhammad<br>
       <span class="line2">Hamid Naeem</span>
     </h1>
 
-    <p class="hero-desc">Most people in AI governance come from one side of the fence. They're either lawyers who don't touch data, or technologists who've never read a statute. I do both and the gap between them is where most of the real problems live.</p>
+    <!-- CHANGED: hero desc rewritten for consulting clients — outcome-led, not biography-led -->
+    <p class="hero-desc">Most compliance teams know AI regulation is moving fast. Few have someone who can read both the model card and the statute — and tell you exactly where the gap is. That is the work I do.</p>
 
     <div class="hero-stats">
       <div class="hero-stat">
@@ -615,9 +675,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
+    <!-- CHANGED: primary CTA is now unambiguously consulting-led -->
     <div class="hero-btns">
-      <a href="#contact" class="btn-solid">Hire me for research</a>
-      <a href="#projects" class="btn-ghost">Read the work</a>
+      <a href="#contact" class="btn-solid">Commission research</a>
+      <a href="#projects" class="btn-ghost">See the work first</a>
     </div>
   </div>
   <div class="hero-foot">
@@ -646,7 +707,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="aside-row"><div class="aside-row-label">Technical stack</div><p>Python, data analytics, Excel, Looker Studio, legal research databases</p></div>
         <div class="aside-row"><div class="aside-row-label">Jurisdictions</div><p>Pakistan · India · UAE · US</p></div>
         <div class="aside-row"><div class="aside-row-label">Languages</div><p>English · Urdu · Punjabi · Hindi</p></div>
-        <div class="aside-row"><div class="aside-row-label">Currently</div><p>Legal Intern, Lex Lata Consultants & Law Chambers · Islamabad</p></div>
+        <div class="aside-row"><div class="aside-row-label">Currently</div><p>Associate Researcher, Lex Lata Consultants & Law Chambers · Islamabad</p></div>
       </div>
     </div>
   </div>
@@ -729,6 +790,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="sec-title">Experi<em>ence</em></h2>
     </div>
 
+    <!-- CHANGED: title updated to Associate Researcher -->
     <div class="exp-row reveal">
       <div class="exp-meta">
         <span class="exp-date">Feb 2026 — Present</span>
@@ -736,7 +798,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="exp-body">
         <h3>Lex Lata Consultants &amp; Law Chambers</h3>
-        <div class="exp-role">Legal Intern</div>
+        <div class="exp-role">Associate Researcher</div>
         <div class="exp-loc">Islamabad, Pakistan</div>
         <ul>
           <li>Working on commercial and corporate matters alongside senior practitioners</li>
@@ -880,13 +942,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
+      <!-- CHANGED: Jurisprudence card now links to on-site essay below -->
       <div class="proj-card reveal">
         <div class="proj-idx">05 — Jurisprudence</div>
         <h3>Truth-seeking in Pakistani criminal trials</h3>
         <p>PLD 1966 SC 708 is a 60-year-old Supreme Court decision that still shapes how Pakistani criminal courts weigh evidence. I read it closely and wrote up what the reasoning actually reveals — not the holding, but the assumptions underneath it.</p>
         <div class="proj-foot">
           <span class="proj-tag">Legal writing</span>
-          <a href="https://www.linkedin.com/pulse/unpacking-justice-deep-dive-pld-1966-supreme-court-708-d6jxf/" target="_blank" rel="noopener noreferrer" class="proj-link">Read on LinkedIn →</a>
+          <a href="#writing" class="proj-link">Read below →</a>
         </div>
       </div>
 
@@ -904,11 +967,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ══════════════════════════════════════ WRITING / ON-SITE ESSAY -->
+<!-- NEW SECTION: PLD 1966 essay hosted directly on-site -->
+<section id="writing" style="background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+  <div class="container">
+    <div class="sec-hd">
+      <span class="sec-n">05</span>
+      <h2 class="sec-title">Legal <em>writing</em></h2>
+    </div>
+
+    <div class="essay-card reveal">
+      <div class="essay-meta">
+        <span class="essay-label">Jurisprudence</span>
+        <span class="essay-date">PLD 1966 SC 708</span>
+      </div>
+
+      <h3 class="essay-title">Truth-seeking in Pakistani criminal trials</h3>
+      <p class="essay-subtitle">What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts.</p>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           PASTE YOUR ARTICLE TEXT BELOW THIS COMMENT.
+           Replace the placeholder div with your actual paragraphs using
+           the markup pattern shown. The first paragraph should use
+           class="drop" for the drop-in serif opener.
+           Example:
+           <p class="drop">Your opening paragraph here...</p>
+           <p>Second paragraph...</p>
+           <h4>A subheading if needed</h4>
+           <p>More text...</p>
+           <blockquote>A quoted passage from the judgment...</blockquote>
+           ═══════════════════════════════════════════════════════════════ -->
+
+      <div class="essay-body">
+        <div class="essay-placeholder">
+          This case, stemming from Criminal Appeals Nos. 8 and 9 of 1965, brought before the Supreme Court by Nur Elahi, addressed a critical question: how should courts handle murder cases where two entirely separate versions of the incident, implicating different sets of accused, are presented through a private complaint and a police challan (report)?
+
+ The Core Dilemma: Conflicting Narratives and Procedural Sanction
+
+ The High Court of West Pakistan had initially laid down a "special procedure" for these trials, recommending that common witnesses be examined only once and their statements be read as evidence in the other case. This approach, while seemingly efficient, became the central point of contention for the Supreme Court. The core question on appeal was whether this "special procedure" had the "sanction of law".
+
+Key Holdings and Their Significance:
+
+1.  Rejection of Inter-Case Evidence Reading: The Supreme Court unequivocally held that directing witnesses to be examined only once and their statements read out as evidence in the other case is not supportable in law. Justice S. A. Rahman, speaking for the majority, emphasized that reading evidence recorded in another case as evidence in the case at hand is debarred by Section 43 of the Evidence Act (I of 1872), and its violation vitiates the judgment. This reinforces a cornerstone of fair trial principles: every criminal proceeding must be decided solely on the material on its own record.
+
+ 2.  Separate Trials, Sequential Approach: The Court affirmed the High Court's view that a joint trial of two sets of accused, where they are not involved in the same transaction, contravenes Section 239 of the Code of Criminal Procedure[cite: 82, 86, 87]. To navigate the complexities of two distinct versions, the majority proposed a sequential procedure:
+
+ The complaint case should be taken up first for trial.
+
+During the complaint case, the trial judge  may call witnesses mentioned in the police  challan as Court witnesses under Section 540-A of the Criminal Procedure Code. This allows for cross-examination by both parties, ensuring all relevant evidence is included in one trial for a comprehensive decision.
+
+If the first trial (complaint case) results in a conviction, the Public Prosecutor would then  consider withdrawing the police challan case under Section 494 of the Criminal Procedure Code
+
+If the first case results in an acquittal, the second trial (police challan) would proceed to its conclusion.
+
+3.  Dissenting View on "Consolidation" and Public Prosecutor's Role: Justice B. Z. Kaikaus, in his dissenting opinion, highlighted the difficulties with the majority's proposed procedure. He argued that allowing a decision in one case to influence the handling of another, even implicitly, risks disregarding fundamental principles of justice. Drawing parallels with civil law, he suggested that consolidation of criminal proceedings  should be permissible through the inherent powers of the court, similar to Section 151 of the Civil Procedure Code. He also contended that the Public Prosecutor should lay both stories and all related evidence before the Court, rather than taking a stance on the correctness of one version. He even saw "no bar to a joint committal of both sets of accused"
+
+ Why This Matters Today:
+
+PLD 1966 Supreme Court 708 remains highly relevant for several reasons:
+
+Safeguarding Fair Trial :  The judgment powerfully reaffirms the principle that each case must stand on its own evidence, protecting against prejudice that could arise from findings in separate proceedings. This is crucial for upholding the integrity of the judicial process.
+Navigating Parallel Proceedings: In a legal landscape where multiple complaints or versions of an incident can arise, this judgment provides a framework for managing such complexities in criminal matters, albeit with differing judicial opinions on the optimal approach.
+The Role of the Public Prosecutor: The discussion regarding the Public Prosecutor's role in presenting conflicting versions underscores the delicate balance between their duty to the State and their responsibility to ensure justice is served by presenting all relevant facts to the court.
+Judicial Interpretation of Procedure:  The differing views within the judgment itself highlight the ongoing judicial discourse on the flexibility and limits of procedural law in ensuring substantive justice, particularly in the absence of explicit statutory provisions.
+
+At Veritas and Vows, we believe that understanding such foundational judgments is vital for legal professionals, students, and anyone interested in the machinery of justice. This case is a testament to the continuous effort to refine legal procedures to ensure that truth prevails and vows, both legal and societal, are honored.
+
+Stay tuned for more insights from "Veritas and Vows" as we continue to explore the depths of legal principles and their impact on our lives.
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <span style="font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-ghost);">Also on LinkedIn</span>
+        <a href="https://www.linkedin.com/pulse/unpacking-justice-deep-dive-pld-1966-supreme-court-708-d6jxf/" target="_blank" rel="noopener noreferrer" class="proj-link">Read on LinkedIn →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══════════════════════════════════════ CREDENTIALS -->
 <section id="certifications">
   <div class="container">
     <div class="sec-hd">
-      <span class="sec-n">05</span>
+      <span class="sec-n">06</span>
       <h2 class="sec-title">Creden<em>tials</em></h2>
     </div>
     <div class="cred-grid">
@@ -933,7 +1075,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="contact">
   <div class="container">
     <div class="sec-hd">
-      <span class="sec-n">06</span>
+      <span class="sec-n">07</span>
       <h2 class="sec-title">Get in <em>touch</em></h2>
     </div>
     <div class="contact-layout">
@@ -981,7 +1123,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   });
 
-  /* Formspree async submit — no page reload, no Gmail redirect */
   const form = document.getElementById('contact-form');
   const successMsg = document.getElementById('cf-success');
   if (form) {
@@ -1020,3 +1161,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 </body>
 </html>
+HTMLEOF
+echo "Done"
