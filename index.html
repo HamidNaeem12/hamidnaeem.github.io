@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KH3MQVKF');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muhammad Hamid Naeem | AI Governance & Legal Tech</title>
   <meta name="description" content="Muhammad Hamid Naeem — AI governance analyst and legal researcher working where law meets emerging technology.">
   <meta name="author" content="Muhammad Hamid Naeem">
-  <meta name="google-site-verification" content="6pj3oc4KSDpdFCOg_j_UY7DY-4J4yeaHYTo1Sdz3Q3Y">
   <link rel="canonical" href="https://hamidnaeem.me/">
   <meta property="og:title" content="Muhammad Hamid Naeem | AI Governance & Legal Tech">
   <meta property="og:description" content="AI governance, legal research, and data analytics across Pakistan, UAE, India, and the US.">
@@ -35,31 +28,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.383.0/umd/lucide.min.js"></script>
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --ink:       #111009;
-      --ink-mid:   #38342c;
-      --ink-soft:  #5e5a52;
-      --ink-muted: #9b9690;
-      --ink-ghost: #ccc8c2;
-      --rule:      #e4e0d8;
-      --rule-dk:   #ccc8c0;
-      --paper:     #f8f6f1;
-      --cream:     #f0ece3;
-      --warm:      #e8e1d4;
-      --white:     #fdfcfa;
-      --red:       #8b2020;
-      --red-lt:    #f5eaea;
-      --serif:     'Cormorant', Georgia, serif;
-      --sans:      'Instrument Sans', sans-serif;
-      --mono:      'Martian Mono', monospace;
+      --ink:        #0e0d09;
+      --ink-mid:    #38342c;
+      --ink-soft:   #5e5a52;
+      --ink-muted:  #8a8680;
+      --ink-ghost:  #b8b4ae;
+      --rule:       #e4e0d8;
+      --rule-dk:    #ccc8c0;
+      --paper:      #f8f6f1;
+      --cream:      #f0ece3;
+      --warm:       #e8e1d4;
+      --white:      #fdfcfa;
+      --red:        #8b2020;
+      --red-lt:     #f5eaea;
+      --red-glow:   rgba(139,32,32,0.15);
+      --serif:      'Cormorant', Georgia, serif;
+      --sans:       'Instrument Sans', sans-serif;
+      --mono:       'Martian Mono', monospace;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
     }
 
     html { scroll-behavior: smooth; }
@@ -73,496 +76,504 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      cursor: none;
     }
 
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--red); color: var(--white);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-decoration: none; text-transform: uppercase;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── CURSOR ── */
+    #cursor {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 12px; height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.3s var(--ease-out), height 0.3s var(--ease-out), background 0.3s;
+      mix-blend-mode: multiply;
+    }
+    #cursor-ring {
+      position: fixed; pointer-events: none; z-index: 9997;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(139,32,32,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s linear, width 0.4s var(--ease-out), height 0.4s var(--ease-out), opacity 0.3s;
+    }
+    body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--red); }
+    body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width: 52px; height: 52px; opacity: 0.5; }
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; z-index: 999;
+      height: 2px; background: var(--red);
+      width: 0%; transition: width 0.1s linear;
+      transform-origin: left;
+    }
+
+    /* ── GRAIN OVERLAY ── */
     body::after {
       content: '';
       position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.022'/%3E%3C/svg%3E");
       background-size: 256px;
-      pointer-events: none; z-index: 9999; opacity: 1;
+      pointer-events: none; z-index: 9996; opacity: 1;
     }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-      background: rgba(248,246,241,0.94);
-      backdrop-filter: blur(10px);
+      background: rgba(253,252,250,0.92);
+      backdrop-filter: blur(16px) saturate(1.5);
       border-bottom: 1px solid var(--rule);
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0 2.5rem; height: 58px;
+      padding: 0 2.5rem; height: 60px;
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    nav.scrolled {
+      box-shadow: 0 4px 32px rgba(14,13,9,0.06);
+      background: rgba(253,252,250,0.97);
     }
     .nav-logo {
       font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
       color: var(--ink); text-decoration: none; letter-spacing: 0.01em;
-    }
-    .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-    .nav-links a {
-      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--ink-muted); text-decoration: none;
       transition: color 0.2s;
     }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; list-style: none; gap: 0.25rem; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted); text-decoration: none;
+      padding: 0.4rem 0.75rem; border-radius: 2px;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 4px; left: 50%; right: 50%;
+      height: 1px; background: var(--red);
+      transition: left 0.25s var(--ease-out), right 0.25s var(--ease-out);
+    }
     .nav-links a:hover { color: var(--ink); }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
-    .nav-burger span { display: block; width: 22px; height: 1px; background: var(--ink); }
+    .nav-links a:hover::after, .nav-links a.active::after { left: 0.75rem; right: 0.75rem; }
+    .nav-links a.active { color: var(--ink); }
+    .nav-burger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+    }
+    .nav-burger span { display: block; width: 22px; height: 1px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
 
     /* ── MOBILE NAV ── */
     .mob-nav {
       display: none; position: fixed; inset: 0; background: var(--white);
       z-index: 600; flex-direction: column; align-items: flex-start;
-      justify-content: center; gap: 0; padding: 0;
-      overflow-y: auto;
+      justify-content: center; overflow-y: auto;
     }
     .mob-nav.open { display: flex; }
-    .mob-nav-inner {
-      padding: 3rem 2rem;
-      display: flex; flex-direction: column; gap: 0;
-      width: 100%;
-    }
+    .mob-nav-inner { padding: 3rem 2rem; display: flex; flex-direction: column; width: 100%; }
     .mob-nav a {
-      font-family: var(--serif); font-size: 2rem; font-weight: 300; font-style: italic;
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 300; font-style: italic;
       color: var(--ink); text-decoration: none;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--rule);
-      display: block;
-      transition: color 0.2s, padding-left 0.2s;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--rule); display: block;
+      transition: color 0.2s, padding-left 0.3s var(--ease-out);
     }
-    .mob-nav a:first-child { border-top: 1px solid var(--rule); }
-    .mob-nav a:hover { color: var(--red); padding-left: 0.5rem; }
+    .mob-nav a:first-of-type { border-top: 1px solid var(--rule); }
+    .mob-nav a:hover { color: var(--red); padding-left: 0.75rem; }
     .mob-close {
-      position: fixed; top: 1.2rem; right: 1.5rem;
-      background: none; border: none; cursor: pointer;
-      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-muted);
-      z-index: 700; padding: 8px;
+      position: fixed; top: 1.2rem; right: 1.5rem; background: none; border: none;
+      cursor: pointer; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted); z-index: 700; padding: 10px;
+      min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: flex-end;
     }
     .mob-nav-label {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--red);
-      margin-bottom: 2rem; display: block;
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 2.5rem;
     }
 
     /* ── HERO ── */
     #home {
-      min-height: 100vh;
-      padding: 0 2.5rem;
+      min-height: 100vh; position: relative; overflow: hidden;
       background: var(--white);
       border-bottom: 1px solid var(--rule);
-      display: grid;
-      grid-template-rows: 1fr auto;
-      position: relative; overflow: hidden;
+      display: grid; grid-template-rows: 1fr auto;
     }
-
-    .hero-bg-text {
-      position: absolute;
-      top: 50%; right: -0.05em;
-      transform: translateY(-52%);
-      font-family: var(--serif); font-size: clamp(20rem, 38vw, 50rem);
-      font-weight: 300; font-style: italic;
-      color: transparent;
-      -webkit-text-stroke: 1px var(--rule);
-      line-height: 1; pointer-events: none; user-select: none;
-      letter-spacing: -0.04em;
+    #hero-canvas {
+      position: absolute; inset: 0; z-index: 0;
+      opacity: 0.55;
     }
-
     .hero-inner {
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding-bottom: 4.5rem;
-      max-width: 860px;
-      position: relative; z-index: 1;
-      padding-top: 100px;
+      padding: 0 2.5rem 4.5rem; max-width: 900px;
+      position: relative; z-index: 1; padding-top: 100px;
     }
-
     .hero-label {
-      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.2em;
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--red);
       display: flex; align-items: center; gap: 1rem;
       margin-bottom: 2.5rem;
-      opacity: 0; animation: up 0.5s 0.05s forwards;
+      opacity: 0; transform: translateY(20px);
     }
-    .hero-label::before { content: ''; width: 24px; height: 1px; background: var(--red); display: block; }
-
+    .hero-label::before { content: ''; width: 32px; height: 1px; background: var(--red); display: block; }
     .hero-name {
-      font-family: var(--serif); font-size: clamp(3.2rem, 8.5vw, 7.5rem);
-      font-weight: 300; line-height: 0.95; color: var(--ink);
-      margin-bottom: 2.5rem;
-      opacity: 0; animation: up 0.7s 0.15s forwards;
-      letter-spacing: -0.02em;
+      font-family: var(--serif); font-size: clamp(3.4rem, 9vw, 8rem);
+      font-weight: 300; line-height: 0.93; color: var(--ink);
+      margin-bottom: 2.5rem; letter-spacing: -0.025em;
+      opacity: 0; transform: translateY(24px);
     }
-    .hero-name .line2 { font-style: italic; display: block; color: var(--ink-mid); }
-
+    .hero-name .line2 { font-style: italic; color: var(--ink-mid); display: block; }
     .hero-desc {
-      max-width: 560px;
-      font-family: var(--serif); font-size: 1.18rem; font-style: italic;
-      color: var(--ink-soft); line-height: 1.8;
-      margin-bottom: 1.5rem;
-      opacity: 0; animation: up 0.5s 0.3s forwards;
-      border-left: 2px solid var(--rule-dk); padding-left: 1.25rem;
+      max-width: 580px;
+      font-family: var(--serif); font-size: 1.2rem; font-style: italic;
+      color: var(--ink-soft); line-height: 1.8; margin-bottom: 2rem;
+      border-left: 2px solid var(--rule-dk); padding-left: 1.35rem;
+      opacity: 0; transform: translateY(20px);
     }
-
     .hero-stats {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-      opacity: 0; animation: up 0.5s 0.38s forwards;
+      display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+      opacity: 0; transform: translateY(18px);
     }
     .hero-stat { display: flex; flex-direction: column; gap: 0.1rem; }
     .hero-stat-n {
-      font-family: var(--serif); font-size: 2rem; font-weight: 300;
-      color: var(--ink); line-height: 1; letter-spacing: -0.02em;
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 300;
+      color: var(--ink); line-height: 1; letter-spacing: -0.025em;
     }
     .hero-stat-l {
-      font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.14em;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--ink-muted);
     }
-    .hero-stat-divider {
-      width: 1px; background: var(--rule-dk); align-self: stretch; margin: 0.2rem 0;
-    }
-
+    .stat-divider { width: 1px; background: var(--rule-dk); align-self: stretch; margin: 0.2rem 0; }
     .hero-btns {
-      display: flex; gap: 0.75rem; flex-wrap: wrap;
-      opacity: 0; animation: up 0.5s 0.45s forwards;
+      display: flex; gap: 0.85rem; flex-wrap: wrap;
+      opacity: 0; transform: translateY(16px);
     }
     .btn-solid {
-      padding: 0.7rem 1.75rem; background: var(--ink); color: var(--white);
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
-      text-transform: uppercase; text-decoration: none;
-      border: 1px solid var(--ink); transition: background 0.2s, border-color 0.2s;
-      cursor: pointer; display: inline-block;
+      padding: 0.85rem 2rem; background: var(--ink); color: var(--white);
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink);
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+      min-height: 48px;
     }
-    .btn-solid:hover { background: var(--red); border-color: var(--red); }
+    .btn-solid:hover { background: var(--red); border-color: var(--red); transform: translateY(-2px); }
     .btn-ghost {
-      padding: 0.7rem 1.75rem; background: transparent; color: var(--ink-soft);
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
-      text-transform: uppercase; text-decoration: none;
-      border: 1px solid var(--rule-dk); transition: border-color 0.2s, color 0.2s;
-      cursor: pointer; display: inline-block;
+      padding: 0.85rem 2rem; background: transparent; color: var(--ink-soft);
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none; border: 1px solid var(--rule-dk);
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+      min-height: 48px;
     }
-    .btn-ghost:hover { border-color: var(--ink-mid); color: var(--ink); }
-
+    .btn-ghost:hover { border-color: var(--ink-mid); color: var(--ink); transform: translateY(-2px); }
     .hero-foot {
-      border-top: 1px solid var(--rule);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 0;
-      font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--ink-ghost);
-      position: relative; z-index: 1;
+      border-top: 1px solid var(--rule); padding: 1.1rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-ghost); position: relative; z-index: 1;
+    }
+    .hero-foot-item { display: flex; align-items: center; gap: 0.5rem; }
+    .hero-foot-item svg { color: var(--red); opacity: 0.7; }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #4caf7d;
+      display: inline-block; box-shadow: 0 0 0 2px rgba(76,175,125,0.2);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(76,175,125,0.2); }
+      50% { box-shadow: 0 0 0 5px rgba(76,175,125,0.1); }
     }
 
     /* ── SECTIONS ── */
-    section { padding: 6.5rem 2.5rem; }
-    .container { max-width: 1000px; margin: 0 auto; }
+    section { padding: 7rem 2.5rem; }
+    .container { max-width: 1040px; margin: 0 auto; }
 
     .sec-hd {
-      display: flex; align-items: baseline; gap: 1rem;
-      margin-bottom: 3.5rem;
-      padding-bottom: 1rem;
+      display: flex; align-items: baseline; gap: 1.25rem;
+      margin-bottom: 4rem; padding-bottom: 1.1rem;
       border-bottom: 1px solid var(--rule);
     }
     .sec-n {
-      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.2em;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em;
       color: var(--red); flex-shrink: 0;
     }
     .sec-title {
-      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -0.01em;
+      font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -0.015em;
     }
     .sec-title em { font-style: italic; color: var(--ink-mid); }
 
     /* ── ABOUT ── */
     #about { background: var(--paper); }
-    .about-layout {
-      display: grid; grid-template-columns: 1fr 260px; gap: 5rem; align-items: start;
-    }
-    .about-body p {
-      font-size: 0.97rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.4rem;
-    }
+    .about-layout { display: grid; grid-template-columns: 1fr 280px; gap: 5rem; align-items: start; }
+    .about-body p { font-size: 0.97rem; line-height: 2.05; color: var(--ink-soft); margin-bottom: 1.5rem; }
     .about-body p.lead {
-      font-family: var(--serif); font-size: 1.22rem; font-style: italic;
+      font-family: var(--serif); font-size: 1.25rem; font-style: italic;
       color: var(--ink); line-height: 1.85; font-weight: 400;
     }
     .about-body p:last-child { margin-bottom: 0; }
 
     .aside-block { border-top: 1px solid var(--rule); }
-    .aside-row { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+    .aside-row { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
     .aside-row-label {
-      font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem;
+      display: flex; align-items: center; gap: 0.5rem;
     }
-    .aside-row p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; }
+    .aside-row p { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.65; }
 
-    /* ── FOCUS AREAS ── */
+    /* ── SERVICES ── */
     #services { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .svc-list-layout { display: flex; flex-direction: column; }
     .svc-item {
-      display: grid; grid-template-columns: 220px 1fr 200px;
-      align-items: start;
-      border-bottom: 1px solid var(--rule);
-      padding: 2.25rem 0;
-      transition: background 0.2s; cursor: default;
+      display: grid; grid-template-columns: 220px 1fr 220px;
+      align-items: start; border-bottom: 1px solid var(--rule);
+      padding: 2.5rem 0; transition: all 0.3s var(--ease-out); cursor: default;
+      position: relative;
     }
+    .svc-item::before {
+      content: ''; position: absolute; left: -2.5rem; right: -2.5rem; top: 0; bottom: 0;
+      background: var(--warm); opacity: 0; transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .svc-item:hover::before { opacity: 1; }
     .svc-item:first-child { border-top: 1px solid var(--rule); }
-    .svc-item:hover { background: var(--warm); margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem; }
     .svc-num {
-      font-family: var(--serif); font-size: 3.5rem; font-weight: 300; font-style: italic;
-      color: var(--rule-dk); line-height: 1; letter-spacing: -0.03em;
-      padding-top: 0.15rem;
+      font-family: var(--serif); font-size: 4rem; font-weight: 300; font-style: italic;
+      color: var(--rule-dk); line-height: 1; letter-spacing: -0.04em; padding-top: 0.1rem;
+      position: relative; z-index: 1;
+      transition: color 0.3s;
     }
+    .svc-item:hover .svc-num { color: rgba(139,32,32,0.12); }
+    .svc-content { position: relative; z-index: 1; }
     .svc-content h3 {
-      font-family: var(--serif); font-size: 1.45rem; font-weight: 400;
-      color: var(--ink); margin-bottom: 0.65rem; line-height: 1.2;
+      font-family: var(--serif); font-size: 1.55rem; font-weight: 400;
+      color: var(--ink); margin-bottom: 0.75rem; line-height: 1.2;
+      display: flex; align-items: center; gap: 0.75rem;
     }
-    .svc-content p {
-      font-size: 0.86rem; color: var(--ink-soft); line-height: 1.75; max-width: 480px;
-    }
-    .svc-tags {
-      display: flex; flex-direction: column; gap: 0.35rem;
-      align-items: flex-end; padding-top: 0.2rem;
-    }
+    .svc-icon { color: var(--red); opacity: 0.7; flex-shrink: 0; }
+    .svc-content p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8; max-width: 480px; }
+    .svc-tags { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-end; padding-top: 0.3rem; position: relative; z-index: 1; }
     .svc-tag {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.08em;
-      color: var(--ink-muted); border: 1px solid var(--rule-dk); padding: 0.2rem 0.6rem;
-      background: var(--white); white-space: nowrap;
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+      color: var(--ink-muted); border: 1px solid var(--rule-dk); padding: 0.25rem 0.75rem;
+      background: var(--white); transition: border-color 0.2s, color 0.2s;
     }
+    .svc-item:hover .svc-tag { border-color: var(--red); color: var(--red); }
 
     /* ── EXPERIENCE ── */
     #experience { background: var(--paper); }
+    .exp-timeline { position: relative; }
+    .exp-timeline::before {
+      content: ''; position: absolute; left: 179px; top: 0; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, transparent, var(--rule) 5%, var(--rule) 95%, transparent);
+    }
     .exp-row {
       display: grid; grid-template-columns: 180px 1fr;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--rule);
-      transition: background 0.2s;
+      padding: 2.25rem 0; border-bottom: 1px solid var(--rule);
+      transition: background 0.25s; position: relative;
     }
-    .exp-row:hover {
-      background: var(--cream);
-      margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem;
+    .exp-row:hover { background: var(--cream); margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem; }
+    .exp-dot {
+      position: absolute; left: 172px; top: 2.6rem;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--rule-dk);
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+      z-index: 1;
     }
-    .exp-meta { padding-right: 2.5rem; padding-top: 0.1rem; }
+    .exp-row:hover .exp-dot { border-color: var(--red); background: var(--red-lt); box-shadow: 0 0 0 4px var(--red-glow); }
+    .exp-meta { padding-right: 2.5rem; padding-top: 0.15rem; }
     .exp-date {
-      font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.06em;
-      color: var(--ink-muted); line-height: 1.9; display: block; margin-bottom: 0.4rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em;
+      color: var(--ink-muted); display: block; margin-bottom: 0.5rem;
     }
     .exp-now {
-      font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.1em;
+      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--red); border: 1px solid var(--red);
-      padding: 0.1rem 0.45rem; display: inline-block; background: var(--red-lt);
+      padding: 0.12rem 0.5rem; display: inline-block; background: var(--red-lt);
     }
     .exp-body h3 {
-      font-family: var(--serif); font-size: 1.15rem; font-weight: 400;
-      color: var(--ink); margin-bottom: 0.15rem;
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
+      color: var(--ink); margin-bottom: 0.2rem;
+      display: flex; align-items: center; gap: 0.5rem;
     }
     .exp-role {
-      font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.15rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.2rem;
     }
-    .exp-loc { font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 0.85rem; }
-    .exp-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .exp-loc { font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem; }
+    .exp-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
     .exp-body li {
-      font-size: 0.86rem; color: var(--ink-soft); line-height: 1.7;
-      padding-left: 1rem; position: relative;
+      font-size: 0.87rem; color: var(--ink-soft); line-height: 1.75;
+      padding-left: 1.1rem; position: relative;
     }
     .exp-body li::before {
-      content: ''; position: absolute; left: 0; top: 0.65em;
-      width: 4px; height: 1px; background: var(--red);
+      content: ''; position: absolute; left: 0; top: 0.7em;
+      width: 5px; height: 1px; background: var(--red);
     }
 
     /* ── PROJECTS ── */
     #projects { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px; background: var(--rule);
-      border: 1px solid var(--rule);
-    }
+    .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
     .proj-card {
-      background: var(--white); padding: 2rem 1.75rem;
+      background: var(--white); padding: 2.25rem 2rem;
       display: flex; flex-direction: column;
-      transition: background 0.2s;
+      transition: background 0.25s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+      position: relative; overflow: hidden;
     }
+    .proj-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px; background: var(--red);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s var(--ease-out);
+    }
+    .proj-card:hover::before { transform: scaleX(1); }
     .proj-card:hover { background: var(--paper); }
     .proj-card.span2 { grid-column: span 2; }
     .proj-idx {
-      font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.14em;
-      color: var(--ink-ghost); margin-bottom: 0.85rem;
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.14em;
+      color: var(--ink-ghost); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
     }
     .proj-card h3 {
-      font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
-      color: var(--ink); line-height: 1.3; margin-bottom: 0.6rem;
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 400;
+      color: var(--ink); line-height: 1.3; margin-bottom: 0.75rem;
     }
-    .proj-card.span2 h3 { font-size: 1.3rem; }
-    .proj-card p {
-      font-size: 0.83rem; color: var(--ink-soft); line-height: 1.7;
-      flex: 1; margin-bottom: 1.25rem;
-    }
+    .proj-card.span2 h3 { font-size: 1.4rem; }
+    .proj-card p { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.75; flex: 1; margin-bottom: 1.5rem; }
     .proj-foot {
       display: flex; justify-content: space-between; align-items: center;
-      padding-top: 0.85rem; border-top: 1px solid var(--rule); margin-top: auto;
+      padding-top: 1rem; border-top: 1px solid var(--rule); margin-top: auto;
     }
     .proj-tag {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em;
+      font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--ink-ghost);
+      display: flex; align-items: center; gap: 0.35rem;
     }
     .proj-link {
-      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em;
       color: var(--red); text-decoration: none; background: none; border: none;
       border-bottom: 1px solid transparent; padding-bottom: 1px;
       transition: border-color 0.2s; cursor: pointer;
+      display: flex; align-items: center; gap: 0.35rem; min-height: 44px;
     }
     .proj-link:hover { border-bottom-color: var(--red); }
 
-    /* ── WRITING SECTION (card list, no article inline) ── */
-    #writing {
-      background: var(--cream);
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-    }
-    .writing-list { display: flex; flex-direction: column; gap: 0; }
+    /* ── WRITING ── */
+    #writing { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .writing-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 2rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--rule);
-      transition: background 0.2s;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 2rem; padding: 2.25rem 0;
+      border-bottom: 1px solid var(--rule); transition: all 0.25s;
     }
     .writing-item:first-child { border-top: 1px solid var(--rule); }
-    .writing-item:hover {
-      background: var(--warm);
-      margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem;
-    }
+    .writing-item:hover { background: var(--warm); margin: 0 -2.5rem; padding-left: 2.5rem; padding-right: 2.5rem; }
     .writing-meta {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem;
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 0.6rem;
       display: flex; gap: 1rem; align-items: center;
     }
     .writing-meta-date { color: var(--ink-ghost); }
     .writing-item h3 {
-      font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
-      color: var(--ink); line-height: 1.3; margin-bottom: 0.4rem;
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 400;
+      color: var(--ink); line-height: 1.3; margin-bottom: 0.5rem;
     }
-    .writing-item p {
-      font-size: 0.85rem; color: var(--ink-soft); line-height: 1.7; max-width: 600px;
-    }
+    .writing-item p { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.72; max-width: 600px; }
     .writing-cta {
-      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em;
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--red); background: none;
-      border: 1px solid var(--red); padding: 0.6rem 1.25rem;
-      cursor: pointer; text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap; flex-shrink: 0;
+      border: 1px solid var(--red); padding: 0.7rem 1.35rem;
+      cursor: pointer; text-decoration: none; min-height: 48px;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: background 0.25s, color 0.25s; white-space: nowrap; flex-shrink: 0;
     }
     .writing-cta:hover { background: var(--red); color: var(--white); }
 
     /* ── ARTICLE MODAL ── */
     .modal-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 800;
-      background: rgba(17,16,9,0.75);
-      backdrop-filter: blur(4px);
-      overflow-y: auto;
-      padding: 2rem 1rem;
+      display: none; position: fixed; inset: 0; z-index: 800;
+      background: rgba(14,13,9,0.7); backdrop-filter: blur(8px);
+      overflow-y: auto; padding: 2.5rem 1rem;
     }
     .modal-overlay.open { display: block; }
     .modal-box {
-      background: var(--white);
-      max-width: 760px; margin: 0 auto;
-      border: 1px solid var(--rule);
-      position: relative;
-      animation: modalIn 0.3s ease;
+      background: var(--white); max-width: 780px; margin: 0 auto;
+      border: 1px solid var(--rule); position: relative;
+      animation: modalIn 0.4s var(--ease-out);
     }
     @keyframes modalIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(30px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
     .modal-header {
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid var(--rule);
+      padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--rule);
       display: flex; justify-content: space-between; align-items: center;
       position: sticky; top: 0; background: var(--white); z-index: 10;
     }
     .modal-header-label {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.16em;
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--red);
+      display: flex; align-items: center; gap: 0.5rem;
     }
     .modal-close {
       background: none; border: none; cursor: pointer;
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-muted);
-      padding: 6px 12px; transition: color 0.2s;
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted); padding: 8px 14px;
+      transition: color 0.2s; min-height: 44px; display: flex; align-items: center; gap: 0.4rem;
     }
     .modal-close:hover { color: var(--ink); }
-    .modal-body { padding: 2.5rem 2.5rem 3rem; }
+    .modal-body { padding: 2.75rem 2.75rem 3.25rem; }
     .modal-body .essay-title {
-      font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem);
+      font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.1rem);
       font-weight: 300; color: var(--ink); line-height: 1.2;
-      margin-bottom: 0.5rem; letter-spacing: -0.01em;
+      margin-bottom: 0.6rem; letter-spacing: -0.015em;
     }
     .modal-body .essay-subtitle {
-      font-family: var(--serif); font-size: 1rem; font-style: italic;
-      color: var(--ink-soft); margin-bottom: 1.5rem; line-height: 1.6;
+      font-family: var(--serif); font-size: 1.05rem; font-style: italic;
+      color: var(--ink-soft); margin-bottom: 1.75rem; line-height: 1.65;
     }
     .modal-body .essay-meta-row {
       display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
-      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+      margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--rule);
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--ink-ghost);
     }
     .modal-body .essay-meta-row span { color: var(--red); }
-    .essay-content p {
-      font-size: 0.95rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.4rem;
-    }
+    .essay-content p { font-size: 0.95rem; line-height: 2.05; color: var(--ink-soft); margin-bottom: 1.5rem; }
     .essay-content p.drop {
-      font-family: var(--serif); font-size: 1.1rem; font-style: italic;
+      font-family: var(--serif); font-size: 1.12rem; font-style: italic;
       color: var(--ink); line-height: 1.9; font-weight: 400;
     }
-    .essay-content h3 {
-      font-family: var(--serif); font-size: 1.2rem; font-weight: 400;
-      color: var(--ink); margin: 2rem 0 0.65rem;
-    }
-    .essay-content h4 {
-      font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
-      color: var(--ink); margin: 1.75rem 0 0.5rem;
-    }
+    .essay-content h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: var(--ink); margin: 2.25rem 0 0.75rem; }
+    .essay-content h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin: 1.75rem 0 0.5rem; }
     .essay-content blockquote {
-      border-left: 3px solid var(--rule-dk); padding-left: 1.25rem;
-      margin: 1.5rem 0; font-family: var(--serif); font-style: italic;
-      font-size: 1rem; color: var(--ink-soft); line-height: 1.8;
+      border-left: 3px solid var(--rule-dk); padding-left: 1.35rem;
+      margin: 1.75rem 0; font-family: var(--serif); font-style: italic;
+      font-size: 1.02rem; color: var(--ink-soft); line-height: 1.85;
     }
     .essay-content blockquote cite {
-      display: block; font-style: normal;
-      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
-      color: var(--ink-muted); margin-top: 0.5rem;
+      display: block; font-style: normal; font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.1em; color: var(--ink-muted); margin-top: 0.5rem;
     }
-    .essay-content ol, .essay-content ul {
-      padding-left: 1.25rem; line-height: 1.8; color: var(--ink-soft); font-size: 0.92rem;
-    }
-    .essay-content li { margin-bottom: 0.5rem; }
-    .essay-content hr {
-      border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0;
-    }
-    .essay-content .steps-box {
-      background: var(--cream); border: 1px solid var(--rule);
-      padding: 1.5rem; margin: 1.5rem 0;
-    }
-    .essay-content .steps-box h5 {
-      font-family: var(--serif); font-size: 1rem; font-weight: 400;
-      color: var(--ink); margin-bottom: 0.75rem;
-    }
+    .essay-content ol, .essay-content ul { padding-left: 1.5rem; line-height: 1.85; color: var(--ink-soft); font-size: 0.93rem; }
+    .essay-content li { margin-bottom: 0.55rem; }
+    .essay-content hr { border: 0; border-top: 1px solid var(--rule); margin: 2.75rem 0; }
+    .essay-content .steps-box { background: var(--cream); border: 1px solid var(--rule); padding: 1.75rem; margin: 1.75rem 0; }
+    .essay-content .steps-box h5 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: 1rem; }
     .modal-footer {
-      padding: 1.25rem 2.5rem;
-      border-top: 1px solid var(--rule);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
+      padding: 1.35rem 2.75rem; border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
     }
-    .modal-footer span {
-      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-ghost);
-    }
+    .modal-footer span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-ghost); }
     .modal-footer a {
-      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
-      color: var(--red); text-decoration: none;
-      border-bottom: 1px solid transparent; padding-bottom: 1px;
-      transition: border-color 0.2s;
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em;
+      color: var(--red); text-decoration: none; border-bottom: 1px solid transparent;
+      padding-bottom: 1px; transition: border-color 0.2s; display: flex; align-items: center; gap: 0.35rem;
     }
     .modal-footer a:hover { border-bottom-color: var(--red); }
 
@@ -570,743 +581,862 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     #certifications { background: var(--paper); }
     .cred-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--rule);
-      border: 1px solid var(--rule); margin-bottom: 1.5rem;
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 1.75rem;
     }
     .cred-card {
-      background: var(--white); padding: 1.4rem 1.35rem; transition: background 0.2s;
+      background: var(--white); padding: 1.6rem 1.5rem; transition: background 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .cred-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--red);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease-out);
     }
     .cred-card:hover { background: var(--cream); }
-    .cred-card h4 {
-      font-family: var(--serif); font-size: 0.97rem; font-weight: 400;
-      color: var(--ink); margin-bottom: 0.3rem; line-height: 1.4;
-    }
-    .cred-card p { font-size: 0.74rem; color: var(--ink-muted); line-height: 1.5; }
-
+    .cred-card:hover::after { transform: scaleX(1); }
+    .cred-icon { color: var(--red); opacity: 0.5; margin-bottom: 0.75rem; }
+    .cred-card h4 { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.35rem; line-height: 1.4; }
+    .cred-card p { font-size: 0.76rem; color: var(--ink-muted); line-height: 1.55; }
     .mem-row {
-      border: 1px solid var(--rule); padding: 1.1rem 1.5rem;
-      display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap;
-      background: var(--cream);
+      border: 1px solid var(--rule); padding: 1.25rem 1.75rem;
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; background: var(--cream);
     }
     .mem-label {
-      font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.18em;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--red); white-space: nowrap;
     }
     .mem-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .mem-pill {
-      font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.05em;
-      color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.25rem 0.75rem;
-      background: var(--white);
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.05em;
+      color: var(--ink-mid); border: 1px solid var(--rule-dk); padding: 0.3rem 0.85rem; background: var(--white);
     }
 
     /* ── CONTACT ── */
-    #contact { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); }
+    #contact { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.07); }
     #contact .sec-title { color: var(--paper); }
-    #contact .sec-title em { color: rgba(255,255,255,0.35); }
+    #contact .sec-title em { color: rgba(255,255,255,0.3); }
     #contact .sec-n { color: var(--red); }
-    #contact .sec-hd { border-bottom-color: rgba(255,255,255,0.08); }
-
-    .contact-layout {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
-    }
+    #contact .sec-hd { border-bottom-color: rgba(255,255,255,0.07); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
     .contact-note {
-      font-family: var(--serif); font-size: 1.05rem; font-style: italic;
-      color: rgba(248,246,241,0.5); line-height: 1.9; margin-bottom: 2.5rem;
+      font-family: var(--serif); font-size: 1.08rem; font-style: italic;
+      color: rgba(248,246,241,0.45); line-height: 1.9; margin-bottom: 2.75rem;
     }
-    .ct-row { padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .ct-row { padding: 0.95rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .ct-row:last-child { border-bottom: none; }
     .ct-label {
-      font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--red); margin-bottom: 0.25rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem;
+      display: flex; align-items: center; gap: 0.5rem;
     }
-    .ct-val, .ct-val a {
-      font-size: 0.88rem; color: rgba(248,246,241,0.45); text-decoration: none;
-      transition: color 0.2s;
-    }
+    .ct-val, .ct-val a { font-size: 0.9rem; color: rgba(248,246,241,0.4); text-decoration: none; transition: color 0.2s; }
     .ct-val a:hover { color: rgba(248,246,241,0.9); }
-
-    .cf { display: flex; flex-direction: column; gap: 1.1rem; }
-    .cf-note {
-      font-size: 0.78rem; color: rgba(248,246,241,0.28); font-style: italic;
-      line-height: 1.65; margin-bottom: 0.1rem;
-    }
-    .cf-row { display: flex; flex-direction: column; gap: 0.35rem; }
+    .cf { display: flex; flex-direction: column; gap: 1.25rem; }
+    .cf-note { font-size: 0.8rem; color: rgba(248,246,241,0.25); font-style: italic; line-height: 1.7; margin-bottom: 0.25rem; }
+    .cf-row { display: flex; flex-direction: column; gap: 0.4rem; }
     .cf-row label {
-      font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(248,246,241,0.28);
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(248,246,241,0.3);
     }
     .cf-row input, .cf-row textarea {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-bottom-color: rgba(255,255,255,0.15);
-      padding: 0.7rem 0.9rem; font-family: var(--sans); font-size: 0.88rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-bottom-color: rgba(255,255,255,0.14);
+      padding: 0.8rem 1rem; font-family: var(--sans); font-size: 0.9rem;
       font-weight: 300; color: var(--paper); outline: none; width: 100%;
       transition: border-color 0.2s, background 0.2s; -webkit-appearance: none;
+      min-height: 48px;
     }
-    .cf-row input::placeholder, .cf-row textarea::placeholder { color: rgba(255,255,255,0.18); }
-    .cf-row input:focus, .cf-row textarea:focus {
-      border-color: var(--red); background: rgba(255,255,255,0.06);
-    }
-    .cf-row textarea { resize: vertical; min-height: 110px; }
+    .cf-row input::placeholder, .cf-row textarea::placeholder { color: rgba(255,255,255,0.16); }
+    .cf-row input:focus, .cf-row textarea:focus { border-color: var(--red); background: rgba(255,255,255,0.06); }
+    .cf-row textarea { resize: vertical; min-height: 120px; }
     .btn-send {
-      padding: 0.8rem 1.75rem; background: var(--red); color: var(--white);
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+      padding: 0.95rem 2rem; background: var(--red); color: var(--white);
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em;
       text-transform: uppercase; border: 1px solid var(--red); cursor: pointer;
-      transition: background 0.2s, color 0.2s; width: 100%; text-align: center;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+      width: 100%; text-align: center; min-height: 52px;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
     }
     .btn-send:hover { background: transparent; color: var(--red); }
     .cf-success {
-      display: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+      display: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: #6dbf8a; border: 1px solid #3a7a52;
-      padding: 0.75rem 1rem; text-align: center;
+      padding: 0.85rem 1.25rem; text-align: center;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 1.75rem 2.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
+      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
     }
     .footer-copy {
-      font-family: var(--serif); font-size: 0.82rem; font-style: italic;
-      color: rgba(248,246,241,0.2);
+      font-family: var(--serif); font-size: 0.84rem; font-style: italic;
+      color: rgba(248,246,241,0.18);
     }
     .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
     .footer-links a {
-      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(248,246,241,0.22); text-decoration: none;
-      transition: color 0.2s;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(248,246,241,0.2); text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem;
     }
     .footer-links a:hover { color: rgba(248,246,241,0.8); }
 
-    /* ── ANIMATIONS ── */
-    @keyframes up {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ── FOCUS RING (accessibility) ── */
+    :focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 3px;
     }
-    .reveal {
-      opacity: 0; transform: translateY(14px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ══════════════════════════════════════
-       MOBILE — complete overhaul
-    ══════════════════════════════════════ */
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+      #hero-canvas { display: none; }
+    }
+
+    /* ══════════════ MOBILE ══════════════ */
     @media (max-width: 860px) {
-      /* Nav */
-      nav { padding: 0 1.25rem; height: 54px; }
+      nav { padding: 0 1.25rem; height: 56px; }
       .nav-links { display: none; }
       .nav-burger { display: flex; }
-
-      /* Sections */
-      section { padding: 3.5rem 1.25rem; }
-
-      /* Hero */
-      #home { padding: 0 1.25rem; min-height: 100svh; }
-      .hero-bg-text { display: none; }
-      .hero-inner { padding-top: 80px; padding-bottom: 3rem; }
-      .hero-label { font-size: 0.52rem; letter-spacing: 0.14em; margin-bottom: 1.75rem; flex-wrap: wrap; }
-      .hero-label::before { display: none; }
-      .hero-name { font-size: clamp(2.6rem, 12vw, 4rem); margin-bottom: 1.75rem; }
-      .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; padding-left: 1rem; }
-      .hero-stats { gap: 1.25rem; margin-bottom: 2rem; }
-      .hero-stat-divider { display: none; }
-      .hero-stat-n { font-size: 1.6rem; }
-      .hero-stat-l { font-size: 0.46rem; }
-      .hero-btns { flex-direction: column; gap: 0.6rem; }
-      .btn-solid, .btn-ghost { text-align: center; padding: 0.85rem 1.5rem; font-size: 0.58rem; }
-      .hero-foot { flex-direction: column; align-items: flex-start; gap: 0.25rem; font-size: 0.5rem; }
-
-      /* About */
-      .about-layout { grid-template-columns: 1fr; gap: 2rem; }
-      .about-body p.lead { font-size: 1.1rem; }
-
-      /* Services */
-      .svc-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.75rem 0; }
-      .svc-num { font-size: 2.5rem; }
-      .svc-content h3 { font-size: 1.2rem; }
+      section { padding: 4rem 1.25rem; }
+      #home { padding: 0; }
+      .hero-inner { padding: 80px 1.25rem 3.5rem; }
+      .hero-name { font-size: clamp(2.8rem, 12vw, 4.5rem); margin-bottom: 2rem; }
+      .hero-desc { font-size: 1.05rem; margin-bottom: 1.75rem; }
+      .hero-stats { gap: 1.5rem; margin-bottom: 2rem; }
+      .stat-divider { display: none; }
+      .hero-stat-n { font-size: 1.8rem; }
+      .hero-stat-l { font-size: 0.58rem; }
+      .hero-btns { flex-direction: column; gap: 0.7rem; }
+      .btn-solid, .btn-ghost { text-align: center; justify-content: center; width: 100%; }
+      .hero-foot { padding: 1rem 1.25rem; font-size: 0.58rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .svc-item { grid-template-columns: 60px 1fr; gap: 1.25rem; padding: 2rem 0; }
+      .svc-num { font-size: 2.75rem; }
+      .svc-content h3 { font-size: 1.25rem; }
       .svc-tags { display: none; }
-      .svc-item:hover { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; }
-
-      /* Experience */
-      .exp-row { grid-template-columns: 1fr; gap: 0.25rem; padding: 1.5rem 0; }
+      .exp-timeline::before { left: -1px; }
+      .exp-dot { display: none; }
+      .exp-row { grid-template-columns: 1fr; gap: 0.3rem; padding: 1.75rem 0; }
       .exp-meta { display: flex; align-items: center; gap: 0.75rem; padding: 0 0 0.5rem; }
-      .exp-date { margin-bottom: 0; font-size: 0.52rem; }
+      .exp-date { margin-bottom: 0; font-size: 0.58rem; }
       .exp-row:hover { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; }
-      .exp-body h3 { font-size: 1.05rem; }
-      .exp-body li { font-size: 0.83rem; }
-
-      /* Projects */
       .proj-grid { grid-template-columns: 1fr; }
       .proj-card.span2 { grid-column: span 1; }
-      .proj-card { padding: 1.5rem; }
-      .proj-card h3 { font-size: 1rem; }
-      .proj-card.span2 h3 { font-size: 1.1rem; }
-
-      /* Writing */
-      .writing-item {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
+      .proj-card { padding: 1.75rem 1.5rem; }
+      .writing-item { grid-template-columns: 1fr; gap: 1.25rem; }
       .writing-item:hover { margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; }
       .writing-cta { align-self: flex-start; }
-
-      /* Modal */
       .modal-overlay { padding: 0; }
       .modal-box { margin: 0; min-height: 100vh; border: none; animation: none; }
-      .modal-header { padding: 1rem 1.25rem; }
-      .modal-body { padding: 1.5rem 1.25rem 2.5rem; }
-      .modal-footer { padding: 1rem 1.25rem; }
-      .modal-body .essay-title { font-size: 1.3rem; }
-      .essay-content p { font-size: 0.9rem; }
-
-      /* Credentials */
+      .modal-header, .modal-footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .modal-body { padding: 1.75rem 1.25rem 2.5rem; }
       .cred-grid { grid-template-columns: 1fr 1fr; }
-      .cred-card { padding: 1.1rem; }
-      .cred-card h4 { font-size: 0.88rem; }
-
-      /* Contact */
-      .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .contact-note { font-size: 0.95rem; }
-
-      /* Footer */
-      footer { flex-direction: column; text-align: center; padding: 1.25rem; }
-      .footer-links { justify-content: center; gap: 1.25rem; }
-
-      /* Section headers */
-      .sec-hd { margin-bottom: 2rem; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; text-align: center; padding: 1.5rem; }
+      .footer-links { justify-content: center; gap: 1.5rem; }
+      .sec-hd { margin-bottom: 2.5rem; }
+      #cursor, #cursor-ring { display: none; }
     }
-
     @media (max-width: 480px) {
       .cred-grid { grid-template-columns: 1fr; }
       nav { padding: 0 1rem; }
-      section { padding: 3rem 1rem; }
-      #home { padding: 0 1rem; }
-      .hero-name { font-size: 2.4rem; }
-      .mem-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      section { padding: 3.5rem 1rem; }
+      .hero-inner { padding: 80px 1rem 3rem; }
+      .mem-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH3MQVKF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Custom Cursor -->
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
 
-<nav>
-  <a href="#home" class="nav-logo">Muhammad Hamid Naeem</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Focus</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li><a href="blog">Blog</a></li>
-    <li><a href="calculator">Calculator</a></li>
-    <li><a href="newsletter">Newsletter</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="nav-burger" onclick="document.querySelector('.mob-nav').classList.add('open')" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <!-- Scroll Progress -->
+  <div id="scroll-progress" role="progressbar" aria-label="Reading progress"></div>
 
-<!-- Mobile Nav -->
-<div class="mob-nav" role="dialog" aria-label="Mobile navigation">
-  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">Close ✕</button>
-  <div class="mob-nav-inner">
-    <span class="mob-nav-label">Navigation</span>
-    <a href="#about"      onclick="document.querySelector('.mob-nav').classList.remove('open')">About</a>
-    <a href="#services"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Focus Areas</a>
-    <a href="#experience" onclick="document.querySelector('.mob-nav').classList.remove('open')">Experience</a>
-    <a href="#projects"   onclick="document.querySelector('.mob-nav').classList.remove('open')">Work</a>
-    <a href="#writing"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Writing</a>
-    <a href="calculator"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
-    <a href="newsletter"  onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
-    <a href="#contact"    onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
-  </div>
-</div>
+  <!-- NAV -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="#home" class="nav-logo">Muhammad Hamid Naeem</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Focus</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="calculator">Calculator</a></li>
+      <li><a href="newsletter">Newsletter</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"
+      onclick="openMobNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-<!-- ══ HERO ══ -->
-<section id="home">
-  <div class="hero-inner">
-    <div class="hero-bg-text" aria-hidden="true">§</div>
-    <p class="hero-label">AI Governance · Regulatory Analysis · Cross-Jurisdictional Research</p>
-    <h1 class="hero-name">
-      Muhammad<br>
-      <span class="line2">Hamid Naeem</span>
-    </h1>
-    <p class="hero-desc">Most compliance teams know AI regulation is moving fast. Few have someone who can read both the model card and the statute and tell you exactly where the gap is. That is the work I do.</p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-n">570+</span>
-        <span class="hero-stat-l">Platform readers</span>
-      </div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">4</span>
-        <span class="hero-stat-l">Jurisdictions</span>
-      </div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">10+</span>
-        <span class="hero-stat-l">Drafted documents</span>
-      </div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">1</span>
-        <span class="hero-stat-l">Published book</span>
-      </div>
-    </div>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-solid">Commission research</a>
-      <a href="#projects" class="btn-ghost">See the work first</a>
+  <!-- MOBILE NAV -->
+  <div class="mob-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <button class="mob-close" onclick="closeMobNav()" aria-label="Close menu">Close ✕</button>
+    <div class="mob-nav-inner">
+      <span class="mob-nav-label">Navigation</span>
+      <a href="#about"      onclick="closeMobNav()">About</a>
+      <a href="#services"   onclick="closeMobNav()">Focus Areas</a>
+      <a href="#experience" onclick="closeMobNav()">Experience</a>
+      <a href="#projects"   onclick="closeMobNav()">Work</a>
+      <a href="#writing"    onclick="closeMobNav()">Writing</a>
+      <a href="calculator"  onclick="closeMobNav()">Calculator</a>
+      <a href="newsletter"  onclick="closeMobNav()">Newsletter</a>
+      <a href="#contact"    onclick="closeMobNav()">Contact</a>
     </div>
   </div>
-  <div class="hero-foot">
-    <span>Islamabad, Pakistan</span>
-    <span>LL.B · Data Analytics · AI Policy</span>
-    <span>Available for consulting</span>
-  </div>
-</section>
 
-<!-- ══ ABOUT ══ -->
-<section id="about">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">01</span>
-      <h2 class="sec-title">About <em>me</em></h2>
-    </div>
-    <div class="about-layout">
-      <div class="about-body">
-        <p class="lead">AI regulation is moving fast. Most organizations are somewhere between "we should probably look into this" and "we have no idea what we're doing." I write the analysis that helps close that gap.</p>
-        <p>My background is LL.B plus hands-on data work. Python, dashboards, legal datasets. That combination is rarer than it should be. I can read a model card and a statute in the same sitting and tell you what the mismatch actually means.</p>
-        <p>Over the past year I've worked in Pakistan, India, the UAE, and the US. Civil litigation, family law, comparative regulatory research, policy drafting. I've built a legal platform read by 570+ professionals across three continents and published a book. None of it was handed to me.</p>
-        <p>I use Python and data tools to find patterns in legal datasets that pure doctrinal analysis misses. And I bring legal precision to data work that would otherwise ignore the regulatory environment it operates in.</p>
-      </div>
-      <div class="aside-block reveal">
-        <div class="aside-row"><div class="aside-row-label">Focus areas</div><p>AI governance, regulatory compliance, civil litigation, constitutional law, policy drafting</p></div>
-        <div class="aside-row"><div class="aside-row-label">Technical stack</div><p>Python, data analytics, Excel, Looker Studio, legal research databases</p></div>
-        <div class="aside-row"><div class="aside-row-label">Jurisdictions</div><p>Pakistan · India · UAE · US</p></div>
-        <div class="aside-row"><div class="aside-row-label">Languages</div><p>English · Urdu · Punjabi · Hindi</p></div>
-        <div class="aside-row"><div class="aside-row-label">Currently</div><p>Associate Researcher, Lex Lata Consultants & Law Chambers · Islamabad</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <main id="main-content">
 
-<!-- ══ SERVICES ══ -->
-<section id="services">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">02</span>
-      <h2 class="sec-title">Areas of <em>focus</em></h2>
-    </div>
-    <div class="svc-list-layout">
-      <div class="svc-item reveal">
-        <div class="svc-num">01</div>
-        <div class="svc-content">
-          <h3>AI governance &amp; regulatory analysis</h3>
-          <p>Most organizations deploying AI have no real idea whether they're compliant. Not because they don't care — because the rules are genuinely complicated and changing fast. I map where their systems sit against the EU AI Act, US executive frameworks, and the emerging Asian regulatory picture, then write it up in a way that doesn't require a law degree to act on.</p>
+  <!-- ══ HERO ══ -->
+  <section id="home" aria-label="Introduction">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="hero-label" id="hero-label">AI Governance · Regulatory Analysis · Cross-Jurisdictional Research</p>
+      <h1 class="hero-name" id="hero-name">
+        Muhammad<br>
+        <span class="line2">Hamid Naeem</span>
+      </h1>
+      <p class="hero-desc" id="hero-desc">Most compliance teams know AI regulation is moving fast. Few have someone who can read both the model card and the statute and tell you exactly where the gap is. That is the work I do.</p>
+      <div class="hero-stats" id="hero-stats" aria-label="Key metrics">
+        <div class="hero-stat">
+          <span class="hero-stat-n" data-count="570">0</span>
+          <span class="hero-stat-l">Platform readers</span>
         </div>
-        <div class="svc-tags">
-          <span class="svc-tag">Regulatory gap analysis</span>
-          <span class="svc-tag">Policy drafting</span>
-          <span class="svc-tag">Compliance frameworks</span>
-          <span class="svc-tag">Comparative research</span>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-n" data-count="4">0</span>
+          <span class="hero-stat-l">Jurisdictions</span>
         </div>
-      </div>
-      <div class="svc-item reveal">
-        <div class="svc-num">02</div>
-        <div class="svc-content">
-          <h3>Legal research &amp; litigation support</h3>
-          <p>I draft for real cases — petitions, legal notices, plaints, sale deeds — across Pakistan and India. Not practice problems, not simulations. Documents that go before courts and get filed with clients' names on them. That changes how carefully you write.</p>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-n" data-count="10">0</span>
+          <span class="hero-stat-l">Drafted documents</span>
         </div>
-        <div class="svc-tags">
-          <span class="svc-tag">Plaints &amp; petitions</span>
-          <span class="svc-tag">Legal notices</span>
-          <span class="svc-tag">Case law research</span>
-          <span class="svc-tag">Sale &amp; rent deeds</span>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-n" data-count="1">0</span>
+          <span class="hero-stat-l">Published book</span>
         </div>
       </div>
-      <div class="svc-item reveal">
-        <div class="svc-num">03</div>
-        <div class="svc-content">
-          <h3>Data analysis &amp; legal intelligence</h3>
-          <p>Courts produce mountains of data. Almost nobody looks at it systematically. I do — case outcomes, enforcement trends, regulatory filings — and I turn the findings into dashboards and reports that actually inform decisions, not just decorate a slide deck.</p>
-        </div>
-        <div class="svc-tags">
-          <span class="svc-tag">Dataset analysis</span>
-          <span class="svc-tag">Dashboard design</span>
-          <span class="svc-tag">Trend reports</span>
-          <span class="svc-tag">Python · Excel</span>
-        </div>
-      </div>
-      <div class="svc-item reveal">
-        <div class="svc-num">04</div>
-        <div class="svc-content">
-          <h3>Legal writing &amp; policy communication</h3>
-          <p>Good legal analysis that nobody reads is useless. I write for people who need to make decisions, not for people who want to demonstrate they've read the literature. Stripping jargon without losing substance is harder than it sounds — I've been doing it long enough to get it right.</p>
-        </div>
-        <div class="svc-tags">
-          <span class="svc-tag">Policy explainers</span>
-          <span class="svc-tag">Legal articles</span>
-          <span class="svc-tag">Newsletter content</span>
-          <span class="svc-tag">Research summaries</span>
-        </div>
+      <div class="hero-btns" id="hero-btns">
+        <a href="#contact" class="btn-solid">
+          <i data-lucide="mail" width="15" height="15"></i>
+          Commission research
+        </a>
+        <a href="#projects" class="btn-ghost">
+          <i data-lucide="folder-open" width="15" height="15"></i>
+          See the work first
+        </a>
       </div>
     </div>
-  </div>
-</section>
+    <div class="hero-foot" aria-label="Status">
+      <span class="hero-foot-item">
+        <i data-lucide="map-pin" width="13" height="13"></i>
+        Islamabad, Pakistan
+      </span>
+      <span class="hero-foot-item">
+        <i data-lucide="graduation-cap" width="13" height="13"></i>
+        LL.B · Data Analytics · AI Policy
+      </span>
+      <span class="hero-foot-item">
+        <span class="status-dot" aria-hidden="true"></span>
+        Available for consulting
+      </span>
+    </div>
+  </section>
 
-<!-- ══ EXPERIENCE ══ -->
-<section id="experience">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">03</span>
-      <h2 class="sec-title">Experi<em>ence</em></h2>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta">
-        <span class="exp-date">Feb 2026 — Present</span>
-        <span class="exp-now">Current</span>
+  <!-- ══ ABOUT ══ -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">01</span>
+        <h2 class="sec-title" id="about-heading">About <em>me</em></h2>
       </div>
-      <div class="exp-body">
-        <h3>Lex Lata Consultants &amp; Law Chambers</h3>
-        <div class="exp-role">Associate Researcher</div>
-        <div class="exp-loc">Islamabad, Pakistan</div>
-        <ul>
-          <li>Working on commercial and corporate matters alongside senior practitioners</li>
-          <li>Conducting live legal research and contributing to client advisory work on active matters</li>
-          <li>Drafting litigation documents including recovery suits filed before civil courts in Islamabad</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta"><span class="exp-date">Jul 2025 — Present</span></div>
-      <div class="exp-body">
-        <h3>Veritas and Vows</h3>
-        <div class="exp-role">Founder &amp; Editorial Lead</div>
-        <div class="exp-loc">Pakistan</div>
-        <ul>
-          <li>Built a legal knowledge platform from scratch — now read by 570+ professionals across Pakistan, the US, and the UK</li>
-          <li>Leads a 5-person editorial team covering AI governance, constitutional law, and human rights</li>
-          <li>Averaging 128+ impressions per post across three continents</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta"><span class="exp-date">Aug 2025 — Present</span></div>
-      <div class="exp-body">
-        <h3>Your First Legal Connection</h3>
-        <div class="exp-role">Published Author</div>
-        <div class="exp-loc">Amazon Kindle &amp; Paperback</div>
-        <ul>
-          <li>Wrote and self-published a 97-page guide on professional networking for law students</li>
-          <li>Handled the full pipeline independently: research, writing, formatting, and Amazon distribution</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta"><span class="exp-date">Jul – Oct 2025</span></div>
-      <div class="exp-body">
-        <h3>Legal Pathway Society</h3>
-        <div class="exp-role">AI Governance Research Intern</div>
-        <div class="exp-loc">United States (Remote)</div>
-        <ul>
-          <li>Co-authored a comparative policy paper on AI governance frameworks in the US and EU</li>
-          <li>Drafted 3 policy documents on civil legal services access for underrepresented communities</li>
-          <li>Completed 6 research assignments as part of a 17-intern international cohort</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta"><span class="exp-date">Sep 2025</span></div>
-      <div class="exp-body">
-        <h3>NyayaSarthak</h3>
-        <div class="exp-role">Legal Intern</div>
-        <div class="exp-loc">New Delhi, India</div>
-        <ul>
-          <li>Drafted a sale deed, rent deed, divorce petition, and loan recovery petition</li>
-          <li>Hands-on exposure across property, family, and civil recovery law in the Indian jurisdiction</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta"><span class="exp-date">Jun – Aug 2025</span></div>
-      <div class="exp-body">
-        <h3>Haji Law Chamber</h3>
-        <div class="exp-role">Legal Assistant</div>
-        <div class="exp-loc">Samundri, Punjab, Pakistan</div>
-        <ul>
-          <li>Drafted family suit petitions and legal notices across active matters</li>
-          <li>Assisted on 4 cases covering divorce, child custody, and criminal procedure</li>
-          <li>Managed client files and communications for 19+ clients</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-meta"><span class="exp-date">Apr – May 2025</span></div>
-      <div class="exp-body">
-        <h3>Excelerate</h3>
-        <div class="exp-role">Data Analytics Intern</div>
-        <div class="exp-loc">Dubai, UAE (Remote)</div>
-        <ul>
-          <li>Analyzed 3 datasets end-to-end and produced written reports with actionable findings</li>
-          <li>Built a capstone dashboard in Excel and Looker Studio covering the full analytics workflow</li>
-          <li>Worked in an 8-member cross-timezone team based in the UAE</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PROJECTS ══ -->
-<section id="projects">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">04</span>
-      <h2 class="sec-title">Featured <em>work</em></h2>
-    </div>
-    <div class="proj-grid">
-      <div class="proj-card span2 reveal">
-        <div class="proj-idx">01 — Published work</div>
-        <h3>Your First Legal Connection</h3>
-        <p>I wrote this because the advice I got as a law student was either obvious or useless. 97 pages on networking and mentorship for people who don't have the right connections yet — and want to build them anyway. Self-published, handled every stage myself.</p>
-        <div class="proj-foot">
-          <span class="proj-tag">Amazon Kindle &amp; Paperback</span>
-          <a href="https://www.amazon.in/Your-First-Legal-Connection-Networking-ebook/dp/B0FKZBX5ZT" target="_blank" rel="noopener noreferrer" class="proj-link">View on Amazon →</a>
+      <div class="about-layout">
+        <div class="about-body">
+          <p class="lead reveal-up">AI regulation is moving fast. Most organizations are somewhere between "we should probably look into this" and "we have no idea what we're doing." I write the analysis that helps close that gap.</p>
+          <p class="reveal-up">My background is LL.B plus hands-on data work. Python, dashboards, legal datasets. That combination is rarer than it should be. I can read a model card and a statute in the same sitting and tell you what the mismatch actually means.</p>
+          <p class="reveal-up">Over the past year I've worked in Pakistan, India, the UAE, and the US. Civil litigation, family law, comparative regulatory research, policy drafting. I've built a legal platform read by 570+ professionals across three continents and published a book. None of it was handed to me.</p>
+          <p class="reveal-up">I use Python and data tools to find patterns in legal datasets that pure doctrinal analysis misses. And I bring legal precision to data work that would otherwise ignore the regulatory environment it operates in.</p>
         </div>
-      </div>
-      <div class="proj-card reveal">
-        <div class="proj-idx">02 — Policy research</div>
-        <h3>US–EU AI Governance: A Comparative Analysis</h3>
-        <p>This paper maps where US and EU frameworks actually agree, where they clash, and what that means if you operate across both. Submitted to Legal Pathway Society; available on request.</p>
-        <div class="proj-foot">
-          <span class="proj-tag">Policy paper</span>
-          <a href="#contact" class="proj-link">Request copy →</a>
-        </div>
-      </div>
-      <div class="proj-card reveal">
-        <div class="proj-idx">03 — Editorial platform</div>
-        <h3>Veritas &amp; Vows</h3>
-        <p>Built from nothing. Covers AI governance, constitutional law, and human rights — 570+ professionals across Pakistan, the US, and the UK read it. I didn't buy that audience. I wrote for it.</p>
-        <div class="proj-foot">
-          <span class="proj-tag">Content platform</span>
-          <a href="https://www.linkedin.com/company/veritas-and-vows" target="_blank" rel="noopener noreferrer" class="proj-link">View on LinkedIn →</a>
-        </div>
-      </div>
-      <div class="proj-card reveal">
-        <div class="proj-idx">04 — Data analytics</div>
-        <h3>Analytics capstone dashboard</h3>
-        <p>Three datasets, a full cleaning and analysis pipeline, and an interactive dashboard in Excel and Looker Studio. Built under real reporting constraints. Available on request.</p>
-        <div class="proj-foot">
-          <span class="proj-tag">Excel · Looker Studio</span>
-          <a href="#contact" class="proj-link">Request access →</a>
-        </div>
-      </div>
-      <div class="proj-card reveal">
-        <div class="proj-idx">05 — Jurisprudence</div>
-        <h3>Truth-seeking in Pakistani criminal trials</h3>
-        <p>PLD 1966 SC 708 is a 60-year-old Supreme Court decision that still shapes how Pakistani criminal courts weigh evidence. I read it closely and wrote up what the reasoning actually reveals.</p>
-        <div class="proj-foot">
-          <span class="proj-tag">Legal writing</span>
-          <button class="proj-link" onclick="openModal()">Read article →</button>
-        </div>
-      </div>
-      <div class="proj-card reveal">
-        <div class="proj-idx">06 — Drafting portfolio</div>
-        <h3>Legal drafting portfolio</h3>
-        <p>10+ documents across family law, property, civil recovery, and criminal procedure in Pakistan and India. Drafted for actual cases — sale deeds, rent agreements, divorce petitions, recovery plaints, legal notices.</p>
-        <div class="proj-foot">
-          <span class="proj-tag">Pakistan · India</span>
-          <a href="#contact" class="proj-link">Request samples →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ WRITING ══ — cards only, no inline article -->
-<section id="writing">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">05</span>
-      <h2 class="sec-title">Legal <em>writing</em></h2>
-    </div>
-    <div class="writing-list">
-      <div class="writing-item reveal">
-        <div>
-          <div class="writing-meta">
-            <span>Jurisprudence</span>
-            <span class="writing-meta-date">July 14, 2025</span>
+        <div class="aside-block reveal-up">
+          <div class="aside-row">
+            <div class="aside-row-label"><i data-lucide="target" width="12" height="12"></i> Focus areas</div>
+            <p>AI governance, regulatory compliance, civil litigation, constitutional law, policy drafting</p>
           </div>
-          <h3>Unpacking Justice: PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h3>
-          <p>What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts — the holding, and the assumptions underneath it.</p>
-        </div>
-        <button class="writing-cta" onclick="openModal()">Read article →</button>
-      </div>
-      <div class="writing-item reveal">
-        <div>
-          <div class="writing-meta">
-            <span>AI Governance</span>
-            <span class="writing-meta-date">More on Substack</span>
+          <div class="aside-row">
+            <div class="aside-row-label"><i data-lucide="code" width="12" height="12"></i> Technical stack</div>
+            <p>Python, data analytics, Excel, Looker Studio, legal research databases</p>
           </div>
-          <h3>The Digital Gavel</h3>
-          <p>Regular writing on AI governance, legal technology, and regulatory developments — published on Substack and read by practitioners across three continents.</p>
+          <div class="aside-row">
+            <div class="aside-row-label"><i data-lucide="globe" width="12" height="12"></i> Jurisdictions</div>
+            <p>Pakistan · India · UAE · US</p>
+          </div>
+          <div class="aside-row">
+            <div class="aside-row-label"><i data-lucide="message-circle" width="12" height="12"></i> Languages</div>
+            <p>English · Urdu · Punjabi · Hindi</p>
+          </div>
+          <div class="aside-row">
+            <div class="aside-row-label"><i data-lucide="briefcase" width="12" height="12"></i> Currently</div>
+            <p>Associate Researcher, Lex Lata Consultants & Law Chambers · Islamabad</p>
+          </div>
         </div>
-        <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="writing-cta">Visit Substack →</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ ARTICLE MODAL ══ -->
-<div class="modal-overlay" id="article-modal" role="dialog" aria-modal="true" aria-label="Article: PLD 1966 Supreme Court 708">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span class="modal-header-label">Legal writing · Jurisprudence</span>
-      <button class="modal-close" onclick="closeModal()">Close ✕</button>
-    </div>
-    <div class="modal-body">
-      <h2 class="essay-title">Unpacking Justice: A Deep Dive into PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h2>
-      <p class="essay-subtitle">What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts.</p>
-      <div class="essay-meta-row">
-        <span>By Hamid Naeem</span>
-        <span style="color:var(--ink-ghost)">·</span>
-        <span style="color:var(--ink-ghost)">Veritas and Vows</span>
-        <span style="color:var(--ink-ghost)">·</span>
-        <span style="color:var(--ink-ghost)">July 14, 2025</span>
+  <!-- ══ SERVICES ══ -->
+  <section id="services" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">02</span>
+        <h2 class="sec-title" id="services-heading">Areas of <em>focus</em></h2>
       </div>
-      <div class="essay-content">
-        <p class="drop">At <em>Veritas and Vows</em>, we're committed to shedding light on the intricacies of the law, ensuring clarity and empowering understanding. Today, we delve into a landmark decision from the Supreme Court of Pakistan, <strong>PLD 1966 Supreme Court 708</strong>, a judgment that grappled with fundamental procedural challenges in criminal trials and offers enduring lessons on the pursuit of truth and fair legal processes.</p>
-        <p>This case, stemming from Criminal Appeals Nos. 8 and 9 of 1965, brought before the Supreme Court by Nur Elahi, addressed a critical question: how should courts handle murder cases where two entirely separate versions of the incident, implicating different sets of accused, are presented through a private complaint and a police challan (report)?</p>
-
-        <h3>The Core Dilemma: Conflicting Narratives and Procedural Sanction</h3>
-        <p>The High Court of West Pakistan had initially laid down a "special procedure" for these trials, recommending that common witnesses be examined only once and their statements be read as evidence in the other case. This approach, while seemingly efficient, became the central point of contention for the Supreme Court. The core question on appeal was whether this "special procedure" had the "sanction of law".</p>
-
-        <h3>Key Holdings and Their Significance</h3>
-
-        <h4>1. Rejection of Inter-Case Evidence Reading</h4>
-        <p>The Supreme Court unequivocally held that directing witnesses to be examined only once and their statements read out as evidence in the other case is not supportable in law. Justice S. A. Rahman, speaking for the majority, emphasized that reading evidence recorded in another case as evidence in the case at hand is strictly debarred. Violation of this procedural boundary completely invalidates the legal finality of the trial.</p>
-
-        <blockquote>
-          <p><strong>The Supreme Court's Exact Rule:</strong><br>"Every criminal proceeding is to be decided on the material on record of that proceeding and neither record of another case nor any finding recorded there-under should affect the decision and if the Court takes into consideration evidence recorded in other case, a finding recorded there in judgment is vitiated."</p>
-          <cite>— PLD 1966 Supreme Court 708, p. 710</cite>
-        </blockquote>
-
-        <p>This reinforces a cornerstone of fair trial principles: every criminal proceeding must be decided solely on the material on its own unique physical record, ensuring that findings from outside cases do not compromise judicial neutrality.</p>
-
-        <h4>2. Separate Trials, Sequential Approach</h4>
-        <p>The Court affirmed the High Court's view that a joint trial of two sets of accused, where they are not involved in the same transaction, contravenes <strong>Section 239 of the Code of Criminal Procedure</strong>. To navigate the complexities of two distinct versions, the majority proposed a strict sequential procedure:</p>
-
-        <div class="steps-box">
-          <h5>The Sequential Protocol:</h5>
-          <ol>
-            <li>The complaint case should be taken up first for trial.</li>
-            <li>During the complaint case, the trial judge may call witnesses mentioned in the police challan as Court witnesses under <strong>Section 540-A</strong> of the Criminal Procedure Code, allowing cross-examination by both parties.</li>
-            <li>If the first trial results in a conviction, the Public Prosecutor would then consider withdrawing the police challan case under <strong>Section 494</strong> of the Criminal Procedure Code.</li>
-            <li>If the first case results in an acquittal, the second trial (police challan) would proceed to its conclusion.</li>
-          </ol>
+      <div class="svc-list-layout">
+        <div class="svc-item reveal-up">
+          <div class="svc-num" aria-hidden="true">01</div>
+          <div class="svc-content">
+            <h3><i data-lucide="shield" class="svc-icon" width="20" height="20"></i>AI governance &amp; regulatory analysis</h3>
+            <p>Most organizations deploying AI have no real idea whether they're compliant. Not because they don't care — because the rules are genuinely complicated and changing fast. I map where their systems sit against the EU AI Act, US executive frameworks, and the emerging Asian regulatory picture, then write it up in a way that doesn't require a law degree to act on.</p>
+          </div>
+          <div class="svc-tags">
+            <span class="svc-tag">Regulatory gap analysis</span>
+            <span class="svc-tag">Policy drafting</span>
+            <span class="svc-tag">Compliance frameworks</span>
+            <span class="svc-tag">Comparative research</span>
+          </div>
         </div>
-
-        <h4>3. Dissenting View on "Consolidation" and Public Prosecutor's Role</h4>
-        <p>Justice B. Z. Kaikaus, in his dissenting opinion, highlighted the difficulties with the majority's proposed procedure. He argued that allowing a decision in one case to influence the handling of another, even implicitly, risks disregarding fundamental principles of justice. Drawing parallels with civil law, he suggested that consolidation of criminal proceedings should be permissible through the inherent powers of the court, similar to <strong>Section 151 of the Civil Procedure Code</strong>.</p>
-        <p>He also contended that the Public Prosecutor should lay both stories and all related evidence before the Court, rather than taking a stance on the correctness of one version.</p>
-
-        <hr>
-
-        <h3>Why This Matters Today</h3>
-        <p><em>PLD 1966 Supreme Court 708</em> remains highly relevant for several critical reasons:</p>
-        <ul>
-          <li><strong>Safeguarding Fair Trial:</strong> The judgment powerfully reaffirms that each case must stand on its own evidence, protecting against prejudice that could arise from findings in separate proceedings.</li>
-          <li><strong>Navigating Parallel Proceedings:</strong> In a legal landscape where multiple complaints or versions of an incident can arise, this judgment provides a framework for managing such complexities in criminal matters.</li>
-          <li><strong>The Role of the Public Prosecutor:</strong> The discussion underscores the delicate balance between the prosecutor's duty to the State and their responsibility to ensure justice is served by presenting all relevant facts.</li>
-          <li><strong>Judicial Interpretation of Procedure:</strong> The differing views within the judgment highlight the ongoing judicial discourse on the flexibility and limits of procedural law in ensuring substantive justice.</li>
-        </ul>
-
-        <hr>
-
-        <p>At <em>Veritas and Vows</em>, we believe that understanding such foundational judgments is vital for legal professionals, students, and anyone interested in the machinery of justice. This case stands as a testament to the continuous effort to refine legal procedures so that truth prevails.</p>
-        <p><em>Stay tuned for more insights from <strong>Veritas and Vows</strong> as we continue to explore the depths of legal principles and their impact on our lives.</em></p>
+        <div class="svc-item reveal-up">
+          <div class="svc-num" aria-hidden="true">02</div>
+          <div class="svc-content">
+            <h3><i data-lucide="scale" class="svc-icon" width="20" height="20"></i>Legal research &amp; litigation support</h3>
+            <p>I draft for real cases — petitions, legal notices, plaints, sale deeds — across Pakistan and India. Not practice problems, not simulations. Documents that go before courts and get filed with clients' names on them. That changes how carefully you write.</p>
+          </div>
+          <div class="svc-tags">
+            <span class="svc-tag">Plaints &amp; petitions</span>
+            <span class="svc-tag">Legal notices</span>
+            <span class="svc-tag">Case law research</span>
+            <span class="svc-tag">Sale &amp; rent deeds</span>
+          </div>
+        </div>
+        <div class="svc-item reveal-up">
+          <div class="svc-num" aria-hidden="true">03</div>
+          <div class="svc-content">
+            <h3><i data-lucide="bar-chart-2" class="svc-icon" width="20" height="20"></i>Data analysis &amp; legal intelligence</h3>
+            <p>Courts produce mountains of data. Almost nobody looks at it systematically. I do — case outcomes, enforcement trends, regulatory filings — and I turn the findings into dashboards and reports that actually inform decisions, not just decorate a slide deck.</p>
+          </div>
+          <div class="svc-tags">
+            <span class="svc-tag">Dataset analysis</span>
+            <span class="svc-tag">Dashboard design</span>
+            <span class="svc-tag">Trend reports</span>
+            <span class="svc-tag">Python · Excel</span>
+          </div>
+        </div>
+        <div class="svc-item reveal-up">
+          <div class="svc-num" aria-hidden="true">04</div>
+          <div class="svc-content">
+            <h3><i data-lucide="pen-tool" class="svc-icon" width="20" height="20"></i>Legal writing &amp; policy communication</h3>
+            <p>Good legal analysis that nobody reads is useless. I write for people who need to make decisions, not for people who want to demonstrate they've read the literature. Stripping jargon without losing substance is harder than it sounds — I've been doing it long enough to get it right.</p>
+          </div>
+          <div class="svc-tags">
+            <span class="svc-tag">Policy explainers</span>
+            <span class="svc-tag">Legal articles</span>
+            <span class="svc-tag">Newsletter content</span>
+            <span class="svc-tag">Research summaries</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <span>Also published on LinkedIn</span>
-      <a href="https://www.linkedin.com/pulse/unpacking-justice-deep-dive-pld-1966-supreme-court-708-d6jxf/" target="_blank" rel="noopener noreferrer">Read on LinkedIn →</a>
-    </div>
-  </div>
-</div>
+  </section>
 
-<!-- ══ CREDENTIALS ══ -->
-<section id="certifications">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">06</span>
-      <h2 class="sec-title">Creden<em>tials</em></h2>
+  <!-- ══ EXPERIENCE ══ -->
+  <section id="experience" aria-labelledby="exp-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">03</span>
+        <h2 class="sec-title" id="exp-heading">Experi<em>ence</em></h2>
+      </div>
+      <div class="exp-timeline">
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta">
+            <span class="exp-date">Feb 2026 — Present</span>
+            <span class="exp-now">Current</span>
+          </div>
+          <div class="exp-body">
+            <h3><i data-lucide="building-2" width="16" height="16" style="color:var(--red);opacity:0.6"></i>Lex Lata Consultants &amp; Law Chambers</h3>
+            <div class="exp-role">Associate Researcher</div>
+            <div class="exp-loc"><i data-lucide="map-pin" width="12" height="12"></i>Islamabad, Pakistan</div>
+            <ul>
+              <li>Working on commercial and corporate matters alongside senior practitioners</li>
+              <li>Conducting live legal research and contributing to client advisory work on active matters</li>
+              <li>Drafting litigation documents including recovery suits filed before civil courts in Islamabad</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta"><span class="exp-date">Jul 2025 — Present</span></div>
+          <div class="exp-body">
+            <h3><i data-lucide="users" width="16" height="16" style="color:var(--red);opacity:0.6"></i>Veritas and Vows</h3>
+            <div class="exp-role">Founder &amp; Editorial Lead</div>
+            <div class="exp-loc"><i data-lucide="map-pin" width="12" height="12"></i>Pakistan</div>
+            <ul>
+              <li>Built a legal knowledge platform from scratch — now read by 570+ professionals across Pakistan, the US, and the UK</li>
+              <li>Leads a 5-person editorial team covering AI governance, constitutional law, and human rights</li>
+              <li>Averaging 128+ impressions per post across three continents</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta"><span class="exp-date">Aug 2025 — Present</span></div>
+          <div class="exp-body">
+            <h3><i data-lucide="book-open" width="16" height="16" style="color:var(--red);opacity:0.6"></i>Your First Legal Connection</h3>
+            <div class="exp-role">Published Author</div>
+            <div class="exp-loc"><i data-lucide="shopping-bag" width="12" height="12"></i>Amazon Kindle &amp; Paperback</div>
+            <ul>
+              <li>Wrote and self-published a 97-page guide on professional networking for law students</li>
+              <li>Handled the full pipeline independently: research, writing, formatting, and Amazon distribution</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta"><span class="exp-date">Jul – Oct 2025</span></div>
+          <div class="exp-body">
+            <h3><i data-lucide="landmark" width="16" height="16" style="color:var(--red);opacity:0.6"></i>Legal Pathway Society</h3>
+            <div class="exp-role">AI Governance Research Intern</div>
+            <div class="exp-loc"><i data-lucide="globe" width="12" height="12"></i>United States (Remote)</div>
+            <ul>
+              <li>Co-authored a comparative policy paper on AI governance frameworks in the US and EU</li>
+              <li>Drafted 3 policy documents on civil legal services access for underrepresented communities</li>
+              <li>Completed 6 research assignments as part of a 17-intern international cohort</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta"><span class="exp-date">Sep 2025</span></div>
+          <div class="exp-body">
+            <h3><i data-lucide="gavel" width="16" height="16" style="color:var(--red);opacity:0.6"></i>NyayaSarthak</h3>
+            <div class="exp-role">Legal Intern</div>
+            <div class="exp-loc"><i data-lucide="map-pin" width="12" height="12"></i>New Delhi, India</div>
+            <ul>
+              <li>Drafted a sale deed, rent deed, divorce petition, and loan recovery petition</li>
+              <li>Hands-on exposure across property, family, and civil recovery law in the Indian jurisdiction</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta"><span class="exp-date">Jun – Aug 2025</span></div>
+          <div class="exp-body">
+            <h3><i data-lucide="scale" width="16" height="16" style="color:var(--red);opacity:0.6"></i>Haji Law Chamber</h3>
+            <div class="exp-role">Legal Assistant</div>
+            <div class="exp-loc"><i data-lucide="map-pin" width="12" height="12"></i>Samundri, Punjab, Pakistan</div>
+            <ul>
+              <li>Drafted family suit petitions and legal notices across active matters</li>
+              <li>Assisted on 4 cases covering divorce, child custody, and criminal procedure</li>
+              <li>Managed client files and communications for 19+ clients</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-row reveal-up">
+          <div class="exp-dot" aria-hidden="true"></div>
+          <div class="exp-meta"><span class="exp-date">Apr – May 2025</span></div>
+          <div class="exp-body">
+            <h3><i data-lucide="trending-up" width="16" height="16" style="color:var(--red);opacity:0.6"></i>Excelerate</h3>
+            <div class="exp-role">Data Analytics Intern</div>
+            <div class="exp-loc"><i data-lucide="globe" width="12" height="12"></i>Dubai, UAE (Remote)</div>
+            <ul>
+              <li>Analyzed 3 datasets end-to-end and produced written reports with actionable findings</li>
+              <li>Built a capstone dashboard in Excel and Looker Studio covering the full analytics workflow</li>
+              <li>Worked in an 8-member cross-timezone team based in the UAE</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="cred-grid">
-      <div class="cred-card reveal"><h4>Google Data Analytics Professional Certificate</h4><p>Data analysis, visualization, reporting — Google</p></div>
-      <div class="cred-card reveal"><h4>Google Prompting Essentials</h4><p>AI prompting and language model interaction — Google</p></div>
-      <div class="cred-card reveal"><h4>McKinsey Forward Program</h4><p>Strategic thinking and leadership — McKinsey & Company</p></div>
-      <div class="cred-card reveal"><h4>C++ Essentials</h4><p>Programming fundamentals and computational logic</p></div>
-      <div class="cred-card reveal"><h4>Project Management: The Basics for Success</h4><p>Planning, execution, and team coordination — UC Irvine / Coursera</p></div>
-      <div class="cred-card reveal"><h4>Aspire Leaders Program</h4><p>Global leadership development · Oct – Dec 2025</p></div>
+  </section>
+
+  <!-- ══ PROJECTS ══ -->
+  <section id="projects" aria-labelledby="projects-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">04</span>
+        <h2 class="sec-title" id="projects-heading">Featured <em>work</em></h2>
+      </div>
+      <div class="proj-grid">
+        <div class="proj-card span2 reveal-up">
+          <div class="proj-idx"><i data-lucide="book" width="13" height="13"></i>01 — Published work</div>
+          <h3>Your First Legal Connection</h3>
+          <p>I wrote this because the advice I got as a law student was either obvious or useless. 97 pages on networking and mentorship for people who don't have the right connections yet — and want to build them anyway. Self-published, handled every stage myself.</p>
+          <div class="proj-foot">
+            <span class="proj-tag"><i data-lucide="shopping-bag" width="12" height="12"></i>Amazon Kindle &amp; Paperback</span>
+            <a href="https://www.amazon.in/Your-First-Legal-Connection-Networking-ebook/dp/B0FKZBX5ZT" target="_blank" rel="noopener noreferrer" class="proj-link">
+              View on Amazon <i data-lucide="arrow-up-right" width="12" height="12"></i>
+            </a>
+          </div>
+        </div>
+        <div class="proj-card reveal-up">
+          <div class="proj-idx"><i data-lucide="file-text" width="13" height="13"></i>02 — Policy research</div>
+          <h3>US–EU AI Governance: A Comparative Analysis</h3>
+          <p>This paper maps where US and EU frameworks actually agree, where they clash, and what that means if you operate across both. Submitted to Legal Pathway Society; available on request.</p>
+          <div class="proj-foot">
+            <span class="proj-tag"><i data-lucide="tag" width="12" height="12"></i>Policy paper</span>
+            <a href="#contact" class="proj-link">Request copy <i data-lucide="arrow-right" width="12" height="12"></i></a>
+          </div>
+        </div>
+        <div class="proj-card reveal-up">
+          <div class="proj-idx"><i data-lucide="users" width="13" height="13"></i>03 — Editorial platform</div>
+          <h3>Veritas &amp; Vows</h3>
+          <p>Built from nothing. Covers AI governance, constitutional law, and human rights — 570+ professionals across Pakistan, the US, and the UK read it. I didn't buy that audience. I wrote for it.</p>
+          <div class="proj-foot">
+            <span class="proj-tag"><i data-lucide="tag" width="12" height="12"></i>Content platform</span>
+            <a href="https://www.linkedin.com/company/veritas-and-vows" target="_blank" rel="noopener noreferrer" class="proj-link">
+              View on LinkedIn <i data-lucide="arrow-up-right" width="12" height="12"></i>
+            </a>
+          </div>
+        </div>
+        <div class="proj-card reveal-up">
+          <div class="proj-idx"><i data-lucide="bar-chart-2" width="13" height="13"></i>04 — Data analytics</div>
+          <h3>Analytics capstone dashboard</h3>
+          <p>Three datasets, a full cleaning and analysis pipeline, and an interactive dashboard in Excel and Looker Studio. Built under real reporting constraints. Available on request.</p>
+          <div class="proj-foot">
+            <span class="proj-tag"><i data-lucide="tag" width="12" height="12"></i>Excel · Looker Studio</span>
+            <a href="#contact" class="proj-link">Request access <i data-lucide="arrow-right" width="12" height="12"></i></a>
+          </div>
+        </div>
+        <div class="proj-card reveal-up">
+          <div class="proj-idx"><i data-lucide="gavel" width="13" height="13"></i>05 — Jurisprudence</div>
+          <h3>Truth-seeking in Pakistani criminal trials</h3>
+          <p>PLD 1966 SC 708 is a 60-year-old Supreme Court decision that still shapes how Pakistani criminal courts weigh evidence. I read it closely and wrote up what the reasoning actually reveals.</p>
+          <div class="proj-foot">
+            <span class="proj-tag"><i data-lucide="tag" width="12" height="12"></i>Legal writing</span>
+            <button class="proj-link" onclick="openModal()" aria-haspopup="dialog">
+              Read article <i data-lucide="arrow-right" width="12" height="12"></i>
+            </button>
+          </div>
+        </div>
+        <div class="proj-card reveal-up">
+          <div class="proj-idx"><i data-lucide="folder" width="13" height="13"></i>06 — Drafting portfolio</div>
+          <h3>Legal drafting portfolio</h3>
+          <p>10+ documents across family law, property, civil recovery, and criminal procedure in Pakistan and India. Drafted for actual cases — sale deeds, rent agreements, divorce petitions, recovery plaints, legal notices.</p>
+          <div class="proj-foot">
+            <span class="proj-tag"><i data-lucide="globe" width="12" height="12"></i>Pakistan · India</span>
+            <a href="#contact" class="proj-link">Request samples <i data-lucide="arrow-right" width="12" height="12"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mem-row">
-      <span class="mem-label">Professional memberships</span>
-      <div class="mem-pills">
-        <span class="mem-pill">American Bar Association</span>
-        <span class="mem-pill">American Psychological Association</span>
+  </section>
+
+  <!-- ══ WRITING ══ -->
+  <section id="writing" aria-labelledby="writing-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">05</span>
+        <h2 class="sec-title" id="writing-heading">Legal <em>writing</em></h2>
+      </div>
+      <div class="writing-list">
+        <div class="writing-item reveal-up">
+          <div>
+            <div class="writing-meta">
+              <span>Jurisprudence</span>
+              <span class="writing-meta-date">July 14, 2025</span>
+            </div>
+            <h3>Unpacking Justice: PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h3>
+            <p>What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts — the holding, and the assumptions underneath it.</p>
+          </div>
+          <button class="writing-cta" onclick="openModal()" aria-haspopup="dialog">
+            <i data-lucide="book-open" width="14" height="14"></i>
+            Read article
+          </button>
+        </div>
+        <div class="writing-item reveal-up">
+          <div>
+            <div class="writing-meta">
+              <span>AI Governance</span>
+              <span class="writing-meta-date">More on Substack</span>
+            </div>
+            <h3>The Digital Gavel</h3>
+            <p>Regular writing on AI governance, legal technology, and regulatory developments — published on Substack and read by practitioners across three continents.</p>
+          </div>
+          <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="writing-cta">
+            <i data-lucide="external-link" width="14" height="14"></i>
+            Visit Substack
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ══ ARTICLE MODAL ══ -->
+  <div class="modal-overlay" id="article-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-header-label">
+          <i data-lucide="book-open" width="14" height="14"></i>
+          Legal writing · Jurisprudence
+        </span>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close article">
+          <i data-lucide="x" width="14" height="14"></i>
+          Close
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="essay-title" id="modal-title">Unpacking Justice: A Deep Dive into PLD 1966 Supreme Court 708 and the Pursuit of Truth in Criminal Trials</h2>
+        <p class="essay-subtitle">What a sixty-year-old Supreme Court decision still reveals about how evidence is weighed in Pakistan's criminal courts.</p>
+        <div class="essay-meta-row">
+          <span>By Hamid Naeem</span>
+          <span style="color:var(--ink-ghost)">·</span>
+          <span style="color:var(--ink-ghost)">Veritas and Vows</span>
+          <span style="color:var(--ink-ghost)">·</span>
+          <span style="color:var(--ink-ghost)">July 14, 2025</span>
+        </div>
+        <div class="essay-content">
+          <p class="drop">At <em>Veritas and Vows</em>, we're committed to shedding light on the intricacies of the law, ensuring clarity and empowering understanding. Today, we delve into a landmark decision from the Supreme Court of Pakistan, <strong>PLD 1966 Supreme Court 708</strong>, a judgment that grappled with fundamental procedural challenges in criminal trials and offers enduring lessons on the pursuit of truth and fair legal processes.</p>
+          <p>This case, stemming from Criminal Appeals Nos. 8 and 9 of 1965, brought before the Supreme Court by Nur Elahi, addressed a critical question: how should courts handle murder cases where two entirely separate versions of the incident, implicating different sets of accused, are presented through a private complaint and a police challan (report)?</p>
+          <h3>The Core Dilemma: Conflicting Narratives and Procedural Sanction</h3>
+          <p>The High Court of West Pakistan had initially laid down a "special procedure" for these trials, recommending that common witnesses be examined only once and their statements be read as evidence in the other case. This approach, while seemingly efficient, became the central point of contention for the Supreme Court. The core question on appeal was whether this "special procedure" had the "sanction of law".</p>
+          <h3>Key Holdings and Their Significance</h3>
+          <h4>1. Rejection of Inter-Case Evidence Reading</h4>
+          <p>The Supreme Court unequivocally held that directing witnesses to be examined only once and their statements read out as evidence in the other case is not supportable in law. Justice S. A. Rahman, speaking for the majority, emphasized that reading evidence recorded in another case as evidence in the case at hand is strictly debarred. Violation of this procedural boundary completely invalidates the legal finality of the trial.</p>
+          <blockquote>
+            <p><strong>The Supreme Court's Exact Rule:</strong><br>"Every criminal proceeding is to be decided on the material on record of that proceeding and neither record of another case nor any finding recorded there-under should affect the decision and if the Court takes into consideration evidence recorded in other case, a finding recorded there in judgment is vitiated."</p>
+            <cite>— PLD 1966 Supreme Court 708, p. 710</cite>
+          </blockquote>
+          <h4>2. Separate Trials, Sequential Approach</h4>
+          <p>The Court affirmed the High Court's view that a joint trial of two sets of accused, where they are not involved in the same transaction, contravenes <strong>Section 239 of the Code of Criminal Procedure</strong>. To navigate the complexities of two distinct versions, the majority proposed a strict sequential procedure:</p>
+          <div class="steps-box">
+            <h5>The Sequential Protocol:</h5>
+            <ol>
+              <li>The complaint case should be taken up first for trial.</li>
+              <li>During the complaint case, the trial judge may call witnesses mentioned in the police challan as Court witnesses under <strong>Section 540-A</strong> of the Criminal Procedure Code, allowing cross-examination by both parties.</li>
+              <li>If the first trial results in a conviction, the Public Prosecutor would then consider withdrawing the police challan case under <strong>Section 494</strong> of the Criminal Procedure Code.</li>
+              <li>If the first case results in an acquittal, the second trial (police challan) would proceed to its conclusion.</li>
+            </ol>
+          </div>
+          <h4>3. Dissenting View on "Consolidation" and Public Prosecutor's Role</h4>
+          <p>Justice B. Z. Kaikaus, in his dissenting opinion, highlighted the difficulties with the majority's proposed procedure. He argued that allowing a decision in one case to influence the handling of another, even implicitly, risks disregarding fundamental principles of justice.</p>
+          <hr>
+          <h3>Why This Matters Today</h3>
+          <ul>
+            <li><strong>Safeguarding Fair Trial:</strong> The judgment powerfully reaffirms that each case must stand on its own evidence, protecting against prejudice that could arise from findings in separate proceedings.</li>
+            <li><strong>Navigating Parallel Proceedings:</strong> In a legal landscape where multiple complaints or versions of an incident can arise, this judgment provides a framework for managing such complexities in criminal matters.</li>
+            <li><strong>The Role of the Public Prosecutor:</strong> The discussion underscores the delicate balance between the prosecutor's duty to the State and their responsibility to ensure justice is served.</li>
+          </ul>
+          <hr>
+          <p><em>Stay tuned for more insights from <strong>Veritas and Vows</strong> as we continue to explore the depths of legal principles and their impact on our lives.</em></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span>Also published on LinkedIn</span>
+        <a href="https://www.linkedin.com/pulse/unpacking-justice-deep-dive-pld-1966-supreme-court-708-d6jxf/" target="_blank" rel="noopener noreferrer">
+          Read on LinkedIn <i data-lucide="arrow-up-right" width="12" height="12"></i>
+        </a>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ══ CONTACT ══ -->
-<section id="contact">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-n">07</span>
-      <h2 class="sec-title">Get in <em>touch</em></h2>
-    </div>
-    <div class="contact-layout">
-      <div>
-        <p class="contact-note">Working on something that needs AI governance analysis, legal research, or cross-jurisdictional regulatory work? I'm available for consulting, research collaborations, and policy projects. I reply within 24–48 hours.</p>
-        <div class="ct-row"><div class="ct-label">Email</div><div class="ct-val"><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></div></div>
-        <div class="ct-row"><div class="ct-label">Phone</div><div class="ct-val"><a href="tel:+923094498176">+92 309 4498176</a></div></div>
-        <div class="ct-row"><div class="ct-label">LinkedIn</div><div class="ct-val"><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">hamidnaeemadvocate</a></div></div>
-        <div class="ct-row"><div class="ct-label">Substack</div><div class="ct-val"><a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">digitalgavel.substack.com</a></div></div>
-        <div class="ct-row"><div class="ct-label">Location</div><div class="ct-val">Islamabad, Pakistan</div></div>
+  <!-- ══ CREDENTIALS ══ -->
+  <section id="certifications" aria-labelledby="cred-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">06</span>
+        <h2 class="sec-title" id="cred-heading">Creden<em>tials</em></h2>
       </div>
-      <div>
-        <p class="cf-note">Fill this in and hit send.</p>
-        <form class="cf" id="contact-form" action="https://formspree.io/f/xbdqypjn" method="POST">
-          <div class="cf-row"><label for="c-name">Name</label><input type="text" id="c-name" name="name" autocomplete="name" placeholder="Your full name" required></div>
-          <div class="cf-row"><label for="c-email">Email</label><input type="email" id="c-email" name="email" autocomplete="email" placeholder="you@example.com" required></div>
-          <div class="cf-row"><label for="c-subject">Subject</label><input type="text" id="c-subject" name="subject" placeholder="What's this about?" required></div>
-          <div class="cf-row"><label for="c-msg">Message</label><textarea id="c-msg" name="message" placeholder="Your message..." required></textarea></div>
-          <button type="submit" class="btn-send">Send message →</button>
-          <div class="cf-success" id="cf-success">Message sent. I'll be in touch within 48 hours.</div>
-        </form>
+      <div class="cred-grid">
+        <div class="cred-card reveal-up">
+          <div class="cred-icon"><i data-lucide="database" width="20" height="20"></i></div>
+          <h4>Google Data Analytics Professional Certificate</h4>
+          <p>Data analysis, visualization, reporting — Google</p>
+        </div>
+        <div class="cred-card reveal-up">
+          <div class="cred-icon"><i data-lucide="cpu" width="20" height="20"></i></div>
+          <h4>Google Prompting Essentials</h4>
+          <p>AI prompting and language model interaction — Google</p>
+        </div>
+        <div class="cred-card reveal-up">
+          <div class="cred-icon"><i data-lucide="trending-up" width="20" height="20"></i></div>
+          <h4>McKinsey Forward Program</h4>
+          <p>Strategic thinking and leadership — McKinsey & Company</p>
+        </div>
+        <div class="cred-card reveal-up">
+          <div class="cred-icon"><i data-lucide="code-2" width="20" height="20"></i></div>
+          <h4>C++ Essentials</h4>
+          <p>Programming fundamentals and computational logic</p>
+        </div>
+        <div class="cred-card reveal-up">
+          <div class="cred-icon"><i data-lucide="clipboard-list" width="20" height="20"></i></div>
+          <h4>Project Management: The Basics for Success</h4>
+          <p>Planning, execution, and team coordination — UC Irvine / Coursera</p>
+        </div>
+        <div class="cred-card reveal-up">
+          <div class="cred-icon"><i data-lucide="star" width="20" height="20"></i></div>
+          <h4>Aspire Leaders Program</h4>
+          <p>Global leadership development · Oct – Dec 2025</p>
+        </div>
+      </div>
+      <div class="mem-row">
+        <span class="mem-label">Professional memberships</span>
+        <div class="mem-pills">
+          <span class="mem-pill">American Bar Association</span>
+          <span class="mem-pill">American Psychological Association</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
-  <div class="footer-links">
-    <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
-    <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
-  </div>
-</footer>
+  <!-- ══ CONTACT ══ -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-n" aria-hidden="true">07</span>
+        <h2 class="sec-title" id="contact-heading">Get in <em>touch</em></h2>
+      </div>
+      <div class="contact-layout">
+        <div>
+          <p class="contact-note">Working on something that needs AI governance analysis, legal research, or cross-jurisdictional regulatory work? I'm available for consulting, research collaborations, and policy projects. I reply within 24–48 hours.</p>
+          <div class="ct-row">
+            <div class="ct-label"><i data-lucide="mail" width="13" height="13"></i>Email</div>
+            <div class="ct-val"><a href="mailto:hamidnaeem2223ab@gmail.com">hamidnaeem2223ab@gmail.com</a></div>
+          </div>
+          <div class="ct-row">
+            <div class="ct-label"><i data-lucide="phone" width="13" height="13"></i>Phone</div>
+            <div class="ct-val"><a href="tel:+923094498176">+92 309 4498176</a></div>
+          </div>
+          <div class="ct-row">
+            <div class="ct-label"><i data-lucide="linkedin" width="13" height="13"></i>LinkedIn</div>
+            <div class="ct-val"><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">hamidnaeemadvocate</a></div>
+          </div>
+          <div class="ct-row">
+            <div class="ct-label"><i data-lucide="rss" width="13" height="13"></i>Substack</div>
+            <div class="ct-val"><a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">digitalgavel.substack.com</a></div>
+          </div>
+          <div class="ct-row">
+            <div class="ct-label"><i data-lucide="map-pin" width="13" height="13"></i>Location</div>
+            <div class="ct-val">Islamabad, Pakistan</div>
+          </div>
+        </div>
+        <div>
+          <p class="cf-note">Fill this in and hit send.</p>
+          <form class="cf" id="contact-form" action="https://formspree.io/f/xbdqypjn" method="POST" novalidate>
+            <div class="cf-row">
+              <label for="c-name">Name</label>
+              <input type="text" id="c-name" name="name" autocomplete="name" placeholder="Your full name" required aria-required="true">
+            </div>
+            <div class="cf-row">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" name="email" autocomplete="email" placeholder="you@example.com" required aria-required="true">
+            </div>
+            <div class="cf-row">
+              <label for="c-subject">Subject</label>
+              <input type="text" id="c-subject" name="subject" placeholder="What's this about?" required aria-required="true">
+            </div>
+            <div class="cf-row">
+              <label for="c-msg">Message</label>
+              <textarea id="c-msg" name="message" placeholder="Your message..." required aria-required="true"></textarea>
+            </div>
+            <button type="submit" class="btn-send">
+              <i data-lucide="send" width="15" height="15"></i>
+              Send message
+            </button>
+            <div class="cf-success" id="cf-success" role="status" aria-live="polite">
+              <i data-lucide="check-circle" width="14" height="14" style="color:#6dbf8a"></i>
+              Message sent. I'll be in touch within 48 hours.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-  /* ── Smooth scroll ── */
+  <footer>
+    <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="linkedin" width="14" height="14"></i>LinkedIn
+      </a>
+      <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="rss" width="14" height="14"></i>Substack
+      </a>
+      <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer">
+        <i data-lucide="github" width="14" height="14"></i>GitHub
+      </a>
+      <a href="mailto:hamidnaeem2223ab@gmail.com">
+        <i data-lucide="mail" width="14" height="14"></i>Email
+      </a>
+    </div>
+  </footer>
+
+  <script>
+  // ── Init Lucide icons ──
+  lucide.createIcons();
+
+  // ── Custom cursor ──
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  // ── Scroll progress ──
+  const prog = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (window.scrollY / docH * 100) + '%';
+  }, { passive: true });
+
+  // ── Nav scroll state + active section ──
+  const navEl = document.getElementById('main-nav');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = document.querySelectorAll('section[id]');
+
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 40);
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+
+  // ── Mobile nav ──
+  function openMobNav(btn) {
+    document.getElementById('mobile-nav').classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobNav() {
+    document.getElementById('mobile-nav').classList.remove('open');
+    const btn = document.querySelector('.nav-burger');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  // ── Smooth scroll ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const href = a.getAttribute('href');
@@ -1317,70 +1447,262 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   });
 
-  /* ── Article modal ── */
+  // ── Modal ──
   const modal = document.getElementById('article-modal');
-
   function openModal() {
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
     modal.scrollTop = 0;
-    // Focus the close button for accessibility
-    modal.querySelector('.modal-close').focus();
+    setTimeout(() => modal.querySelector('.modal-close').focus(), 50);
   }
-
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
   }
-
-  // Close on overlay click (outside modal-box)
-  modal.addEventListener('click', e => {
-    if (e.target === modal) closeModal();
-  });
-
-  // Close on Escape
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
 
-  /* ── Contact form ── */
+  // ── Contact form ──
   const form = document.getElementById('contact-form');
   const successMsg = document.getElementById('cf-success');
   if (form) {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const btn = form.querySelector('.btn-send');
-      btn.textContent = 'Sending…';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg> Sending…';
       btn.disabled = true;
       try {
         const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }
         });
         if (res.ok) {
-          form.reset();
-          btn.style.display = 'none';
-          successMsg.style.display = 'block';
+          form.reset(); btn.style.display = 'none'; successMsg.style.display = 'flex';
+          lucide.createIcons();
         } else {
-          btn.textContent = 'Failed — try emailing directly';
-          btn.disabled = false;
+          btn.innerHTML = 'Failed — try emailing directly'; btn.disabled = false;
         }
       } catch {
-        btn.textContent = 'Failed — try emailing directly';
-        btn.disabled = false;
+        btn.innerHTML = 'Failed — try emailing directly'; btn.disabled = false;
       }
     });
   }
 
-  /* ── Scroll reveal ── */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  // ── Three.js hero particle field ──
+  (function initHero3D() {
+    if (!window.THREE) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.getElementById('hero-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
+    camera.position.z = 28;
+
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Nodes (legal/data metaphor: documents & connections)
+    const nodeCount = 120;
+    const nodeGeo = new THREE.BufferGeometry();
+    const positions = new Float32Array(nodeCount * 3);
+    const colors = new Float32Array(nodeCount * 3);
+    const nodeData = [];
+
+    const palette = [
+      [0.545, 0.125, 0.125], // dark red
+      [0.88,  0.87,  0.85],  // cream
+      [0.37,  0.33,  0.27],  // ink mid
+      [0.61,  0.57,  0.50],  // ink soft
+    ];
+
+    for (let i = 0; i < nodeCount; i++) {
+      const x = (Math.random() - 0.5) * 60;
+      const y = (Math.random() - 0.5) * 40;
+      const z = (Math.random() - 0.5) * 25;
+      positions[i*3]   = x;
+      positions[i*3+1] = y;
+      positions[i*3+2] = z;
+      nodeData.push({ x, y, z, vx: (Math.random()-.5)*0.008, vy: (Math.random()-.5)*0.006, vz: (Math.random()-.5)*0.004 });
+      const c = palette[Math.floor(Math.random() * palette.length)];
+      colors[i*3] = c[0]; colors[i*3+1] = c[1]; colors[i*3+2] = c[2];
+    }
+    nodeGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    nodeGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    const nodeMat = new THREE.PointsMaterial({ size: 0.22, vertexColors: true, transparent: true, opacity: 0.7, sizeAttenuation: true });
+    const nodesMesh = new THREE.Points(nodeGeo, nodeMat);
+    scene.add(nodesMesh);
+
+    // Lines between nearby nodes
+    const lineMat = new THREE.LineBasicMaterial({ color: 0xccc8c0, transparent: true, opacity: 0.12 });
+    const lineGroup = new THREE.Group();
+    scene.add(lineGroup);
+
+    function buildLines() {
+      lineGroup.clear();
+      const pos = nodeGeo.attributes.position.array;
+      for (let i = 0; i < nodeCount; i++) {
+        for (let j = i + 1; j < nodeCount; j++) {
+          const dx = pos[i*3] - pos[j*3];
+          const dy = pos[i*3+1] - pos[j*3+1];
+          const dz = pos[i*3+2] - pos[j*3+2];
+          const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+          if (dist < 9) {
+            const geo = new THREE.BufferGeometry().setFromPoints([
+              new THREE.Vector3(pos[i*3], pos[i*3+1], pos[i*3+2]),
+              new THREE.Vector3(pos[j*3], pos[j*3+1], pos[j*3+2])
+            ]);
+            const mat = lineMat.clone();
+            mat.opacity = (1 - dist / 9) * 0.15;
+            lineGroup.add(new THREE.Line(geo, mat));
+          }
+        }
+      }
+    }
+    buildLines();
+    let lineTimer = 0;
+
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', e => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
     });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
+
+    let frame = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      frame++;
+
+      // Update node positions
+      const pos = nodeGeo.attributes.position.array;
+      for (let i = 0; i < nodeCount; i++) {
+        const d = nodeData[i];
+        d.x += d.vx; d.y += d.vy; d.z += d.vz;
+        if (d.x > 30 || d.x < -30) d.vx *= -1;
+        if (d.y > 20 || d.y < -20) d.vy *= -1;
+        if (d.z > 12 || d.z < -12) d.vz *= -1;
+        pos[i*3] = d.x; pos[i*3+1] = d.y; pos[i*3+2] = d.z;
+      }
+      nodeGeo.attributes.position.needsUpdate = true;
+
+      // Rebuild lines every 90 frames
+      lineTimer++;
+      if (lineTimer > 90) { buildLines(); lineTimer = 0; }
+
+      // Camera gentle parallax
+      camera.position.x += (mouseX * 3 - camera.position.x) * 0.025;
+      camera.position.y += (mouseY * 2 - camera.position.y) * 0.025;
+      camera.lookAt(0, 0, 0);
+
+      // Slow rotation
+      scene.rotation.y += 0.0008;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
+
+  // ── GSAP scroll animations ──
+  (function initGSAP() {
+    if (!window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal-up').forEach(el => el.style.opacity = '1');
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .to('#hero-label',  { opacity: 1, y: 0, duration: 0.7, delay: 0.1 })
+      .to('#hero-name',   { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+      .to('#hero-desc',   { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+      .to('#hero-stats',  { opacity: 1, y: 0, duration: 0.6 }, '-=0.35')
+      .to('#hero-btns',   { opacity: 1, y: 0, duration: 0.5 }, '-=0.3');
+
+    // Animate counters
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const suffix = target > 10 ? '+' : '';
+      gsap.to({ val: 0 }, {
+        val: target, duration: 1.8, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+        onUpdate: function() { el.textContent = Math.floor(this.targets()[0].val) + suffix; },
+        onComplete: function() { el.textContent = target + suffix; }
+      });
+    });
+
+    // Section reveal
+    gsap.utils.toArray('.reveal-up').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          delay: (i % 3) * 0.08
+        }
+      );
+    });
+
+    // Experience timeline line draw
+    const timelineLine = document.querySelector('.exp-timeline::before');
+    if (timelineLine) {
+      // just animate each row in stagger
+    }
+
+    // Section headings parallax
+    gsap.utils.toArray('.sec-title').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, x: -15 },
+        { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+        }
+      );
+    });
+  })();
+
+  // ── 3D card tilt on project cards ──
+  document.querySelectorAll('.proj-card, .cred-card').forEach(card => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(600px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(600px) rotateY(0) rotateX(0) translateZ(0)';
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+    });
+    card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
+  });
+
+  // ── Magnetic buttons ──
+  document.querySelectorAll('.btn-solid, .btn-ghost, .btn-send').forEach(btn => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width/2) * 0.18;
+      const y = (e.clientY - rect.top - rect.height/2) * 0.18;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.25s, border-color 0.25s, color 0.25s';
+    });
+    btn.addEventListener('mouseenter', () => { btn.style.transition = 'none'; });
+  });
+
+  // ── Re-init icons after dynamic content ──
+  lucide.createIcons();
+  </script>
 </body>
 </html>
-
