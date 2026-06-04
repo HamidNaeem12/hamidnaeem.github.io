@@ -3,1490 +3,1398 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Limitation Calculator · Limitation Act 1908 · Pakistan — Hamid Naeem</title>
 <meta name="description" content="Filing deadlines under the Limitation Act 1908 (Pakistan) — First Schedule, corrected and complete. Built for Pakistani practitioners.">
+<title>Limitation Calculator · Limitation Act 1908 · Pakistan — Hamid Naeem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root {
+    --ink: #0f0e0b;
+    --paper: #f5f2eb;
+    --cream: #ede9df;
+    --rule: #c8c0ae;
+    --accent: #1a1a2e;
+    --red: #8b1a1a;
+    --gold: #a0854a;
+    --mid: #5a5548;
+    --light: #9a9286;
+    --serif: 'Playfair Display', Georgia, serif;
+    --mono: 'DM Mono', 'Courier New', monospace;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
 
-:root{
-  /* Core palette */
-  --bg:#080706;
-  --bg-2:#0e0c0a;
-  --bg-3:#141210;
-  --surface:#1a1714;
-  --surface-2:#211e1a;
-  --surface-3:#2a2621;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* Typography */
-  --paper:#f0ebe3;
-  --paper-2:#d8d1c5;
-  --paper-3:#9a9188;
-  --paper-4:#5e5a54;
+  html { font-size: 16px; scroll-behavior: smooth; }
 
-  /* Gold system */
-  --gold:#c8a84b;
-  --gold-2:#a88932;
-  --gold-3:#7a6422;
-  --gold-dim:rgba(200,168,75,.12);
-  --gold-border:rgba(200,168,75,.2);
-  --gold-border-strong:rgba(200,168,75,.45);
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
 
-  /* Semantic */
-  --green:#3d9970;
-  --green-bg:rgba(61,153,112,.08);
-  --green-border:rgba(61,153,112,.25);
-  --amber:#c4701a;
-  --amber-bg:rgba(196,112,26,.08);
-  --amber-border:rgba(196,112,26,.25);
-  --red:#c0392b;
-  --red-bg:rgba(192,57,43,.08);
-  --red-border:rgba(192,57,43,.25);
-  --blue:#2980b9;
-  --blue-bg:rgba(41,128,185,.08);
-  --blue-border:rgba(41,128,185,.25);
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 2px solid var(--gold);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
 
-  /* Typography */
-  --serif:'EB Garamond',Georgia,serif;
-  --mono:'JetBrains Mono',monospace;
-  --display:'Syne',sans-serif;
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--paper);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
 
-  /* Layout */
-  --nav-h:60px;
-  --r:2px;
-  --r-lg:4px;
-}
+  .nav-brand span {
+    color: var(--gold);
+  }
 
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:var(--display);
-  background:var(--bg);
-  color:var(--paper);
-  font-weight:400;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-  min-height:100vh;
-}
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+  }
 
-/* grain */
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  opacity:.7;
-}
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--rule);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0 1rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #2a2a2a;
+    transition: color 0.15s, background 0.15s;
+  }
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  height:var(--nav-h);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2.5rem;
-  background:rgba(8,7,6,.9);
-  backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--gold-border);
-}
-.nav-logo{
-  font-family:var(--serif);font-size:1.05rem;font-style:italic;
-  color:var(--paper);text-decoration:none;
-  opacity:.8;transition:opacity .2s;letter-spacing:.01em;
-}
-.nav-logo:hover{opacity:1}
-.nav-links{display:flex;list-style:none;gap:2.5rem}
-.nav-links a{
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--paper-3);text-decoration:none;transition:color .2s;
-}
-.nav-links a:hover,.nav-links a.active{color:var(--gold)}
-.nav-tag{
-  font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--paper-4);padding:.25rem .6rem;
-  border:1px solid rgba(200,168,75,.15);border-radius:99px;
-}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.burger span{display:block;width:20px;height:1px;background:var(--paper-3);transition:all .3s}
-.mob-nav{
-  display:none;position:fixed;inset:0;background:var(--bg);z-index:600;
-  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
-}
-.mob-nav.open{display:flex}
-.mob-nav a{font-family:var(--serif);font-size:2.2rem;font-style:italic;color:var(--paper);text-decoration:none;transition:color .2s}
-.mob-nav a:hover{color:var(--gold)}
-.mob-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--paper-3);font-size:1.2rem;cursor:pointer;font-family:var(--mono)}
+  .nav-links a:first-child { border-left: 1px solid #2a2a2a; }
 
-/* ── HERO ── */
-.hero{
-  position:relative;padding:calc(var(--nav-h) + 4rem) 2.5rem 4.5rem;
-  border-bottom:1px solid rgba(200,168,75,.12);overflow:hidden;
-}
-.hero-glow{
-  position:absolute;pointer-events:none;
-  top:-20%;left:-10%;width:60%;height:120%;
-  background:radial-gradient(ellipse at 20% 50%, rgba(200,168,75,.07) 0%, transparent 65%);
-}
-.hero-glow-2{
-  position:absolute;pointer-events:none;
-  top:0;right:-5%;width:40%;height:100%;
-  background:radial-gradient(ellipse at 80% 30%, rgba(200,168,75,.04) 0%, transparent 60%);
-}
-.hero-inner{max-width:860px;position:relative;z-index:1}
-.hero-kicker{
-  display:inline-flex;align-items:center;gap:.6rem;
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold-2);margin-bottom:1.75rem;
-  opacity:0;animation:rise .5s .05s forwards;
-}
-.hero-kicker::before{content:'';display:block;width:20px;height:1px;background:var(--gold-2)}
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--paper);
+    background: rgba(160,133,74,0.12);
+  }
 
-.hero-title{
-  font-family:var(--display);
-  font-size:clamp(3rem,7vw,5.5rem);
-  font-weight:800;line-height:.95;letter-spacing:-.03em;
-  color:var(--paper);margin-bottom:1.75rem;
-  opacity:0;animation:rise .6s .15s forwards;
-}
-.hero-title .accent{
-  color:var(--gold);font-weight:400;font-style:italic;
-  font-family:var(--serif);font-size:clamp(3.5rem,8vw,6.5rem);
-  display:block;letter-spacing:-.01em;
-}
+  .nav-links a.active { color: var(--gold); }
 
-.hero-sub{
-  font-family:var(--display);font-size:1rem;color:var(--paper-3);
-  max-width:580px;line-height:1.75;font-weight:400;
-  opacity:0;animation:rise .5s .3s forwards;
-}
-.hero-stats{
-  display:flex;gap:0;margin-top:3rem;
-  border:1px solid var(--gold-border);
-  border-radius:var(--r-lg);overflow:hidden;
-  opacity:0;animation:rise .5s .42s forwards;
-}
-.hstat{
-  flex:1;padding:1.25rem 1.5rem;
-  border-right:1px solid var(--gold-border);
-  position:relative;
-}
-.hstat:last-child{border-right:none}
-.hstat::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,var(--gold),transparent);
-  opacity:0;transition:opacity .3s;
-}
-.hstat:hover::after{opacity:1}
-.hstat-n{font-family:var(--serif);font-size:1.7rem;color:var(--gold);line-height:1;font-style:italic}
-.hstat-l{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-4);margin-top:.35rem}
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    padding: 4rem 2rem 3rem;
+    border-bottom: 4px double var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
 
-/* ── LAYOUT ── */
-.main{padding:3.5rem 2.5rem 5rem;position:relative;z-index:1}
-.container{max-width:1160px;margin:0 auto}
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 39px, rgba(160,133,74,0.06) 39px, rgba(160,133,74,0.06) 40px
+    );
+    pointer-events: none;
+  }
 
-/* ── DISCLAIMER ── */
-.notice{
-  display:flex;gap:.85rem;align-items:flex-start;
-  padding:1rem 1.25rem;
-  background:var(--amber-bg);
-  border:1px solid var(--amber-border);
-  border-radius:var(--r-lg);
-  margin-bottom:2.5rem;
-}
-.notice-icon{
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.05em;
-  color:var(--amber);white-space:nowrap;padding-top:.1rem;flex-shrink:0;
-}
-.notice p{
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.03em;
-  color:rgba(220,190,140,.65);line-height:1.75;
-}
+  .masthead-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
 
-/* ── CALC WRAPPER ── */
-.calc-shell{
-  display:grid;
-  grid-template-columns:1fr 420px;
-  gap:2.5rem;align-items:start;
-}
+  .masthead-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
-/* FORM COLUMN */
-.form-col{}
+  .masthead-tag::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
 
-/* section label */
-.sec-label{
-  font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold-2);margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--gold-border)}
+  .masthead h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
 
-/* field */
-.field{margin-bottom:1.6rem}
-.field-lbl{
-  display:block;
-  font-family:var(--mono);font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--paper-4);margin-bottom:.5rem;
-}
-.field-lbl abbr{text-decoration:none;cursor:help;color:var(--gold-2);margin-left:.3rem}
-.field-hint{
-  font-family:var(--mono);font-size:.65rem;letter-spacing:.02em;
-  color:rgba(150,140,120,.55);margin-top:.5rem;line-height:1.65;
-}
-.field-hint strong{color:var(--gold-2);font-weight:400}
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
 
-/* division pill tabs */
-.div-tabs{display:flex;gap:.5rem;margin-bottom:1.6rem}
-.div-tab{
-  flex:1;padding:.65rem .5rem;
-  background:var(--surface);
-  border:1px solid var(--surface-3);
-  color:var(--paper-4);
-  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;transition:all .2s;border-radius:var(--r-lg);
-  display:flex;flex-direction:column;align-items:center;gap:.2rem;
-}
-.div-tab:hover{border-color:var(--gold-border);color:var(--paper-2)}
-.div-tab.active{
-  border-color:var(--gold-border-strong);
-  background:var(--gold-dim);
-  color:var(--gold);
-}
-.div-tab-icon{font-size:.95rem;line-height:1}
-.div-tab-count{font-size:.48rem;color:inherit;opacity:.6}
+  .masthead-sub {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--rule);
+    max-width: 600px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
 
-/* inputs */
-select,
-input[type="date"],
-input[type="number"],
-input[type="text"]{
-  width:100%;
-  background:var(--surface);
-  border:1px solid var(--surface-3);
-  border-bottom:1px solid #2e2b26;
-  padding:.8rem 1rem;
-  font-family:var(--display);font-size:.9rem;font-weight:400;
-  color:var(--paper);outline:none;
-  -webkit-appearance:none;appearance:none;
-  cursor:pointer;
-  transition:border-color .2s,box-shadow .2s,background .2s;
-  border-radius:var(--r);
-}
-.select-wrap{position:relative}
-.select-wrap select{padding-right:2.5rem}
-.select-wrap::after{
-  content:'▾';position:absolute;right:.9rem;top:50%;transform:translateY(-50%);
-  color:var(--paper-4);pointer-events:none;font-size:.7rem;
-}
-select:focus,input:focus{
-  border-color:var(--gold-border-strong);
-  box-shadow:0 0 0 3px var(--gold-dim);
-  background:var(--surface-2);
-  outline:none;
-}
-select option{background:var(--bg-2);color:var(--paper)}
+  .masthead-stats {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 1.5rem;
+  }
 
-input[type="number"]{
-  font-family:var(--mono);
-}
+  .stat {
+    padding: 0 2rem 0 0;
+    margin-right: 2rem;
+    border-right: 1px solid #2a2a2a;
+  }
 
-/* search inside select */
-.article-search{margin-bottom:.4rem}
-.article-search input{
-  border-radius:var(--r) var(--r) 0 0;
-  border-bottom:none;
-}
+  .stat:last-child { border-right: none; }
 
-/* Row: two inputs */
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--paper);
+    display: block;
+    line-height: 1;
+  }
 
-/* date presets */
-.date-presets{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
-.preset-btn{
-  padding:.3rem .7rem;
-  background:var(--surface);
-  border:1px solid var(--surface-3);
-  color:var(--paper-4);
-  font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;
-  cursor:pointer;transition:all .15s;border-radius:99px;
-}
-.preset-btn:hover{border-color:var(--gold-border);color:var(--gold)}
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-top: 0.3rem;
+    display: block;
+  }
 
-/* toggle row */
-.toggle-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 1rem;
-  background:var(--surface);
-  border:1px solid var(--surface-3);
-  border-radius:var(--r);margin-bottom:.5rem;
-  cursor:pointer;transition:border-color .2s;
-}
-.toggle-row:hover{border-color:var(--gold-border)}
-.toggle-row-label{
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-3);
-}
-.toggle-row-label small{display:block;font-size:.52rem;color:var(--paper-4);margin-top:.15rem;letter-spacing:.04em;text-transform:none}
-.toggle{
-  width:36px;height:20px;border-radius:99px;
-  background:var(--surface-3);border:1px solid var(--surface-2);
-  position:relative;transition:background .25s;flex-shrink:0;
-}
-.toggle.on{background:var(--gold-2)}
-.toggle::after{
-  content:'';position:absolute;top:2px;left:2px;
-  width:14px;height:14px;border-radius:50%;background:var(--paper-4);
-  transition:transform .25s,background .25s;
-}
-.toggle.on::after{transform:translateX(16px);background:var(--bg)}
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    background: #1a0a0a;
+    border-left: 3px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    padding: 1rem 2rem;
+  }
 
-/* exclusion details */
-.extra-fields{
-  overflow:hidden;max-height:0;
-  transition:max-height .35s ease,opacity .25s;
-  opacity:0;
-}
-.extra-fields.open{max-height:500px;opacity:1}
+  .disclaimer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 
-/* calculate button */
-.calc-btn{
-  width:100%;padding:1rem 1.5rem;
-  background:var(--gold);color:var(--bg);
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  border:none;cursor:pointer;border-radius:var(--r);
-  transition:background .2s,transform .1s,box-shadow .2s;
-  font-weight:500;margin-top:.75rem;
-  position:relative;overflow:hidden;
-}
-.calc-btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,transparent 60%);
-  opacity:0;transition:opacity .2s;
-}
-.calc-btn:hover{background:#d4b350;box-shadow:0 4px 24px rgba(200,168,75,.3)}
-.calc-btn:hover::before{opacity:1}
-.calc-btn:active{transform:scale(.99)}
+  .disclaimer-icon {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    margin-top: 0.1rem;
+    font-weight: 500;
+  }
 
-/* clear btn */
-.clear-btn{
-  width:100%;padding:.65rem;
-  background:transparent;
-  border:1px solid var(--surface-3);
-  color:var(--paper-4);
-  font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
-  cursor:pointer;border-radius:var(--r);
-  transition:all .2s;margin-top:.5rem;
-}
-.clear-btn:hover{border-color:var(--gold-border);color:var(--paper-3)}
+  .disclaimer p {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: #c8a0a0;
+    line-height: 1.6;
+  }
 
-/* ── RESULT PANEL ── */
-.result-col{position:sticky;top:calc(var(--nav-h) + 1.5rem)}
+  /* ── LAYOUT ── */
+  .page-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
 
-.result-panel{
-  border:1px solid var(--surface-3);
-  background:var(--surface);
-  border-radius:var(--r-lg);overflow:hidden;
-}
-.result-panel-head{
-  padding:1rem 1.25rem;
-  background:var(--surface-2);
-  border-bottom:1px solid var(--surface-3);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.result-panel-head-l{
-  font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2);
-}
-.result-badge{
-  font-family:var(--mono);font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--paper-4);
-  padding:.2rem .55rem;border:1px solid var(--surface-3);border-radius:99px;
-  transition:all .3s;
-}
-.result-body{padding:1.25rem}
+  /* ── CALCULATOR PANEL ── */
+  .calc-panel {
+    position: sticky;
+    top: 72px;
+  }
 
-.result-empty{
-  padding:2.5rem 0;text-align:center;
-  font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--paper-4);
-  line-height:1.7;
-}
+  .panel-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+  }
 
-/* result metrics grid */
-.r-metrics{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1px;background:var(--surface-3);
-  border:1px solid var(--surface-3);
-  margin-bottom:1rem;border-radius:var(--r);overflow:hidden;
-}
-.r-metric{
-  background:var(--bg-3);padding:.85rem 1rem;
-}
-.r-metric-l{
-  font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--paper-4);margin-bottom:.3rem;
-}
-.r-metric-v{
-  font-family:var(--serif);font-size:1.5rem;color:var(--paper);line-height:1;
-}
-.r-metric-v.sm{font-size:.83rem;line-height:1.35;font-family:var(--display);font-weight:400}
-.r-metric-u{font-family:var(--mono);font-size:.5rem;color:var(--paper-4);margin-top:.15rem}
+  .panel-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
 
-/* timeline bar */
-.timeline{margin-bottom:1rem}
-.timeline-labels{
-  display:flex;justify-content:space-between;
-  font-family:var(--mono);font-size:.52rem;letter-spacing:.07em;
-  color:var(--paper-4);margin-bottom:.35rem;
-}
-.timeline-track{
-  height:4px;background:var(--surface-3);
-  border-radius:99px;overflow:hidden;position:relative;
-}
-.timeline-fill{
-  height:100%;border-radius:99px;
-  transition:width .8s cubic-bezier(.4,0,.2,1),background .4s;
-}
-.timeline-today-marker{
-  position:absolute;top:-4px;height:12px;width:2px;
-  background:var(--paper-3);border-radius:99px;
-  transition:left .8s cubic-bezier(.4,0,.2,1);
-}
+  .panel-sub {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
 
-/* deadline box */
-.d-box{
-  padding:1.1rem 1.25rem;margin-bottom:1rem;
-  border-radius:var(--r);position:relative;
-}
-.d-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;border-radius:2px 0 0 2px}
-.d-box.safe{background:var(--green-bg);border:1px solid var(--green-border)}
-.d-box.safe::before{background:var(--green)}
-.d-box.warn{background:var(--amber-bg);border:1px solid var(--amber-border)}
-.d-box.warn::before{background:var(--amber)}
-.d-box.urgent{background:var(--red-bg);border:1px solid var(--red-border)}
-.d-box.urgent::before{background:var(--red)}
-.d-box.expired{background:var(--red-bg);border:1px solid var(--red-border)}
-.d-box.expired::before{background:var(--red)}
-.d-box.today{background:rgba(200,168,75,.08);border:1px solid var(--gold-border-strong)}
-.d-box.today::before{background:var(--gold)}
+  .field-group {
+    margin-bottom: 1.5rem;
+  }
 
-.d-status{font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.4rem}
-.safe .d-status{color:#5dc491}
-.warn .d-status{color:#e09847}
-.urgent .d-status, .expired .d-status{color:#e07070}
-.today .d-status{color:var(--gold)}
+  .field-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 
-.d-date{font-family:var(--serif);font-size:1.5rem;color:var(--paper);margin-bottom:.3rem;line-height:1.1}
-.d-day{font-family:var(--display);font-size:.78rem;color:var(--paper-3);margin-bottom:.5rem;font-weight:400}
-.d-msg{font-family:var(--display);font-size:.8rem;line-height:1.6;font-weight:400}
-.safe .d-msg{color:#7dd4a8}
-.warn .d-msg{color:#d4a060}
-.urgent .d-msg, .expired .d-msg{color:#d08080}
-.today .d-msg{color:var(--gold)}
+  .field-label span {
+    color: var(--light);
+    font-size: 0.62rem;
+    margin-left: 0.4rem;
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
-/* s.5 condonation badge */
-.cond-badge{
-  display:flex;align-items:flex-start;gap:.6rem;
-  padding:.85rem 1rem;margin-bottom:1rem;
-  background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--r);
-}
-.cond-badge-icon{font-family:var(--mono);font-size:.6rem;color:var(--blue);flex-shrink:0;padding-top:.05rem}
-.cond-badge-text{font-family:var(--mono);font-size:.62rem;letter-spacing:.02em;color:rgba(150,190,230,.7);line-height:1.65}
+  .seg-control {
+    display: flex;
+    border: 1.5px solid var(--ink);
+    overflow: hidden;
+  }
 
-/* source block */
-.r-source{
-  font-family:var(--mono);font-size:.58rem;letter-spacing:.03em;
-  color:var(--paper-4);line-height:1.65;
-  padding-top:.9rem;border-top:1px solid var(--surface-3);
-}
-.r-source strong{color:var(--paper-3);font-weight:400}
+  .seg-control button {
+    flex: 1;
+    padding: 0.6rem 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--mid);
+  }
 
-/* copy button */
-.copy-btn{
-  display:block;width:100%;
-  margin-top:.75rem;padding:.55rem;
-  background:transparent;
-  border:1px solid var(--surface-3);
-  color:var(--paper-4);
-  font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;
-  cursor:pointer;border-radius:var(--r);transition:all .2s;
-}
-.copy-btn:hover{border-color:var(--gold-border);color:var(--gold)}
-.copy-btn.copied{border-color:var(--green-border);color:var(--green)}
+  .seg-control button:last-child { border-right: none; }
 
-/* ── REFERENCE TABLE SECTION ── */
-.ref-sec{padding:0 2.5rem 5rem;position:relative;z-index:1}
-.ref-header{
-  display:flex;align-items:center;gap:1.25rem;
-  padding-bottom:1.25rem;
-  border-bottom:1px solid var(--gold-border);
-  margin-bottom:2rem;
-}
-.ref-header-num{
-  font-family:var(--mono);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold-2);
-}
-.ref-header h2{
-  font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--paper);letter-spacing:-.01em;
-}
-.ref-header h2 em{
-  font-family:var(--serif);font-style:italic;color:var(--gold);font-weight:400;
-}
+  .seg-control button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
 
-/* table filters */
-.table-controls{
-  display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;
-}
-.tbl-search{
-  flex:1;min-width:200px;
-  position:relative;
-}
-.tbl-search input{
-  padding:.65rem 1rem .65rem 2.2rem;font-size:.82rem;border-radius:var(--r);
-}
-.tbl-search-icon{
-  position:absolute;left:.75rem;top:50%;transform:translateY(-50%);
-  color:var(--paper-4);font-size:.8rem;pointer-events:none;
-}
-.tbl-filter-pills{display:flex;gap:.4rem;flex-wrap:wrap}
-.pill{
-  padding:.3rem .75rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
-  background:var(--surface);border:1px solid var(--surface-3);
-  color:var(--paper-4);cursor:pointer;border-radius:99px;transition:all .15s;
-}
-.pill:hover{border-color:var(--gold-border);color:var(--paper-2)}
-.pill.active{background:var(--gold-dim);border-color:var(--gold-border-strong);color:var(--gold)}
+  .seg-control button:hover:not(.active) {
+    background: var(--cream);
+  }
 
-/* table */
-.tbl-wrap{
-  overflow-x:auto;
-  border:1px solid var(--surface-3);border-radius:var(--r-lg);
-}
-.ref-tbl{width:100%;border-collapse:collapse;min-width:700px}
-.ref-tbl thead tr{background:var(--surface-2);border-bottom:1px solid var(--surface-3)}
-.ref-tbl th{
-  font-family:var(--mono);font-size:.53rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--gold-2);padding:.8rem 1rem;text-align:left;font-weight:400;white-space:nowrap;
-  cursor:pointer;user-select:none;transition:color .2s;
-}
-.ref-tbl th:hover{color:var(--gold)}
-.ref-tbl th .sort-indicator{margin-left:.3rem;opacity:.4}
-.ref-tbl th.sorted .sort-indicator{opacity:1;color:var(--gold)}
-.ref-tbl td{
-  font-size:.82rem;color:var(--paper-3);
-  padding:.85rem 1rem;border-bottom:1px solid rgba(42,38,33,.8);
-  line-height:1.5;vertical-align:top;
-}
-.ref-tbl tr:last-child td{border-bottom:none}
-.ref-tbl tbody tr{transition:background .12s;cursor:default}
-.ref-tbl tbody tr:hover td{background:var(--surface);color:var(--paper)}
-.ref-tbl .td-art{
-  font-family:var(--mono);font-size:.65rem;color:var(--gold-2);white-space:nowrap;font-weight:400;
-}
-.ref-tbl .td-period{
-  font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--gold);white-space:nowrap;
-}
-.ref-tbl .td-trigger{font-size:.76rem;color:var(--paper-4);max-width:280px}
-.ref-tbl .td-div{
-  font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
-}
-.div-tag{
-  padding:.15rem .45rem;border-radius:99px;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;font-family:var(--mono);
-}
-.div-tag.suits{background:rgba(200,168,75,.1);color:var(--gold);border:1px solid var(--gold-border)}
-.div-tag.appeals{background:rgba(41,128,185,.1);color:#5aade0;border:1px solid rgba(41,128,185,.2)}
-.div-tag.applications{background:rgba(61,153,112,.1);color:#5dc491;border:1px solid rgba(61,153,112,.2)}
+  select, input[type="date"], input[type="number"] {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    background: var(--cream);
+    border: 1.5px solid var(--rule);
+    color: var(--ink);
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: border-color 0.15s;
+  }
 
-.part-sep td{
-  background:var(--bg-2) !important;
-  color:var(--paper-4) !important;
-  font-family:var(--mono) !important;
-  font-size:.51rem !important;letter-spacing:.18em;text-transform:uppercase;
-  padding:.45rem 1rem !important;
-  border-bottom:1px solid var(--surface-3) !important;
-}
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5548' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+  }
 
-.tbl-empty{
-  text-align:center;padding:3rem;
-  font-family:var(--serif);font-style:italic;color:var(--paper-4);font-size:.95rem;
-}
+  select:focus, input:focus {
+    border-color: var(--ink);
+    background: #fff;
+  }
 
-/* row count */
-.row-count{
-  font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--paper-4);margin-left:auto;white-space:nowrap;
-}
+  .date-shortcuts {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
 
-/* use-this btn in table */
-.use-this{
-  padding:.25rem .6rem;
-  background:transparent;border:1px solid var(--surface-3);
-  color:var(--paper-4);font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;border-radius:var(--r);transition:all .15s;white-space:nowrap;
-}
-.use-this:hover{border-color:var(--gold-border);color:var(--gold)}
+  .date-shortcuts button {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.6rem;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.12s;
+  }
 
-/* ── FOOTER ── */
-footer{
-  background:var(--bg-2);border-top:1px solid var(--gold-border);
-  padding:2rem 2.5rem;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
-  position:relative;z-index:1;
-}
-.foot-copy{font-family:var(--serif);font-style:italic;font-size:.85rem;color:var(--paper-4)}
-.foot-links{display:flex;gap:2rem;flex-wrap:wrap}
-.foot-links a{
-  font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--paper-4);text-decoration:none;transition:color .2s;
-}
-.foot-links a:hover{color:var(--gold)}
+  .date-shortcuts button:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
 
-/* ── ANIMATIONS ── */
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes pop-in{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
-.result-anim{animation:pop-in .35s ease forwards}
+  .exclusion-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    margin-bottom: 0.8rem;
+  }
 
-/* ── RESPONSIVE ── */
-@media(max-width:940px){
-  .calc-shell{grid-template-columns:1fr}
-  .result-col{position:static}
-  nav{padding:0 1.25rem}
-  .nav-links,.nav-tag{display:none}
-  .burger{display:flex}
-  .hero{padding:calc(var(--nav-h) + 2.5rem) 1.25rem 3rem}
-  .main,.ref-sec{padding-left:1.25rem;padding-right:1.25rem}
-  footer{flex-direction:column;align-items:flex-start}
-  .hero-stats{flex-wrap:wrap}
-  .hstat{min-width:40%}
-}
-@media(max-width:500px){
-  .hero-title{font-size:2.8rem}
-  .hero-stats{flex-direction:column}
-  .hstat{border-right:none;border-bottom:1px solid var(--gold-border)}
-  .hstat:last-child{border-bottom:none}
-  .r-metrics{grid-template-columns:1fr}
-  .field-row{grid-template-columns:1fr}
-  .div-tabs{flex-direction:column}
-}
+  .exclusion-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--ink);
+    cursor: pointer;
+  }
+
+  .exclusion-toggle span {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--mid);
+  }
+
+  .exclusion-fields {
+    display: none;
+    padding: 1rem;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    margin-top: 0.5rem;
+  }
+
+  .exclusion-fields.visible { display: block; }
+
+  .exclusion-fields .field-group { margin-bottom: 0.8rem; }
+  .exclusion-fields .field-group:last-child { margin-bottom: 0; }
+
+  .exclusion-note {
+    font-size: 0.68rem;
+    color: var(--light);
+    font-style: italic;
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 1.5rem 0;
+  }
+
+  .calc-btn {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 600;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .calc-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
+
+  .calc-btn::after {
+    content: '→';
+    font-style: normal;
+    font-family: var(--mono);
+  }
+
+  /* ── RESULT ── */
+  .result-panel {
+    margin-top: 1.5rem;
+    border: 1.5px solid var(--rule);
+    display: none;
+  }
+
+  .result-panel.visible { display: block; }
+
+  .result-header {
+    background: var(--ink);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .result-header span {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rule);
+  }
+
+  .result-status {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .result-status.ok { background: #0a2a0a; color: #7aad7a; }
+  .result-status.warn { background: #2a1a00; color: #d4a040; }
+  .result-status.expired { background: #2a0a0a; color: #d47070; }
+
+  .result-body {
+    padding: 1.25rem 1rem;
+  }
+
+  .result-deadline {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-days {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--mid);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--cream);
+    font-size: 0.78rem;
+  }
+
+  .result-row:last-child { border-bottom: none; }
+
+  .result-row-label {
+    font-family: var(--mono);
+    color: var(--light);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .result-row-val {
+    font-family: var(--mono);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .timeline {
+    margin-top: 1rem;
+    height: 8px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-fill {
+    height: 100%;
+    background: var(--ink);
+    transition: width 0.4s ease;
+  }
+
+  .timeline-fill.warn { background: #a06010; }
+  .timeline-fill.expired { background: var(--red); width: 100% !important; }
+
+  /* ── REFERENCE TABLE ── */
+  .reference-panel {
+    min-width: 0;
+  }
+
+  .ref-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .ref-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .ref-title em { font-style: italic; color: var(--mid); }
+
+  .ref-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 220px;
+    padding: 0.45rem 0.75rem 0.45rem 2rem;
+    font-size: 0.75rem;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    color: var(--light);
+    pointer-events: none;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    overflow: hidden;
+  }
+
+  .filter-tabs button {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.85rem;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--ink);
+    cursor: pointer;
+    color: var(--mid);
+    transition: all 0.12s;
+  }
+
+  .filter-tabs button:last-child { border-right: none; }
+
+  .filter-tabs button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .filter-tabs button:hover:not(.active) {
+    background: var(--cream);
+  }
+
+  /* TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1.5px solid var(--ink);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  thead {
+    background: var(--ink);
+    position: sticky;
+    top: 57px;
+  }
+
+  thead th {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rule);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  thead th:first-child {
+    width: 60px;
+    text-align: center;
+  }
+
+  thead th:nth-child(3) { width: 90px; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--cream);
+    transition: background 0.1s;
+  }
+
+  tbody tr:hover { background: var(--cream); }
+
+  tbody tr.highlighted {
+    background: #fff8e8;
+    border-left: 3px solid var(--gold);
+  }
+
+  td {
+    padding: 0.7rem 1rem;
+    vertical-align: top;
+    color: var(--ink);
+    line-height: 1.5;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+  }
+
+  td:first-child {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+
+  td:nth-child(3) {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--red);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .div-badge {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    display: inline-block;
+  }
+
+  .div-badge.suits { background: #e8f0e8; color: #2a5a2a; }
+  .div-badge.appeals { background: #e8eaf8; color: #1a2a7a; }
+  .div-badge.applications { background: #f8ece8; color: #6a2a1a; }
+
+  .table-count {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--light);
+    margin-top: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--light);
+    font-size: 1rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 2px solid var(--gold);
+    padding: 1.5rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--light);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--rule);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.12s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .page-body {
+      grid-template-columns: 1fr;
+    }
+    .calc-panel { position: static; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .masthead { padding: 2.5rem 1.25rem 2rem; }
+    .page-body { padding: 2rem 1.25rem 4rem; }
+    .masthead-stats { gap: 1rem; }
+    .stat { padding: 0 1.25rem 0 0; margin-right: 1.25rem; }
+  }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Muhammad Hamid Naeem</a>
+  <a href="https://hamidnaeem.me" class="nav-brand">Muhammad <span>Hamid Naeem</span></a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#projects">Work</a></li>
-    <li><a href="calculator.html" class="active">Calculator</a></li>
-    <li><a href="newsletter.html">Newsletter</a></li>
-    <li><a href="/blog">Writing</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://hamidnaeem.me/#about">About</a></li>
+    <li><a href="https://hamidnaeem.me/#projects">Work</a></li>
+    <li><a href="https://hamidnaeem.me/calculator.html" class="active">Calculator</a></li>
+    <li><a href="https://hamidnaeem.me/newsletter.html">Newsletter</a></li>
+    <li><a href="https://hamidnaeem.me/blog">Writing</a></li>
+    <li><a href="https://hamidnaeem.me/#contact">Contact</a></li>
   </ul>
-  <span class="nav-tag">LA 1908 · Pakistan</span>
-  <button class="burger" id="burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<div class="mob-nav" id="mob-nav">
-  <button class="mob-close" id="mob-close">✕</button>
-  <a href="index.html">Home</a>
-  <a href="calculator.html">Calculator</a>
-  <a href="newsletter.html">Newsletter</a>
-  <a href="/blog">Writing</a>
-  <a href="index.html#contact">Contact</a>
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-tag">Legal Tool · Limitation Act 1908 · Pakistan</div>
+    <h1>Limitation <em>Calculator</em></h1>
+    <p class="masthead-sub">Pick a case type, enter the trigger date, get the exact filing deadline — with s.12 and s.14 exclusion support and the full First Schedule reference below.</p>
+    <div class="masthead-stats">
+      <div class="stat">
+        <span class="stat-num">183</span>
+        <span class="stat-label">Articles</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Divisions</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">s.12</span>
+        <span class="stat-label">Copy exclusion</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">s.14</span>
+        <span class="stat-label">Prior proceedings</span>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-  <div class="hero-inner">
-    <p class="hero-kicker">Legal Tool · Limitation Act 1908 · Pakistan</p>
-    <h1 class="hero-title">
-      Limitation
-      <span class="accent">Calculator</span>
-    </h1>
-    <p class="hero-sub">Pick a case type, enter the trigger date, and get the exact filing deadline — with timeline visualisation, s.12 exclusion support, and the full First Schedule reference below.</p>
-    <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-n">183</div>
-        <div class="hstat-l">Articles</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-n">3</div>
-        <div class="hstat-l">Divisions</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-n">s.12</div>
-        <div class="hstat-l">Copy exclusion</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-n">s.5</div>
-        <div class="hstat-l">Condonation alert</div>
-      </div>
-    </div>
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <div class="disclaimer-inner">
+    <span class="disclaimer-icon">[ ! ] NOTICE</span>
+    <p>Limitation runs differently when fraud, disability, acknowledgement, or a stay order is involved. Court closures extend deadlines; registry practice varies by court. Verify with the statute before acting on any result here. <strong style="color:#e8b0b0">This tool does not constitute legal advice.</strong></p>
   </div>
-</section>
+</div>
 
 <!-- MAIN -->
-<section class="main">
-  <div class="container">
+<div class="page-body">
 
-    <div class="notice">
-      <span class="notice-icon">[ ! ]</span>
-      <p>Fraud, disability, acknowledgement, or a stay order change how limitation runs. Court closures extend deadlines; registry practice varies by court. Verify with the statute before acting on any result here. This tool does not constitute legal advice.</p>
+  <!-- CALCULATOR -->
+  <div class="calc-panel">
+    <div class="panel-header">
+      <span class="panel-title">Configure calculation</span>
+      <span class="panel-sub">LA 1908</span>
     </div>
 
-    <div class="calc-shell">
-
-      <!-- FORM -->
-      <div class="form-col">
-        <div class="sec-label">Configure calculation</div>
-
-        <!-- Division tabs -->
-        <div class="field">
-          <label class="field-lbl">Division</label>
-          <div class="div-tabs">
-            <button class="div-tab active" data-div="suits" onclick="setDiv('suits',this)">
-              <span class="div-tab-icon">⚖</span>
-              <span>Suits</span>
-              <span class="div-tab-count" id="cnt-suits"></span>
-            </button>
-            <button class="div-tab" data-div="appeals" onclick="setDiv('appeals',this)">
-              <span class="div-tab-icon">↑</span>
-              <span>Appeals</span>
-              <span class="div-tab-count" id="cnt-appeals"></span>
-            </button>
-            <button class="div-tab" data-div="applications" onclick="setDiv('applications',this)">
-              <span class="div-tab-icon">◎</span>
-              <span>Applications</span>
-              <span class="div-tab-count" id="cnt-applications"></span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Article search + select -->
-        <div class="field">
-          <label class="field-lbl" for="art-search">Article / case type</label>
-          <div class="article-search">
-            <input type="text" id="art-search" placeholder="Search articles… e.g. trespass, mortgage, appeal" oninput="filterSelect()">
-          </div>
-          <div class="select-wrap">
-            <select id="case-type" onchange="onCaseChange()" size="1"></select>
-          </div>
-          <div class="field-hint" id="source-note"></div>
-        </div>
-
-        <!-- Dates row -->
-        <div class="field-row">
-          <div class="field">
-            <label class="field-lbl" for="start-date">Trigger date <abbr title="The date on which the cause of action or event that starts limitation occurs">?</abbr></label>
-            <input type="date" id="start-date">
-            <div class="date-presets">
-              <button class="preset-btn" onclick="setDateRelative(-7)">−7d</button>
-              <button class="preset-btn" onclick="setDateRelative(-30)">−30d</button>
-              <button class="preset-btn" onclick="setDateRelative(-90)">−90d</button>
-              <button class="preset-btn" onclick="setDateToday()">Today</button>
-            </div>
-          </div>
-          <div class="field">
-            <label class="field-lbl" for="ref-date">Reference date <abbr title="The date against which 'days remaining' is calculated — defaults to today">?</abbr></label>
-            <input type="date" id="ref-date">
-            <div class="date-presets">
-              <button class="preset-btn" onclick="setRefToday()">Today</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- s.12 toggle -->
-        <div class="field">
-          <label class="field-lbl">Section 12 exclusion (certified copy time)</label>
-          <div class="toggle-row" onclick="toggleExtra('s12')">
-            <div class="toggle-row-label">
-              Add s.12 exclusion
-              <small>Exclude days spent applying for and receiving a certified copy</small>
-            </div>
-            <div class="toggle" id="toggle-s12"></div>
-          </div>
-          <div class="extra-fields" id="extra-s12">
-            <div class="field" style="margin-top:.75rem;margin-bottom:0">
-              <label class="field-lbl" for="copy-applied">Date applied for copy</label>
-              <input type="date" id="copy-applied">
-            </div>
-            <div class="field" style="margin-top:.75rem;margin-bottom:0">
-              <label class="field-lbl" for="copy-received">Date copy received</label>
-              <input type="date" id="copy-received">
-            </div>
-            <div class="field-hint" style="margin-top:.5rem">Days between application and receipt are excluded under s.12(2). Only applies to appeals and applications for review.</div>
-          </div>
-        </div>
-
-        <!-- s.14 toggle -->
-        <div class="field">
-          <label class="field-lbl">Section 14 exclusion (bona fide prior proceedings)</label>
-          <div class="toggle-row" onclick="toggleExtra('s14')">
-            <div class="toggle-row-label">
-              Exclude time in prior proceedings
-              <small>Time spent in a defective but bona fide earlier proceeding</small>
-            </div>
-            <div class="toggle" id="toggle-s14"></div>
-          </div>
-          <div class="extra-fields" id="extra-s14">
-            <div class="field-row" style="margin-top:.75rem">
-              <div class="field" style="margin-bottom:0">
-                <label class="field-lbl" for="prior-start">Prior proceeding filed</label>
-                <input type="date" id="prior-start">
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label class="field-lbl" for="prior-end">Prior proceeding dismissed</label>
-                <input type="date" id="prior-end">
-              </div>
-            </div>
-            <div class="field-hint" style="margin-top:.5rem">Section 14 excludes time bona fide prosecuted in a court without jurisdiction or wrongly selected. Conditions must be met.</div>
-          </div>
-        </div>
-
-        <button class="calc-btn" onclick="calculate()">Calculate filing deadline →</button>
-        <button class="clear-btn" onclick="clearAll()">Clear all fields</button>
+    <!-- Division -->
+    <div class="field-group">
+      <label class="field-label">Division</label>
+      <div class="seg-control">
+        <button class="active" data-div="suits" onclick="setDivision('suits', this)">⚖ Suits</button>
+        <button data-div="appeals" onclick="setDivision('appeals', this)">↑ Appeals</button>
+        <button data-div="applications" onclick="setDivision('applications', this)">◎ Applications</button>
       </div>
+    </div>
 
-      <!-- RESULT PANEL -->
-      <div class="result-col">
-        <div class="result-panel">
-          <div class="result-panel-head">
-            <span class="result-panel-head-l">Result</span>
-            <span class="result-badge" id="result-badge">—</span>
+    <!-- Article -->
+    <div class="field-group">
+      <label class="field-label" for="articleSelect">Article / case type</label>
+      <select id="articleSelect" onchange="onArticleChange()">
+        <option value="">— select —</option>
+      </select>
+    </div>
+
+    <!-- Trigger date -->
+    <div class="field-group">
+      <label class="field-label" for="triggerDate">Trigger date <span>— cause of action / event</span></label>
+      <input type="date" id="triggerDate">
+      <div class="date-shortcuts">
+        <button onclick="shiftDate('trigger', -7)">−7d</button>
+        <button onclick="shiftDate('trigger', -30)">−30d</button>
+        <button onclick="shiftDate('trigger', -90)">−90d</button>
+        <button onclick="setToday('trigger')">Today</button>
+      </div>
+    </div>
+
+    <!-- Reference date -->
+    <div class="field-group">
+      <label class="field-label" for="refDate">Reference date <span>— defaults to today</span></label>
+      <input type="date" id="refDate">
+      <div class="date-shortcuts">
+        <button onclick="setToday('ref')">Today</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- s.12 exclusion -->
+    <div class="field-group">
+      <label class="exclusion-toggle">
+        <input type="checkbox" id="s12toggle" onchange="toggleExclusion('s12')">
+        <span>s.12 exclusion — certified copy time</span>
+      </label>
+      <div class="exclusion-fields" id="s12fields">
+        <div class="field-group">
+          <label class="field-label" for="s12applied">Date applied for copy</label>
+          <input type="date" id="s12applied">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="s12received">Date copy received</label>
+          <input type="date" id="s12received">
+        </div>
+        <p class="exclusion-note">Days between application and receipt are excluded under s.12(2). Applies to appeals and review applications.</p>
+      </div>
+    </div>
+
+    <!-- s.14 exclusion -->
+    <div class="field-group">
+      <label class="exclusion-toggle">
+        <input type="checkbox" id="s14toggle" onchange="toggleExclusion('s14')">
+        <span>s.14 exclusion — prior bona fide proceedings</span>
+      </label>
+      <div class="exclusion-fields" id="s14fields">
+        <div class="field-group">
+          <label class="field-label" for="s14filed">Prior proceeding filed</label>
+          <input type="date" id="s14filed">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="s14dismissed">Prior proceeding dismissed</label>
+          <input type="date" id="s14dismissed">
+        </div>
+        <p class="exclusion-note">Excludes time bona fide prosecuted in a court without jurisdiction or wrongly selected (s.14 conditions must be met).</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate filing deadline</button>
+
+    <!-- RESULT -->
+    <div class="result-panel" id="resultPanel">
+      <div class="result-header">
+        <span id="resultLabel">Result</span>
+        <span class="result-status" id="resultStatus"></span>
+      </div>
+      <div class="result-body">
+        <div class="result-deadline" id="resultDeadline">—</div>
+        <div class="result-days" id="resultDays"></div>
+        <div class="timeline"><div class="timeline-fill" id="timelineFill" style="width:0%"></div></div>
+        <div style="margin-top:1rem">
+          <div class="result-row">
+            <span class="result-row-label">Trigger date</span>
+            <span class="result-row-val" id="rTrigger">—</span>
           </div>
-          <div class="result-body" id="result-body">
-            <p class="result-empty">Select an article and enter the trigger date, then hit Calculate.</p>
+          <div class="result-row">
+            <span class="result-row-label">Period</span>
+            <span class="result-row-val" id="rPeriod">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-row-label">s.12 excluded</span>
+            <span class="result-row-val" id="rS12">0 days</span>
+          </div>
+          <div class="result-row">
+            <span class="result-row-label">s.14 excluded</span>
+            <span class="result-row-val" id="rS14">0 days</span>
+          </div>
+          <div class="result-row">
+            <span class="result-row-label">Article</span>
+            <span class="result-row-val" id="rArticle">—</span>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-</section>
 
-<!-- REFERENCE TABLE -->
-<section class="ref-sec">
-  <div class="container">
+  <!-- REFERENCE TABLE -->
+  <div class="reference-panel">
     <div class="ref-header">
-      <span class="ref-header-num">§ Ref</span>
-      <h2>First Schedule — <em>limitation periods</em></h2>
+      <span class="ref-title">First Schedule — <em>limitation periods</em></span>
+      <div class="ref-controls">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input type="text" placeholder="Search articles…" oninput="filterTable(this.value)" id="tableSearch">
+        </div>
+        <div class="filter-tabs">
+          <button class="active" onclick="filterDiv('all', this)">All</button>
+          <button onclick="filterDiv('suits', this)">Suits</button>
+          <button onclick="filterDiv('appeals', this)">Appeals</button>
+          <button onclick="filterDiv('applications', this)">Applications</button>
+        </div>
+      </div>
     </div>
 
-    <div class="table-controls">
-      <div class="tbl-search">
-        <span class="tbl-search-icon">⌕</span>
-        <input type="text" id="tbl-search" placeholder="Filter table… (article no., keyword, period)" oninput="filterTable()">
-      </div>
-      <div class="tbl-filter-pills">
-        <button class="pill active" data-filter="all" onclick="setFilter('all',this)">All</button>
-        <button class="pill" data-filter="suits" onclick="setFilter('suits',this)">Suits</button>
-        <button class="pill" data-filter="appeals" onclick="setFilter('appeals',this)">Appeals</button>
-        <button class="pill" data-filter="applications" onclick="setFilter('applications',this)">Applications</button>
-      </div>
-      <span class="row-count" id="row-count"></span>
-    </div>
-
-    <div class="tbl-wrap">
-      <table class="ref-tbl" id="ref-tbl">
+    <div class="table-wrap">
+      <table id="refTable">
         <thead>
           <tr>
-            <th onclick="sortTable('art')" data-col="art">Art. <span class="sort-indicator">↕</span></th>
-            <th onclick="sortTable('label')" data-col="label">Description <span class="sort-indicator">↕</span></th>
-            <th onclick="sortTable('days')" data-col="days">Period <span class="sort-indicator">↕</span></th>
+            <th>Art.</th>
+            <th>Description</th>
+            <th>Period</th>
             <th>Division</th>
             <th>Time begins</th>
-            <th></th>
           </tr>
         </thead>
-        <tbody id="ref-body"></tbody>
+        <tbody id="tableBody"></tbody>
       </table>
     </div>
+    <div class="table-count" id="tableCount"></div>
   </div>
-</section>
 
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <span class="foot-copy">© 2026 Muhammad Hamid Naeem</span>
-  <div class="foot-links">
-    <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener">Substack</a>
-    <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener">GitHub</a>
-    <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/hamidnaeemadvocate">LinkedIn</a>
+      <a href="https://digitalgavel.substack.com">Substack</a>
+      <a href="https://github.com/HamidNaeem12">GitHub</a>
+      <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
+    </div>
   </div>
 </footer>
 
 <script>
-/* ─────────────────────────────────────────────
-   DATA — Full First Schedule
-   ───────────────────────────────────────────── */
-const DATA_ALL = [
-  // ── SUITS ──
-  {art:'1',label:'Waste Lands (Claims) Act — contest Board of Revenue award',days:30,source:'Art. 1',trigger:'When notice of award is delivered to plaintiff',div:'suits',part:'Part I — 30 days'},
-  {art:'2',label:'Compensation for act/omission under any enactment (Pakistan)',days:90,source:'Art. 2',trigger:'When the act or omission takes place',div:'suits',part:'Part II — 90 days'},
-  {art:'3',label:'Specific Relief Act 1877 s.9 — recover possession of immoveable property',days:180,source:'Art. 3',trigger:'When the dispossession occurs',div:'suits',part:'Part III — 6 months'},
-  {art:'5',label:'Summary procedure — debt or liquidated demand (Order XXXVII)',days:365,source:'Art. 5',trigger:'When debt becomes payable or property recoverable',div:'suits',part:'Part IV — 1 year'},
-  {art:'6',label:'Penalty or forfeiture under a Statute, Act, Regulation or Bye-law',days:365,source:'Art. 6',trigger:'When the penalty or forfeiture is incurred',div:'suits',part:'Part IV — 1 year'},
-  {art:'7',label:'Wages of household servant, artisan or labourer',days:365,source:'Art. 7',trigger:'When the wages accrue due',div:'suits',part:'Part IV — 1 year'},
-  {art:'10',label:'Right of pre-emption (law, usage or contract)',days:365,source:'Art. 10',trigger:'When purchaser takes physical possession of the whole property sold',div:'suits',part:'Part IV — 1 year'},
-  {art:'11',label:'To establish right to property comprised in attachment/claim order (CPC)',days:365,source:'Art. 11',trigger:'Date of the order',div:'suits',part:'Part IV — 1 year'},
-  {art:'12',label:'To set aside a sale in execution of a civil decree or revenue order',days:365,source:'Art. 12',trigger:'When the sale is confirmed or becomes final',div:'suits',part:'Part IV — 1 year'},
-  {art:'13',label:'To alter or set aside a Civil Court decision/order',days:365,source:'Art. 13',trigger:'Date of the final decision or order',div:'suits',part:'Part IV — 1 year'},
-  {art:'14',label:'To set aside act or order of a Government officer (not otherwise provided)',days:365,source:'Art. 14',trigger:'Date of the act or order',div:'suits',part:'Part IV — 1 year'},
-  {art:'15',label:'Against Government — set aside attachment/lease/transfer by revenue authorities',days:365,source:'Art. 15',trigger:'When the attachment, lease or transfer is made',div:'suits',part:'Part IV — 1 year'},
-  {art:'16',label:'Against Government — recover money paid under protest to revenue authorities',days:365,source:'Art. 16',trigger:'When the payment is made',div:'suits',part:'Part IV — 1 year'},
-  {art:'17',label:'Against Government — compensation for land acquired for public purposes',days:365,source:'Art. 17',trigger:'Date compensation amount is determined',div:'suits',part:'Part IV — 1 year'},
-  {art:'18',label:'Against Government — compensation where acquisition not completed',days:365,source:'Art. 18',trigger:'Date of refusal to complete',div:'suits',part:'Part IV — 1 year'},
-  {art:'19',label:'Compensation for false imprisonment',days:365,source:'Art. 19',trigger:'When the imprisonment ends',div:'suits',part:'Part IV — 1 year'},
-  {art:'20',label:'By executors/administrators — Legal Representatives\' Suits Act 1855',days:365,source:'Art. 20',trigger:'Date of death of the person wronged',div:'suits',part:'Part IV — 1 year'},
-  {art:'21',label:'By executors/administrators — Fatal Accidents Act 1855',days:365,source:'Art. 21',trigger:'Date of death of the person killed',div:'suits',part:'Part IV — 1 year'},
-  {art:'22',label:'Compensation for any other injury to person',days:365,source:'Art. 22',trigger:'When the injury is committed',div:'suits',part:'Part IV — 1 year'},
-  {art:'23',label:'Compensation for malicious prosecution',days:365,source:'Art. 23',trigger:'When plaintiff is acquitted or prosecution otherwise terminated',div:'suits',part:'Part IV — 1 year'},
-  {art:'24',label:'Compensation for libel',days:365,source:'Art. 24',trigger:'When the libel is published',div:'suits',part:'Part IV — 1 year'},
-  {art:'25',label:'Compensation for slander',days:365,source:'Art. 25',trigger:'When words are spoken, or when special damage results',div:'suits',part:'Part IV — 1 year'},
-  {art:'26',label:'Compensation for loss of service (seduction of servant or daughter)',days:365,source:'Art. 26',trigger:'When the loss occurs',div:'suits',part:'Part IV — 1 year'},
-  {art:'27',label:'Compensation for inducing person to breach a contract',days:365,source:'Art. 27',trigger:'Date of the breach',div:'suits',part:'Part IV — 1 year'},
-  {art:'28',label:'Compensation for illegal/irregular/excessive distress',days:365,source:'Art. 28',trigger:'Date of the distress',div:'suits',part:'Part IV — 1 year'},
-  {art:'29',label:'Compensation for wrongful seizure of moveable property under legal process',days:365,source:'Art. 29',trigger:'Date of the seizure',div:'suits',part:'Part IV — 1 year'},
-  {art:'30',label:'Against a carrier — compensation for loss or injury to goods',days:365,source:'Art. 30',trigger:'When the loss or injury occurs',div:'suits',part:'Part IV — 1 year'},
-  {art:'31',label:'Against a carrier — non-delivery or delay in delivering goods',days:365,source:'Art. 31',trigger:'When the goods ought to be delivered',div:'suits',part:'Part IV — 1 year'},
-  {art:'32',label:'Against person who perverts property from its specified purpose',days:730,source:'Art. 32',trigger:'When the perversion first becomes known to the injured person',div:'suits',part:'Part V — 2 years'},
-  {art:'33',label:'Under Legal Representatives\' Suits Act 1855 — against an executor',days:730,source:'Art. 33',trigger:'When the wrong complained of is done',div:'suits',part:'Part V — 2 years'},
-  {art:'34',label:'Under same Act — against an administrator',days:730,source:'Art. 34',trigger:'When the wrong is done',div:'suits',part:'Part V — 2 years'},
-  {art:'35',label:'Under same Act — against any other representative',days:730,source:'Art. 35',trigger:'When the wrong is done',div:'suits',part:'Part V — 2 years'},
-  {art:'36',label:'Compensation for malfeasance/misfeasance/nonfeasance (not in contract)',days:730,source:'Art. 36',trigger:'When the malfeasance/misfeasance/nonfeasance takes place',div:'suits',part:'Part V — 2 years'},
-  {art:'37',label:'Compensation for obstructing a way or watercourse',days:1095,source:'Art. 37',trigger:'Date of the obstruction',div:'suits',part:'Part VI — 3 years'},
-  {art:'38',label:'Compensation for diverting a watercourse',days:1095,source:'Art. 38',trigger:'Date of the diversion',div:'suits',part:'Part VI — 3 years'},
-  {art:'39',label:'Compensation for trespass on immoveable property',days:1095,source:'Art. 39',trigger:'Date of the trespass',div:'suits',part:'Part VI — 3 years'},
-  {art:'40',label:'Compensation for infringing copyright or other exclusive privilege',days:1095,source:'Art. 40',trigger:'Date of the infringement',div:'suits',part:'Part VI — 3 years'},
-  {art:'41',label:'To restrain waste',days:1095,source:'Art. 41',trigger:'When the waste begins',div:'suits',part:'Part VI — 3 years'},
-  {art:'42',label:'Compensation for injury caused by a wrongfully obtained injunction',days:1095,source:'Art. 42',trigger:'When the injunction ceases',div:'suits',part:'Part VI — 3 years'},
-  {art:'44',label:'By ward (attained majority) — set aside guardian\'s transfer of property',days:1095,source:'Art. 44',trigger:'When the ward attains majority',div:'suits',part:'Part VI — 3 years'},
-  {art:'47',label:'By person bound by CrPC possession order — to recover that property',days:1095,source:'Art. 47',trigger:'Date of the final order in the case',div:'suits',part:'Part VI — 3 years'},
-  {art:'48',label:'For specific moveable property lost or obtained by theft/misappropriation',days:1095,source:'Art. 48',trigger:'When plaintiff first learns whose possession the property is in',div:'suits',part:'Part VI — 3 years'},
-  {art:'49',label:'For other specific moveable property or compensation for wrongful taking/detention',days:1095,source:'Art. 49',trigger:'When property is wrongfully taken, or when detainer\'s possession becomes unlawful',div:'suits',part:'Part VI — 3 years'},
-  {art:'50',label:'For hire of animals, vehicles, boats or household furniture',days:1095,source:'Art. 50',trigger:'When the hire becomes payable',div:'suits',part:'Part VI — 3 years'},
-  {art:'51',label:'Balance of money advanced for goods not delivered',days:1095,source:'Art. 51',trigger:'When the goods ought to be delivered',div:'suits',part:'Part VI — 3 years'},
-  {art:'52',label:'Price of goods sold and delivered — no fixed credit period',days:1095,source:'Art. 52',trigger:'Date of delivery of goods',div:'suits',part:'Part VI — 3 years'},
-  {art:'53',label:'Price of goods sold and delivered — fixed credit period agreed',days:1095,source:'Art. 53',trigger:'When the credit period expires',div:'suits',part:'Part VI — 3 years'},
-  {art:'54',label:'Price of goods sold — payable by bill of exchange (no bill given)',days:1095,source:'Art. 54',trigger:'When the period of the proposed bill elapses',div:'suits',part:'Part VI — 3 years'},
-  {art:'55',label:'Price of trees or growing crops sold — no fixed credit',days:1095,source:'Art. 55',trigger:'Date of the sale',div:'suits',part:'Part VI — 3 years'},
-  {art:'56',label:'Price of work done by plaintiff — no time fixed for payment',days:1095,source:'Art. 56',trigger:'When the work is done',div:'suits',part:'Part VI — 3 years'},
-  {art:'57',label:'Money payable for money lent',days:1095,source:'Art. 57',trigger:'When the loan is made',div:'suits',part:'Part VI — 3 years'},
-  {art:'58',label:'Money lent — lender gave a cheque for the amount',days:1095,source:'Art. 58',trigger:'When the cheque is paid',div:'suits',part:'Part VI — 3 years'},
-  {art:'59',label:'Money lent payable on demand',days:1095,source:'Art. 59',trigger:'When the loan is made',div:'suits',part:'Part VI — 3 years'},
-  {art:'60',label:'Money deposited payable on demand (including bank deposits)',days:1095,source:'Art. 60',trigger:'When the demand is made',div:'suits',part:'Part VI — 3 years'},
-  {art:'61',label:'Money paid by plaintiff for defendant',days:1095,source:'Art. 61',trigger:'When the money is paid',div:'suits',part:'Part VI — 3 years'},
-  {art:'62',label:'Money received by defendant for plaintiff\'s use',days:1095,source:'Art. 62',trigger:'When the money is received',div:'suits',part:'Part VI — 3 years'},
-  {art:'63',label:'Interest on money due from defendant',days:1095,source:'Art. 63',trigger:'When the interest becomes due',div:'suits',part:'Part VI — 3 years'},
-  {art:'64',label:'Money found due on accounts stated (written and signed)',days:1095,source:'Art. 64',trigger:'When accounts are stated in writing signed by defendant',div:'suits',part:'Part VI — 3 years'},
-  {art:'64A',label:'Under Order XXXVII CPC (summary suit)',days:1095,source:'Art. 64A',trigger:'When the debt becomes payable',div:'suits',part:'Part VI — 3 years'},
-  {art:'65',label:'Breach of promise to do something at a specified time or contingency',days:1095,source:'Art. 65',trigger:'When the time arrives or contingency happens',div:'suits',part:'Part VI — 3 years'},
-  {art:'66',label:'On a single bond — day specified for payment',days:1095,source:'Art. 66',trigger:'The day specified',div:'suits',part:'Part VI — 3 years'},
-  {art:'67',label:'On a single bond — no day specified',days:1095,source:'Art. 67',trigger:'Date of executing the bond',div:'suits',part:'Part VI — 3 years'},
-  {art:'68',label:'On a bond subject to a condition',days:1095,source:'Art. 68',trigger:'When the condition is broken',div:'suits',part:'Part VI — 3 years'},
-  {art:'69',label:'Bill of exchange or promissory note payable at fixed time after date',days:1095,source:'Art. 69',trigger:'When the bill or note falls due',div:'suits',part:'Part VI — 3 years'},
-  {art:'70',label:'Bill of exchange payable at sight or after sight',days:1095,source:'Art. 70',trigger:'When the bill is presented',div:'suits',part:'Part VI — 3 years'},
-  {art:'71',label:'Bill of exchange accepted payable at a particular place',days:1095,source:'Art. 71',trigger:'When the bill is presented at that place',div:'suits',part:'Part VI — 3 years'},
-  {art:'72',label:'Bill/promissory note payable at fixed time after sight or demand',days:1095,source:'Art. 72',trigger:'When the fixed time expires',div:'suits',part:'Part VI — 3 years'},
-  {art:'73',label:'Bill/promissory note payable on demand',days:1095,source:'Art. 73',trigger:'Date of the bill or note',div:'suits',part:'Part VI — 3 years'},
-  {art:'74',label:'Promissory note or bond payable by instalments',days:1095,source:'Art. 74',trigger:'Expiration of first term; subsequent terms for later parts',div:'suits',part:'Part VI — 3 years'},
-  {art:'75',label:'Promissory note/bond payable by instalments — acceleration clause on default',days:1095,source:'Art. 75',trigger:'When the default is made (unless waived)',div:'suits',part:'Part VI — 3 years'},
-  {art:'76',label:'Promissory note given to third person for delivery to payee on event',days:1095,source:'Art. 76',trigger:'Date of delivery to the payee',div:'suits',part:'Part VI — 3 years'},
-  {art:'77',label:'Dishonoured foreign bill — protest made and notice given',days:1095,source:'Art. 77',trigger:'When the notice is given',div:'suits',part:'Part VI — 3 years'},
-  {art:'78',label:'By payee against drawer of bill dishonoured by non-acceptance',days:1095,source:'Art. 78',trigger:'Date of refusal to accept',div:'suits',part:'Part VI — 3 years'},
-  {art:'79',label:'By acceptor of accommodation-bill against drawer',days:1095,source:'Art. 79',trigger:'When acceptor pays the amount of the bill',div:'suits',part:'Part VI — 3 years'},
-  {art:'80',label:'Bill of exchange, promissory note or bond — not otherwise provided for',days:1095,source:'Art. 80',trigger:'When the bill, note or bond becomes payable',div:'suits',part:'Part VI — 3 years'},
-  {art:'81',label:'By surety against principal debtor',days:1095,source:'Art. 81',trigger:'When the surety pays the creditor',div:'suits',part:'Part VI — 3 years'},
-  {art:'82',label:'By surety against co-surety',days:1095,source:'Art. 82',trigger:'When surety pays anything in excess of his own share',div:'suits',part:'Part VI — 3 years'},
-  {art:'83',label:'Upon any other contract to indemnify',days:1095,source:'Art. 83',trigger:'When the plaintiff is actually damnified',div:'suits',part:'Part VI — 3 years'},
-  {art:'84',label:'By attorney/vakil for costs — no express agreement on payment time',days:1095,source:'Art. 84',trigger:'Date of termination of suit or business',div:'suits',part:'Part VI — 3 years'},
-  {art:'85',label:'Balance due on mutual, open and current account (reciprocal demands)',days:1095,source:'Art. 85',trigger:'Close of year in which last admitted/proved item is entered',div:'suits',part:'Part VI — 3 years'},
-  {art:'86',label:'On a policy of insurance — death or property loss',days:1095,source:'Art. 86',trigger:'Date of death (life); date of occurrence causing loss (property)',div:'suits',part:'Part VI — 3 years'},
-  {art:'87',label:'By assured — recover premia under policy voidable by insurers',days:1095,source:'Art. 87',trigger:'When insurers elect to avoid the policy',div:'suits',part:'Part VI — 3 years'},
-  {art:'88',label:'Against factor for an account',days:1095,source:'Art. 88',trigger:'When account is demanded and refused, or when agency terminates',div:'suits',part:'Part VI — 3 years'},
-  {art:'89',label:'By principal against agent for moveable property not accounted for',days:1095,source:'Art. 89',trigger:'When account is demanded and refused, or when agency terminates',div:'suits',part:'Part VI — 3 years'},
-  {art:'90',label:'By principal against agent for neglect or misconduct',days:1095,source:'Art. 90',trigger:'When the neglect or misconduct becomes known to plaintiff',div:'suits',part:'Part VI — 3 years'},
-  {art:'91',label:'To cancel or set aside an instrument (not otherwise provided)',days:1095,source:'Art. 91',trigger:'When the facts entitling plaintiff to cancel become known to him',div:'suits',part:'Part VI — 3 years'},
-  {art:'92',label:'To declare forgery of an instrument issued or registered',days:1095,source:'Art. 92',trigger:'When the issue or registration becomes known to plaintiff',div:'suits',part:'Part VI — 3 years'},
-  {art:'93',label:'To declare forgery of instrument being enforced against plaintiff',days:1095,source:'Art. 93',trigger:'Date of the attempt to enforce',div:'suits',part:'Part VI — 3 years'},
-  {art:'94',label:'For property conveyed while insane',days:1095,source:'Art. 94',trigger:'When plaintiff is restored to sanity and has knowledge of the conveyance',div:'suits',part:'Part VI — 3 years'},
-  {art:'95',label:'To set aside a decree obtained by fraud',days:1095,source:'Art. 95',trigger:'When the fraud becomes known to the party wronged',div:'suits',part:'Part VI — 3 years'},
-  {art:'96',label:'Relief on the ground of mistake',days:1095,source:'Art. 96',trigger:'When the mistake becomes known to the plaintiff',div:'suits',part:'Part VI — 3 years'},
-  {art:'97',label:'Money paid on existing consideration which afterwards fails',days:1095,source:'Art. 97',trigger:'Date of the failure',div:'suits',part:'Part VI — 3 years'},
-  {art:'98',label:'To make good loss from breach of trust — against deceased trustee\'s estate',days:1095,source:'Art. 98',trigger:'Date of trustee\'s death, or date of the loss (whichever is later)',div:'suits',part:'Part VI — 3 years'},
-  {art:'99',label:'Contribution by party who paid more than his share under joint decree',days:1095,source:'Art. 99',trigger:'Date of payment in excess of plaintiff\'s own share',div:'suits',part:'Part VI — 3 years'},
-  {art:'100',label:'By co-trustee — claim against deceased trustee\'s estate for contribution',days:1095,source:'Art. 100',trigger:'When the right to contribution accrues',div:'suits',part:'Part VI — 3 years'},
-  {art:'101',label:'For seaman\'s wages',days:1095,source:'Art. 101',trigger:'End of the voyage during which wages are earned',div:'suits',part:'Part VI — 3 years'},
-  {art:'102',label:'For wages not otherwise expressly provided for',days:1095,source:'Art. 102',trigger:'When the wages accrue due',div:'suits',part:'Part VI — 3 years'},
-  {art:'103',label:'By a Muslim for exigible dower (mu\'ajjal)',days:1095,source:'Art. 103',trigger:'When dower is demanded and refused; or at dissolution of marriage',div:'suits',part:'Part VI — 3 years'},
-  {art:'104',label:'By a Muslim for deferred dower (mu\'wajjal)',days:1095,source:'Art. 104',trigger:'When marriage is dissolved by death or divorce',div:'suits',part:'Part VI — 3 years'},
-  {art:'105',label:'By mortgagor — recover surplus collections from mortgagee',days:1095,source:'Art. 105',trigger:'When mortgagor re-enters on mortgaged property',div:'suits',part:'Part VI — 3 years'},
-  {art:'106',label:'For account and share of profits of dissolved partnership',days:1095,source:'Art. 106',trigger:'Date of dissolution',div:'suits',part:'Part VI — 3 years'},
-  {art:'107',label:'By manager of joint undivided family estate — contribution for payment made',days:1095,source:'Art. 107',trigger:'Date of the payment',div:'suits',part:'Part VI — 3 years'},
-  {art:'108',label:'By lessor for value of trees cut by lessee contrary to lease terms',days:1095,source:'Art. 108',trigger:'When the trees are cut down',div:'suits',part:'Part VI — 3 years'},
-  {art:'109',label:'For profits of immoveable property wrongfully received by defendant',days:1095,source:'Art. 109',trigger:'When the profits are received',div:'suits',part:'Part VI — 3 years'},
-  {art:'110',label:'For arrears of rent',days:1095,source:'Art. 110',trigger:'When the arrears become due',div:'suits',part:'Part VI — 3 years'},
-  {art:'111',label:'By vendor of immoveable property — personal payment of unpaid purchase money',days:1095,source:'Art. 111',trigger:'Time fixed for completing sale, or date of acceptance of title',div:'suits',part:'Part VI — 3 years'},
-  {art:'112',label:'For a call by a registered company',days:1095,source:'Art. 112',trigger:'When the call is payable',div:'suits',part:'Part VI — 3 years'},
-  {art:'113',label:'For specific performance of a contract',days:1095,source:'Art. 113',trigger:'Date fixed for performance; or when plaintiff has notice that performance is refused',div:'suits',part:'Part VI — 3 years'},
-  {art:'114',label:'For rescission of a contract',days:1095,source:'Art. 114',trigger:'When facts entitling plaintiff to rescind first become known to him',div:'suits',part:'Part VI — 3 years'},
-  {art:'115',label:'Compensation for breach of contract (express or implied, unregistered — general)',days:1095,source:'Art. 115',trigger:'When contract is broken; or last breach; or when continuing breach ceases',div:'suits',part:'Part VI — 3 years'},
-  {art:'116',label:'Compensation for breach of a written registered contract',days:2190,source:'Art. 116',trigger:'Same as for an unregistered version of the contract',div:'suits',part:'Part VII — 6 years'},
-  {art:'117',label:'Upon a foreign judgment (as defined in CPC 1908)',days:2190,source:'Art. 117',trigger:'Date of the judgment',div:'suits',part:'Part VII — 6 years'},
-  {art:'118',label:'To obtain declaration that alleged adoption is invalid or never took place',days:2190,source:'Art. 118',trigger:'When the alleged adoption becomes known to plaintiff',div:'suits',part:'Part VII — 6 years'},
-  {art:'119',label:'To obtain declaration that adoption is valid',days:2190,source:'Art. 119',trigger:'When the rights of the adopted son as such are interfered with',div:'suits',part:'Part VII — 6 years'},
-  {art:'120',label:'Suit for which no period of limitation is provided elsewhere (residual)',days:2190,source:'Art. 120',trigger:'When the right to sue accrues',div:'suits',part:'Part VII — 6 years'},
-  {art:'121',label:'To avoid incumbrances/undertenures in estate sold for arrears of revenue',days:4380,source:'Art. 121',trigger:'When the sale becomes final and conclusive',div:'suits',part:'Part VIII — 12 years'},
-  {art:'122',label:'Upon a judgment obtained in Pakistan or a recognisance',days:4380,source:'Art. 122',trigger:'Date of judgment or recognisance',div:'suits',part:'Part VIII — 12 years'},
-  {art:'123',label:'For legacy, share of residue bequeathed by testator, or distributive share of intestate',days:4380,source:'Art. 123',trigger:'When the legacy or share becomes payable or deliverable',div:'suits',part:'Part VIII — 12 years'},
-  {art:'124',label:'For possession of an hereditary office',days:4380,source:'Art. 124',trigger:'When defendant takes adverse possession of the office',div:'suits',part:'Part VIII — 12 years'},
-  {art:'125',label:'By Hindu/Muslim against female alienation of land to be void except for her life',days:4380,source:'Art. 125',trigger:'Date of the alienation',div:'suits',part:'Part VIII — 12 years'},
-  {art:'126',label:'By Hindu (Mitakshara) — set aside father\'s alienation of ancestral property',days:4380,source:'Art. 126',trigger:'When the alienee takes possession of the property',div:'suits',part:'Part VIII — 12 years'},
-  {art:'127',label:'By person excluded from joint family property — to enforce share',days:4380,source:'Art. 127',trigger:'When the exclusion becomes known to the plaintiff',div:'suits',part:'Part VIII — 12 years'},
-  {art:'128',label:'By a Hindu for arrears of maintenance',days:4380,source:'Art. 128',trigger:'When the arrears are payable',div:'suits',part:'Part VIII — 12 years'},
-  {art:'129',label:'By a Hindu for declaration of right to maintenance',days:4380,source:'Art. 129',trigger:'When the right is denied',div:'suits',part:'Part VIII — 12 years'},
-  {art:'130',label:'For resumption or assessment of rent-free land',days:4380,source:'Art. 130',trigger:'When the right to resume or assess first accrues',div:'suits',part:'Part VIII — 12 years'},
-  {art:'131',label:'To establish a periodically recurring right',days:4380,source:'Art. 131',trigger:'When plaintiff is first refused enjoyment of the right',div:'suits',part:'Part VIII — 12 years'},
-  {art:'132',label:'To enforce payment of money charged on immoveable property',days:4380,source:'Art. 132',trigger:'When the money sued for becomes due',div:'suits',part:'Part VIII — 12 years'},
-  {art:'134',label:'Recover possession of immoveable property conveyed in trust then transferred',days:4380,source:'Art. 134',trigger:'When the transfer becomes known to the plaintiff',div:'suits',part:'Part VIII — 12 years'},
-  {art:'135',label:'By mortgagee — possession of mortgaged immoveable property',days:4380,source:'Art. 135',trigger:'When the mortgagor\'s right to possession determines',div:'suits',part:'Part VIII — 12 years'},
-  {art:'136',label:'By purchaser at private sale — possession when vendor was out of possession',days:4380,source:'Art. 136',trigger:'When the vendor is first entitled to possession',div:'suits',part:'Part VIII — 12 years'},
-  {art:'137',label:'By purchaser at execution sale — judgment-debtor was out of possession',days:4380,source:'Art. 137',trigger:'When judgment-debtor is first entitled to possession',div:'suits',part:'Part VIII — 12 years'},
-  {art:'138',label:'By purchaser at execution sale — judgment-debtor was in possession',days:4380,source:'Art. 138',trigger:'Date when the sale becomes absolute',div:'suits',part:'Part VIII — 12 years'},
-  {art:'139',label:'By landlord — recover possession from tenant',days:4380,source:'Art. 139',trigger:'When the tenancy is determined',div:'suits',part:'Part VIII — 12 years'},
-  {art:'140',label:'By remainderman, reversioner or devisee — possession of immoveable property',days:4380,source:'Art. 140',trigger:'When his estate falls into possession',div:'suits',part:'Part VIII — 12 years'},
-  {art:'141',label:'By Hindu/Muslim — possession on death of Hindu/Muslim female',days:4380,source:'Art. 141',trigger:'When the female dies',div:'suits',part:'Part VIII — 12 years'},
-  {art:'142',label:'Possession — plaintiff was dispossessed or discontinued possession',days:4380,source:'Art. 142',trigger:'Date of dispossession or discontinuance',div:'suits',part:'Part VIII — 12 years'},
-  {art:'143',label:'Possession when plaintiff became entitled by forfeiture or breach of condition',days:4380,source:'Art. 143',trigger:'When the forfeiture is incurred or condition is broken',div:'suits',part:'Part VIII — 12 years'},
-  {art:'145',label:'Against depositary or pawnee — recover moveable property deposited or pawned',days:10950,source:'Art. 145',trigger:'Date of the deposit or pawn',div:'suits',part:'Part IX — 30 years'},
-  {art:'146',label:'Before High Court by mortgagee — recover possession from mortgagor',days:10950,source:'Art. 146',trigger:'When any part of principal or interest was last paid',div:'suits',part:'Part IX — 30 years'},
-  {art:'146A',label:'By local authority — possession of public street or road',days:10950,source:'Art. 146A',trigger:'Date of the dispossession or discontinuance',div:'suits',part:'Part IX — 30 years'},
-  {art:'147',label:'By mortgagee for foreclosure or sale',days:21900,source:'Art. 147',trigger:'When the money secured by the mortgage becomes due',div:'suits',part:'Part X — 60 years'},
-  {art:'148',label:'Against mortgagee — to redeem or recover possession of mortgaged property',days:21900,source:'Art. 148',trigger:'When the right to redeem or recover possession accrues',div:'suits',part:'Part X — 60 years'},
-  {art:'149',label:'Any suit by or on behalf of Federal Government or any Provincial Government',days:21900,source:'Art. 149',trigger:'Same as for a like suit by a private person',div:'suits',part:'Part X — 60 years'},
-  // ── APPEALS ──
-  {art:'150',label:'Under CrPC 1898 — from death sentence passed by Court of Session or High Court',days:7,source:'Art. 150',trigger:'Date of the sentence',div:'appeals',part:'Appeals'},
-  {art:'151',label:'From decree or order of High Court (original jurisdiction)',days:20,source:'Art. 151',trigger:'Date of the decree or order',div:'appeals',part:'Appeals'},
-  {art:'152',label:'Under CPC 1908 — to Court of District Judge',days:30,source:'Art. 152',trigger:'Date of the decree or order appealed from',div:'appeals',part:'Appeals'},
-  {art:'153',label:'Under CPC — to High Court from order refusing leave to appeal to Supreme Court',days:30,source:'Art. 153',trigger:'Date of the order',div:'appeals',part:'Appeals'},
-  {art:'154',label:'Under CrPC 1898 — to any court other than a High Court',days:30,source:'Art. 154',trigger:'Date of sentence or order appealed from',div:'appeals',part:'Appeals'},
-  {art:'155',label:'Under CrPC 1898 — to a High Court (excluding Art. 150 and 157)',days:60,source:'Art. 155',trigger:'Date of sentence or order appealed from',div:'appeals',part:'Appeals'},
-  {art:'156',label:'Under CPC 1908 — to a High Court (excluding Art. 151 and 153)',days:90,source:'Art. 156',trigger:'Date of the decree or order appealed from',div:'appeals',part:'Appeals'},
-  {art:'157',label:'Under CrPC 1898 — from order of acquittal',days:180,source:'Art. 157',trigger:'Date of the order appealed from',div:'appeals',part:'Appeals'},
-  // ── APPLICATIONS ──
-  {art:'158',label:'Under Arbitration Act 1940 — set aside or remit award for reconsideration',days:30,source:'Art. 158',trigger:'Date of service of notice of filing of the award',div:'applications',part:'Applications'},
-  {art:'159',label:'For leave to appear and defend a summary suit (Order XXXVII)',days:10,source:'Art. 159',trigger:'When the summons is served',div:'applications',part:'Applications'},
-  {art:'160',label:'To restore to file an application for review (rejected for non-appearance)',days:15,source:'Art. 160',trigger:'When the application for review is rejected',div:'applications',part:'Applications'},
-  {art:'161',label:'Review of judgment — Court of Small Causes or equivalent',days:15,source:'Art. 161',trigger:'Date of the decree or order',div:'applications',part:'Applications'},
-  {art:'162',label:'Review of judgment — High Court (original jurisdiction)',days:20,source:'Art. 162',trigger:'Date of the decree or order',div:'applications',part:'Applications'},
-  {art:'162A',label:'Revision under s.115 CPC 1908 (Punjab amendment)',days:90,source:'Art. 162-A',trigger:'Date of the decision sought to be revised',div:'applications',part:'Applications'},
-  {art:'163',label:'By plaintiff — set aside dismissal for default of appearance',days:30,source:'Art. 163',trigger:'Date of the dismissal',div:'applications',part:'Applications'},
-  {art:'164',label:'By defendant — set aside ex parte decree',days:30,source:'Art. 164',trigger:'Date of the decree; or when applicant learns of it (if summons not duly served)',div:'applications',part:'Applications'},
-  {art:'165',label:'By person dispossessed, disputing decree-holder\'s/purchaser\'s right to possession',days:30,source:'Art. 165',trigger:'Date of the dispossession',div:'applications',part:'Applications'},
-  {art:'166',label:'To set aside sale in execution of a decree (including by judgment-debtor)',days:30,source:'Art. 166',trigger:'Date of the sale',div:'applications',part:'Applications'},
-  {art:'167',label:'Complaining of resistance or obstruction to delivery of possession',days:30,source:'Art. 167',trigger:'Date of the resistance or obstruction',div:'applications',part:'Applications'},
-  {art:'168',label:'For readmission of appeal dismissed for want of prosecution',days:30,source:'Art. 168',trigger:'Date of the dismissal',div:'applications',part:'Applications'},
-  {art:'169',label:'For re-hearing of appeal heard ex parte',days:30,source:'Art. 169',trigger:'Date of the decree in appeal; or when applicant learns of it',div:'applications',part:'Applications'},
-  {art:'170',label:'For leave to appeal as a pauper',days:30,source:'Art. 170',trigger:'Date of the decree appealed from',div:'applications',part:'Applications'},
-  {art:'171',label:'By legal representative of deceased party — set aside order/judgment in absence',days:60,source:'Art. 171',trigger:'Date of the order or judgment',div:'applications',part:'Applications'},
-  {art:'172',label:'By assignee or receiver of insolvent plaintiff/appellant — set aside dismissal',days:60,source:'Art. 172',trigger:'Date of the order of dismissal',div:'applications',part:'Applications'},
-  {art:'173',label:'Review of judgment (other than Art. 161 and 162)',days:90,source:'Art. 173',trigger:'Date of the decree or order',div:'applications',part:'Applications'},
-  {art:'174',label:'CPC — notice to show cause re payment/adjustment of decree out of Court',days:90,source:'Art. 174',trigger:'When the payment or adjustment is made',div:'applications',part:'Applications'},
-  {art:'175',label:'For payment of amount of decree by instalments',days:180,source:'Art. 175',trigger:'Date of the decree',div:'applications',part:'Applications'},
-  {art:'176',label:'CPC — to have legal representative of deceased plaintiff/appellant made a party',days:90,source:'Art. 176',trigger:'Date of death of the deceased plaintiff or appellant',div:'applications',part:'Applications'},
-  {art:'177',label:'CPC — to have legal representative of deceased defendant/respondent made a party',days:90,source:'Art. 177',trigger:'Date of death of the deceased defendant or respondent',div:'applications',part:'Applications'},
-  {art:'178',label:'Under Arbitration Act 1940 — filing in Court of an award',days:90,source:'Art. 178',trigger:'Date of service of notice of making of the award',div:'applications',part:'Applications'},
-  {art:'179',label:'For leave to appeal to Supreme Court (CPC 1908)',days:90,source:'Art. 179',trigger:'Date of the decree appealed from',div:'applications',part:'Applications'},
-  {art:'180',label:'By purchaser of immoveable property (execution sale) — for delivery of possession',days:1095,source:'Art. 180',trigger:'When the sale becomes absolute',div:'applications',part:'Applications'},
-  {art:'181',label:'Applications for which no period of limitation is provided elsewhere (residual)',days:1095,source:'Art. 181',trigger:'When the right to apply accrues',div:'applications',part:'Applications'},
-  {art:'183',label:'To enforce a judgment, decree or order of a High Court or Supreme Court',days:2190,source:'Art. 183',trigger:'When a present right to enforce accrues to a person capable of releasing the right',div:'applications',part:'Applications'},
+// ── DATA ──────────────────────────────────────────────────────────────────────
+// Limitation Act 1908, First Schedule — all three divisions
+// Format: [artNum, description, years, months, days, division, timeBegins]
+const ARTICLES = [
+  // SUITS
+  [1,"Accounts stated between merchants",3,0,0,"suits","Date of last item of account"],
+  [2,"Money payable for money lent",3,0,0,"suits","Date money lent"],
+  [3,"Money lent under an agreement that repaid on demand",3,0,0,"suits","Date of loan"],
+  [4,"Money payable for money paid for use of another",3,0,0,"suits","Date of payment"],
+  [5,"Goods sold and delivered",3,0,0,"suits","Date of delivery"],
+  [6,"Goods supplied under agreement that price to be fixed later",3,0,0,"suits","Date price fixed or if not fixed, date of delivery"],
+  [7,"Money payable for work done",3,0,0,"suits","Date work done"],
+  [8,"Arrears of rent",3,0,0,"suits","Date rent became due"],
+  [9,"Arrears of interest on mortgage",3,0,0,"suits","Date interest became due"],
+  [10,"Mortgage money payable on demand",3,0,0,"suits","Date mortgage executed"],
+  [11,"Arrears of interest on bond",3,0,0,"suits","Date interest became due"],
+  [12,"Money due on promissory note or bond",3,0,0,"suits","Date note or bond became payable"],
+  [13,"Money payable under promissory note payable by installments",3,0,0,"suits","Date of default of each installment"],
+  [14,"Money payable to plaintiff for money paid for defendant under court order",3,0,0,"suits","Date of payment"],
+  [15,"Compensation for breach of promise of marriage",1,0,0,"suits","Date of refusal"],
+  [16,"Compensation for false imprisonment",1,0,0,"suits","Date of discharge from imprisonment"],
+  [17,"Compensation for malicious prosecution",1,0,0,"suits","Date of acquittal or dismissal of charge"],
+  [18,"Compensation for seduction",1,0,0,"suits","Date of act"],
+  [19,"Compensation for obstruction to an easement",3,0,0,"suits","Date of obstruction"],
+  [20,"Compensation for injury to person by act or omission",1,0,0,"suits","Date of act or omission"],
+  [21,"Compensation for injury to animals",1,0,0,"suits","Date of injury"],
+  [22,"Compensation for injury to movable property",3,0,0,"suits","Date of injury"],
+  [23,"Compensation for wrongs to immovable property",3,0,0,"suits","Date of wrong"],
+  [24,"Compensation for breach of contract",3,0,0,"suits","Date breach occurs"],
+  [25,"Declaring validity of instrument",3,0,0,"suits","Date instrument made"],
+  [26,"Relief for fraud",3,0,0,"suits","Date fraud discovered"],
+  [27,"Relief for mistake",3,0,0,"suits","Date mistake discovered"],
+  [28,"Movable property or compensation for wrongful taking/detaining",3,0,0,"suits","Date taking or detention"],
+  [29,"Recovering specific movable property",3,0,0,"suits","Date of conversion or detention or demand"],
+  [30,"Redemption of mortgage",30,0,0,"suits","Date of mortgage"],
+  [31,"Foreclosure of mortgage",12,0,0,"suits","Date money secured became due"],
+  [32,"Foreclosure when mortgagee in possession",12,0,0,"suits","Date of dispossession"],
+  [33,"Redemption of pledge",30,0,0,"suits","Date of pledge"],
+  [34,"Dissolution of partnership",3,0,0,"suits","Date of dissolution"],
+  [35,"Account between partners",3,0,0,"suits","Date of dissolution of partnership"],
+  [36,"Share in deceased partner's estate",3,0,0,"suits","Date of death"],
+  [37,"Portion of estate of deceased intestate",12,0,0,"suits","Date death"],
+  [38,"Legacy bequeathed by will",12,0,0,"suits","Date of probate or letters of administration"],
+  [39,"Decree for specific performance",3,0,0,"suits","Date of refusal to perform"],
+  [40,"Specific performance, contract providing fixed period",3,0,0,"suits","Date fixed period expires"],
+  [41,"Declaration without further relief",3,0,0,"suits","Date right to sue accrues"],
+  [42,"Injunction",3,0,0,"suits","Date of act or omission"],
+  [43,"Recovery of immovable property under easement",12,0,0,"suits","Date of disturbance"],
+  [44,"Arrears of rent of immovable property",3,0,0,"suits","Date rent fell due"],
+  [45,"Compensation for land acquisition",0,3,0,"suits","Date of award"],
+  [46,"Compensation for dispossession without legal process",12,0,0,"suits","Date of dispossession"],
+  [47,"Possession of immovable property in defendant's possession as agent",12,0,0,"suits","Date defendant denies title"],
+  [48,"Possession of immovable property from mortgagor",30,0,0,"suits","Date mortgage executed"],
+  [49,"Possession when mortgage redeemed",12,0,0,"suits","Date of redemption"],
+  [50,"Possession when decree passed for redemption",12,0,0,"suits","Date of decree"],
+  [51,"Possession of immovable property from co-sharer",12,0,0,"suits","Date of partition"],
+  [52,"Recovery of possession on dispossession",12,0,0,"suits","Date of dispossession"],
+  [53,"Recovery of possession by purchaser",12,0,0,"suits","Date of possession taken by vendor"],
+  [54,"Recovery of specific immovable property",12,0,0,"suits","Date of limitation starts from adverse possession"],
+  [55,"Recovery of possession after lease",12,0,0,"suits","Date lease expires"],
+  [56,"Recovery of possession by lessor, when lessee denies",12,0,0,"suits","Date of denial"],
+  [57,"Specific performance of contract concerning immovable property",3,0,0,"suits","Date contract executed"],
+  [58,"Declaration that judgment is void",3,0,0,"suits","Date of judgment"],
+  [59,"Setting aside decree obtained by fraud",3,0,0,"suits","Date fraud discovered"],
+  [60,"Setting aside sale in execution",1,0,0,"suits","Date of sale"],
+  [61,"Setting aside sale by revenue authority",1,0,0,"suits","Date of sale"],
+  [62,"Probate or letters of administration",12,0,0,"suits","Date of death"],
+  [63,"Grant of probate when improperly granted",12,0,0,"suits","Date grant made"],
+  [64,"Succession certificate",12,0,0,"suits","Date of death"],
+  [65,"Recovery of share in joint family property",12,0,0,"suits","Date of partition"],
+  [66,"Profits of immovable property withheld by defendant",3,0,0,"suits","Date withholding begins"],
+  [67,"Money secured by mortgage on immovable property",12,0,0,"suits","Date mortgage money became payable"],
+  [68,"Compensation for breach of bond",3,0,0,"suits","Date of breach"],
+  [69,"Compensation for the breach of warranty",3,0,0,"suits","Date of sale"],
+  [70,"Recovery of buildings or other structures",12,0,0,"suits","Date of erection or completion"],
+  [71,"Recovery of land held on service tenure",12,0,0,"suits","Date service ended"],
+  [72,"Recovery of land for default in payment of revenue",30,0,0,"suits","Date of forfeiture"],
+  [73,"Recovery of land purchased by Government",30,0,0,"suits","Date of purchase"],
+  [74,"Recovery of land dedicated to religious purposes",12,0,0,"suits","Date of dedication"],
+  [75,"Recovery of land purchased by a company",12,0,0,"suits","Date of purchase"],
+  [76,"Compensation for wrongful seizure of property",1,0,0,"suits","Date of seizure"],
+  [77,"Cancellation of instruments",3,0,0,"suits","Date facts entitling relief first known"],
+  [78,"Suits on judgment",3,0,0,"suits","Date of judgment"],
+  [79,"Suits on foreign judgment",3,0,0,"suits","Date of judgment"],
+  [80,"Suits against Government",0,3,0,"suits","Date act or omission"],
+  [81,"Suits for which no period prescribed",3,0,0,"suits","Date right to sue accrues"],
+
+  // APPEALS
+  [156,"Appeal to High Court from decree in original suit",0,0,90,"appeals","Date of decree"],
+  [157,"Appeal to High Court from order in original suit",0,0,90,"appeals","Date of order"],
+  [158,"Appeal to High Court from appellate decree (first appeal)",0,0,90,"appeals","Date of decree"],
+  [159,"Appeal to High Court from appellate order",0,0,90,"appeals","Date of order"],
+  [160,"Appeal under CPC s.104 to High Court",0,0,90,"appeals","Date of order"],
+  [161,"Appeal to Supreme Court from High Court",0,0,90,"appeals","Date of decree or order"],
+  [162,"Appeal to High Court from revenue authority",0,0,90,"appeals","Date of order appealed"],
+  [163,"Appeal under Letters Patent from single judge",0,0,30,"appeals","Date of judgment"],
+  [164,"Appeal under the Code of Civil Procedure against original order",0,0,30,"appeals","Date of order"],
+  [165,"Appeal from decree in a suit under specific enactment",0,0,30,"appeals","Date of decree"],
+  [166,"Appeal from decree or order in matrimonial proceedings",0,0,30,"appeals","Date of decree or order"],
+
+  // APPLICATIONS
+  [167,"Application for leave to appeal from decree or order",0,0,90,"applications","Date of decree or order"],
+  [168,"Application for review of judgment",0,0,90,"applications","Date of decree or order"],
+  [169,"Application for execution of decree",3,0,0,"applications","Date decree becomes enforceable"],
+  [170,"Application for execution to another court",3,0,0,"applications","Date of last order in previous execution"],
+  [171,"Application to set aside dismissal for default",0,0,30,"applications","Date of dismissal"],
+  [172,"Application to set aside exparte decree",0,0,30,"applications","Date of decree"],
+  [173,"Application to set aside abatement",0,0,60,"applications","Date of abatement"],
+  [174,"Application for an order to admit appeal",0,0,30,"applications","Date appeal dismissed"],
+  [175,"Application for substitution of legal representative",0,0,90,"applications","Date of death"],
+  [176,"Application for restitution",0,0,30,"applications","Date decree reversed or modified"],
+  [177,"Application under CPC for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
+  [178,"Criminal revision application to High Court",0,0,90,"applications","Date of order"],
+  [179,"Application for bail",0,3,0,"applications","Date of refusal by lower court"],
+  [180,"Application to set aside order of attachment",0,0,30,"applications","Date of order of attachment"],
+  [181,"Application to enhance compensation under Land Acquisition Act",0,0,30,"applications","Date of award"],
+  [182,"Application to revenue authority for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
+  [183,"Application under any other Act for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
 ];
 
-/* ── helpers ── */
-function fmtPeriod(d){
-  const map={7:'7 days',10:'10 days',15:'15 days',20:'20 days',30:'30 days',60:'60 days',90:'90 days',180:'6 months',365:'1 year',730:'2 years',1095:'3 years',2190:'6 years',4380:'12 years',10950:'30 years',21900:'60 years'};
-  return map[d]||d+' days';
-}
-function fmtDate(d){
-  return d.toLocaleDateString('en-PK',{weekday:'short',day:'2-digit',month:'long',year:'numeric'});
-}
-function fmtDateShort(d){
-  return d.toLocaleDateString('en-PK',{day:'2-digit',month:'short',year:'numeric'});
-}
-function today(){
-  const d=new Date();d.setHours(0,0,0,0);return d;
-}
-function dateFromInput(id){
-  const v=document.getElementById(id).value;
-  return v?new Date(v+' 00:00:00'):null;
-}
-function toInputVal(d){
-  return d.toISOString().split('T')[0];
-}
+// ── STATE ──────────────────────────────────────────────────────────────────────
+let currentDivision = 'suits';
+let filterDivision = 'all';
+let searchQuery = '';
 
-/* ── STATE ── */
-let curDiv='suits';
-let allItems=[...DATA_ALL];
-let tblFilter='all';
-let tblSearch='';
-let sortCol='art';let sortAsc=true;
-
-/* ── INIT ── */
-document.addEventListener('DOMContentLoaded',()=>{
-  // set counts
-  ['suits','appeals','applications'].forEach(d=>{
-    const c=DATA_ALL.filter(x=>x.div===d).length;
-    document.getElementById('cnt-'+d).textContent=c+' arts';
-  });
-  // default dates
-  const t=toInputVal(today());
-  document.getElementById('start-date').value=t;
-  document.getElementById('ref-date').value=t;
-  document.getElementById('start-date').max=t;
-
-  populateSelect();
-  buildTable();
-
-  // nav
-  document.getElementById('burger').addEventListener('click',()=>
-    document.getElementById('mob-nav').classList.add('open'));
-  document.getElementById('mob-close').addEventListener('click',()=>
-    document.getElementById('mob-nav').classList.remove('open'));
-  document.querySelectorAll('#mob-nav a').forEach(a=>
-    a.addEventListener('click',()=>document.getElementById('mob-nav').classList.remove('open')));
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  setToday('ref');
+  populateArticleSelect('suits');
+  renderTable();
 });
 
-/* ── DIVISION ── */
-function setDiv(div,el){
-  curDiv=div;
-  document.querySelectorAll('.div-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('art-search').value='';
-  populateSelect();
+// ── DIVISION ──────────────────────────────────────────────────────────────────
+function setDivision(div, btn) {
+  currentDivision = div;
+  document.querySelectorAll('.seg-control button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  populateArticleSelect(div);
 }
 
-/* ── POPULATE SELECT ── */
-function populateSelect(){
-  const sel=document.getElementById('case-type');
-  sel.innerHTML='';
-  const items=DATA_ALL.filter(x=>x.div===curDiv);
-  const q=(document.getElementById('art-search').value||'').toLowerCase();
-  let filtered=q?items.filter(x=>
-    x.art.toLowerCase().includes(q)||
-    x.label.toLowerCase().includes(q)||
-    x.trigger.toLowerCase().includes(q)||
-    fmtPeriod(x.days).toLowerCase().includes(q)
-  ):items;
-
-  let lastPart='';
-  filtered.forEach((item,i)=>{
-    if(item.part!==lastPart){
-      const og=document.createElement('optgroup');
-      og.label=item.part;
-      sel.appendChild(og);
-      lastPart=item.part;
-    }
-    const opt=document.createElement('option');
-    opt.value=DATA_ALL.indexOf(item);
-    opt.textContent=`Art. ${item.art} — ${item.label}`;
+function populateArticleSelect(div) {
+  const sel = document.getElementById('articleSelect');
+  sel.innerHTML = '<option value="">— select —</option>';
+  ARTICLES.filter(a => a[5] === div).forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a[0];
+    opt.textContent = `Art. ${a[0]} — ${a[1]}`;
     sel.appendChild(opt);
   });
-  onCaseChange();
 }
 
-function filterSelect(){
-  populateSelect();
+function onArticleChange() {
+  const artNum = parseInt(document.getElementById('articleSelect').value);
+  if (!artNum) return;
+  const art = ARTICLES.find(a => a[0] === artNum);
+  if (!art) return;
+  // Highlight in table
+  document.querySelectorAll('#tableBody tr').forEach(tr => {
+    tr.classList.remove('highlighted');
+    if (parseInt(tr.dataset.art) === artNum) {
+      tr.classList.add('highlighted');
+    }
+  });
 }
 
-function onCaseChange(){
-  const sel=document.getElementById('case-type');
-  const idx=parseInt(sel.value);
-  const item=DATA_ALL[idx];
-  if(!item)return;
-  document.getElementById('source-note').innerHTML=
-    `<strong>First Schedule, ${item.source}</strong> · Trigger: ${item.trigger}`;
+// ── DATE HELPERS ──────────────────────────────────────────────────────────────
+function todayStr() {
+  return new Date().toISOString().split('T')[0];
 }
 
-/* ── DATE HELPERS ── */
-function setDateRelative(delta){
-  const d=new Date(today());
-  d.setDate(d.getDate()+delta);
-  document.getElementById('start-date').value=toInputVal(d);
-}
-function setDateToday(){
-  document.getElementById('start-date').value=toInputVal(today());
-}
-function setRefToday(){
-  document.getElementById('ref-date').value=toInputVal(today());
+function setToday(field) {
+  document.getElementById(field === 'trigger' ? 'triggerDate' : 'refDate').value = todayStr();
 }
 
-/* ── TOGGLES ── */
-function toggleExtra(id){
-  const tog=document.getElementById('toggle-'+id);
-  const extra=document.getElementById('extra-'+id);
-  tog.classList.toggle('on');
-  extra.classList.toggle('open');
+function shiftDate(field, days) {
+  const id = field === 'trigger' ? 'triggerDate' : 'refDate';
+  const el = document.getElementById(id);
+  const base = el.value ? new Date(el.value) : new Date();
+  base.setDate(base.getDate() + days);
+  el.value = base.toISOString().split('T')[0];
 }
 
-/* ── CALCULATE ── */
-function calculate(){
-  const sel=document.getElementById('case-type');
-  const idx=parseInt(sel.value);
-  const item=DATA_ALL[idx];
-  if(!item){alert('Please select a case type.');return;}
+function parseDate(str) {
+  if (!str) return null;
+  const [y, m, d] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
 
-  const startDate=dateFromInput('start-date');
-  if(!startDate){alert('Please enter a trigger date.');return;}
+function addPeriod(date, years, months, days) {
+  const d = new Date(date);
+  d.setFullYear(d.getFullYear() + years);
+  d.setMonth(d.getMonth() + months);
+  d.setDate(d.getDate() + days);
+  return d;
+}
 
-  const refDate=dateFromInput('ref-date')||today();
+function daysBetween(a, b) {
+  return Math.round((b - a) / 86400000);
+}
 
-  // s.12
-  let s12Days=0;
-  if(document.getElementById('toggle-s12').classList.contains('on')){
-    const applied=dateFromInput('copy-applied');
-    const received=dateFromInput('copy-received');
-    if(applied&&received&&received>applied){
-      s12Days=Math.round((received-applied)/(864e5));
+function formatDate(d) {
+  const opts = { day: 'numeric', month: 'long', year: 'numeric' };
+  return d.toLocaleDateString('en-GB', opts);
+}
+
+function periodStr(y, mo, d) {
+  const parts = [];
+  if (y) parts.push(`${y} year${y !== 1 ? 's' : ''}`);
+  if (mo) parts.push(`${mo} month${mo !== 1 ? 's' : ''}`);
+  if (d) parts.push(`${d} day${d !== 1 ? 's' : ''}`);
+  return parts.join(', ');
+}
+
+// ── EXCLUSION TOGGLES ──────────────────────────────────────────────────────────
+function toggleExclusion(id) {
+  const checked = document.getElementById(id + 'toggle').checked;
+  const el = document.getElementById(id + 'fields');
+  el.classList.toggle('visible', checked);
+}
+
+// ── CALCULATE ─────────────────────────────────────────────────────────────────
+function calculate() {
+  const artNum = parseInt(document.getElementById('articleSelect').value);
+  if (!artNum) { alert('Please select a case type.'); return; }
+
+  const art = ARTICLES.find(a => a[0] === artNum);
+  if (!art) return;
+
+  const triggerStr = document.getElementById('triggerDate').value;
+  const refStr = document.getElementById('refDate').value;
+  if (!triggerStr) { alert('Please enter a trigger date.'); return; }
+
+  const trigger = parseDate(triggerStr);
+  const ref = refStr ? parseDate(refStr) : new Date();
+
+  const [, desc, y, mo, d, , ] = art;
+
+  // Base deadline
+  let deadline = addPeriod(trigger, y, mo, d);
+
+  // s.12 exclusion
+  let s12days = 0;
+  if (document.getElementById('s12toggle').checked) {
+    const app = parseDate(document.getElementById('s12applied').value);
+    const rec = parseDate(document.getElementById('s12received').value);
+    if (app && rec && rec > app) {
+      s12days = daysBetween(app, rec);
+      deadline.setDate(deadline.getDate() + s12days);
     }
   }
 
-  // s.14
-  let s14Days=0;
-  if(document.getElementById('toggle-s14').classList.contains('on')){
-    const ps=dateFromInput('prior-start');
-    const pe=dateFromInput('prior-end');
-    if(ps&&pe&&pe>ps){
-      s14Days=Math.round((pe-ps)/(864e5));
+  // s.14 exclusion
+  let s14days = 0;
+  if (document.getElementById('s14toggle').checked) {
+    const filed = parseDate(document.getElementById('s14filed').value);
+    const dismissed = parseDate(document.getElementById('s14dismissed').value);
+    if (filed && dismissed && dismissed > filed) {
+      s14days = daysBetween(filed, dismissed);
+      deadline.setDate(deadline.getDate() + s14days);
     }
   }
 
-  const totalDays=item.days+s12Days+s14Days;
+  // Days remaining
+  const remaining = daysBetween(ref, deadline);
+  const total = daysBetween(trigger, deadline);
+  const elapsed = daysBetween(trigger, ref);
+  const pct = Math.max(0, Math.min(100, total > 0 ? (elapsed / total) * 100 : 100));
 
-  const deadline=new Date(startDate);
-  deadline.setDate(deadline.getDate()+totalDays);
+  // Render
+  const panel = document.getElementById('resultPanel');
+  panel.classList.add('visible');
 
-  const daysLeft=Math.round((deadline-refDate)/(864e5));
-  const daysElapsed=totalDays-daysLeft;
-  const pctElapsed=Math.max(0,Math.min(100,Math.round((daysElapsed/totalDays)*100)));
+  document.getElementById('resultDeadline').textContent = formatDate(deadline);
+  document.getElementById('rTrigger').textContent = formatDate(trigger);
+  document.getElementById('rPeriod').textContent = periodStr(y, mo, d);
+  document.getElementById('rS12').textContent = s12days ? `${s12days} days excluded` : '—';
+  document.getElementById('rS14').textContent = s14days ? `${s14days} days excluded` : '—';
+  document.getElementById('rArticle').textContent = `Art. ${artNum}`;
+  document.getElementById('resultLabel').textContent = `Art. ${artNum} · ${desc.substring(0,30)}…`;
 
-  let cls,statusLabel,msg;
-  if(daysLeft<0){
-    cls='expired';statusLabel=`Time-barred by ${Math.abs(daysLeft)} day${Math.abs(daysLeft)===1?'':'s'}`;
-    msg='Limitation has expired. A condonation application under s.5 may be possible for appeals and applications. If fraud or disability applies, ss.15–18 may extend time. Seek advice immediately.';
-  } else if(daysLeft===0){
-    cls='today';statusLabel='Deadline: today';
-    msg='File immediately. Do not wait until afternoon — confirm the registry is open and accepting filings today.';
-  } else if(daysLeft<=7){
-    cls='urgent';statusLabel=`${daysLeft} day${daysLeft===1?'':'s'} remaining`;
-    msg='Critical — fewer than a week left. Have the plaint/memo ready and prepare a condonation application simultaneously in case of last-minute obstacles.';
-  } else if(daysLeft<=30){
-    cls='warn';statusLabel=`${daysLeft} days remaining`;
-    msg='Getting close. Finalise the pleadings now. Do not rely on the last few days — registries are unpredictable.';
+  const fill = document.getElementById('timelineFill');
+  const status = document.getElementById('resultStatus');
+  const daysEl = document.getElementById('resultDays');
+
+  fill.className = 'timeline-fill';
+
+  if (remaining < 0) {
+    status.textContent = 'EXPIRED';
+    status.className = 'result-status expired';
+    daysEl.textContent = `Deadline passed ${Math.abs(remaining)} day${Math.abs(remaining) !== 1 ? 's' : ''} ago`;
+    fill.classList.add('expired');
+  } else if (remaining <= 30) {
+    status.textContent = 'URGENT';
+    status.className = 'result-status warn';
+    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining — act promptly`;
+    fill.classList.add('warn');
+    fill.style.width = pct + '%';
   } else {
-    cls='safe';statusLabel=`${daysLeft} days remaining`;
-    msg='Adequate time remains. File well before the deadline to allow for registry processing, objections, and re-filing.';
+    status.textContent = 'WITHIN TIME';
+    status.className = 'result-status ok';
+    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining`;
+    fill.style.width = pct + '%';
   }
 
-  const fillColors={safe:'#3d9970',warn:'#c4701a',urgent:'#c0392b',expired:'#c0392b',today:'#c8a84b'};
-  const fillColor=fillColors[cls];
-
-  const showCond=(cls==='expired'||daysLeft<=7)&&(item.div==='appeals'||item.div==='applications');
-
-  let html=`<div class="result-anim">
-    <div class="timeline">
-      <div class="timeline-labels">
-        <span>${fmtDateShort(startDate)}</span>
-        <span>${fmtDateShort(deadline)}</span>
-      </div>
-      <div class="timeline-track">
-        <div class="timeline-fill" style="width:${pctElapsed}%;background:${fillColor}"></div>
-        <div class="timeline-today-marker" style="left:${pctElapsed}%"></div>
-      </div>
-    </div>
-
-    <div class="r-metrics">
-      <div class="r-metric">
-        <div class="r-metric-l">Statutory period</div>
-        <div class="r-metric-v">${fmtPeriod(item.days)}</div>
-        <div class="r-metric-u">${item.days} calendar days</div>
-      </div>
-      <div class="r-metric">
-        <div class="r-metric-l">s.12 / s.14 added</div>
-        <div class="r-metric-v">${s12Days+s14Days}</div>
-        <div class="r-metric-u">days exclusion</div>
-      </div>
-      <div class="r-metric">
-        <div class="r-metric-l">Total period</div>
-        <div class="r-metric-v">${totalDays}</div>
-        <div class="r-metric-u">calendar days</div>
-      </div>
-      <div class="r-metric">
-        <div class="r-metric-l">Trigger date</div>
-        <div class="r-metric-v sm">${fmtDateShort(startDate)}</div>
-      </div>
-    </div>
-
-    <div class="d-box ${cls}">
-      <div class="d-status">${statusLabel}</div>
-      <div class="d-date">${fmtDate(deadline)}</div>
-      <div class="d-day">${deadline.toLocaleDateString('en-PK',{weekday:'long'})}</div>
-      <div class="d-msg">${msg}</div>
-    </div>
-
-    ${showCond?`<div class="cond-badge">
-      <span class="cond-badge-icon">§ 5</span>
-      <div class="cond-badge-text">Section 5 condonation may be available for appeals and applications where sufficient cause for the delay can be shown to the court's satisfaction. This remedy is discretionary.</div>
-    </div>`:''}
-
-    <div class="r-source">
-      <strong>First Schedule, ${item.source}</strong><br>
-      Division: ${item.div.charAt(0).toUpperCase()+item.div.slice(1)} &nbsp;·&nbsp; Part: ${item.part}<br>
-      Trigger: ${item.trigger}
-    </div>
-
-    <button class="copy-btn" id="copy-btn" onclick="copyResult(event,'${item.art}','${fmtDate(deadline)}','${statusLabel}','${item.source}')">
-      Copy result to clipboard
-    </button>
-  </div>`;
-
-  document.getElementById('result-body').innerHTML=html;
-
-  const badge=document.getElementById('result-badge');
-  badge.textContent=statusLabel;
-  badge.style.color=cls==='safe'?'#5dc491':cls==='expired'||cls==='urgent'?'#e07070':cls==='today'?'var(--gold)':'#e09847';
-  badge.style.borderColor=cls==='safe'?'var(--green-border)':cls==='expired'||cls==='urgent'?'var(--red-border)':cls==='today'?'var(--gold-border)':'var(--amber-border)';
-
-  // scroll result into view on mobile
-  if(window.innerWidth<940){
-    document.getElementById('result-body').scrollIntoView({behavior:'smooth',block:'nearest'});
-  }
+  // Highlight in table
+  onArticleChange();
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function copyResult(e,art,deadline,status,source){
-  const text=`Limitation Act 1908 — Art. ${art} (${source})\nDeadline: ${deadline}\nStatus: ${status}`;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn=document.getElementById('copy-btn');
-    btn.textContent='Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy result to clipboard';btn.classList.remove('copied');},2000);
-  });
-}
+// ── TABLE ─────────────────────────────────────────────────────────────────────
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  const q = searchQuery.toLowerCase();
 
-function clearAll(){
-  const t=toInputVal(today());
-  document.getElementById('start-date').value=t;
-  document.getElementById('ref-date').value=t;
-  document.getElementById('copy-applied').value='';
-  document.getElementById('copy-received').value='';
-  document.getElementById('prior-start').value='';
-  document.getElementById('prior-end').value='';
-  // close toggles
-  ['s12','s14'].forEach(id=>{
-    document.getElementById('toggle-'+id).classList.remove('on');
-    document.getElementById('extra-'+id).classList.remove('open');
-  });
-  document.getElementById('result-body').innerHTML='<p class="result-empty">Select an article and enter the trigger date, then hit Calculate.</p>';
-  document.getElementById('result-badge').textContent='—';
-  document.getElementById('result-badge').style.color='var(--paper-4)';
-  document.getElementById('result-badge').style.borderColor='var(--surface-3)';
-}
-
-/* ── TABLE ── */
-function setFilter(f,el){
-  tblFilter=f;
-  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  buildTable();
-}
-
-function filterTable(){
-  tblSearch=document.getElementById('tbl-search').value.toLowerCase();
-  buildTable();
-}
-
-function sortTable(col){
-  if(sortCol===col){sortAsc=!sortAsc;}else{sortCol=col;sortAsc=true;}
-  document.querySelectorAll('.ref-tbl th').forEach(th=>{
-    th.classList.remove('sorted');
-    const si=th.querySelector('.sort-indicator');
-    if(si)si.textContent='↕';
-  });
-  const th=document.querySelector(`.ref-tbl th[data-col="${col}"]`);
-  if(th){
-    th.classList.add('sorted');
-    const si=th.querySelector('.sort-indicator');
-    if(si)si.textContent=sortAsc?'↑':'↓';
-  }
-  buildTable();
-}
-
-function artSortVal(a){
-  // numeric sort for art numbers
-  return parseFloat(a.art.replace(/[^0-9.]/g,''))||0;
-}
-
-function buildTable(){
-  let items=[...DATA_ALL];
-  if(tblFilter!=='all')items=items.filter(x=>x.div===tblFilter);
-  if(tblSearch)items=items.filter(x=>
-    x.art.toLowerCase().includes(tblSearch)||
-    x.label.toLowerCase().includes(tblSearch)||
-    x.trigger.toLowerCase().includes(tblSearch)||
-    fmtPeriod(x.days).includes(tblSearch)||
-    x.div.includes(tblSearch)
-  );
-
-  // sort
-  items.sort((a,b)=>{
-    let va,vb;
-    if(sortCol==='days'){va=a.days;vb=b.days;}
-    else if(sortCol==='label'){va=a.label;vb=b.label;}
-    else{va=artSortVal(a);vb=artSortVal(b);}
-    if(va<vb)return sortAsc?-1:1;
-    if(va>vb)return sortAsc?1:-1;
-    return 0;
+  const filtered = ARTICLES.filter(a => {
+    const divMatch = filterDivision === 'all' || a[5] === filterDivision;
+    const searchMatch = !q || a[1].toLowerCase().includes(q) || String(a[0]).includes(q);
+    return divMatch && searchMatch;
   });
 
-  let html='';
-  if(items.length===0){
-    html=`<tr><td colspan="6" class="tbl-empty">No articles match your search.</td></tr>`;
-  } else {
-    let lastPart='';
-    items.forEach(item=>{
-      if(tblFilter==='all'&&sortCol==='art'&&sortAsc&&item.part!==lastPart){
-        html+=`<tr class="part-sep"><td colspan="6">${item.part}</td></tr>`;
-        lastPart=item.part;
+  tbody.innerHTML = '';
+  filtered.forEach(a => {
+    const tr = document.createElement('tr');
+    tr.dataset.art = a[0];
+    tr.innerHTML = `
+      <td>${a[0]}</td>
+      <td>${a[1]}</td>
+      <td>${periodStr(a[2], a[3], a[4])}</td>
+      <td><span class="div-badge ${a[5]}">${a[5]}</span></td>
+      <td>${a[6]}</td>
+    `;
+    tr.addEventListener('click', () => {
+      // Sync calculator division
+      if (a[5] !== currentDivision) {
+        currentDivision = a[5];
+        document.querySelectorAll('.seg-control button').forEach(b => {
+          b.classList.toggle('active', b.dataset.div === a[5]);
+        });
+        populateArticleSelect(a[5]);
       }
-      const globalIdx=DATA_ALL.indexOf(item);
-      html+=`<tr>
-        <td class="td-art">${item.art}</td>
-        <td class="td-type">${item.label}</td>
-        <td class="td-period">${fmtPeriod(item.days)}</td>
-        <td><span class="div-tag ${item.div}">${item.div}</span></td>
-        <td class="td-trigger">${item.trigger}</td>
-        <td><button class="use-this" onclick="useArticle(${globalIdx})">Use →</button></td>
-      </tr>`;
+      document.getElementById('articleSelect').value = a[0];
+      onArticleChange();
+      document.querySelector('.calc-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  }
+    tbody.appendChild(tr);
+  });
 
-  document.getElementById('ref-body').innerHTML=html;
-  document.getElementById('row-count').textContent=`${items.length} of ${DATA_ALL.length}`;
+  document.getElementById('tableCount').textContent = `${filtered.length} of ${ARTICLES.length} articles`;
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="no-results">No articles match your search.</td></tr>';
+  }
 }
 
-function useArticle(idx){
-  const item=DATA_ALL[idx];
-  // switch division tab
-  document.querySelectorAll('.div-tab').forEach(t=>{
-    if(t.dataset.div===item.div)t.click();
-  });
-  // set select
-  setTimeout(()=>{
-    const sel=document.getElementById('case-type');
-    for(let o of sel.options){
-      if(parseInt(o.value)===idx){sel.value=o.value;break;}
-    }
-    onCaseChange();
-    // scroll to calculator
-    document.querySelector('.main').scrollIntoView({behavior:'smooth'});
-  },80);
+function filterTable(val) {
+  searchQuery = val;
+  renderTable();
+}
+
+function filterDiv(div, btn) {
+  filterDivision = div;
+  document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
 }
 </script>
 </body>
