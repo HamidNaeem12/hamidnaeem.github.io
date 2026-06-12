@@ -1,4 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <rect width="512" height="512" rx="96" fill="#0d0d12"/>
-  <text x="256" y="370" font-family="Georgia, 'Times New Roman', serif" font-size="380" font-weight="700" fill="#534AB7" text-anchor="middle">H</text>
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#08080f"/>
+  
+  <!-- Document shape -->
+  <rect x="136" y="80" width="240" height="352" rx="6" fill="#0f0f1a" stroke="#534AB7" stroke-width="6"/>
+  
+  <!-- Folded corner -->
+  <polygon points="328,80 376,80 376,128 328,80" fill="#08080f"/>
+  <polygon points="328,80 376,128 328,128" fill="#1a1a2e" stroke="#534AB7" stroke-width="4"/>
+  
+  <!-- Title line — bold -->
+  <line x1="160" y1="156" x2="320" y2="156" stroke="#f5f0e8" stroke-width="12" stroke-linecap="round"/>
+  <!-- Subtitle line -->
+  <line x1="160" y1="178" x2="270" y2="178" stroke="#f5f0e8" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+  
+  <!-- Wave line 1 — law rhythm -->
+  <path d="M160,210 Q176,196 192,210 Q208,224 224,210 Q240,196 256,210 Q272,224 288,210 Q304,196 320,210" fill="none" stroke="#534AB7" stroke-width="7" stroke-linecap="round"/>
+  
+  <!-- Jagged line — AI/data signal -->
+  <path d="M160,238 L176,222 L192,254 L208,222 L224,238 L240,222 L256,254 L272,238 L288,222 L304,238 L320,238" fill="none" stroke="#1D9E75" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Dotted statute line -->
+  <line x1="160" y1="266" x2="320" y2="266" stroke="#f5f0e8" stroke-width="5" stroke-dasharray="18,10" stroke-linecap="round" opacity="0.25"/>
+  
+  <!-- Wave line 2 -->
+  <path d="M160,294 Q176,280 192,294 Q208,308 224,294 Q240,280 256,294 Q272,308 288,294 Q304,280 320,294" fill="none" stroke="#534AB7" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Signal line 2 -->
+  <path d="M160,322 L176,308 L192,336 L208,308 L224,322 L240,308 L256,336 L272,322 L288,308 L304,322 L320,322" fill="none" stroke="#1D9E75" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+
+  <!-- Section divider -->
+  <line x1="160" y1="352" x2="320" y2="352" stroke="#534AB7" stroke-width="3" opacity="0.4"/>
+  
+  <!-- HN Monogram -->
+  <text x="168" y="418" font-family="Georgia,'Times New Roman',serif" font-size="80" font-weight="700" fill="#f5f0e8" letter-spacing="-2">HN</text>
+  
+  <!-- Tiny circuit node ornament -->
+  <circle cx="160" cy="440" r="7" fill="#1D9E75" opacity="0.5"/>
+  <line x1="167" y1="440" x2="190" y2="440" stroke="#1D9E75" stroke-width="4" opacity="0.35"/>
+  <circle cx="196" cy="440" r="5" fill="#1D9E75" opacity="0.3"/>
 </svg>
