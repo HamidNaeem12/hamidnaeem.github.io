@@ -145,11 +145,12 @@
     .nav-links a {
       font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--ink-muted); text-decoration: none;
-      padding: 0.35rem 0.7rem; position: relative;
+      padding: 0 0.7rem; position: relative;
       transition: color 0.2s;
+      height: 58px; display: flex; align-items: center;
     }
     .nav-links a::after {
-      content: ''; position: absolute; bottom: 2px; left: 50%; right: 50%;
+      content: ''; position: absolute; bottom: 0; left: 50%; right: 50%;
       height: 1px; background: var(--red);
       transition: left 0.25s var(--ease-out), right 0.25s var(--ease-out);
     }
@@ -264,26 +265,30 @@
     }
 
     .hero-btns {
-      display: flex; gap: 0.85rem; flex-wrap: wrap;
+      display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;
     }
     .btn-solid {
-      padding: 0.85rem 2rem; background: var(--ink); color: var(--white);
-      font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.12em;
-      text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink);
-      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+      padding: 1rem 2.25rem; background: var(--red); color: var(--white);
+      font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.14em;
+      text-transform: uppercase; text-decoration: none; border: 1px solid var(--red);
+      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
       cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
-      min-height: 48px;
+      min-height: 50px;
+      box-shadow: 0 4px 20px rgba(139,32,32,0.25);
     }
-    .btn-solid:hover { background: var(--red); border-color: var(--red); }
+    .btn-solid:hover {
+      background: #6d1818; border-color: #6d1818;
+      box-shadow: 0 6px 28px rgba(139,32,32,0.35);
+    }
     .btn-ghost {
-      padding: 0.85rem 2rem; background: transparent; color: var(--ink-soft);
-      font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.12em;
+      padding: 0.9rem 1.75rem; background: transparent; color: var(--ink-muted);
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
       text-transform: uppercase; text-decoration: none; border: 1px solid var(--rule-dk);
       transition: border-color 0.25s, color 0.25s;
       cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
-      min-height: 48px;
+      min-height: 50px;
     }
-    .btn-ghost:hover { border-color: var(--ink-mid); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
 
     .hero-foot {
       border-top: 1px solid var(--rule); padding: 1.1rem 2.5rem;
@@ -326,7 +331,7 @@
     /* ── ABOUT ── */
     #about { background: var(--paper); }
     .about-layout { display: grid; grid-template-columns: 1fr 268px; gap: 5rem; align-items: start; }
-    .about-body p { font-size: 0.96rem; line-height: 2.05; color: var(--ink-soft); margin-bottom: 1.5rem; }
+    .about-body p { font-size: 0.96rem; line-height: 1.78; color: var(--ink-soft); margin-bottom: 1.5rem; }
     .about-body p.lead {
       font-family: var(--serif); font-size: 1.28rem; font-style: italic;
       color: var(--ink); line-height: 1.85; font-weight: 400;
@@ -647,10 +652,10 @@
       text-transform: uppercase; color: var(--ink-ghost);
     }
     .modal-body .essay-meta-row span { color: var(--red); }
-    .essay-content p { font-size: 0.95rem; line-height: 2.05; color: var(--ink-soft); margin-bottom: 1.5rem; }
+    .essay-content p { font-size: 0.95rem; line-height: 1.82; color: var(--ink-soft); margin-bottom: 1.5rem; }
     .essay-content p.drop {
       font-family: var(--serif); font-size: 1.12rem; font-style: italic;
-      color: var(--ink); line-height: 1.9; font-weight: 400;
+      color: var(--ink); line-height: 1.75; font-weight: 400;
     }
     .essay-content h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: var(--ink); margin: 2.25rem 0 0.75rem; }
     .essay-content h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin: 1.75rem 0 0.5rem; }
