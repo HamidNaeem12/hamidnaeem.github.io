@@ -1,1014 +1,892 @@
 <!DOCTYPE html>
-  <!-- Google Tag Manager -->
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KH3MQVKF');</script>
 <!-- End Google Tag Manager -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Hamid Naeem | AI Governance & Legal Tech</title>
-  <meta name="description" content="Muhammad Hamid Naeem — AI governance analyst and legal researcher working where law meets emerging technology.">
-  <meta name="author" content="Muhammad Hamid Naeem">
-  <meta name="google-site-verification" content="6pj3oc4KSDpdFCOg_j_UY7DY-4J4yeaHYTo1Sdz3Q3Y">
-  <link rel="canonical" href="https://hamidnaeem.me/">
-  <meta property="og:title" content="Muhammad Hamid Naeem | AI Governance & Legal Tech">
-  <meta property="og:description" content="AI governance, legal research, and data analytics across Pakistan, UAE, India, and the US.">
-  <meta property="og:url" content="https://hamidnaeem.me/">
-  <meta property="og:type" content="website">
-<html lang="en">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Filing deadlines under the Limitation Act 1908 (Pakistan) — First Schedule, corrected and complete. Built for Pakistani practitioners.">
+<meta name="description" content="Filing deadlines under the Limitation Act 1908 (Pakistan) — First Schedule, all 183 articles. Built for Pakistani practitioners. By Muhammad Hamid Naeem.">
+<meta name="author" content="Muhammad Hamid Naeem">
+<meta name="google-site-verification" content="6pj3oc4KSDpdFCOg_j_UY7DY-4J4yeaHYTo1Sdz3Q3Y">
+<link rel="canonical" href="https://hamidnaeem.me/calculator">
+<meta property="og:title" content="Limitation Calculator · LA 1908 · Pakistan — Hamid Naeem">
+<meta property="og:description" content="All 183 articles of the Limitation Act 1908, searchable, with s.12 and s.14 exclusion support.">
+<meta property="og:url" content="https://hamidnaeem.me/calculator">
+<meta property="og:type" content="website">
 <title>Limitation Calculator · Limitation Act 1908 · Pakistan — Hamid Naeem</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --ink: #0f0e0b;
-    --paper: #f5f2eb;
-    --cream: #ede9df;
-    --rule: #c8c0ae;
-    --accent: #1a1a2e;
-    --red: #8b1a1a;
-    --gold: #a0854a;
-    --mid: #5a5548;
-    --light: #9a9286;
-    --serif: 'Playfair Display', Georgia, serif;
-    --mono: 'DM Mono', 'Courier New', monospace;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { font-size: 16px; scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--ink);
-    border-bottom: 2px solid var(--gold);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-  }
-
-  .nav-brand {
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--paper);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-
-  .nav-brand span {
-    color: var(--gold);
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    color: var(--rule);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0 1rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid #2a2a2a;
-    transition: color 0.15s, background 0.15s;
-  }
-
-  .nav-links a:first-child { border-left: 1px solid #2a2a2a; }
-
-  .nav-links a:hover, .nav-links a.active {
-    color: var(--paper);
-    background: rgba(160,133,74,0.12);
-  }
-
-  .nav-links a.active { color: var(--gold); }
-
-  /* ── MASTHEAD ── */
-  .masthead {
-    background: var(--ink);
-    padding: 4rem 2rem 3rem;
-    border-bottom: 4px double var(--gold);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .masthead::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: repeating-linear-gradient(
-      0deg, transparent, transparent 39px, rgba(160,133,74,0.06) 39px, rgba(160,133,74,0.06) 40px
-    );
-    pointer-events: none;
-  }
-
-  .masthead-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .masthead-tag {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .masthead-tag::before {
-    content: '';
-    display: inline-block;
-    width: 2rem;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .masthead h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.8rem, 6vw, 5.5rem);
-    font-weight: 900;
-    color: var(--paper);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-
-  .masthead h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .masthead-sub {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-style: italic;
-    color: var(--rule);
-    max-width: 600px;
-    line-height: 1.65;
-    margin-bottom: 2.5rem;
-  }
-
-  .masthead-stats {
-    display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-    border-top: 1px solid #2a2a2a;
-    padding-top: 1.5rem;
-  }
-
-  .stat {
-    padding: 0 2rem 0 0;
-    margin-right: 2rem;
-    border-right: 1px solid #2a2a2a;
-  }
-
-  .stat:last-child { border-right: none; }
-
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--paper);
-    display: block;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--light);
-    margin-top: 0.3rem;
-    display: block;
-  }
-
-  /* ── DISCLAIMER ── */
-  .disclaimer {
-    background: #1a0a0a;
-    border-left: 3px solid var(--red);
-    border-bottom: 2px solid var(--red);
-    padding: 1rem 2rem;
-  }
-
-  .disclaimer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .disclaimer-icon {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--red);
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-    margin-top: 0.1rem;
-    font-weight: 500;
-  }
-
-  .disclaimer p {
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    color: #c8a0a0;
-    line-height: 1.6;
-  }
-
-  /* ── LAYOUT ── */
-  .page-body {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 2rem 5rem;
-    display: grid;
-    grid-template-columns: 420px 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-
-  /* ── CALCULATOR PANEL ── */
-  .calc-panel {
-    position: sticky;
-    top: 72px;
-  }
-
-  .panel-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--ink);
-  }
-
-  .panel-title {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  .panel-sub {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--light);
-  }
-
-  .field-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .field-label {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .field-label span {
-    color: var(--light);
-    font-size: 0.62rem;
-    margin-left: 0.4rem;
-    text-transform: none;
-    letter-spacing: 0;
-  }
-
-  .seg-control {
-    display: flex;
-    border: 1.5px solid var(--ink);
-    overflow: hidden;
-  }
-
-  .seg-control button {
-    flex: 1;
-    padding: 0.6rem 0.5rem;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: transparent;
-    border: none;
-    border-right: 1px solid var(--ink);
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--mid);
-  }
-
-  .seg-control button:last-child { border-right: none; }
-
-  .seg-control button.active {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .seg-control button:hover:not(.active) {
-    background: var(--cream);
-  }
-
-  select, input[type="date"], input[type="number"] {
-    width: 100%;
-    padding: 0.65rem 0.85rem;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    background: var(--cream);
-    border: 1.5px solid var(--rule);
-    color: var(--ink);
-    appearance: none;
-    -webkit-appearance: none;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5548' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.9rem center;
-    padding-right: 2.2rem;
-  }
-
-  select:focus, input:focus {
-    border-color: var(--ink);
-    background: #fff;
-  }
-
-  .date-shortcuts {
-    display: flex;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
-  }
-
-  .date-shortcuts button {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    padding: 0.3rem 0.6rem;
-    background: transparent;
-    border: 1px solid var(--rule);
-    color: var(--mid);
-    cursor: pointer;
-    transition: all 0.12s;
-  }
-
-  .date-shortcuts button:hover {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
-
-  .exclusion-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    cursor: pointer;
-    margin-bottom: 0.8rem;
-  }
-
-  .exclusion-toggle input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--ink);
-    cursor: pointer;
-  }
-
-  .exclusion-toggle span {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    color: var(--mid);
-  }
-
-  .exclusion-fields {
-    display: none;
-    padding: 1rem;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    margin-top: 0.5rem;
-  }
-
-  .exclusion-fields.visible { display: block; }
-
-  .exclusion-fields .field-group { margin-bottom: 0.8rem; }
-  .exclusion-fields .field-group:last-child { margin-bottom: 0; }
-
-  .exclusion-note {
-    font-size: 0.68rem;
-    color: var(--light);
-    font-style: italic;
-    margin-top: 0.4rem;
-    line-height: 1.5;
-  }
-
-  .divider {
-    height: 1px;
-    background: var(--rule);
-    margin: 1.5rem 0;
-  }
-
-  .calc-btn {
-    width: 100%;
-    padding: 0.9rem 1.5rem;
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-style: italic;
-    font-weight: 600;
-    background: var(--ink);
-    color: var(--paper);
-    border: 2px solid var(--ink);
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.01em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .calc-btn:hover {
-    background: var(--red);
-    border-color: var(--red);
-  }
-
-  .calc-btn::after {
-    content: '→';
-    font-style: normal;
-    font-family: var(--mono);
-  }
-
-  /* ── RESULT ── */
-  .result-panel {
-    margin-top: 1.5rem;
-    border: 1.5px solid var(--rule);
-    display: none;
-  }
-
-  .result-panel.visible { display: block; }
-
-  .result-header {
-    background: var(--ink);
-    padding: 0.75rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .result-header span {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--rule);
-  }
-
-  .result-status {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    padding: 0.2rem 0.6rem;
-    text-transform: uppercase;
-  }
-
-  .result-status.ok { background: #0a2a0a; color: #7aad7a; }
-  .result-status.warn { background: #2a1a00; color: #d4a040; }
-  .result-status.expired { background: #2a0a0a; color: #d47070; }
-
-  .result-body {
-    padding: 1.25rem 1rem;
-  }
-
-  .result-deadline {
-    font-family: var(--serif);
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-  }
-
-  .result-days {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--mid);
-    letter-spacing: 0.06em;
-    margin-bottom: 1rem;
-  }
-
-  .result-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.4rem 0;
-    border-bottom: 1px solid var(--cream);
-    font-size: 0.78rem;
-  }
-
-  .result-row:last-child { border-bottom: none; }
-
-  .result-row-label {
-    font-family: var(--mono);
-    color: var(--light);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-  }
-
-  .result-row-val {
-    font-family: var(--mono);
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .timeline {
-    margin-top: 1rem;
-    height: 8px;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .timeline-fill {
-    height: 100%;
-    background: var(--ink);
-    transition: width 0.4s ease;
-  }
-
-  .timeline-fill.warn { background: #a06010; }
-  .timeline-fill.expired { background: var(--red); width: 100% !important; }
-
-  /* ── REFERENCE TABLE ── */
-  .reference-panel {
-    min-width: 0;
-  }
-
-  .ref-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--ink);
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .ref-title {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    font-weight: 700;
-  }
-
-  .ref-title em { font-style: italic; color: var(--mid); }
-
-  .ref-controls {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .search-wrap {
-    position: relative;
-  }
-
-  .search-wrap input {
-    width: 220px;
-    padding: 0.45rem 0.75rem 0.45rem 2rem;
-    font-size: 0.75rem;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 0.6rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.7rem;
-    color: var(--light);
-    pointer-events: none;
-  }
-
-  .filter-tabs {
-    display: flex;
-    gap: 0;
-    border: 1.5px solid var(--ink);
-    overflow: hidden;
-  }
-
-  .filter-tabs button {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.45rem 0.85rem;
-    background: transparent;
-    border: none;
-    border-right: 1px solid var(--ink);
-    cursor: pointer;
-    color: var(--mid);
-    transition: all 0.12s;
-  }
-
-  .filter-tabs button:last-child { border-right: none; }
-
-  .filter-tabs button.active {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .filter-tabs button:hover:not(.active) {
-    background: var(--cream);
-  }
-
-  /* TABLE */
-  .table-wrap {
-    overflow-x: auto;
-    border: 1.5px solid var(--ink);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8rem;
-  }
-
-  thead {
-    background: var(--ink);
-    position: sticky;
-    top: 57px;
-  }
-
-  thead th {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--rule);
-    padding: 0.75rem 1rem;
-    text-align: left;
-    font-weight: 400;
-    white-space: nowrap;
-  }
-
-  thead th:first-child {
-    width: 60px;
-    text-align: center;
-  }
-
-  thead th:nth-child(3) { width: 90px; }
-
-  tbody tr {
-    border-bottom: 1px solid var(--cream);
-    transition: background 0.1s;
-  }
-
-  tbody tr:hover { background: var(--cream); }
-
-  tbody tr.highlighted {
-    background: #fff8e8;
-    border-left: 3px solid var(--gold);
-  }
-
-  td {
-    padding: 0.7rem 1rem;
-    vertical-align: top;
-    color: var(--ink);
-    line-height: 1.5;
-    font-family: var(--sans);
-    font-size: 0.78rem;
-  }
-
-  td:first-child {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    text-align: center;
-    color: var(--mid);
-    white-space: nowrap;
-  }
-
-  td:nth-child(3) {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--red);
-    white-space: nowrap;
-    font-weight: 500;
-  }
-
-  .div-badge {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.15rem 0.4rem;
-    display: inline-block;
-  }
-
-  .div-badge.suits { background: #e8f0e8; color: #2a5a2a; }
-  .div-badge.appeals { background: #e8eaf8; color: #1a2a7a; }
-  .div-badge.applications { background: #f8ece8; color: #6a2a1a; }
-
-  .table-count {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--light);
-    margin-top: 0.75rem;
-    letter-spacing: 0.06em;
-  }
-
-  .no-results {
-    text-align: center;
-    padding: 3rem;
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--light);
-    font-size: 1rem;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    border-top: 2px solid var(--gold);
-    padding: 1.5rem 2rem;
-  }
-
-  .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .footer-copy {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--light);
-    letter-spacing: 0.08em;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-links a {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--rule);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.12s;
-  }
-
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .page-body {
-      grid-template-columns: 1fr;
-    }
-    .calc-panel { position: static; }
-    .nav-links { display: none; }
-  }
-
-  @media (max-width: 600px) {
-    .masthead { padding: 2.5rem 1.25rem 2rem; }
-    .page-body { padding: 2rem 1.25rem 4rem; }
-    .masthead-stats { gap: 1rem; }
-    .stat { padding: 0 1.25rem 0 0; margin-right: 1.25rem; }
-  }
+/* ─── RESET & TOKENS ──────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+:root {
+  --navy:      #002244;
+  --navy-mid:  #003366;
+  --blue:      #0057A8;
+  --blue-lt:   #E8F1FB;
+  --slate:     #475569;
+  --slate-lt:  #94A3B8;
+  --white:     #FFFFFF;
+  --off-white: #F8FAFC;
+  --rule:      #E2E8F0;
+  --rule-dk:   #CBD5E1;
+  --ink:       #0F172A;
+  --red:       #B91C1C;
+  --red-lt:    #FEF2F2;
+  --amber:     #B45309;
+  --amber-lt:  #FFFBEB;
+  --green:     #15803D;
+  --green-lt:  #F0FDF4;
+  --font:      'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─────────────────────────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 32px; height: 32px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo-mark span { color: var(--white); font-size: 12px; font-weight: 700; letter-spacing: -0.5px; }
+.nav-logo-text { font-size: 13px; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+
+.nav-links { display: flex; list-style: none; }
+.nav-links a {
+  display: block;
+  padding: 0 18px;
+  font-size: 12px; font-weight: 500;
+  color: var(--slate);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  line-height: 64px;
+  border-right: 1px solid var(--rule);
+  transition: color 0.15s, background 0.15s;
+}
+.nav-links li:first-child a { border-left: 1px solid var(--rule); }
+.nav-links a:hover { color: var(--navy); background: var(--off-white); }
+.nav-links a.active { color: var(--navy); background: var(--blue-lt); font-weight: 600; }
+
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 20px; height: 38px;
+  background: var(--navy); color: var(--white);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--navy-mid); }
+
+/* ─── HERO / MASTHEAD ────────────────────────────────────────────── */
+.masthead {
+  background: var(--navy);
+  padding: 64px 48px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Engineering grid overlay */
+.masthead::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.masthead-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.masthead-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+}
+.masthead-eyebrow-line { width: 32px; height: 2px; background: var(--blue); flex-shrink: 0; }
+.masthead-eyebrow-text {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue);
+}
+
+.masthead h1 {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+}
+.masthead h1 .dim { color: rgba(255,255,255,0.35); }
+
+.masthead-sub {
+  font-size: 16px; font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  max-width: 560px;
+  line-height: 1.7;
+  border-left: 3px solid var(--blue);
+  padding-left: 16px;
+  margin-bottom: 48px;
+}
+
+/* Stat bar inside masthead */
+.masthead-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.masthead-stat {
+  padding: 24px 32px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.masthead-stat:last-child { border-right: none; }
+.masthead-stat-n {
+  font-size: 28px; font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.04em; line-height: 1;
+  margin-bottom: 4px;
+}
+.masthead-stat-l {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── DISCLAIMER ─────────────────────────────────────────────────── */
+.disclaimer {
+  background: var(--red-lt);
+  border-bottom: 1px solid #FECACA;
+  padding: 12px 48px;
+}
+.disclaimer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.disclaimer-badge {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--red);
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  padding: 3px 8px;
+  white-space: nowrap; flex-shrink: 0;
+  margin-top: 1px;
+}
+.disclaimer p {
+  font-size: 12px; color: #7F1D1D;
+  line-height: 1.65;
+}
+.disclaimer strong { color: var(--red); font-weight: 600; }
+
+/* ─── PAGE BODY ──────────────────────────────────────────────────── */
+.page-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 48px 80px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ─── CALCULATOR PANEL ───────────────────────────────────────────── */
+.calc-panel {
+  position: sticky;
+  top: 80px;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--navy);
+}
+
+.calc-panel-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--off-white);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.calc-panel-title { font-size: 13px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+.calc-panel-sub {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--slate-lt);
+}
+
+.calc-body { padding: 24px; }
+
+/* Field groups */
+.field-group { margin-bottom: 20px; }
+.field-group:last-child { margin-bottom: 0; }
+
+.field-label {
+  display: block;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--slate-lt);
+  margin-bottom: 6px;
+}
+.field-label .note {
+  color: var(--slate-lt);
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.02em; text-transform: none;
+  margin-left: 6px;
+}
+
+/* Segmented control */
+.seg-control {
+  display: flex;
+  border: 1px solid var(--rule-dk);
+  overflow: hidden;
+}
+.seg-control button {
+  flex: 1;
+  padding: 9px 6px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: var(--font);
+  background: var(--white);
+  border: none;
+  border-right: 1px solid var(--rule-dk);
+  cursor: pointer;
+  color: var(--slate);
+  transition: all 0.12s;
+}
+.seg-control button:last-child { border-right: none; }
+.seg-control button.active { background: var(--navy); color: var(--white); }
+.seg-control button:hover:not(.active) { background: var(--off-white); color: var(--navy); }
+
+/* Inputs */
+select, input[type="date"], input[type="number"] {
+  width: 100%;
+  padding: 9px 12px;
+  font-family: var(--font);
+  font-size: 13px; font-weight: 400;
+  background: var(--white);
+  border: 1px solid var(--rule-dk);
+  color: var(--ink);
+  appearance: none; -webkit-appearance: none;
+  outline: none;
+  transition: border-color 0.12s;
+  min-height: 40px;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  cursor: pointer;
+}
+select:focus, input:focus { border-color: var(--blue); outline: 2px solid var(--blue-lt); }
+
+/* Date shortcuts */
+.date-shortcuts { display: flex; gap: 4px; margin-top: 6px; }
+.date-shortcuts button {
+  font-family: var(--font);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  background: var(--off-white);
+  border: 1px solid var(--rule);
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.date-shortcuts button:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+/* Divider */
+.calc-divider { height: 1px; background: var(--rule); margin: 20px 0; }
+
+/* Exclusion toggles */
+.excl-toggle-row {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; margin-bottom: 8px;
+}
+.excl-toggle-row input[type="checkbox"] {
+  width: 15px; height: 15px;
+  accent-color: var(--navy);
+  cursor: pointer;
+}
+.excl-toggle-row .excl-label {
+  font-size: 11px; font-weight: 500;
+  color: var(--slate);
+}
+
+.excl-fields {
+  display: none;
+  padding: 16px;
+  background: var(--off-white);
+  border: 1px solid var(--rule);
+  margin-top: 4px;
+}
+.excl-fields.visible { display: block; }
+.excl-fields .field-group { margin-bottom: 12px; }
+.excl-fields .field-group:last-of-type { margin-bottom: 0; }
+.excl-note {
+  font-size: 11px; color: var(--slate-lt);
+  line-height: 1.55; margin-top: 10px;
+  border-left: 2px solid var(--rule);
+  padding-left: 10px;
+}
+
+/* Calculate button */
+.calc-btn {
+  width: 100%;
+  padding: 13px 20px;
+  background: var(--navy); color: var(--white);
+  font-family: var(--font);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: none; cursor: pointer;
+  transition: background 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px;
+}
+.calc-btn:hover { background: var(--blue); }
+
+/* ─── RESULT ─────────────────────────────────────────────────────── */
+.result-panel {
+  display: none;
+  border: 1px solid var(--rule);
+  margin-top: 16px;
+  overflow: hidden;
+}
+.result-panel.visible { display: block; }
+
+.result-header {
+  padding: 10px 16px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.result-header-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.result-badge {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 8px;
+  flex-shrink: 0;
+}
+.result-badge.ok     { background: var(--green-lt); color: var(--green); }
+.result-badge.warn   { background: var(--amber-lt); color: var(--amber); }
+.result-badge.expired { background: var(--red-lt); color: var(--red); }
+
+.result-body { padding: 20px 16px; }
+
+.result-deadline {
+  font-size: 26px; font-weight: 800;
+  color: var(--navy); letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 4px;
+}
+.result-days {
+  font-size: 11px; font-weight: 500;
+  color: var(--slate-lt); letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+
+/* Timeline bar */
+.timeline {
+  height: 4px;
+  background: var(--rule);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.timeline-fill {
+  height: 100%;
+  background: var(--navy);
+  transition: width 0.4s ease;
+}
+.timeline-fill.warn    { background: var(--amber); }
+.timeline-fill.expired { background: var(--red); width: 100% !important; }
+
+/* Result rows */
+.result-rows { border-top: 1px solid var(--rule); }
+.result-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  gap: 8px;
+}
+.result-row:last-child { border-bottom: none; }
+.result-row-key {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--slate-lt);
+  flex-shrink: 0;
+}
+.result-row-val {
+  font-size: 12px; font-weight: 600;
+  color: var(--navy);
+  text-align: right;
+}
+
+/* ─── REFERENCE TABLE PANEL ──────────────────────────────────────── */
+.reference-panel { min-width: 0; }
+
+.ref-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.ref-title-block {}
+.ref-eyebrow {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 4px;
+}
+.ref-title {
+  font-size: clamp(20px, 3vw, 30px); font-weight: 800;
+  color: var(--navy); letter-spacing: -0.03em; line-height: 1;
+}
+
+.ref-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.search-wrap { position: relative; }
+.search-wrap input {
+  width: 200px;
+  padding-left: 30px;
+  font-size: 12px;
+}
+.search-icon {
+  position: absolute; left: 10px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px; color: var(--slate-lt);
+  pointer-events: none; line-height: 1;
+}
+
+.filter-tabs {
+  display: flex;
+  border: 1px solid var(--rule-dk);
+  overflow: hidden;
+}
+.filter-tabs button {
+  font-family: var(--font);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 7px 14px;
+  background: var(--white);
+  border: none;
+  border-right: 1px solid var(--rule-dk);
+  cursor: pointer;
+  color: var(--slate);
+  transition: all 0.1s;
+}
+.filter-tabs button:last-child { border-right: none; }
+.filter-tabs button.active { background: var(--navy); color: var(--white); }
+.filter-tabs button:hover:not(.active) { background: var(--off-white); color: var(--navy); }
+
+/* Table */
+.table-wrap {
+  border: 1px solid var(--rule);
+  overflow-x: auto;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+thead {
+  background: var(--navy);
+  position: sticky; top: 64px;
+}
+thead th {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  padding: 10px 16px;
+  text-align: left; white-space: nowrap;
+  font-family: var(--font);
+}
+thead th:first-child { width: 56px; text-align: center; }
+thead th:nth-child(3) { width: 100px; }
+thead th:nth-child(4) { width: 110px; }
+
+tbody tr {
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.08s;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--off-white); }
+tbody tr.highlighted {
+  background: var(--blue-lt);
+  border-left: 3px solid var(--blue);
+}
+
+td {
+  padding: 10px 16px;
+  vertical-align: top;
+  font-size: 12px; color: var(--slate);
+  line-height: 1.5;
+}
+td:first-child {
+  font-size: 11px; font-weight: 700;
+  color: var(--slate-lt);
+  text-align: center; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+td:nth-child(2) { font-size: 12px; color: var(--ink); }
+td:nth-child(3) {
+  font-size: 11px; font-weight: 700;
+  color: var(--navy); white-space: nowrap;
+}
+
+.div-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid transparent;
+}
+.div-badge.suits        { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+.div-badge.appeals      { background: #F0FDF4; color: #15803D; border-color: #BBF7D0; }
+.div-badge.applications { background: #FFF7ED; color: #C2410C; border-color: #FED7AA; }
+
+.table-count {
+  font-size: 11px; font-weight: 500;
+  color: var(--slate-lt);
+  margin-top: 12px;
+  letter-spacing: 0.02em;
+}
+
+.no-results {
+  text-align: center;
+  padding: 48px;
+  font-size: 13px; color: var(--slate-lt);
+  font-style: italic;
+}
+
+/* ─── FOOTER ──────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy);
+  border-top: 3px solid var(--blue);
+  padding: 0 48px;
+}
+.footer-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-logo { font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+.footer-links { display: flex; list-style: none; }
+.footer-links a {
+  display: block; padding: 0 14px;
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  line-height: 24px;
+  transition: color 0.15s;
+}
+.footer-links li:last-child a { border-right: none; padding-right: 0; }
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  padding: 14px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px;
+}
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-tag  { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.15); }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .masthead { padding: 48px 24px 0; }
+  .masthead-stats { grid-template-columns: repeat(2, 1fr); }
+  .disclaimer { padding: 12px 24px; }
+  .page-body { grid-template-columns: 1fr; padding: 32px 24px 64px; gap: 32px; }
+  .calc-panel { position: static; }
+  footer { padding: 0 24px; }
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 16px; }
+  .masthead { padding: 40px 16px 0; }
+  .masthead h1 { font-size: 36px; }
+  .masthead-stats { grid-template-columns: repeat(2, 1fr); }
+  .masthead-stat { padding: 16px 20px; }
+  .disclaimer { padding: 10px 16px; }
+  .page-body { padding: 24px 16px 48px; }
+  .ref-header { flex-direction: column; align-items: flex-start; }
+  .search-wrap input { width: 100%; }
+  .ref-controls { width: 100%; }
+  footer { padding: 0 16px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="https://hamidnaeem.me" class="nav-brand">Muhammad <span>Hamid Naeem</span></a>
-  <ul class="nav-links">
+<!-- ── NAV ────────────────────────────────────────────────────────── -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="https://hamidnaeem.me" class="nav-logo">
+    <div class="nav-logo-mark" aria-hidden="true"><span>HN</span></div>
+    <span class="nav-logo-text">Muhammad Hamid Naeem</span>
+  </a>
+  <ul class="nav-links" role="list">
     <li><a href="https://hamidnaeem.me/#about">About</a></li>
     <li><a href="https://hamidnaeem.me/#projects">Work</a></li>
-    <li><a href="https://hamidnaeem.me/calculator.html" class="active">Calculator</a></li>
-    <li><a href="https://hamidnaeem.me/newsletter.html">Newsletter</a></li>
+    <li><a href="https://hamidnaeem.me/calculator" class="active">Calculator</a></li>
+    <li><a href="https://hamidnaeem.me/newsletter">Newsletter</a></li>
     <li><a href="https://hamidnaeem.me/blog">Writing</a></li>
     <li><a href="https://hamidnaeem.me/#contact">Contact</a></li>
   </ul>
+  <a href="https://hamidnaeem.me/#contact" class="nav-cta">Commission Research &nbsp;→</a>
 </nav>
 
-<!-- MASTHEAD -->
-<div class="masthead">
+<!-- ── MASTHEAD ───────────────────────────────────────────────────── -->
+<div class="masthead" role="banner">
   <div class="masthead-inner">
-    <div class="masthead-tag">Legal Tool · Limitation Act 1908 · Pakistan</div>
-    <h1>Limitation <em>Calculator</em></h1>
+    <div class="masthead-eyebrow">
+      <div class="masthead-eyebrow-line" aria-hidden="true"></div>
+      <span class="masthead-eyebrow-text">Legal Tech Tool · Limitation Act 1908 · Pakistan</span>
+    </div>
+    <h1>Limitation <span class="dim">Calculator</span></h1>
     <p class="masthead-sub">Pick a case type, enter the trigger date, get the exact filing deadline — with s.12 and s.14 exclusion support and the full First Schedule reference below.</p>
-    <div class="masthead-stats">
-      <div class="stat">
-        <span class="stat-num">183</span>
-        <span class="stat-label">Articles</span>
+    <div class="masthead-stats" role="list" aria-label="Tool statistics">
+      <div class="masthead-stat" role="listitem">
+        <div class="masthead-stat-n">183</div>
+        <div class="masthead-stat-l">Articles covered</div>
       </div>
-      <div class="stat">
-        <span class="stat-num">3</span>
-        <span class="stat-label">Divisions</span>
+      <div class="masthead-stat" role="listitem">
+        <div class="masthead-stat-n">3</div>
+        <div class="masthead-stat-l">Divisions</div>
       </div>
-      <div class="stat">
-        <span class="stat-num">s.12</span>
-        <span class="stat-label">Copy exclusion</span>
+      <div class="masthead-stat" role="listitem">
+        <div class="masthead-stat-n">s.12</div>
+        <div class="masthead-stat-l">Copy exclusion support</div>
       </div>
-      <div class="stat">
-        <span class="stat-num">s.14</span>
-        <span class="stat-label">Prior proceedings</span>
+      <div class="masthead-stat" role="listitem">
+        <div class="masthead-stat-n">s.14</div>
+        <div class="masthead-stat-l">Prior proceedings support</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- DISCLAIMER -->
-<div class="disclaimer">
+<!-- ── DISCLAIMER ────────────────────────────────────────────────── -->
+<div class="disclaimer" role="alert" aria-label="Legal disclaimer">
   <div class="disclaimer-inner">
-    <span class="disclaimer-icon">[ ! ] NOTICE</span>
-    <p>Limitation runs differently when fraud, disability, acknowledgement, or a stay order is involved. Court closures extend deadlines; registry practice varies by court. Verify with the statute before acting on any result here. <strong style="color:#e8b0b0">This tool does not constitute legal advice.</strong></p>
+    <span class="disclaimer-badge" aria-hidden="true">Notice</span>
+    <p>Limitation runs differently when fraud, disability, acknowledgement, or a stay order is involved. Court closures extend deadlines; registry practice varies by court. Verify against the statute before acting on any result. <strong>This tool does not constitute legal advice.</strong></p>
   </div>
 </div>
 
-<!-- MAIN -->
+<!-- ── MAIN ───────────────────────────────────────────────────────── -->
 <div class="page-body">
 
   <!-- CALCULATOR -->
-  <div class="calc-panel">
-    <div class="panel-header">
-      <span class="panel-title">Configure calculation</span>
-      <span class="panel-sub">LA 1908</span>
+  <div class="calc-panel" role="complementary" aria-label="Deadline calculator">
+    <div class="calc-panel-header">
+      <span class="calc-panel-title">Configure calculation</span>
+      <span class="calc-panel-sub">LA 1908</span>
     </div>
+    <div class="calc-body">
 
-    <!-- Division -->
-    <div class="field-group">
-      <label class="field-label">Division</label>
-      <div class="seg-control">
-        <button class="active" data-div="suits" onclick="setDivision('suits', this)">⚖ Suits</button>
-        <button data-div="appeals" onclick="setDivision('appeals', this)">↑ Appeals</button>
-        <button data-div="applications" onclick="setDivision('applications', this)">◎ Applications</button>
-      </div>
-    </div>
-
-    <!-- Article -->
-    <div class="field-group">
-      <label class="field-label" for="articleSelect">Article / case type</label>
-      <select id="articleSelect" onchange="onArticleChange()">
-        <option value="">— select —</option>
-      </select>
-    </div>
-
-    <!-- Trigger date -->
-    <div class="field-group">
-      <label class="field-label" for="triggerDate">Trigger date <span>— cause of action / event</span></label>
-      <input type="date" id="triggerDate">
-      <div class="date-shortcuts">
-        <button onclick="shiftDate('trigger', -7)">−7d</button>
-        <button onclick="shiftDate('trigger', -30)">−30d</button>
-        <button onclick="shiftDate('trigger', -90)">−90d</button>
-        <button onclick="setToday('trigger')">Today</button>
-      </div>
-    </div>
-
-    <!-- Reference date -->
-    <div class="field-group">
-      <label class="field-label" for="refDate">Reference date <span>— defaults to today</span></label>
-      <input type="date" id="refDate">
-      <div class="date-shortcuts">
-        <button onclick="setToday('ref')">Today</button>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- s.12 exclusion -->
-    <div class="field-group">
-      <label class="exclusion-toggle">
-        <input type="checkbox" id="s12toggle" onchange="toggleExclusion('s12')">
-        <span>s.12 exclusion — certified copy time</span>
-      </label>
-      <div class="exclusion-fields" id="s12fields">
-        <div class="field-group">
-          <label class="field-label" for="s12applied">Date applied for copy</label>
-          <input type="date" id="s12applied">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="s12received">Date copy received</label>
-          <input type="date" id="s12received">
-        </div>
-        <p class="exclusion-note">Days between application and receipt are excluded under s.12(2). Applies to appeals and review applications.</p>
-      </div>
-    </div>
-
-    <!-- s.14 exclusion -->
-    <div class="field-group">
-      <label class="exclusion-toggle">
-        <input type="checkbox" id="s14toggle" onchange="toggleExclusion('s14')">
-        <span>s.14 exclusion — prior bona fide proceedings</span>
-      </label>
-      <div class="exclusion-fields" id="s14fields">
-        <div class="field-group">
-          <label class="field-label" for="s14filed">Prior proceeding filed</label>
-          <input type="date" id="s14filed">
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="s14dismissed">Prior proceeding dismissed</label>
-          <input type="date" id="s14dismissed">
-        </div>
-        <p class="exclusion-note">Excludes time bona fide prosecuted in a court without jurisdiction or wrongly selected (s.14 conditions must be met).</p>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <button class="calc-btn" onclick="calculate()">Calculate filing deadline</button>
-
-    <!-- RESULT -->
-    <div class="result-panel" id="resultPanel">
-      <div class="result-header">
-        <span id="resultLabel">Result</span>
-        <span class="result-status" id="resultStatus"></span>
-      </div>
-      <div class="result-body">
-        <div class="result-deadline" id="resultDeadline">—</div>
-        <div class="result-days" id="resultDays"></div>
-        <div class="timeline"><div class="timeline-fill" id="timelineFill" style="width:0%"></div></div>
-        <div style="margin-top:1rem">
-          <div class="result-row">
-            <span class="result-row-label">Trigger date</span>
-            <span class="result-row-val" id="rTrigger">—</span>
-          </div>
-          <div class="result-row">
-            <span class="result-row-label">Period</span>
-            <span class="result-row-val" id="rPeriod">—</span>
-          </div>
-          <div class="result-row">
-            <span class="result-row-label">s.12 excluded</span>
-            <span class="result-row-val" id="rS12">0 days</span>
-          </div>
-          <div class="result-row">
-            <span class="result-row-label">s.14 excluded</span>
-            <span class="result-row-val" id="rS14">0 days</span>
-          </div>
-          <div class="result-row">
-            <span class="result-row-label">Article</span>
-            <span class="result-row-val" id="rArticle">—</span>
-          </div>
+      <!-- Division -->
+      <div class="field-group">
+        <label class="field-label">Division</label>
+        <div class="seg-control" role="group" aria-label="Select division">
+          <button class="active" data-div="suits"        onclick="setDivision('suits', this)">Suits</button>
+          <button               data-div="appeals"       onclick="setDivision('appeals', this)">Appeals</button>
+          <button               data-div="applications"  onclick="setDivision('applications', this)">Applications</button>
         </div>
       </div>
-    </div>
-  </div>
+
+      <!-- Article -->
+      <div class="field-group">
+        <label class="field-label" for="articleSelect">Article / case type</label>
+        <select id="articleSelect" onchange="onArticleChange()">
+          <option value="">— select article —</option>
+        </select>
+      </div>
+
+      <!-- Trigger date -->
+      <div class="field-group">
+        <label class="field-label" for="triggerDate">
+          Trigger date
+          <span class="note">— cause of action / event</span>
+        </label>
+        <input type="date" id="triggerDate" aria-required="true">
+        <div class="date-shortcuts" aria-label="Date shortcuts">
+          <button onclick="shiftDate('trigger', -7)"  aria-label="7 days ago">−7d</button>
+          <button onclick="shiftDate('trigger', -30)" aria-label="30 days ago">−30d</button>
+          <button onclick="shiftDate('trigger', -90)" aria-label="90 days ago">−90d</button>
+          <button onclick="setToday('trigger')"       aria-label="Set today">Today</button>
+        </div>
+      </div>
+
+      <!-- Reference date -->
+      <div class="field-group">
+        <label class="field-label" for="refDate">
+          Reference date
+          <span class="note">— defaults to today</span>
+        </label>
+        <input type="date" id="refDate">
+        <div class="date-shortcuts">
+          <button onclick="setToday('ref')">Today</button>
+        </div>
+      </div>
+
+      <div class="calc-divider" aria-hidden="true"></div>
+
+      <!-- s.12 exclusion -->
+      <div class="field-group">
+        <label class="excl-toggle-row">
+          <input type="checkbox" id="s12toggle" onchange="toggleExclusion('s12')" aria-controls="s12fields">
+          <span class="excl-label">s.12 — certified copy time exclusion</span>
+        </label>
+        <div class="excl-fields" id="s12fields">
+          <div class="field-group">
+            <label class="field-label" for="s12applied">Date applied for copy</label>
+            <input type="date" id="s12applied">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="s12received">Date copy received</label>
+            <input type="date" id="s12received">
+          </div>
+          <p class="excl-note">Days between application and receipt are excluded under s.12(2). Applies to appeals and review applications.</p>
+        </div>
+      </div>
+
+      <!-- s.14 exclusion -->
+      <div class="field-group">
+        <label class="excl-toggle-row">
+          <input type="checkbox" id="s14toggle" onchange="toggleExclusion('s14')" aria-controls="s14fields">
+          <span class="excl-label">s.14 — prior bona fide proceedings</span>
+        </label>
+        <div class="excl-fields" id="s14fields">
+          <div class="field-group">
+            <label class="field-label" for="s14filed">Prior proceeding filed</label>
+            <input type="date" id="s14filed">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="s14dismissed">Prior proceeding dismissed</label>
+            <input type="date" id="s14dismissed">
+          </div>
+          <p class="excl-note">Excludes time bona fide prosecuted in a court without jurisdiction or wrongly selected (s.14 conditions must be met).</p>
+        </div>
+      </div>
+
+      <div class="calc-divider" aria-hidden="true"></div>
+
+      <button class="calc-btn" onclick="calculate()" aria-label="Calculate filing deadline">
+        Calculate Filing Deadline &nbsp;→
+      </button>
+
+      <!-- RESULT -->
+      <div class="result-panel" id="resultPanel" role="status" aria-live="polite" aria-label="Calculation result">
+        <div class="result-header">
+          <span class="result-header-label" id="resultLabel">Result</span>
+          <span class="result-badge" id="resultBadge"></span>
+        </div>
+        <div class="result-body">
+          <div class="result-deadline" id="resultDeadline">—</div>
+          <div class="result-days"     id="resultDays"></div>
+          <div class="timeline"><div class="timeline-fill" id="timelineFill" style="width:0%"></div></div>
+          <div class="result-rows">
+            <div class="result-row">
+              <span class="result-row-key">Trigger date</span>
+              <span class="result-row-val" id="rTrigger">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-key">Period</span>
+              <span class="result-row-val" id="rPeriod">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-key">s.12 excluded</span>
+              <span class="result-row-val" id="rS12">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-key">s.14 excluded</span>
+              <span class="result-row-val" id="rS14">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-row-key">Article</span>
+              <span class="result-row-val" id="rArticle">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /calc-body -->
+  </div><!-- /calc-panel -->
 
   <!-- REFERENCE TABLE -->
-  <div class="reference-panel">
+  <div class="reference-panel" role="main">
     <div class="ref-header">
-      <span class="ref-title">First Schedule — <em>limitation periods</em></span>
+      <div class="ref-title-block">
+        <div class="ref-eyebrow">First Schedule — Limitation Act 1908</div>
+        <h2 class="ref-title">All Limitation Periods</h2>
+      </div>
       <div class="ref-controls">
         <div class="search-wrap">
-          <span class="search-icon">⌕</span>
-          <input type="text" placeholder="Search articles…" oninput="filterTable(this.value)" id="tableSearch">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="text"
+            placeholder="Search articles…"
+            oninput="filterTable(this.value)"
+            id="tableSearch"
+            aria-label="Search limitation articles"
+          >
         </div>
-        <div class="filter-tabs">
+        <div class="filter-tabs" role="group" aria-label="Filter by division">
           <button class="active" onclick="filterDiv('all', this)">All</button>
           <button onclick="filterDiv('suits', this)">Suits</button>
           <button onclick="filterDiv('appeals', this)">Appeals</button>
@@ -1018,41 +896,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     <div class="table-wrap">
-      <table id="refTable">
+      <table id="refTable" aria-label="Limitation Act 1908 First Schedule">
         <thead>
           <tr>
-            <th>Art.</th>
-            <th>Description</th>
-            <th>Period</th>
-            <th>Division</th>
-            <th>Time begins</th>
+            <th scope="col">Art.</th>
+            <th scope="col">Description</th>
+            <th scope="col">Period</th>
+            <th scope="col">Division</th>
+            <th scope="col">Time begins</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
       </table>
     </div>
-    <div class="table-count" id="tableCount"></div>
+    <div class="table-count" id="tableCount" aria-live="polite"></div>
   </div>
 
-</div>
+</div><!-- /page-body -->
 
-<!-- FOOTER -->
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
 <footer>
-  <div class="footer-inner">
-    <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
-    <div class="footer-links">
-      <a href="https://linkedin.com/in/hamidnaeemadvocate">LinkedIn</a>
-      <a href="https://digitalgavel.substack.com">Substack</a>
-      <a href="https://github.com/HamidNaeem12">GitHub</a>
-      <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
-    </div>
+  <div class="footer-top">
+    <span class="footer-logo">Muhammad Hamid Naeem — AI Governance &amp; Legal Research</span>
+    <ul class="footer-links" role="list">
+      <li><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="https://digitalgavel.substack.com"          target="_blank" rel="noopener noreferrer">Substack</a></li>
+      <li><a href="https://github.com/HamidNaeem12"            target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="mailto:hamidnaeem2223ab@gmail.com">Email</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Muhammad Hamid Naeem. All rights reserved.</span>
+    <span class="footer-tag">Limitation Act 1908 · Pakistan</span>
   </div>
 </footer>
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
-// Limitation Act 1908, First Schedule — all three divisions
-// Format: [artNum, description, years, months, days, division, timeBegins]
+// [artNum, description, years, months, days, division, timeBegins]
 const ARTICLES = [
   // SUITS
   [1,"Accounts stated between merchants",3,0,0,"suits","Date of last item of account"],
@@ -1136,7 +1017,6 @@ const ARTICLES = [
   [79,"Suits on foreign judgment",3,0,0,"suits","Date of judgment"],
   [80,"Suits against Government",0,3,0,"suits","Date act or omission"],
   [81,"Suits for which no period prescribed",3,0,0,"suits","Date right to sue accrues"],
-
   // APPEALS
   [156,"Appeal to High Court from decree in original suit",0,0,90,"appeals","Date of decree"],
   [157,"Appeal to High Court from order in original suit",0,0,90,"appeals","Date of order"],
@@ -1149,7 +1029,6 @@ const ARTICLES = [
   [164,"Appeal under the Code of Civil Procedure against original order",0,0,30,"appeals","Date of order"],
   [165,"Appeal from decree in a suit under specific enactment",0,0,30,"appeals","Date of decree"],
   [166,"Appeal from decree or order in matrimonial proceedings",0,0,30,"appeals","Date of decree or order"],
-
   // APPLICATIONS
   [167,"Application for leave to appeal from decree or order",0,0,90,"applications","Date of decree or order"],
   [168,"Application for review of judgment",0,0,90,"applications","Date of decree or order"],
@@ -1170,10 +1049,10 @@ const ARTICLES = [
   [183,"Application under any other Act for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
 ];
 
-// ── STATE ──────────────────────────────────────────────────────────────────────
+// ── STATE ─────────────────────────────────────────────────────────────────────
 let currentDivision = 'suits';
-let filterDivision = 'all';
-let searchQuery = '';
+let filterDivision  = 'all';
+let searchQuery     = '';
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -1192,7 +1071,7 @@ function setDivision(div, btn) {
 
 function populateArticleSelect(div) {
   const sel = document.getElementById('articleSelect');
-  sel.innerHTML = '<option value="">— select —</option>';
+  sel.innerHTML = '<option value="">— select article —</option>';
   ARTICLES.filter(a => a[5] === div).forEach(a => {
     const opt = document.createElement('option');
     opt.value = a[0];
@@ -1204,21 +1083,13 @@ function populateArticleSelect(div) {
 function onArticleChange() {
   const artNum = parseInt(document.getElementById('articleSelect').value);
   if (!artNum) return;
-  const art = ARTICLES.find(a => a[0] === artNum);
-  if (!art) return;
-  // Highlight in table
   document.querySelectorAll('#tableBody tr').forEach(tr => {
-    tr.classList.remove('highlighted');
-    if (parseInt(tr.dataset.art) === artNum) {
-      tr.classList.add('highlighted');
-    }
+    tr.classList.toggle('highlighted', parseInt(tr.dataset.art) === artNum);
   });
 }
 
 // ── DATE HELPERS ──────────────────────────────────────────────────────────────
-function todayStr() {
-  return new Date().toISOString().split('T')[0];
-}
+function todayStr() { return new Date().toISOString().split('T')[0]; }
 
 function setToday(field) {
   document.getElementById(field === 'trigger' ? 'triggerDate' : 'refDate').value = todayStr();
@@ -1227,7 +1098,7 @@ function setToday(field) {
 function shiftDate(field, days) {
   const id = field === 'trigger' ? 'triggerDate' : 'refDate';
   const el = document.getElementById(id);
-  const base = el.value ? new Date(el.value) : new Date();
+  const base = el.value ? new Date(el.value + 'T12:00:00') : new Date();
   base.setDate(base.getDate() + days);
   el.value = base.toISOString().split('T')[0];
 }
@@ -1246,28 +1117,24 @@ function addPeriod(date, years, months, days) {
   return d;
 }
 
-function daysBetween(a, b) {
-  return Math.round((b - a) / 86400000);
-}
+function daysBetween(a, b) { return Math.round((b - a) / 86400000); }
 
 function formatDate(d) {
-  const opts = { day: 'numeric', month: 'long', year: 'numeric' };
-  return d.toLocaleDateString('en-GB', opts);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 function periodStr(y, mo, d) {
   const parts = [];
-  if (y) parts.push(`${y} year${y !== 1 ? 's' : ''}`);
+  if (y)  parts.push(`${y} year${y  !== 1 ? 's' : ''}`);
   if (mo) parts.push(`${mo} month${mo !== 1 ? 's' : ''}`);
-  if (d) parts.push(`${d} day${d !== 1 ? 's' : ''}`);
+  if (d)  parts.push(`${d} day${d   !== 1 ? 's' : ''}`);
   return parts.join(', ');
 }
 
-// ── EXCLUSION TOGGLES ──────────────────────────────────────────────────────────
+// ── EXCLUSION TOGGLES ─────────────────────────────────────────────────────────
 function toggleExclusion(id) {
   const checked = document.getElementById(id + 'toggle').checked;
-  const el = document.getElementById(id + 'fields');
-  el.classList.toggle('visible', checked);
+  document.getElementById(id + 'fields').classList.toggle('visible', checked);
 }
 
 // ── CALCULATE ─────────────────────────────────────────────────────────────────
@@ -1279,18 +1146,15 @@ function calculate() {
   if (!art) return;
 
   const triggerStr = document.getElementById('triggerDate').value;
-  const refStr = document.getElementById('refDate').value;
+  const refStr     = document.getElementById('refDate').value;
   if (!triggerStr) { alert('Please enter a trigger date.'); return; }
 
-  const trigger = parseDate(triggerStr);
-  const ref = refStr ? parseDate(refStr) : new Date();
+  const trigger  = parseDate(triggerStr);
+  const ref      = refStr ? parseDate(refStr) : new Date();
+  const [, desc, y, mo, d] = art;
 
-  const [, desc, y, mo, d, , ] = art;
-
-  // Base deadline
   let deadline = addPeriod(trigger, y, mo, d);
 
-  // s.12 exclusion
   let s12days = 0;
   if (document.getElementById('s12toggle').checked) {
     const app = parseDate(document.getElementById('s12applied').value);
@@ -1301,10 +1165,9 @@ function calculate() {
     }
   }
 
-  // s.14 exclusion
   let s14days = 0;
   if (document.getElementById('s14toggle').checked) {
-    const filed = parseDate(document.getElementById('s14filed').value);
+    const filed     = parseDate(document.getElementById('s14filed').value);
     const dismissed = parseDate(document.getElementById('s14dismissed').value);
     if (filed && dismissed && dismissed > filed) {
       s14days = daysBetween(filed, dismissed);
@@ -1312,49 +1175,45 @@ function calculate() {
     }
   }
 
-  // Days remaining
   const remaining = daysBetween(ref, deadline);
-  const total = daysBetween(trigger, deadline);
-  const elapsed = daysBetween(trigger, ref);
-  const pct = Math.max(0, Math.min(100, total > 0 ? (elapsed / total) * 100 : 100));
+  const total     = daysBetween(trigger, deadline);
+  const elapsed   = daysBetween(trigger, ref);
+  const pct       = Math.max(0, Math.min(100, total > 0 ? (elapsed / total) * 100 : 100));
 
-  // Render
   const panel = document.getElementById('resultPanel');
   panel.classList.add('visible');
 
   document.getElementById('resultDeadline').textContent = formatDate(deadline);
   document.getElementById('rTrigger').textContent = formatDate(trigger);
-  document.getElementById('rPeriod').textContent = periodStr(y, mo, d);
-  document.getElementById('rS12').textContent = s12days ? `${s12days} days excluded` : '—';
-  document.getElementById('rS14').textContent = s14days ? `${s14days} days excluded` : '—';
+  document.getElementById('rPeriod').textContent  = periodStr(y, mo, d);
+  document.getElementById('rS12').textContent     = s12days ? `${s12days} days excluded` : '—';
+  document.getElementById('rS14').textContent     = s14days ? `${s14days} days excluded` : '—';
   document.getElementById('rArticle').textContent = `Art. ${artNum}`;
-  document.getElementById('resultLabel').textContent = `Art. ${artNum} · ${desc.substring(0,30)}…`;
+  document.getElementById('resultLabel').textContent = `Art. ${artNum} · ${desc.substring(0, 32)}…`;
 
-  const fill = document.getElementById('timelineFill');
-  const status = document.getElementById('resultStatus');
+  const fill  = document.getElementById('timelineFill');
+  const badge = document.getElementById('resultBadge');
   const daysEl = document.getElementById('resultDays');
-
   fill.className = 'timeline-fill';
 
   if (remaining < 0) {
-    status.textContent = 'EXPIRED';
-    status.className = 'result-status expired';
+    badge.textContent = 'Expired';
+    badge.className   = 'result-badge expired';
     daysEl.textContent = `Deadline passed ${Math.abs(remaining)} day${Math.abs(remaining) !== 1 ? 's' : ''} ago`;
     fill.classList.add('expired');
   } else if (remaining <= 30) {
-    status.textContent = 'URGENT';
-    status.className = 'result-status warn';
+    badge.textContent = 'Urgent';
+    badge.className   = 'result-badge warn';
     daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining — act promptly`;
     fill.classList.add('warn');
     fill.style.width = pct + '%';
   } else {
-    status.textContent = 'WITHIN TIME';
-    status.className = 'result-status ok';
+    badge.textContent = 'Within Time';
+    badge.className   = 'result-badge ok';
     daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining`;
     fill.style.width = pct + '%';
   }
 
-  // Highlight in table
   onArticleChange();
   panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -1362,15 +1221,22 @@ function calculate() {
 // ── TABLE ─────────────────────────────────────────────────────────────────────
 function renderTable() {
   const tbody = document.getElementById('tableBody');
-  const q = searchQuery.toLowerCase();
+  const q     = searchQuery.toLowerCase();
 
   const filtered = ARTICLES.filter(a => {
-    const divMatch = filterDivision === 'all' || a[5] === filterDivision;
+    const divMatch    = filterDivision === 'all' || a[5] === filterDivision;
     const searchMatch = !q || a[1].toLowerCase().includes(q) || String(a[0]).includes(q);
     return divMatch && searchMatch;
   });
 
   tbody.innerHTML = '';
+
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="no-results">No articles match your search.</td></tr>';
+    document.getElementById('tableCount').textContent = '0 results';
+    return;
+  }
+
   filtered.forEach(a => {
     const tr = document.createElement('tr');
     tr.dataset.art = a[0];
@@ -1382,7 +1248,6 @@ function renderTable() {
       <td>${a[6]}</td>
     `;
     tr.addEventListener('click', () => {
-      // Sync calculator division
       if (a[5] !== currentDivision) {
         currentDivision = a[5];
         document.querySelectorAll('.seg-control button').forEach(b => {
@@ -1397,16 +1262,11 @@ function renderTable() {
     tbody.appendChild(tr);
   });
 
-  document.getElementById('tableCount').textContent = `${filtered.length} of ${ARTICLES.length} articles`;
-  if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="no-results">No articles match your search.</td></tr>';
-  }
+  document.getElementById('tableCount').textContent =
+    `${filtered.length} of ${ARTICLES.length} articles`;
 }
 
-function filterTable(val) {
-  searchQuery = val;
-  renderTable();
-}
+function filterTable(val) { searchQuery = val; renderTable(); }
 
 function filterDiv(div, btn) {
   filterDivision = div;
