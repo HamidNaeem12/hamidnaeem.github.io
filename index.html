@@ -968,6 +968,8 @@
       font-size: 13px;
       color: var(--slate);
       font-weight: 400;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .contact-val a {
       color: var(--blue);
@@ -1100,7 +1102,7 @@
       section { padding: 60px 24px; }
       .hero-main { padding: 60px 24px 48px; grid-template-columns: 1fr; gap: 40px; }
       .hero-right { display: none; }
-      .hero-ticker { padding: 0 24px; }
+      .hero-ticker { padding: 0 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .jurisdiction-grid { grid-template-columns: repeat(2, 1fr); }
       .jurisdiction-block { border-right: none; border-bottom: 1px solid var(--rule-dk); }
       .jurisdiction-block:nth-child(2n) { border-right: none; }
@@ -1115,30 +1117,83 @@
       .contact-grid { grid-template-columns: 1fr; }
       .contact-left { border-right: none; border-bottom: 1px solid var(--rule); }
       footer { padding: 0 24px; }
-      .footer-top { flex-direction: column; gap: 16px; }
+      .footer-top { grid-template-columns: 1fr; justify-items: start; gap: 16px; }
+    }
+
+    /* Collapse the full nav into a hamburger earlier than the rest of the
+       breakpoints so the link row never has to squeeze on tablets/phones */
+    @media (max-width: 880px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    @media (max-width: 768px) {
+      .section-header {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .section-link { justify-self: start; }
     }
 
     @media (max-width: 640px) {
       nav { padding: 0 16px; }
-      .nav-links, .nav-cta { display: none; }
-      .nav-toggle { display: flex; }
       section { padding: 48px 16px; }
       .hero-main { padding: 40px 16px; }
-      .hero-ticker { padding: 0 16px; gap: 0; overflow-x: auto; }
-      .hero-name { font-size: 44px; }
+      .hero-ticker { padding: 0 16px; gap: 0; }
+      .hero-eyebrow { align-items: flex-start; }
+      .hero-eyebrow-line { margin-top: 6px; flex-shrink: 0; }
+      .hero-eyebrow-text { line-height: 1.5; }
+      .hero-name { font-size: 42px; }
+      .hero-statement { font-size: 15px; padding-left: 16px; margin-bottom: 36px; }
+
       .jurisdiction-grid { grid-template-columns: 1fr; }
+      .jurisdiction-block { padding: 28px 20px; }
+
       .footprint-summary { grid-template-columns: repeat(2, 1fr); }
+      .footprint-stat { padding: 20px 16px; }
+      .footprint-stat-n { font-size: 28px; }
+
       .capability-grid { grid-template-columns: 1fr; }
-      .capability-item { border-right: none; }
-      .capability-item:nth-child(2n) { padding-left: 0; }
-      .tools-grid { grid-template-columns: 1fr 1fr; }
-      footer { padding: 0 16px; }
-      .footer-bottom { flex-direction: column; gap: 8px; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
-      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-      .contact-left, .contact-right { padding: 28px 20px; }
-      .release-card.featured { padding: 24px 20px; }
+      .capability-item { border-right: none; padding: 28px 0; }
+      .capability-item:nth-child(2n) { padding-left: 0; padding: 28px 0; }
+      .cap-title { font-size: 18px; }
+
+      .release-card.featured,
       .release-card { padding: 24px 20px; }
+      .featured-metrics { flex-direction: column; }
+      .newsletter-strip { grid-template-columns: 1fr; }
+      .issue-card { padding: 20px; }
+
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      .tool-block { padding: 20px 16px; }
+
+      .memberships-bar { gap: 10px 16px; padding: 16px 20px; }
+
+      .contact-left, .contact-right { padding: 28px 20px; }
+      .contact-row { grid-template-columns: 76px 1fr; gap: 8px; }
+
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .btn-send { width: 100%; justify-content: center; }
+
+      footer { padding: 0 16px; }
+      .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 4px 0; }
+      .footer-links a { border-right: none; padding: 4px 14px 4px 0; line-height: 1.7; }
+    }
+
+    @media (max-width: 420px) {
+      .hero-name { font-size: 34px; }
+      .hero-statement { font-size: 14px; }
+      .nav-logo-text { display: none; }
+      .hero-eyebrow-text { font-size: 10px; }
+      .footprint-summary { grid-template-columns: 1fr 1fr; }
+      .footprint-stat { padding: 16px 12px; }
+      .footprint-stat-n { font-size: 24px; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .contact-row { grid-template-columns: 1fr; gap: 4px; }
+      .contact-key { padding-top: 0; }
     }
 
     /* ─── ANIMATIONS ────────────────────────────────────────────── */
