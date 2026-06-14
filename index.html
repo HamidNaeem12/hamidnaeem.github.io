@@ -120,6 +120,75 @@
     }
     .nav-cta:hover { background: var(--navy-mid); }
 
+    /* ─── MOBILE NAV TOGGLE ─────────────────────────────────────── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid var(--rule);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--navy);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── MOBILE MENU PANEL ─────────────────────────────────────── */
+    .mobile-menu {
+      position: fixed;
+      top: 64px;
+      left: 0; right: 0;
+      bottom: 0;
+      background: var(--white);
+      z-index: 899;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      visibility: hidden;
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+      visibility: visible;
+    }
+    .mobile-menu-links { list-style: none; }
+    .mobile-menu-links a {
+      display: block;
+      padding: 18px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      letter-spacing: 0.01em;
+    }
+    .mobile-menu-links a:active { background: var(--off-white); }
+    .mobile-menu-cta {
+      display: block;
+      margin: 24px;
+      padding: 16px;
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
     /* ─── HERO ──────────────────────────────────────────────────── */
     #hero {
       margin-top: 64px;
@@ -772,11 +841,18 @@
     /* ─── CREDENTIALS ──────────────────────────────────────────── */
     #credentials { background: var(--white); }
 
+    .cred-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--rule);
+      -webkit-overflow-scrolling: touch;
+    }
     .cred-table {
       width: 100%;
-      border: 1px solid var(--rule);
       border-collapse: collapse;
+      min-width: 560px;
     }
+    .cred-table-wrap .cred-table { border: none; }
     .cred-table thead tr {
       background: var(--off-white);
       border-bottom: 2px solid var(--rule-dk);
@@ -789,6 +865,7 @@
       color: var(--slate-lt);
       text-align: left;
       padding: 12px 20px;
+      white-space: nowrap;
     }
     .cred-table td {
       padding: 16px 20px;
@@ -812,6 +889,7 @@
       padding: 2px 8px;
       background: var(--blue-lt);
       color: var(--blue);
+      white-space: nowrap;
     }
 
     .memberships-bar {
@@ -1043,6 +1121,7 @@
     @media (max-width: 640px) {
       nav { padding: 0 16px; }
       .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
       section { padding: 48px 16px; }
       .hero-main { padding: 40px 16px; }
       .hero-ticker { padding: 0 16px; gap: 0; overflow-x: auto; }
@@ -1057,6 +1136,9 @@
       .footer-bottom { flex-direction: column; gap: 8px; }
       .hero-actions { flex-direction: column; align-items: flex-start; }
       .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .contact-left, .contact-right { padding: 28px 20px; }
+      .release-card.featured { padding: 24px 20px; }
+      .release-card { padding: 24px 20px; }
     }
 
     /* ─── ANIMATIONS ────────────────────────────────────────────── */
@@ -1091,7 +1173,22 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Commission Research &nbsp;→</a>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- ── MOBILE MENU ─────────────────────────────────────────────────── -->
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <ul class="mobile-menu-links" role="list">
+    <li><a href="#footprint">Global Work</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#releases">Publications</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="mobile-menu-cta">Commission Research &nbsp;→</a>
+</div>
 
 <!-- ── HERO ────────────────────────────────────────────────────────── -->
 <section id="hero" aria-label="Introduction">
@@ -1481,6 +1578,7 @@
     </div>
   </div>
 
+  <div class="cred-table-wrap">
   <table class="cred-table" aria-label="Credentials and certifications">
     <thead>
       <tr>
@@ -1535,6 +1633,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="memberships-bar">
     <span class="mem-label">Professional Memberships</span>
@@ -1649,6 +1748,34 @@ if (form) {
     } catch {
       btn.textContent = 'Error — email directly';
       btn.disabled = false;
+    }
+  });
+}
+
+// ── Mobile nav toggle ──
+const navToggle = document.getElementById('nav-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+if (navToggle && mobileMenu) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 640 && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     }
   });
 }
