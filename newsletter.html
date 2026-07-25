@@ -3,324 +3,535 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Gavel — Newsletter | Muhammad Hamid Naeem</title>
-  <meta name="description" content="Digital Gavel — law, technology, and justice in a data-driven world. Subscribe to Muhammad Hamid Naeem's newsletter on AI governance and legal tech.">
+  <title>The Digital Gavel — Newsletter | Muhammad Hamid Naeem</title>
+  <meta name="description" content="The Digital Gavel — law, technology, and justice in a data-driven world. Muhammad Hamid Naeem's newsletter on AI governance and legal tech.">
+  <link rel="canonical" href="https://hamidnaeem.me/newsletter">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta property="og:title" content="The Digital Gavel — Newsletter | Muhammad Hamid Naeem">
+  <meta property="og:description" content="Law, technology, and justice in a data-driven world.">
+  <meta property="og:url" content="https://hamidnaeem.me/newsletter">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts — matches site-wide system -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --ink:       #111111;
-      --ink-mid:   #333333;
-      --ink-light: #666666;
-      --ink-faint: #999999;
-      --rule:      #e0ddd8;
-      --rule-dk:   #c0bdb8;
-      --paper:     #faf9f7;
-      --warm:      #f4f1ec;
-      --white:     #ffffff;
-      --serif:     'Playfair Display', Georgia, serif;
-      --sans:      'IBM Plex Sans', sans-serif;
-      --mono:      'IBM Plex Mono', monospace;
+      --ink:        #0e0d09;
+      --ink-mid:    #38342c;
+      --ink-soft:   #5e5a52;
+      --ink-muted:  #8a8680;
+      --ink-ghost:  #b8b4ae;
+      --rule:       #e4e0d8;
+      --rule-dk:    #ccc8c0;
+      --paper:      #f8f6f1;
+      --cream:      #f0ece3;
+      --warm:       #e8e1d4;
+      --white:      #fdfcfa;
+      --red:        #8b2020;
+      --red-lt:     #f5eaea;
+      --red-glow:   rgba(139,32,32,0.15);
+      --serif:      'Cormorant', Georgia, serif;
+      --sans:       'Instrument Sans', sans-serif;
+      --mono:       'Martian Mono', monospace;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body {
+      font-family: var(--sans); background: var(--paper); color: var(--ink);
+      font-weight: 300; font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+      cursor: auto;
+    }
+    body.cursor-active { cursor: none; }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 3rem; height: 60px; }
-    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; }
-    .nav-links { display: flex; list-style: none; gap: 2.5rem; }
-    .nav-links a { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
-    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); }
-    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--red); color: var(--white);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-decoration: none; text-transform: uppercase; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── CURSOR ── */
+    #cursor {
+      position: fixed; pointer-events: none; z-index: 9998; display: none;
+      width: 10px; height: 10px; background: var(--red); border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out);
+      mix-blend-mode: multiply;
+    }
+    #cursor-ring {
+      position: fixed; pointer-events: none; z-index: 9997; display: none;
+      width: 32px; height: 32px; border: 1px solid rgba(139,32,32,0.25); border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), opacity 0.3s;
+    }
+    body.cursor-active #cursor, body.cursor-active #cursor-ring { display: block; }
+    body.cursor-active:has(a:hover) #cursor, body.cursor-active:has(button:hover) #cursor { width: 18px; height: 18px; }
+    body.cursor-active:has(a:hover) #cursor-ring, body.cursor-active:has(button:hover) #cursor-ring { width: 48px; height: 48px; opacity: 0.45; }
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-progress { position: fixed; top: 0; left: 0; z-index: 999; height: 1px; background: var(--red); width: 0%; transition: width 0.1s linear; }
+
+    /* ── NAV (shared component) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      background: rgba(253,252,250,0.90); backdrop-filter: blur(20px) saturate(1.6);
+      border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 2.5rem; height: 58px; transition: box-shadow 0.3s, background 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(14,13,9,0.05); background: rgba(253,252,250,0.97); }
+    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; list-style: none; gap: 0.15rem; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-muted); text-decoration: none; padding: 0 0.7rem; position: relative;
+      transition: color 0.2s; height: 58px; display: flex; align-items: center;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 1px; background: var(--red);
+      transition: left 0.25s var(--ease-out), right 0.25s var(--ease-out);
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after, .nav-links a.active::after { left: 0.7rem; right: 0.7rem; }
+    .nav-links a.active { color: var(--ink); }
+    .nav-burger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none;
+      padding: 10px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
+    }
+    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
+
+    /* ── MOBILE NAV ── */
+    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 600; flex-direction: column; align-items: flex-start; justify-content: center; }
     .mob-nav.open { display: flex; }
-    .mob-nav a { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); text-decoration: none; }
-    .mob-close { position: absolute; top: 1.2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-mid); font-family: var(--serif); }
+    .mob-nav-inner { padding: 3rem 2rem; display: flex; flex-direction: column; width: 100%; }
+    .mob-nav a {
+      font-family: var(--serif); font-size: 2.4rem; font-weight: 300; font-style: italic; color: var(--ink);
+      text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); display: block;
+      transition: color 0.2s, padding-left 0.3s var(--ease-out);
+    }
+    .mob-nav a:first-of-type { border-top: 1px solid var(--rule); }
+    .mob-nav a:hover { color: var(--red); padding-left: 0.75rem; }
+    .mob-close {
+      position: fixed; top: 1.1rem; right: 1.5rem; background: none; border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); z-index: 700; padding: 10px;
+      min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: flex-end; letter-spacing: 0.05em;
+    }
+    .mob-close:hover { color: var(--ink); }
+    .mob-nav-label { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 2.5rem; }
 
-    /* HERO */
-    .nl-hero { padding: 9rem 3rem 5rem; background: var(--white); border-bottom: 1px solid var(--rule); }
-    .nl-hero-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: end; }
-    .nl-kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.5rem; opacity: 0; animation: rise 0.6s 0.1s forwards; }
-    .nl-title { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400; line-height: 1.05; color: var(--ink); margin-bottom: 1.25rem; opacity: 0; animation: rise 0.7s 0.25s forwards; }
+    /* ── NEWSLETTER HERO ── */
+    .nl-hero { padding: 9.5rem 2.5rem 4.5rem; background: var(--white); border-bottom: 1px solid var(--rule); }
+    .nl-hero-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 4.5rem; align-items: end; }
+    .nl-kicker {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem;
+    }
+    .nl-kicker::before { content: ''; width: 28px; height: 1px; background: var(--red); display: block; }
+    .nl-title { font-family: var(--serif); font-size: clamp(2.8rem, 6.5vw, 5.2rem); font-weight: 300; line-height: 0.98; color: var(--ink); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
     .nl-title em { font-style: italic; color: var(--ink-mid); }
-    .nl-tagline { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--ink-light); line-height: 1.75; margin-bottom: 2rem; opacity: 0; animation: rise 0.6s 0.4s forwards; }
-    .nl-meta { display: flex; gap: 2rem; opacity: 0; animation: rise 0.6s 0.55s forwards; }
-    .nl-stat { }
-    .nl-stat-n { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--ink); line-height: 1; margin-bottom: 0.2rem; }
-    .nl-stat-l { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
-    .nl-cta-box { border: 1px solid var(--rule-dk); padding: 2rem; background: var(--warm); opacity: 0; animation: rise 0.6s 0.5s forwards; }
-    .nl-cta-box h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; }
-    .nl-cta-box p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.5rem; }
-    .btn-ink { display: inline-block; padding: 0.75rem 1.75rem; background: var(--ink); color: var(--white); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); transition: background 0.2s; width: 100%; text-align: center; }
-    .btn-ink:hover { background: var(--ink-mid); }
+    .nl-tagline { font-family: var(--serif); font-size: 1.12rem; font-style: italic; color: var(--ink-soft); line-height: 1.78; margin-bottom: 2rem; border-left: 2px solid var(--rule-dk); padding-left: 1.25rem; max-width: 520px; }
+    .nl-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .nl-stat-n { font-family: var(--serif); font-size: 1.9rem; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 0.25rem; letter-spacing: -0.02em; }
+    .nl-stat-l { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
 
-    /* ISSUES */
-    .issues-section { padding: 5rem 3rem; background: var(--paper); }
-    .container { max-width: 960px; margin: 0 auto; }
-    .sec-hd { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
-    .sec-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em; color: var(--ink-faint); flex-shrink: 0; }
-    .sec-title { font-family: var(--serif); font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 400; color: var(--ink); }
+    .nl-cta-box { border: 1px solid var(--rule); padding: 2rem; background: var(--cream); }
+    .nl-cta-box h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; }
+    .nl-cta-box p { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.65; margin-bottom: 1.5rem; }
+    .btn-solid {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%;
+      padding: 1rem 1.5rem; background: var(--red); color: var(--white);
+      font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--red);
+      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+      min-height: 50px; box-shadow: 0 4px 20px rgba(139,32,32,0.25);
+    }
+    .btn-solid:hover { background: #6d1818; border-color: #6d1818; box-shadow: 0 6px 28px rgba(139,32,32,0.35); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6.5rem 2.5rem; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .sec-hd { display: flex; align-items: baseline; gap: 1.25rem; margin-bottom: 3.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+    .sec-eyebrow { font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.2em; color: var(--red); flex-shrink: 0; text-transform: uppercase; }
+    .sec-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; color: var(--ink); line-height: 1; letter-spacing: -0.015em; }
     .sec-title em { font-style: italic; color: var(--ink-mid); }
 
-    .issue-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2px; }
-    .issue-card { background: var(--white); padding: 2rem 2rem; display: flex; flex-direction: column; transition: background 0.2s; text-decoration: none; }
-    .issue-card:hover { background: var(--warm); }
+    /* ── ISSUES ── */
+    #issues { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .issue-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 1px; }
+    .issue-card {
+      background: var(--white); padding: 1.75rem 1.75rem; display: flex; flex-direction: column; gap: 0.6rem;
+      transition: background 0.2s; text-decoration: none; position: relative; overflow: hidden;
+    }
+    .issue-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--red);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--ease-out);
+    }
+    .issue-card:hover { background: var(--paper); }
+    .issue-card:hover::after { transform: scaleX(1); }
     .issue-card.featured { background: var(--ink); }
-    .issue-card.featured:hover { background: #222; }
-    .issue-n { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--ink-faint); margin-bottom: 0.9rem; }
-    .issue-card.featured .issue-n { color: rgba(255,255,255,0.35); }
-    .issue-tag { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--rule-dk); padding: 0.15rem 0.5rem; display: inline-block; margin-bottom: 1rem; width: fit-content; }
-    .issue-card.featured .issue-tag { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.2); }
-    .issue-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); line-height: 1.35; margin-bottom: 0.75rem; flex: 1; }
-    .issue-card.featured h3 { color: var(--white); font-size: 1.35rem; }
-    .issue-card p { font-size: 0.83rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.25rem; }
-    .issue-card.featured p { color: rgba(255,255,255,0.55); }
-    .issue-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--rule); }
-    .issue-card.featured .issue-footer { border-top-color: rgba(255,255,255,0.15); }
-    .issue-date { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--ink-faint); }
-    .issue-card.featured .issue-date { color: rgba(255,255,255,0.35); }
-    .issue-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--ink-mid); border-bottom: 1px solid var(--rule-dk); padding-bottom: 1px; }
-    .issue-card.featured .issue-link { color: rgba(255,255,255,0.7); border-bottom-color: rgba(255,255,255,0.3); }
+    .issue-card.featured:hover { background: #1a1812; }
+    .issue-card.featured::after { background: var(--red); }
+    .issue-n { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.14em; color: var(--ink-ghost); text-transform: uppercase; }
+    .issue-card.featured .issue-n { color: rgba(248,246,241,0.35); }
+    .issue-tag { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+    .issue-card.featured .issue-tag { color: #d98f8f; }
+    .issue-card h3 { font-family: var(--serif); font-size: 1.12rem; font-weight: 400; color: var(--ink); line-height: 1.35; flex: 1; }
+    .issue-card.featured h3 { color: var(--white); font-size: 1.4rem; }
+    .issue-card p { font-size: 0.83rem; color: var(--ink-soft); line-height: 1.68; }
+    .issue-card.featured p { color: rgba(248,246,241,0.55); }
+    .issue-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 0.9rem; border-top: 1px solid var(--rule); }
+    .issue-card.featured .issue-footer { border-top-color: rgba(248,246,241,0.12); }
+    .issue-date { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.08em; color: var(--ink-ghost); }
+    .issue-card.featured .issue-date { color: rgba(248,246,241,0.35); }
+    .issue-link { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; color: var(--red); display: flex; align-items: center; gap: 0.3rem; }
+    .issue-card.featured .issue-link { color: #d98f8f; }
 
-    .issues-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); border-top: none; }
+    .issues-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-top: none; }
+    .issue-subscribe-card { justify-content: center; align-items: center; text-align: center; min-height: 200px; background: var(--warm) !important; }
+    .issue-subscribe-card p { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; }
+    .issue-subscribe-card .btn-solid { width: auto; padding: 0.85rem 1.5rem; }
 
-    /* ABOUT STRIP */
-    .about-strip { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 4rem 3rem; }
-    .about-strip-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 4rem; }
-    .about-strip-text { flex: 1; }
-    .about-strip-text h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; }
-    .about-strip-text p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.75; }
-    .about-strip-links { display: flex; flex-direction: column; gap: 0.6rem; flex-shrink: 0; }
-    .strip-link { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.08em; color: var(--ink-mid); text-decoration: none; border-bottom: 1px solid var(--rule-dk); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
-    .strip-link:hover { color: var(--ink); border-color: var(--ink); }
+    /* ── ABOUT STRIP ── */
+    #about-strip { background: var(--paper); }
+    .about-strip-inner { display: flex; align-items: center; gap: 4rem; flex-wrap: wrap; }
+    .about-strip-text { flex: 1; min-width: 280px; }
+    .about-strip-text p.lead { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--ink); line-height: 1.8; margin-bottom: 0; }
+    .about-strip-links { display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0; }
+    .strip-link {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--ink-mid); text-decoration: none;
+      border-bottom: 1px solid var(--rule-dk); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .strip-link:hover { color: var(--red); border-color: var(--red); }
 
-    /* FOOTER */
-    footer { background: var(--ink); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .footer-copy { font-family: var(--serif); font-size: 0.85rem; font-style: italic; color: rgba(250,249,247,0.4); }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05); padding: 1.75rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-family: var(--serif); font-size: 0.82rem; font-style: italic; color: rgba(248,246,241,0.16); }
     .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .footer-links a { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,249,247,0.38); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: rgba(250,249,247,0.85); }
+    .footer-links a {
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(248,246,241,0.2); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .footer-links a:hover { color: rgba(248,246,241,0.75); }
 
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    /* ── ACCESSIBILITY ── */
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
-    @media (max-width: 820px) {
-      nav { padding: 0 1.5rem; }
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.25rem; height: 54px; }
       .nav-links { display: none; }
       .nav-burger { display: flex; }
-      .nl-hero { padding: 7rem 1.5rem 3rem; }
-      .nl-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      section { padding: 4rem 1.25rem; }
+      .nl-hero { padding: 7rem 1.25rem 3rem; }
+      .nl-hero-inner { grid-template-columns: 1fr; gap: 2.25rem; }
       .issue-featured { grid-template-columns: 1fr; }
       .issues-grid { grid-template-columns: 1fr; }
-      .issues-section { padding: 3rem 1.5rem; }
-      .about-strip { padding: 3rem 1.5rem; }
-      .about-strip-inner { flex-direction: column; gap: 2rem; align-items: flex-start; }
-      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
+      .about-strip-inner { flex-direction: column; align-items: flex-start; gap: 1.75rem; }
+      footer { flex-direction: column; text-align: center; padding: 1.5rem; }
+      .footer-links { justify-content: center; gap: 1.5rem; }
+      #cursor, #cursor-ring { display: none !important; }
+    }
+    @media (max-width: 480px) {
+      nav { padding: 0 1rem; }
+      section { padding: 3.25rem 1rem; }
+      .nl-hero { padding: 7rem 1rem 2.5rem; }
     }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="scroll-progress" role="progressbar" aria-label="Reading progress"></div>
 
-<nav>
-  <a href="index.html" class="nav-logo">Muhammad Hamid Naeem</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#projects">Work</a></li>
-    <li><a href="calculator.html">Calculator</a></li>
-    <li><a href="newsletter.html" class="active">Newsletter</a></li>
-    <li><a href="/blog">Writing</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
-  <button class="nav-burger" onclick="document.querySelector('.mob-nav').classList.add('open')" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <!-- ── NAV ── -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo">Muhammad Hamid Naeem</a>
+    <ul class="nav-links" role="list">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog">Writing</a></li>
+      <li><a href="/calculator">Calculator</a></li>
+      <li><a href="/newsletter" class="active">Newsletter</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="openMobNav(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-<div class="mob-nav">
-  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">✕</button>
-  <a href="index.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Home</a>
-  <a href="calculator.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Calculator</a>
-  <a href="newsletter.html" onclick="document.querySelector('.mob-nav').classList.remove('open')">Newsletter</a>
-  <a href="/blog" onclick="document.querySelector('.mob-nav').classList.remove('open')">Writing</a>
-  <a href="index.html#contact" onclick="document.querySelector('.mob-nav').classList.remove('open')">Contact</a>
-</div>
-
-<!-- HERO -->
-<div class="nl-hero">
-  <div class="nl-hero-inner">
-    <div>
-      <p class="nl-kicker">Newsletter · Est. 2025</p>
-      <h1 class="nl-title">The Digital<br><em>Gavel</em></h1>
-      <p class="nl-tagline">Where law meets the algorithm — and neither comes out clean.</p>
-      <div class="nl-meta">
-        <div class="nl-stat">
-          <div class="nl-stat-n">6</div>
-          <div class="nl-stat-l">Issues Published</div>
-        </div>
-        <div class="nl-stat">
-          <div class="nl-stat-n">570+</div>
-          <div class="nl-stat-l">Subscribers</div>
-        </div>
-        <div class="nl-stat">
-          <div class="nl-stat-n">3</div>
-          <div class="nl-stat-l">Countries Reached</div>
-        </div>
-      </div>
-    </div>
-    <div class="nl-cta-box">
-      <h3>Get new issues in your inbox</h3>
-      <p>AI governance, constitutional questions, legal tech — when I write, you'll hear about it first.</p>
-      <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="btn-ink">Subscribe on Substack →</a>
+  <!-- ── MOBILE NAV ── -->
+  <div class="mob-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <button class="mob-close" onclick="closeMobNav()" aria-label="Close menu">✕</button>
+    <div class="mob-nav-inner">
+      <span class="mob-nav-label">Navigation</span>
+      <a href="/#about" onclick="closeMobNav()">About</a>
+      <a href="/blog" onclick="closeMobNav()">Writing</a>
+      <a href="/calculator" onclick="closeMobNav()">Calculator</a>
+      <a href="/newsletter" onclick="closeMobNav()">Newsletter</a>
+      <a href="/#contact" onclick="closeMobNav()">Contact</a>
     </div>
   </div>
-</div>
 
-<!-- ISSUES -->
-<section class="issues-section">
-  <div class="container">
-    <div class="sec-hd">
-      <span class="sec-num">01</span>
-      <h2 class="sec-title">Recent <em>Issues</em></h2>
-    </div>
+  <main id="main-content">
 
-    <!-- Featured -->
-    <div class="issue-featured">
-      <a href="https://digitalgavel.substack.com/p/the-agentic-liability-crisis-who" target="_blank" rel="noopener noreferrer" class="issue-card featured">
-        <div class="issue-n">Latest Issue</div>
-        <span class="issue-tag">AI Governance</span>
-        <h3>The Agentic Liability Crisis: Who Sues a Hallucination?</h3>
-        <p>AI has stopped generating text and started making decisions. The law has not caught up. This issue asks the obvious question nobody wants to answer: when an autonomous agent causes harm, who pays?</p>
-        <div class="issue-footer">
-          <span class="issue-date">Apr 2026</span>
-          <span class="issue-link">Read on Substack →</span>
+  <!-- ══ HERO ══ -->
+  <div class="nl-hero">
+    <div class="nl-hero-inner">
+      <div>
+        <p class="nl-kicker">Newsletter · Est. 2025</p>
+        <h1 class="nl-title">The Digital<br><em>Gavel</em></h1>
+        <p class="nl-tagline">Where law meets the algorithm — and neither comes out clean.</p>
+        <div class="nl-meta">
+          <div>
+            <div class="nl-stat-n">7</div>
+            <div class="nl-stat-l">Issues published</div>
+          </div>
+          <div>
+            <div class="nl-stat-n">570+</div>
+            <div class="nl-stat-l">Subscribers</div>
+          </div>
+          <div>
+            <div class="nl-stat-n">3</div>
+            <div class="nl-stat-l">Countries reached</div>
+          </div>
         </div>
-      </a>
-      <a href="https://digitalgavel.substack.com/p/pakistans-national-ai-policy-2025" target="_blank" rel="noopener noreferrer" class="issue-card">
-        <div class="issue-n">Issue 05</div>
-        <span class="issue-tag">Policy</span>
-        <h3>Pakistan's National AI Policy 2025: Blueprint for Progress or Digital Mirage?</h3>
-        <p>Pakistan's AI policy arrived with real ambition. This issue goes through what it actually commits to — and where the regulatory teeth are missing.</p>
-        <div class="issue-footer">
-          <span class="issue-date">Oct 2025</span>
-          <span class="issue-link">Read on Substack →</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Grid -->
-    <div class="issues-grid">
-      <a href="https://digitalgavel.substack.com/p/ai-in-the-courtroom-promise-or-peril" target="_blank" rel="noopener noreferrer" class="issue-card">
-        <div class="issue-n">Issue 04</div>
-        <span class="issue-tag">Legal Tech</span>
-        <h3>AI in the Courtroom: Promise or Peril?</h3>
-        <p>Algorithms are already influencing bail decisions, sentencing recommendations, and case predictions. The courtroom hasn't figured out what to do about it yet.</p>
-        <div class="issue-footer">
-          <span class="issue-date">Sep 2025</span>
-          <span class="issue-link">Read →</span>
-        </div>
-      </a>
-
-      <a href="https://digitalgavel.substack.com/p/digital-rights-in-a-data-driven-world" target="_blank" rel="noopener noreferrer" class="issue-card">
-        <div class="issue-n">Issue 03</div>
-        <span class="issue-tag">Rights</span>
-        <h3>Digital Rights in a Data-Driven World: Why Privacy is the New Civil Liberty</h3>
-        <p>Surveillance infrastructure built for security keeps getting repurposed. This issue traces where privacy law has held — and where it hasn't.</p>
-        <div class="issue-footer">
-          <span class="issue-date">Sep 2025</span>
-          <span class="issue-link">Read →</span>
-        </div>
-      </a>
-
-      <a href="https://digitalgavel.substack.com/p/the-transatlantic-split" target="_blank" rel="noopener noreferrer" class="issue-card">
-        <div class="issue-n">Issue 02</div>
-        <span class="issue-tag">Comparative Law</span>
-        <h3>The Transatlantic Split</h3>
-        <p>The EU wants to regulate AI like a product. The US treats it like speech. Both approaches have a logic — and both have a blind spot.</p>
-        <div class="issue-footer">
-          <span class="issue-date">Aug 2025</span>
-          <span class="issue-link">Read →</span>
-        </div>
-      </a>
-
-      <a href="https://digitalgavel.substack.com/p/the-four-fifths-audit" target="_blank" rel="noopener noreferrer" class="issue-card">
-        <div class="issue-n">Issue 01</div>
-        <span class="issue-tag">Data & Law</span>
-        <h3>The "Four-Fifths" Audit: Using Python to Cross-Examine the Judiciary</h3>
-        <p>I ran the four-fifths rule — an employment discrimination test — against judicial appointment data. The numbers raised questions I didn't expect.</p>
-        <div class="issue-footer">
-          <span class="issue-date">Aug 2025</span>
-          <span class="issue-link">Read →</span>
-        </div>
-      </a>
-
-      <a href="https://digitalgavel.substack.com/p/welcome-to-the-digital-gavel" target="_blank" rel="noopener noreferrer" class="issue-card">
-        <div class="issue-n">Issue 00</div>
-        <span class="issue-tag">Introduction</span>
-        <h3>Welcome to The Digital Gavel</h3>
-        <p>Why I started this. What I think lawyers and technologists keep getting wrong about each other. And what this newsletter is actually trying to do.</p>
-        <div class="issue-footer">
-          <span class="issue-date">Jul 2025</span>
-          <span class="issue-link">Read →</span>
-        </div>
-      </a>
-
-      <div class="issue-card" style="background: var(--warm); justify-content: center; align-items: center; text-align: center; min-height: 220px;">
-        <p style="font-family: var(--serif); font-style: italic; color: var(--ink-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;">New issues come out regularly. Subscribe and you won't miss them.</p>
-        <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="btn-ink" style="width: auto; display: inline-block;">Subscribe →</a>
+      </div>
+      <div class="nl-cta-box reveal-up">
+        <h3>Get new issues in your inbox</h3>
+        <p>AI governance, constitutional questions, legal tech — when I write, you'll hear about it first.</p>
+        <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="btn-solid">
+          <i data-lucide="mail" width="14" height="14"></i>
+          Subscribe on Substack
+        </a>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ABOUT STRIP -->
-<div class="about-strip">
-  <div class="about-strip-inner">
-    <div class="about-strip-text">
-      <h3>About Digital Gavel</h3>
-      <p>I'm Muhammad Hamid Naeem — an LL.B student and AI governance researcher. Digital Gavel is where I write about the legal questions that technology keeps generating faster than courts can answer them. Each issue picks one problem and takes it seriously: no hype, no hand-waving, just the actual argument.</p>
+  <!-- ══ ISSUES ══ -->
+  <section id="issues" aria-labelledby="issues-heading">
+    <div class="container">
+      <div class="sec-hd">
+        <span class="sec-eyebrow">Archive</span>
+        <h2 class="sec-title" id="issues-heading">Recent issues</h2>
+      </div>
+
+      <div class="issue-featured">
+        <a href="https://digitalgavel.substack.com/p/the-agentic-liability-crisis-who" target="_blank" rel="noopener noreferrer" class="issue-card featured reveal-up">
+          <div class="issue-n">Latest issue</div>
+          <span class="issue-tag">AI Governance</span>
+          <h3>The Agentic Liability Crisis: Who Sues a Hallucination?</h3>
+          <p>AI has stopped generating text and started making decisions. The law has not caught up. When an autonomous agent causes harm, who pays?</p>
+          <div class="issue-footer">
+            <span class="issue-date">Apr 2026</span>
+            <span class="issue-link">Read on Substack <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+        <a href="https://digitalgavel.substack.com/p/pakistans-national-ai-policy-2025" target="_blank" rel="noopener noreferrer" class="issue-card reveal-up">
+          <div class="issue-n">Issue 05</div>
+          <span class="issue-tag">Policy</span>
+          <h3>Pakistan's National AI Policy 2025: Blueprint or Digital Mirage?</h3>
+          <p>Pakistan's AI policy arrived with real ambition. This issue goes through what it actually commits to — and where the regulatory teeth are missing.</p>
+          <div class="issue-footer">
+            <span class="issue-date">Oct 2025</span>
+            <span class="issue-link">Read on Substack <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+      </div>
+
+      <div class="issues-grid">
+        <a href="https://digitalgavel.substack.com/p/ai-in-the-courtroom-promise-or-peril" target="_blank" rel="noopener noreferrer" class="issue-card reveal-up">
+          <div class="issue-n">Issue 04</div>
+          <span class="issue-tag">Legal Tech</span>
+          <h3>AI in the Courtroom: Promise or Peril?</h3>
+          <p>Algorithms are already influencing bail decisions, sentencing recommendations, and case predictions. The courtroom hasn't figured out what to do about it yet.</p>
+          <div class="issue-footer">
+            <span class="issue-date">Sep 2025</span>
+            <span class="issue-link">Read <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+        <a href="https://digitalgavel.substack.com/p/digital-rights-in-a-data-driven-world" target="_blank" rel="noopener noreferrer" class="issue-card reveal-up">
+          <div class="issue-n">Issue 03</div>
+          <span class="issue-tag">Rights</span>
+          <h3>Digital Rights in a Data-Driven World</h3>
+          <p>Surveillance infrastructure built for security keeps getting repurposed. This issue traces where privacy law has held — and where it hasn't.</p>
+          <div class="issue-footer">
+            <span class="issue-date">Sep 2025</span>
+            <span class="issue-link">Read <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+        <a href="https://digitalgavel.substack.com/p/the-transatlantic-split" target="_blank" rel="noopener noreferrer" class="issue-card reveal-up">
+          <div class="issue-n">Issue 02</div>
+          <span class="issue-tag">Comparative Law</span>
+          <h3>The Transatlantic Split</h3>
+          <p>The EU wants to regulate AI like a product. The US treats it like speech. Both approaches have a logic — and both have a blind spot.</p>
+          <div class="issue-footer">
+            <span class="issue-date">Aug 2025</span>
+            <span class="issue-link">Read <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+        <a href="https://digitalgavel.substack.com/p/the-four-fifths-audit" target="_blank" rel="noopener noreferrer" class="issue-card reveal-up">
+          <div class="issue-n">Issue 01</div>
+          <span class="issue-tag">Data &amp; Law</span>
+          <h3>The "Four-Fifths" Audit: Using Python to Cross-Examine the Judiciary</h3>
+          <p>I ran an employment discrimination test against judicial appointment data. The numbers raised questions I didn't expect.</p>
+          <div class="issue-footer">
+            <span class="issue-date">Aug 2025</span>
+            <span class="issue-link">Read <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+        <a href="https://digitalgavel.substack.com/p/welcome-to-the-digital-gavel" target="_blank" rel="noopener noreferrer" class="issue-card reveal-up">
+          <div class="issue-n">Issue 00</div>
+          <span class="issue-tag">Introduction</span>
+          <h3>Welcome to The Digital Gavel</h3>
+          <p>Why I started this. What lawyers and technologists keep getting wrong about each other. What this newsletter is actually trying to do.</p>
+          <div class="issue-footer">
+            <span class="issue-date">Jul 2025</span>
+            <span class="issue-link">Read <i data-lucide="arrow-up-right" width="11" height="11"></i></span>
+          </div>
+        </a>
+        <div class="issue-card issue-subscribe-card reveal-up">
+          <p>New issues come out regularly. Subscribe and you won't miss them.</p>
+          <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer" class="btn-solid">
+            <i data-lucide="rss" width="13" height="13"></i>
+            Subscribe
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="about-strip-links">
-      <a href="https://digitalgavel.substack.com/archive" target="_blank" rel="noopener noreferrer" class="strip-link">Full archive on Substack →</a>
-      <a href="blog.html" class="strip-link">Read articles →</a>
-      <a href="index.html#contact" class="strip-link">Get in touch →</a>
+  </section>
+
+  <!-- ══ ABOUT STRIP ══ -->
+  <section id="about-strip" aria-label="About the newsletter">
+    <div class="container">
+      <div class="about-strip-inner">
+        <div class="about-strip-text">
+          <p class="lead reveal-up">Digital Gavel is where I write about the legal questions technology keeps generating faster than courts can answer them. Each issue picks one problem and takes it seriously — no hype, no hand-waving, just the argument.</p>
+        </div>
+        <div class="about-strip-links reveal-up">
+          <a href="https://digitalgavel.substack.com/archive" target="_blank" rel="noopener noreferrer" class="strip-link">
+            Full archive on Substack <i data-lucide="arrow-up-right" width="11" height="11"></i>
+          </a>
+          <a href="/blog" class="strip-link">
+            Read articles <i data-lucide="arrow-right" width="11" height="11"></i>
+          </a>
+          <a href="/#contact" class="strip-link">
+            Get in touch <i data-lucide="arrow-right" width="11" height="11"></i>
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer>
-  <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
-  <div class="footer-links">
-    <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
-    <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="mailto:hamidnaeem2223ab@gmail.com">Email</a>
-  </div>
-</footer>
+  </main>
 
-<script>
+  <footer>
+    <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin" width="13" height="13"></i>LinkedIn</a>
+      <a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer"><i data-lucide="rss" width="13" height="13"></i>Substack</a>
+      <a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer"><i data-lucide="github" width="13" height="13"></i>GitHub</a>
+      <a href="mailto:hamidnaeem2223ab@gmail.com"><i data-lucide="mail" width="13" height="13"></i>Email</a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.383.0/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+  // ── Custom cursor: only disable native cursor once the JS loop actually starts ──
+  (function initCursor() {
+    if (window.matchMedia('(max-width: 860px)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    if (!cursor || !cursorRing) return;
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    document.body.classList.add('cursor-active');
+    function animCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+  })();
+
+  // ── Scroll progress ──
+  const prog = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (window.scrollY / docH * 100) + '%';
+  }, { passive: true });
+
+  // ── Nav scroll state ──
+  const navEl = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── Mobile nav ──
+  function openMobNav(btn) {
+    document.getElementById('mobile-nav').classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobNav() {
+    document.getElementById('mobile-nav').classList.remove('open');
+    const btn = document.querySelector('.nav-burger');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) closeMobNav();
+  });
+
+  // ── Smooth scroll for in-page anchors ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const href = a.getAttribute('href');
       if (href === '#') return;
-      e.preventDefault();
       const t = document.querySelector(href);
-      if (t) t.scrollIntoView({ behavior: 'smooth' });
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
 
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(el => {
-      if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)'; io.unobserve(el.target); }
+  // ── GSAP reveals ──
+  (function initGSAP() {
+    if (!window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal-up').forEach((el, i) => {
+      gsap.set(el, { opacity: 0, y: 24 });
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 93%', once: true },
+        delay: (i % 3) * 0.06
+      });
     });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.issue-card').forEach(el => {
-    el.style.cssText += 'opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease;';
-    io.observe(el);
-  });
-</script>
+  })();
+
+  lucide.createIcons();
+  </script>
 </body>
 </html>
