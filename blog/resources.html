@@ -4,254 +4,278 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resource Library — Muhammad Hamid Naeem</title>
-  <meta name="description" content="Curated tools, databases, and references for AI governance, legal research, and data privacy." />
+  <meta name="description" content="Curated tools, databases, and references for AI governance, legal research, and data privacy — across Pakistan, India, UAE, the EU, and the US." />
+  <link rel="canonical" href="https://hamidnaeem.me/blog/resources">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta property="og:title" content="Resource Library — Muhammad Hamid Naeem">
+  <meta property="og:description" content="Curated tools, databases, and references for AI governance, legal research, and data privacy.">
+  <meta property="og:url" content="https://hamidnaeem.me/blog/resources">
+  <meta property="og:type" content="website">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0e0d0b;
-      --surface: #161411;
-      --border: #252218;
-      --text: #ede9e0;
-      --muted: #6e6a5e;
-      --warm: #c4a97d;
-      --accent: #c4a97d;
-      --accent-dim: #7a6645;
+      --ink:        #0e0d09;
+      --ink-mid:    #38342c;
+      --ink-soft:   #5e5a52;
+      --ink-muted:  #8a8680;
+      --ink-ghost:  #b8b4ae;
+      --rule:       #e4e0d8;
+      --rule-dk:    #ccc8c0;
+      --paper:      #f8f6f1;
+      --cream:      #f0ece3;
+      --warm:       #e8e1d4;
+      --white:      #fdfcfa;
+      --red:        #8b2020;
+      --red-lt:     #f5eaea;
+      --red-glow:   rgba(139,32,32,0.15);
+      --serif:      'Cormorant', Georgia, serif;
+      --sans:       'Instrument Sans', sans-serif;
+      --mono:       'Martian Mono', monospace;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'EB Garamond', Georgia, serif;
-      line-height: 1.75;
-      min-height: 100vh;
-    }
-
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 3rem;
-      background: rgba(14,13,11,0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav a.logo { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text); text-decoration: none; }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav ul a { font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
-    nav ul a:hover, nav ul a.active { color: var(--text); }
-
-    .hero {
-      padding: 9rem 3rem 4rem;
-      max-width: 800px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .breadcrumb {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .breadcrumb a { color: var(--accent); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-
-    .hero h1 {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 540px;
-      line-height: 1.85;
-    }
-
-    .main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 4rem 3rem 6rem;
-    }
-
-    .section {
-      margin-bottom: 4rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-title {
-      font-family: 'EB Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--text);
-    }
-
-    .section-count {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
-
-    .resource-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
-    .resource {
-      background: var(--surface);
-      padding: 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: background 0.2s;
-    }
-
-    .resource:hover { background: #1a1712; }
-
-    .resource-name {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .resource-name::after { content: '↗'; font-size: 0.7rem; color: var(--accent); opacity: 0; transition: opacity 0.2s; }
-    .resource:hover .resource-name::after { opacity: 1; }
-
-    .resource-desc {
-      font-family: 'EB Garamond', serif;
-      font-size: 0.9rem;
-      color: var(--muted);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
       line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      cursor: auto;
     }
+    body.cursor-active { cursor: none; }
 
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999;
+      background: var(--red); color: var(--white);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-decoration: none; text-transform: uppercase; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── CURSOR ── */
+    #cursor {
+      position: fixed; pointer-events: none; z-index: 9998; display: none;
+      width: 10px; height: 10px; background: var(--red); border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out);
+      mix-blend-mode: multiply;
+    }
+    #cursor-ring {
+      position: fixed; pointer-events: none; z-index: 9997; display: none;
+      width: 32px; height: 32px; border: 1px solid rgba(139,32,32,0.25); border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), opacity 0.3s;
+    }
+    body.cursor-active #cursor, body.cursor-active #cursor-ring { display: block; }
+    body.cursor-active:has(a:hover) #cursor, body.cursor-active:has(button:hover) #cursor { width: 18px; height: 18px; }
+    body.cursor-active:has(a:hover) #cursor-ring, body.cursor-active:has(button:hover) #cursor-ring { width: 48px; height: 48px; opacity: 0.45; }
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-progress { position: fixed; top: 0; left: 0; z-index: 999; height: 1px; background: var(--red); width: 0%; transition: width 0.1s linear; }
+
+    /* ── NAV (shared component) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      background: rgba(253,252,250,0.90); backdrop-filter: blur(20px) saturate(1.6);
+      border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 2.5rem; height: 58px; transition: box-shadow 0.3s, background 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(14,13,9,0.05); background: rgba(253,252,250,0.97); }
+    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; list-style: none; gap: 0.15rem; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-muted); text-decoration: none; padding: 0 0.7rem; position: relative;
+      transition: color 0.2s; height: 58px; display: flex; align-items: center;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 1px; background: var(--red);
+      transition: left 0.25s var(--ease-out), right 0.25s var(--ease-out);
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after, .nav-links a.active::after { left: 0.7rem; right: 0.7rem; }
+    .nav-links a.active { color: var(--ink); }
+    .nav-burger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none;
+      padding: 10px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
+    }
+    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
+
+    /* ── MOBILE NAV ── */
+    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 600; flex-direction: column; align-items: flex-start; justify-content: center; }
+    .mob-nav.open { display: flex; }
+    .mob-nav-inner { padding: 3rem 2rem; display: flex; flex-direction: column; width: 100%; }
+    .mob-nav a {
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 300; font-style: italic; color: var(--ink);
+      text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); display: block;
+      transition: color 0.2s, padding-left 0.3s var(--ease-out);
+    }
+    .mob-nav a:first-of-type { border-top: 1px solid var(--rule); }
+    .mob-nav a:hover { color: var(--red); padding-left: 0.75rem; }
+    .mob-close {
+      position: fixed; top: 1.1rem; right: 1.5rem; background: none; border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); z-index: 700; padding: 10px;
+      min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: flex-end; letter-spacing: 0.05em;
+    }
+    .mob-close:hover { color: var(--ink); }
+    .mob-nav-label { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 2.5rem; }
+
+    /* ── HERO ── */
+    .hero { padding: 9rem 2.5rem 3.5rem; max-width: 900px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
+    .breadcrumb { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--red); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 300; line-height: 1.1; color: var(--ink); margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .hero p { font-size: 0.98rem; color: var(--ink-soft); max-width: 560px; line-height: 1.8; }
+
+    /* ── MAIN ── */
+    .main { max-width: 900px; margin: 0 auto; padding: 3.5rem 2.5rem 5.5rem; }
+    .section { margin-bottom: 3.5rem; }
+    .section:last-of-type { margin-bottom: 0; }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--rule); }
+    .section-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--ink); }
+    .section-count { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-ghost); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .resource { background: var(--white); padding: 1.4rem 1.5rem; text-decoration: none; color: inherit; display: block; transition: background 0.2s; }
+    .resource:hover { background: var(--cream); }
+    .resource-name { font-family: var(--sans); font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+    .resource-name::after { content: '↗'; font-size: 0.7rem; color: var(--red); opacity: 0; transition: opacity 0.2s; }
+    .resource:hover .resource-name::after { opacity: 1; }
+    .resource-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.65; }
     .resource-tag {
-      display: inline-block;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid var(--accent-dim);
-      padding: 0.1rem 0.45rem;
-      margin-bottom: 0.6rem;
+      display: inline-block; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--red); border: 1px solid rgba(139,32,32,0.25); padding: 0.15rem 0.5rem; margin-bottom: 0.6rem; background: var(--red-lt);
     }
 
-    .note {
-      margin-top: 5rem;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-    }
+    .note { margin-top: 4rem; padding: 1.5rem 1.75rem; border: 1px solid var(--rule); background: var(--cream); }
+    .note p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.8; }
+    .note p em { color: var(--red); font-style: italic; }
 
-    .note p {
-      font-family: 'EB Garamond', serif;
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .note p em { color: var(--warm); font-style: italic; }
-
+    /* ── FOOTER (shared component) ── */
     footer {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--border);
+      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05); padding: 1.75rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-family: var(--serif); font-size: 0.82rem; font-style: italic; color: rgba(248,246,241,0.16); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; list-style: none; }
+    .footer-links a { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,246,241,0.2); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(248,246,241,0.75); }
+
+    /* ── ACCESSIBILITY / MOTION ── */
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
     }
 
-    footer p { font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: var(--muted); }
-    footer .links { display: flex; gap: 1.5rem; }
-    footer .links a { font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    footer .links a:hover { color: var(--text); }
-
-    @media (max-width: 640px) {
-      nav { padding: 1rem 1.5rem; }
-      nav ul { gap: 1.2rem; }
-      .hero, .main { padding-left: 1.5rem; padding-right: 1.5rem; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.25rem; height: 54px; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .hero { padding: 7rem 1.25rem 2.5rem; }
+      .main { padding: 2.5rem 1.25rem 4rem; }
       .resource-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      #cursor, #cursor-ring { display: none !important; }
     }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="scroll-progress" role="progressbar" aria-label="Reading progress"></div>
 
-  <nav>
-    <a class="logo" href="https://hamidnaeem.me">Muhammad Hamid Naeem</a>
-    <ul>
-      <li><a href="https://hamidnaeem.me/#about">About</a></li>
-      <li><a href="https://hamidnaeem.me/#projects">Work</a></li>
-      <li><a href="/blog/" class="active">Writing</a></li>
-      <li><a href="https://hamidnaeem.me/#contact">Contact</a></li>
+  <!-- ── NAV ── -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo">Muhammad Hamid Naeem</a>
+    <ul class="nav-links" role="list">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog" class="active">Writing</a></li>
+      <li><a href="/calculator">Calculator</a></li>
+      <li><a href="/newsletter">Newsletter</a></li>
+      <li><a href="/#contact">Contact</a></li>
     </ul>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="openMobNav(this)">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
+  <!-- ── MOBILE NAV ── -->
+  <div class="mob-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <button class="mob-close" onclick="closeMobNav()" aria-label="Close menu">✕</button>
+    <div class="mob-nav-inner">
+      <span class="mob-nav-label">Navigation</span>
+      <a href="/#about" onclick="closeMobNav()">About</a>
+      <a href="/blog" onclick="closeMobNav()">Writing</a>
+      <a href="/calculator" onclick="closeMobNav()">Calculator</a>
+      <a href="/newsletter" onclick="closeMobNav()">Newsletter</a>
+      <a href="/#contact" onclick="closeMobNav()">Contact</a>
+    </div>
+  </div>
+
   <section class="hero">
-    <p class="breadcrumb"><a href="/blog/">Writing</a> &nbsp;/&nbsp; Resource Library</p>
+    <p class="breadcrumb"><a href="/blog">Writing</a> / Resource Library</p>
     <h1>The Library</h1>
     <p>Tools, databases, and references I actually use. Organized by what they help you do, not by category name. No sponsored placement — something has to earn its spot here.</p>
   </section>
 
-  <main class="main">
+  <main id="main-content" class="main">
 
     <div class="section">
       <div class="section-header">
-        <span class="section-title">AI Governance & Regulation</span>
-        <span class="section-count">Primary texts and monitoring tools</span>
+        <span class="section-title">AI Governance &amp; Regulation</span>
+        <span class="section-count">6 sources</span>
       </div>
       <div class="resource-grid">
-        <a class="resource" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">
+        <a class="resource" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Primary Law</span>
           <p class="resource-name">EU AI Act — Official Text</p>
           <p class="resource-desc">The consolidated regulation directly from EUR-Lex. Read the annexes — they define what "high-risk" actually means in practice, not the summaries.</p>
         </a>
-        <a class="resource" href="https://www.nist.gov/artificial-intelligence/ai-risk-management-framework" target="_blank" rel="noopener">
+        <a class="resource" href="https://www.nist.gov/artificial-intelligence/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Framework</span>
           <p class="resource-name">NIST AI RMF</p>
           <p class="resource-desc">The US risk management framework. More flexible than EU law but more practically useful for building compliance arguments across jurisdictions.</p>
         </a>
-        <a class="resource" href="https://www.oecd.ai/en/dashboards" target="_blank" rel="noopener">
+        <a class="resource" href="https://www.oecd.ai/en/dashboards" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Policy Monitor</span>
           <p class="resource-name">OECD AI Policy Observatory</p>
           <p class="resource-desc">Tracks AI policies across 70+ countries including Pakistan, India, and UAE. Useful for cross-jurisdictional comparison without reading every national document.</p>
         </a>
-        <a class="resource" href="https://hai.stanford.edu/ai-index" target="_blank" rel="noopener">
+        <a class="resource" href="https://hai.stanford.edu/ai-index" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Annual Report</span>
           <p class="resource-name">Stanford HAI — AI Index</p>
           <p class="resource-desc">The most credible annual survey of AI research, policy, and adoption trends. The policy chapter is the one worth reading carefully.</p>
+        </a>
+        <a class="resource" href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">Global Standard</span>
+          <p class="resource-name">UNESCO Recommendation on the Ethics of AI</p>
+          <p class="resource-desc">The only AI ethics instrument with buy-in from 193 member states, including Pakistan. A useful baseline when a jurisdiction has no domestic AI law yet.</p>
+        </a>
+        <a class="resource" href="https://www.adalovelaceinstitute.org/" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">Think Tank</span>
+          <p class="resource-name">Ada Lovelace Institute</p>
+          <p class="resource-desc">Independent UK research institute working on data and AI power asymmetries. Their reports on algorithmic accountability are more rigorous than most of the government consultations they respond to.</p>
         </a>
       </div>
     </div>
@@ -259,28 +283,38 @@
     <div class="section">
       <div class="section-header">
         <span class="section-title">Legal Research</span>
-        <span class="section-count">Databases and court resources</span>
+        <span class="section-count">6 sources</span>
       </div>
       <div class="resource-grid">
-        <a class="resource" href="https://www.pakistanlawsite.com" target="_blank" rel="noopener">
+        <a class="resource" href="https://www.pakistanlawsite.com" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Pakistan</span>
           <p class="resource-name">Pakistan Law Site</p>
           <p class="resource-desc">Searchable database of Pakistani legislation and superior court judgments. The IHC, LHC, and Supreme Court decisions are reasonably up to date.</p>
         </a>
-        <a class="resource" href="https://indiankanoon.org" target="_blank" rel="noopener">
+        <a class="resource" href="https://indiankanoon.org" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">India</span>
           <p class="resource-name">Indian Kanoon</p>
           <p class="resource-desc">Free full-text search across Indian court judgments from all High Courts and the Supreme Court. Underused by non-Indian researchers despite its quality.</p>
         </a>
-        <a class="resource" href="https://www.icanet.org" target="_blank" rel="noopener">
+        <a class="resource" href="https://www.icanet.org" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">International</span>
           <p class="resource-name">ICANN / Internet Governance</p>
           <p class="resource-desc">For matters touching digital identity, domain disputes, and internet governance law — jurisdictionally complex but increasingly relevant.</p>
         </a>
-        <a class="resource" href="https://scholar.google.com" target="_blank" rel="noopener">
+        <a class="resource" href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Academic</span>
           <p class="resource-name">Google Scholar — Case Law</p>
           <p class="resource-desc">Underrated for finding legal scholarship. The "Cited by" function is useful for tracing how a judgment has been interpreted across subsequent cases.</p>
+        </a>
+        <a class="resource" href="https://www.ljcp.gov.pk/" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">Pakistan</span>
+          <p class="resource-name">Law &amp; Justice Commission of Pakistan</p>
+          <p class="resource-desc">The federal body that actually recommends law reform in Pakistan, chaired by the Chief Justice. Closest thing to an official record of where domestic legal reform is headed.</p>
+        </a>
+        <a class="resource" href="https://www.courtlistener.com/" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">US · Open Data</span>
+          <p class="resource-name">CourtListener</p>
+          <p class="resource-desc">Free, open-source US case law database from the Free Law Project — over nine million opinions. Useful for the comparative angle: citing how American courts have handled a question Pakistani courts haven't reached yet.</p>
         </a>
       </div>
     </div>
@@ -288,28 +322,38 @@
     <div class="section">
       <div class="section-header">
         <span class="section-title">Data Privacy</span>
-        <span class="section-count">Regulators, guidance, and frameworks</span>
+        <span class="section-count">6 sources</span>
       </div>
       <div class="resource-grid">
-        <a class="resource" href="https://edpb.europa.eu/edpb_en" target="_blank" rel="noopener">
+        <a class="resource" href="https://edpb.europa.eu/edpb_en" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">GDPR</span>
           <p class="resource-name">EDPB — European Data Protection Board</p>
           <p class="resource-desc">Official guidance on GDPR interpretation. The opinions and guidelines are more useful than most academic commentary on GDPR compliance questions.</p>
         </a>
-        <a class="resource" href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">
+        <a class="resource" href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">US / CCPA</span>
           <p class="resource-name">California AG — CCPA Resources</p>
           <p class="resource-desc">Official CCPA guidance and enforcement actions. The enforcement letters are the most informative documents for understanding what the AG prioritizes.</p>
         </a>
-        <a class="resource" href="https://iapp.org/resources/article/privacy-tracker/" target="_blank" rel="noopener">
+        <a class="resource" href="https://iapp.org/resources/article/privacy-tracker/" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Global Tracker</span>
           <p class="resource-name">IAPP Global Privacy Law Tracker</p>
           <p class="resource-desc">Tracks the status of privacy legislation across all major jurisdictions. The Pakistan PDPA status is included — worth checking quarterly.</p>
         </a>
-        <a class="resource" href="https://www.pdpb.gov.pk" target="_blank" rel="noopener">
+        <a class="resource" href="https://www.pdpb.gov.pk" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Pakistan</span>
           <p class="resource-name">Pakistan — Personal Data Protection Bill</p>
           <p class="resource-desc">Track legislative progress and any draft regulations from the regulator. Still evolving — check for updates before relying on older summaries.</p>
+        </a>
+        <a class="resource" href="https://u.ae/en/about-the-uae/digital-uae/data/data-protection-laws" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">UAE</span>
+          <p class="resource-name">UAE PDPL — Official Text</p>
+          <p class="resource-desc">Federal Decree-Law No. 45 of 2021, hosted on the UAE government's own platform. The free-zone carve-outs (DIFC, ADGM run their own regimes) are the detail most summaries skip.</p>
+        </a>
+        <a class="resource" href="https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">India</span>
+          <p class="resource-name">India DPDPA 2023 — Official Text</p>
+          <p class="resource-desc">The full text of India's first comprehensive privacy law, hosted by MeitY. Rules were only notified in November 2025 — check the commencement schedule before assuming a provision is in force.</p>
         </a>
       </div>
     </div>
@@ -317,28 +361,33 @@
     <div class="section">
       <div class="section-header">
         <span class="section-title">Newsletters Worth Reading</span>
-        <span class="section-count">Signal over noise</span>
+        <span class="section-count">5 sources</span>
       </div>
       <div class="resource-grid">
-        <a class="resource" href="https://digitalgavel.substack.com" target="_blank" rel="noopener">
+        <a class="resource" href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">My Own</span>
           <p class="resource-name">The Digital Gavel</p>
           <p class="resource-desc">My newsletter covering AI governance, digital rights, and international law with a South Asian lens. Published when there is something worth saying.</p>
         </a>
-        <a class="resource" href="https://www.aisnakeoil.com" target="_blank" rel="noopener">
+        <a class="resource" href="https://www.aisnakeoil.com" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Critical AI</span>
-          <p class="resource-name">AI Snake Oil — Narayanan & Kapoor</p>
+          <p class="resource-name">AI Snake Oil — Narayanan &amp; Kapoor</p>
           <p class="resource-desc">The most rigorous critical perspective on AI claims and hype. Essential reading before citing any AI capability study in a legal or policy argument.</p>
         </a>
-        <a class="resource" href="https://lawfare.media" target="_blank" rel="noopener">
+        <a class="resource" href="https://lawfare.media" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Policy</span>
           <p class="resource-name">Lawfare</p>
           <p class="resource-desc">Serious analysis at the intersection of law and national security, including digital governance. The AI and tech law coverage is consistently high-quality.</p>
         </a>
-        <a class="resource" href="https://techpolicy.press" target="_blank" rel="noopener">
+        <a class="resource" href="https://techpolicy.press" target="_blank" rel="noopener noreferrer">
           <span class="resource-tag">Global South</span>
           <p class="resource-name">Tech Policy Press</p>
           <p class="resource-desc">Good coverage of tech policy issues with genuine attention to non-Western jurisdictions. Fills a gap that most US-centric newsletters ignore entirely.</p>
+        </a>
+        <a class="resource" href="https://restofworld.org/" target="_blank" rel="noopener noreferrer">
+          <span class="resource-tag">Global South</span>
+          <p class="resource-name">Rest of World</p>
+          <p class="resource-desc">Nonprofit tech journalism from outside Silicon Valley's usual frame. Consistently covers AI and tech stories from South Asia, Africa, and Latin America that Western outlets miss entirely.</p>
         </a>
       </div>
     </div>
@@ -350,13 +399,63 @@
   </main>
 
   <footer>
-    <p>© 2026 Muhammad Hamid Naeem</p>
-    <div class="links">
-      <a href="https://linkedin.com/in/hamidnaeemadvocate">LinkedIn</a>
-      <a href="https://digitalgavel.substack.com">Substack</a>
-      <a href="https://hamidnaeem.me/#contact">Contact</a>
-    </div>
+    <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+    <ul class="footer-links" role="list">
+      <li><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">Substack</a></li>
+      <li><a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="mailto:hamidnaeem2223ab@gmail.com">Email</a></li>
+    </ul>
   </footer>
 
+  <script>
+    // ── Custom cursor: only disable native cursor once the JS loop actually starts ──
+    (function initCursor() {
+      if (window.matchMedia('(max-width: 860px)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const cursor = document.getElementById('cursor');
+      const cursorRing = document.getElementById('cursor-ring');
+      if (!cursor || !cursorRing) return;
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      document.body.classList.add('cursor-active');
+      function animCursor() {
+        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+        rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+        cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+        requestAnimationFrame(animCursor);
+      }
+      animCursor();
+    })();
+
+    // ── Scroll progress ──
+    const prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (docH > 0 ? window.scrollY / docH * 100 : 0) + '%';
+    }, { passive: true });
+
+    // ── Nav scroll state ──
+    const navEl = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile nav ──
+    function openMobNav(btn) {
+      document.getElementById('mobile-nav').classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobNav() {
+      document.getElementById('mobile-nav').classList.remove('open');
+      const btn = document.querySelector('.nav-burger');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) closeMobNav();
+    });
+  </script>
 </body>
 </html>
