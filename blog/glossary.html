@@ -3,1177 +3,1110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Field Guide — Resources & Insights</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Field Guide — Muhammad Hamid Naeem</title>
+  <meta name="description" content="A practitioner's glossary for law, AI governance, and data privacy — 23 terms, explained plainly, with a Global South lens." />
+  <link rel="canonical" href="https://hamidnaeem.me/blog/glossary">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta property="og:title" content="Field Guide — Muhammad Hamid Naeem">
+  <meta property="og:description" content="A practitioner's glossary for law, AI governance, and data privacy.">
+  <meta property="og:url" content="https://hamidnaeem.me/blog/glossary">
+  <meta property="og:type" content="website">
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink:     '#0A0C0F',
-            'ink-2': '#111318',
-            'ink-3': '#181C24',
-            'ink-4': '#1F242F',
-            'ink-5': '#262D3A',
-            gold:    '#C9A84C',
-            'gold-dim': '#8A6F2E',
-            'gold-pale': '#E8D08A',
-            mist:    '#8A919E',
-            'mist-2':'#5C6470',
-            ivory:   '#F0EBE0',
-            'ivory-dim': '#B8B2A6',
-          },
-          fontFamily: {
-            display: ['"Playfair Display"', 'Georgia', 'serif'],
-            body:    ['Inter', 'system-ui', 'sans-serif'],
-            mono:    ['"JetBrains Mono"', 'monospace'],
-          },
-        }
-      }
-    }
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Base ── */
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0e0d09;
+      --ink-mid:    #38342c;
+      --ink-soft:   #5e5a52;
+      --ink-muted:  #8a8680;
+      --ink-ghost:  #b8b4ae;
+      --rule:       #e4e0d8;
+      --rule-dk:    #ccc8c0;
+      --paper:      #f8f6f1;
+      --cream:      #f0ece3;
+      --warm:       #e8e1d4;
+      --white:      #fdfcfa;
+      --red:        #8b2020;
+      --red-lt:     #f5eaea;
+      --red-glow:   rgba(139,32,32,0.15);
+      --amber:      #B45309;
+      --amber-lt:   #FFFBEB;
+      --green:      #15803D;
+      --green-lt:   #F0FDF4;
+      --serif:      'Cormorant', Georgia, serif;
+      --sans:       'Instrument Sans', sans-serif;
+      --mono:       'Martian Mono', monospace;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     html { scroll-behavior: smooth; }
     body {
-      background-color: #0A0C0F;
-      color: #F0EBE0;
-      font-family: 'Inter', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300;
+      line-height: 1.65; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: auto;
     }
+    body.cursor-active { cursor: none; }
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #111318; }
-    ::-webkit-scrollbar-thumb { background: #8A6F2E; border-radius: 2px; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--rule-dk); border-radius: 3px; }
 
-    /* ── Typography ── */
-    .display { font-family: 'Playfair Display', Georgia, serif; }
-    .mono    { font-family: 'JetBrains Mono', monospace; }
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: fixed; top: -100%; left: 1rem; z-index: 9999; background: var(--red); color: var(--white);
+      padding: 0.75rem 1.5rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-decoration: none; text-transform: uppercase; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
 
-    /* ── Gold rule ── */
-    .gold-rule {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #C9A84C44, #C9A84C, #C9A84C44, transparent);
+    /* ── CURSOR ── */
+    #cursor {
+      position: fixed; pointer-events: none; z-index: 9998; display: none; width: 10px; height: 10px;
+      background: var(--red); border-radius: 50%; transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out); mix-blend-mode: multiply;
     }
-    .gold-rule-faint {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #C9A84C22, #C9A84C44, #C9A84C22, transparent);
+    #cursor-ring {
+      position: fixed; pointer-events: none; z-index: 9997; display: none; width: 32px; height: 32px;
+      border: 1px solid rgba(139,32,32,0.25); border-radius: 50%; transform: translate(-50%, -50%);
+      transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), opacity 0.3s;
     }
+    body.cursor-active #cursor, body.cursor-active #cursor-ring { display: block; }
+    body.cursor-active:has(a:hover) #cursor, body.cursor-active:has(button:hover) #cursor { width: 18px; height: 18px; }
+    body.cursor-active:has(a:hover) #cursor-ring, body.cursor-active:has(button:hover) #cursor-ring { width: 48px; height: 48px; opacity: 0.45; }
 
-    /* ── Book cover ── */
-    .book-cover {
-      background: linear-gradient(160deg, #1F242F 0%, #111318 60%, #0A0C0F 100%);
-      border: 1px solid #C9A84C44;
-      box-shadow:
-        4px 0 0 0 #C9A84C,
-        8px 4px 24px rgba(0,0,0,0.6),
-        0 0 60px rgba(201,168,76,0.06);
-      position: relative;
-      overflow: hidden;
-    }
-    .book-cover::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 28px,
-          rgba(201,168,76,0.04) 28px,
-          rgba(201,168,76,0.04) 29px
-        );
-    }
-    .book-cover::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(180deg, #C9A84C, #8A6F2E);
-    }
+    #scroll-progress { position: fixed; top: 0; left: 0; z-index: 999; height: 1px; background: var(--red); width: 0%; transition: width 0.1s linear; }
 
-    /* ── Hero gradient text ── */
-    .text-gold-gradient {
-      background: linear-gradient(135deg, #E8D08A 0%, #C9A84C 50%, #8A6F2E 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* ── NAV (shared component) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500; background: rgba(253,252,250,0.90);
+      backdrop-filter: blur(20px) saturate(1.6); border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center; padding: 0 2.5rem; height: 58px;
+      transition: box-shadow 0.3s, background 0.3s;
     }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(14,13,9,0.05); background: rgba(253,252,250,0.97); }
+    .nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .nav-logo:hover { color: var(--red); }
+    .nav-links { display: flex; list-style: none; gap: 0.15rem; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted);
+      text-decoration: none; padding: 0 0.7rem; position: relative; transition: color 0.2s; height: 58px; display: flex; align-items: center;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 1px; background: var(--red);
+      transition: left 0.25s var(--ease-out), right 0.25s var(--ease-out);
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after, .nav-links a.active::after { left: 0.7rem; right: 0.7rem; }
+    .nav-links a.active { color: var(--ink); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
 
-    /* ── Glossary row ── */
-    .glossary-row {
-      border-bottom: 1px solid #1F242F;
-      transition: background 0.2s ease;
-      position: relative;
+    /* ── MOBILE NAV ── */
+    .mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 600; flex-direction: column; align-items: flex-start; justify-content: center; }
+    .mob-nav.open { display: flex; }
+    .mob-nav-inner { padding: 3rem 2rem; display: flex; flex-direction: column; width: 100%; }
+    .mob-nav a {
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 300; font-style: italic; color: var(--ink);
+      text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); display: block;
+      transition: color 0.2s, padding-left 0.3s var(--ease-out);
     }
-    .glossary-row::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: #C9A84C;
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.25s ease;
+    .mob-nav a:first-of-type { border-top: 1px solid var(--rule); }
+    .mob-nav a:hover { color: var(--red); padding-left: 0.75rem; }
+    .mob-close {
+      position: fixed; top: 1.1rem; right: 1.5rem; background: none; border: none; cursor: pointer; font-family: var(--mono);
+      font-size: 0.7rem; color: var(--ink-muted); z-index: 700; padding: 10px; min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: flex-end; letter-spacing: 0.05em;
     }
-    .glossary-row:hover::before,
-    .glossary-row.open::before { transform: scaleY(1); }
-    .glossary-row:hover { background: rgba(201,168,76,0.03); }
-    .glossary-row.open  { background: rgba(201,168,76,0.04); }
+    .mob-close:hover { color: var(--ink); }
+    .mob-nav-label { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 2.5rem; }
 
-    /* ── Accordion panel ── */
-    .definition-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
-      opacity: 0;
-    }
-    .definition-panel.open {
-      max-height: 520px;
-      opacity: 1;
-      overflow-y: auto;
-    }
+    /* ── LAYOUT HELPERS ── */
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 2.5rem; }
+    section { padding: 4.5rem 0; }
+    .rule-line { border: none; height: 1px; background: var(--rule); flex: 1; }
 
-    /* ── Chevron ── */
-    .chevron { transition: transform 0.3s ease; }
-    .chevron.open { transform: rotate(180deg); }
+    /* ── HERO / INTRO ── */
+    .gl-hero { padding: 9rem 0 3.5rem; }
+    .gl-eyebrow { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .gl-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--red); display: block; }
+    .gl-hero h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 300; color: var(--ink); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .gl-hero p { font-size: 1rem; color: var(--ink-soft); max-width: 600px; line-height: 1.8; }
 
-    /* ── Filter pill ── */
+    /* ── SECTION HEADERS ── */
+    .sec-hd { display: flex; align-items: baseline; gap: 1.25rem; margin-bottom: 1rem; }
+    .sec-eyebrow { font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.2em; color: var(--red); flex-shrink: 0; text-transform: uppercase; }
+    .sec-title { font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 300; color: var(--ink); letter-spacing: -0.015em; }
+    .sec-sub { font-size: 0.9rem; color: var(--ink-muted); max-width: 560px; line-height: 1.75; margin-bottom: 2.5rem; }
+
+    /* ── FILTER + SEARCH ── */
+    .gl-controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    #filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .filter-pill {
-      cursor: pointer;
-      border: 1px solid #2A3040;
-      transition: all 0.2s ease;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer; border: 1px solid var(--rule-dk); background: var(--white); color: var(--ink-soft);
+      font-family: var(--mono); font-size: 0.58rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.5rem 0.9rem; transition: all 0.15s;
     }
-    .filter-pill:hover { border-color: #C9A84C66; color: #C9A84C; }
-    .filter-pill.active { background: rgba(201,168,76,0.12); border-color: #C9A84C; color: #C9A84C; }
-
-    /* ── Resource card ── */
-    .resource-card {
-      background: #111318;
-      border: 1px solid #1F242F;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .resource-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #C9A84C55, #C9A84C, #C9A84C55, transparent);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .resource-card:hover { border-color: #C9A84C44; box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
-    .resource-card:hover::before { opacity: 1; }
-
-    /* ── Download button ── */
-    .btn-download {
-      border: 1px solid #C9A84C66;
-      color: #C9A84C;
-      transition: all 0.2s ease;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .btn-download:hover { background: #C9A84C; color: #0A0C0F; border-color: #C9A84C; }
-
-    /* ── Eyebrow ── */
-    .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #C9A84C;
-    }
-
-    /* ── Category badge ── */
-    .cat-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 2px;
-    }
-    .cat-ai-gov     { background: rgba(99,102,241,0.15);  color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
-    .cat-data-priv  { background: rgba(20,184,166,0.12);  color: #5eead4; border: 1px solid rgba(20,184,166,0.25); }
-    .cat-legal-tech { background: rgba(245,158,11,0.12);  color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
-    .cat-concept    { background: rgba(139,92,246,0.12);  color: #c4b5fd; border: 1px solid rgba(139,92,246,0.25); }
-    .cat-intl-law   { background: rgba(244,63,94,0.12);   color: #fda4af; border: 1px solid rgba(244,63,94,0.25); }
-
-    /* ── Section number ── */
-    .section-num {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 5rem;
-      line-height: 1;
-      color: rgba(201,168,76,0.07);
-      position: absolute;
-      right: 0;
-      top: -1rem;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* ── Glossary search ── */
+    .filter-pill:hover { border-color: var(--red); color: var(--red); }
+    .filter-pill.active { background: var(--red); border-color: var(--red); color: var(--white); }
     #glossary-search {
-      background: #111318;
-      border: 1px solid #1F242F;
-      color: #F0EBE0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      outline: none;
-      transition: border-color 0.2s ease;
+      background: var(--white); border: 1px solid var(--rule-dk); color: var(--ink); font-family: var(--mono);
+      font-size: 0.78rem; outline: none; transition: border-color 0.2s; padding: 0.6rem 0.9rem; width: 220px; min-height: 40px;
     }
-    #glossary-search:focus { border-color: #C9A84C66; }
-    #glossary-search::placeholder { color: #3A4050; }
+    #glossary-search:focus { border-color: var(--red); }
+    #glossary-search::placeholder { color: var(--ink-ghost); }
 
-    /* ── Progress bar on open panel ── */
-    .definition-panel.open::-webkit-scrollbar { width: 3px; }
-    .definition-panel.open::-webkit-scrollbar-track { background: #111318; }
-    .definition-panel.open::-webkit-scrollbar-thumb { background: #C9A84C44; border-radius: 2px; }
-
-    /* ── Subtle background texture ── */
-    .bg-noise { position: relative; }
-    .bg-noise::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.015;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      pointer-events: none;
+    /* ── GLOSSARY LIST ── */
+    #glossary-list { border-top: 1px solid var(--rule); }
+    .glossary-row { border-bottom: 1px solid var(--rule); position: relative; transition: background 0.2s; }
+    .glossary-row::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red);
+      transform: scaleY(0); transform-origin: top; transition: transform 0.25s;
     }
-
-    /* ── Term index marker ── */
-    .term-index {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: rgba(201,168,76,0.25);
-      font-size: 0.75rem;
-      min-width: 1.6rem;
+    .glossary-row:hover::before, .glossary-row.open::before { transform: scaleY(1); }
+    .glossary-row:hover { background: var(--cream); }
+    .glossary-row.open { background: var(--cream); }
+    .row-trigger {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.1rem 0.5rem; background: none; border: none; cursor: pointer; text-align: left;
     }
+    .row-left { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .term-index { font-family: var(--serif); font-style: italic; color: var(--rule-dk); font-size: 0.85rem; min-width: 1.6rem; }
+    .term-name { font-family: var(--serif); font-size: 1.08rem; font-weight: 500; color: var(--ink); }
+    .term-alt { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em; color: var(--ink-ghost); }
+    .chevron { transition: transform 0.3s; color: var(--ink-ghost); flex-shrink: 0; }
+    .chevron.open { transform: rotate(180deg); color: var(--red); }
 
-    /* ── No-results state ── */
-    #no-results {
-      display: none;
-      padding: 3rem 1rem;
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      color: #3A4050;
-      text-transform: uppercase;
+    .cat-badge { font-family: var(--mono); font-size: 0.53rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border: 1px solid transparent; }
+    .cat-ai-gov     { background: var(--red-lt); color: var(--red); border-color: rgba(139,32,32,0.2); }
+    .cat-data-priv  { background: var(--cream); color: var(--ink-mid); border-color: var(--rule-dk); }
+    .cat-legal-tech { background: var(--amber-lt); color: var(--amber); border-color: #FED7AA; }
+    .cat-concept    { background: var(--warm); color: var(--ink-soft); border-color: var(--rule-dk); }
+    .cat-intl-law   { background: var(--green-lt); color: var(--green); border-color: #BBF7D0; }
+
+    .definition-panel { max-height: 0; overflow: hidden; transition: max-height 0.38s var(--ease-out), opacity 0.3s; opacity: 0; }
+    .definition-panel.open { max-height: 900px; opacity: 1; overflow-y: auto; }
+    .def-body { padding: 0 2.5rem 1.75rem 3rem; border-left: 2px solid var(--rule); margin-left: 0.25rem; }
+    .def-body p { font-size: 0.93rem; color: var(--ink-mid); line-height: 1.82; }
+    .def-body p + p { margin-top: 0.9rem; }
+    .def-body p.secondary { color: var(--ink-soft); }
+    .def-body em { font-style: italic; color: var(--red); }
+    .def-source { margin-top: 1rem; display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+    .def-source-label { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-ghost); }
+    .def-source-val { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-muted); }
+
+    #no-results { display: none; padding: 3rem 1rem; text-align: center; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-ghost); }
+
+    .gl-count-row { margin-top: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+    .gl-count { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-muted); letter-spacing: 0.03em; }
+    .gl-count-note { font-family: var(--mono); font-size: 0.6rem; color: var(--red); }
+
+    /* ── MONOGRAPH — compact related-work card, not a hero ── */
+    #monograph { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .mono-card { display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center; background: var(--ink); padding: 2rem 2.25rem; }
+    .mono-mark { width: 3px; align-self: stretch; background: var(--red); }
+    .mono-eyebrow { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+    .mono-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; font-style: italic; color: var(--white); line-height: 1.3; margin-bottom: 0.4rem; }
+    .mono-desc { font-size: 0.85rem; color: rgba(248,246,241,0.55); line-height: 1.7; max-width: 520px; }
+    .mono-btn {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white);
+      background: var(--red); border: 1px solid var(--red); padding: 0.8rem 1.4rem; cursor: pointer;
+      transition: background 0.2s, border-color 0.2s; white-space: nowrap;
     }
+    .mono-btn:hover { background: #6d1818; border-color: #6d1818; }
 
+    /* ── MODAL ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 800; background: rgba(14,13,9,0.7); backdrop-filter: blur(10px); overflow-y: auto; padding: 3rem 1.25rem; }
+    .modal-overlay.open { display: block; }
+    .modal-box { background: var(--white); max-width: 740px; margin: 0 auto; border: 1px solid var(--rule); position: relative; }
+    .modal-close {
+      position: sticky; top: 0; float: right; background: var(--white); border: none; cursor: pointer; font-family: var(--mono);
+      font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); padding: 1.1rem 1.5rem; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--red); }
+    .modal-body { padding: 0.5rem 2.5rem 2.5rem; clear: both; }
+    .modal-eyebrow { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.75rem; }
+    .modal-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; line-height: 1.25; }
+    .modal-subtitle { font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--ink-soft); margin-bottom: 1.5rem; }
+    .modal-body hr { border: none; height: 1px; background: var(--rule); margin: 1.5rem 0; }
+    .modal-body p { font-size: 0.92rem; color: var(--ink-mid); line-height: 1.82; margin-bottom: 1rem; }
+    .modal-body h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin: 1.5rem 0 0.6rem; }
+    .modal-callout { background: var(--cream); border-left: 3px solid var(--red); padding: 1.25rem 1.4rem; margin: 1.25rem 0; }
+    .modal-callout h5 { font-family: var(--serif); font-size: 1.02rem; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; }
+    .modal-callout .action { font-size: 0.86rem; color: var(--ink-soft); margin-top: 0.6rem; }
+    .modal-callout .action strong { color: var(--red); }
+    .modal-foot { font-size: 0.8rem; color: var(--ink-ghost); font-style: italic; border-top: 1px solid var(--rule); padding-top: 1rem; margin-top: 1.5rem; }
+
+    /* ── RESOURCES ── */
+    #resources { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .res-card { background: var(--white); padding: 2rem; display: flex; flex-direction: column; }
+    .res-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; gap: 1rem; }
+    .res-kind { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-ghost); margin-bottom: 0.5rem; }
+    .res-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .res-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); line-height: 1.35; margin-bottom: 0.85rem; }
+    .res-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.72; flex: 1; margin-bottom: 1.25rem; }
+    .res-meta { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1.25rem; }
+    .res-meta-row { display: flex; justify-content: space-between; gap: 1rem; }
+    .res-meta-key { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-ghost); flex-shrink: 0; }
+    .res-meta-val { font-family: var(--mono); font-size: 0.58rem; color: var(--ink-muted); text-align: right; }
+    .res-actions { display: flex; align-items: center; gap: 0.75rem; padding-top: 1.1rem; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+    .btn-outline {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red);
+      border: 1px solid rgba(139,32,32,0.4); background: none; padding: 0.55rem 1.1rem; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+    .btn-outline[disabled] { opacity: 0.35; cursor: not-allowed; }
+    .res-soon { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.08em; color: var(--ink-ghost); margin-left: auto; }
+
+    /* ── FOOTER (shared component) ── */
+    footer {
+      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05); padding: 1.75rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-family: var(--serif); font-size: 0.82rem; font-style: italic; color: rgba(248,246,241,0.16); }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; list-style: none; }
+    .footer-links a { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,246,241,0.2); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(248,246,241,0.75); }
+
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
     @media (prefers-reduced-motion: reduce) {
-      .definition-panel, .chevron, .glossary-row::before, .resource-card,
-      .resource-card::before, .btn-download, .filter-pill { transition: none !important; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 860px) {
+      nav { padding: 0 1.25rem; height: 54px; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .wrap { padding: 0 1.25rem; }
+      .gl-hero { padding: 7rem 0 2.5rem; }
+      section { padding: 3rem 0; }
+      .gl-controls { flex-direction: column; align-items: flex-start; }
+      #glossary-search { width: 100%; }
+      .def-body { padding: 0 1.25rem 1.5rem 1.5rem; }
+      .mono-card { grid-template-columns: 1fr; gap: 1.25rem; text-align: left; }
+      .mono-mark { display: none; }
+      .res-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 0.5rem 1.5rem 2rem; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      #cursor, #cursor-ring { display: none !important; }
     }
   </style>
 </head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="scroll-progress" role="progressbar" aria-label="Reading progress"></div>
 
-<body class="bg-noise min-h-screen">
-
-  <!-- ══ NAVIGATION ══ -->
-  <nav class="sticky top-0 z-50 border-b border-ink-4" style="background:rgba(10,12,15,0.92);backdrop-filter:blur(12px);">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="eyebrow text-ivory-dim hover:text-gold transition-colors">← Portfolio</a>
-      <span class="eyebrow" style="color:#5C6470;">Field Guide · v2.1</span>
-      <a href="#resources" class="eyebrow hover:text-gold transition-colors" style="color:#5C6470;">Resources ↓</a>
-    </div>
+  <!-- ── NAV ── -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo">Muhammad Hamid Naeem</a>
+    <ul class="nav-links" role="list">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/blog" class="active">Writing</a></li>
+      <li><a href="/calculator">Calculator</a></li>
+      <li><a href="/newsletter">Newsletter</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="openMobNav(this)">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-
-  <!-- ══ HERO — FEATURED PUBLICATION ══ -->
-  <section class="max-w-6xl mx-auto px-6 pt-20 pb-24">
-
-    <div class="flex items-center gap-4 mb-12">
-      <span class="eyebrow">Featured Publication</span>
-      <hr class="gold-rule flex-1" />
-      <span class="eyebrow" style="color:#5C6470;">2025</span>
+  <!-- ── MOBILE NAV ── -->
+  <div class="mob-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+    <button class="mob-close" onclick="closeMobNav()" aria-label="Close menu">✕</button>
+    <div class="mob-nav-inner">
+      <span class="mob-nav-label">Navigation</span>
+      <a href="/#about" onclick="closeMobNav()">About</a>
+      <a href="/blog" onclick="closeMobNav()">Writing</a>
+      <a href="/calculator" onclick="closeMobNav()">Calculator</a>
+      <a href="/newsletter" onclick="closeMobNav()">Newsletter</a>
+      <a href="/#contact" onclick="closeMobNav()">Contact</a>
     </div>
+  </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+  <main id="main-content">
 
-      <!-- Book Cover -->
-      <div class="lg:col-span-4 flex justify-center lg:justify-start">
-        <div class="book-cover w-56 h-80 lg:w-64 lg:h-88 rounded-sm flex flex-col justify-between p-6">
-          <div>
-            <p class="eyebrow mb-4" style="font-size:0.55rem;">Forthcoming Monograph</p>
-            <div class="w-8 h-px bg-gold mb-4"></div>
-            <h3 class="display text-ivory leading-tight" style="font-size:1.05rem; font-style:italic;">
-              Regulating Intelligence at the Periphery
-            </h3>
-          </div>
-          <div>
-            <p class="display text-gold-pale" style="font-size:0.78rem; font-style:italic; opacity:0.8;">AI Law & Governance<br>in Emerging Economies</p>
-            <div class="w-full h-px bg-gold-dim mt-4 mb-3" style="opacity:0.4;"></div>
-            <p class="mono text-mist-2" style="font-size:0.6rem;">[ COVER IMAGE PLACEHOLDER ]</p>
-          </div>
+  <!-- ══ HERO ══ -->
+  <div class="wrap">
+    <section class="gl-hero">
+      <p class="gl-eyebrow">Writing / Field Guide</p>
+      <h1>The Field Guide</h1>
+      <p>A practitioner's glossary for the law–AI–data intersection — 23 terms, explained plainly, with a Global South lens. Not academic definitions. Working ones, written for people drafting submissions, not reading textbooks.</p>
+    </section>
+  </div>
+
+  <!-- ══ GLOSSARY ══ -->
+  <div class="wrap">
+    <section aria-labelledby="glossary-heading">
+      <div class="sec-hd">
+        <span class="sec-eyebrow">Reference</span>
+        <h2 class="sec-title" id="glossary-heading">Practitioner's lexicon</h2>
+      </div>
+      <p class="sec-sub">Authoritative working definitions for key terms at the intersection of law, AI governance, and data privacy — with every entry noting what it means for practitioners outside Brussels and Washington.</p>
+
+      <div class="gl-controls">
+        <div id="filter-bar">
+          <button class="filter-pill active" data-filter="all">All</button>
+          <button class="filter-pill" data-filter="AI Governance">AI Governance</button>
+          <button class="filter-pill" data-filter="Data Privacy">Data Privacy</button>
+          <button class="filter-pill" data-filter="Legal Tech">Legal Tech</button>
+          <button class="filter-pill" data-filter="Concept">Concept</button>
+          <button class="filter-pill" data-filter="International Law">Intl. Law</button>
         </div>
+        <input type="text" id="glossary-search" placeholder="Search terms…" autocomplete="off" spellcheck="false" aria-label="Search glossary terms">
       </div>
 
-      <!-- Publication Details -->
-      <div class="lg:col-span-8">
-        <p class="eyebrow mb-3" style="color:#8A6F2E;">Forthcoming · Academic Press</p>
+      <div id="glossary-list">
 
-        <h1 class="display text-ivory leading-tight mb-2" style="font-size:clamp(1.8rem, 4vw, 2.8rem);">
-          Regulating Intelligence<br/>
-          <span class="text-gold-gradient">at the Periphery</span>
-        </h1>
-        <p class="display mb-6" style="font-size:1rem; color:#8A919E; font-style:italic;">
-          AI Law & Governance in Emerging Economies
-        </p>
-
-        <hr class="gold-rule-faint mb-6" />
-
-        <p class="text-ivory-dim leading-relaxed mb-3" style="font-size:1.05rem; line-height:1.8;">
-          As multilateral AI regulatory frameworks crystallise in Brussels and Washington, the vast majority of the world's digital population inhabits a governance vacuum — where legacy data-protection statutes are misapplied to algorithmic decision-making and no adequate accountability architecture exists for high-risk automated systems deployed at scale.
-        </p>
-        <p class="text-ivory-dim leading-relaxed mb-8" style="font-size:1.05rem; line-height:1.8; color:#8A919E;">
-          This monograph constructs a foundational legal theory for AI governance that begins from the conditions of the Global South — examining how Pakistan, Nigeria, Kenya, and Indonesia are each developing distinct regulatory postures and what a genuinely pluralist international AI law might look like.
-        </p>
-
-        <div class="flex flex-wrap gap-x-8 gap-y-2 mb-8">
-          <div>
-            <p class="eyebrow mb-1" style="color:#5C6470;">Discipline</p>
-            <p class="text-ivory-dim text-sm">Law · AI Governance · Comparative Regulation</p>
-          </div>
-          <div>
-            <p class="eyebrow mb-1" style="color:#5C6470;">Pages (Est.)</p>
-            <p class="text-ivory-dim text-sm">~320 pp.</p>
-          </div>
-          <div>
-            <p class="eyebrow mb-1" style="color:#5C6470;">Format</p>
-            <p class="text-ivory-dim text-sm">Hardcover · Digital</p>
+        <!-- 01 -->
+        <div class="glossary-row" data-category="AI Governance" data-term="high-risk ai system">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">01</span>
+              <span class="term-name">High-Risk AI System</span>
+              <span class="cat-badge cat-ai-gov">AI Governance</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>Under the EU AI Act's risk-stratified architecture, a <em>high-risk AI system</em> is one whose deployment in specified critical sectors — including biometric identification, critical infrastructure management, educational and vocational assessment, employment-related decision-making, essential public services, law enforcement, migration and border control, and the administration of justice — carries a materially elevated probability of causing harm to health, safety, or fundamental rights. The classification triggers a mandatory conformity assessment regime requiring documented technical robustness, human oversight obligations, data governance protocols, and registration in the EU's centralized AI database prior to market placement.</p>
+              <p class="secondary">For practitioners in the Global South, the critical question is how analogous risk-tiering principles can be transposed into domestic regulatory instruments that lack the institutional infrastructure — notified conformity bodies, enforcement agencies, sector-specific technical standards — that underpin EU implementation; a direct legislative copy without that institutional substrate produces a nominally rigorous regime that is functionally unenforceable.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">EU AI Act, Annex III · Articles 6–7 · Recital 51</span></div>
+            </div>
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-4 items-center">
-          <button
-            onclick="document.getElementById('abstract-modal').classList.remove('hidden')"
-            class="px-6 py-3 text-sm font-medium rounded-sm transition-all"
-            style="background:#C9A84C; color:#0A0C0F; font-family:'Inter',sans-serif; letter-spacing:0.02em;"
-            onmouseover="this.style.background='#E8D08A'"
-            onmouseout="this.style.background='#C9A84C'"
-          >
-            Read Abstract
+        <!-- 02 -->
+        <div class="glossary-row" data-category="AI Governance" data-term="gpai model general-purpose ai">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">02</span>
+              <span class="term-name">GPAI Model</span>
+              <span class="cat-badge cat-ai-gov">AI Governance</span>
+              <span class="term-alt">General-Purpose AI</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <button
-            disabled
-            class="px-6 py-3 text-sm font-medium rounded-sm cursor-not-allowed"
-            style="background:transparent; color:#5C6470; border:1px solid #2A3040; font-family:'Inter',sans-serif; letter-spacing:0.02em;"
-          >
-            Pre-order — Coming Soon
-          </button>
-          <button
-            class="px-4 py-3 text-xs font-medium transition-colors"
-            style="color:#8A6F2E; font-family:'JetBrains Mono',monospace; letter-spacing:0.08em; text-transform:uppercase; background:none; border:none; cursor:pointer;"
-            onmouseover="this.style.color='#C9A84C'"
-            onmouseout="this.style.color='#8A6F2E'"
-          >
-            Notify me on release →
-          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>A <em>general-purpose AI model</em> (GPAI model) is trained on broad data at scale and is capable of competently performing a wide range of distinct tasks, integrable into a plurality of downstream systems — the paradigm case being large language and multimodal foundation models. The EU AI Act's Chapter V introduces a tiered GPAI regime: all providers must maintain technical documentation and comply with copyright obligations regarding training data, while providers of models assessed to present <em>systemic risk</em> (operationalized by a computational threshold of 10²⁵ floating-point operations for training) face heightened obligations including adversarial testing, incident reporting, and cybersecurity measures.</p>
+              <p class="secondary">The GPAI regime creates a structural tension with data privacy law that is particularly acute in cross-border contexts: training-data transparency obligations necessarily require disclosure of sourcing practices, which surfaces compliance questions under GDPR-equivalent provisions — a tension most emerging-market jurisdictions are only beginning to legislate.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">EU AI Act, Chapter V · Articles 51–56 · Annex XIII</span></div>
+            </div>
+          </div>
         </div>
+
+        <!-- 03 -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="data protection impact assessment dpia">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">03</span>
+              <span class="term-name">Data Protection Impact Assessment</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+              <span class="term-alt">DPIA</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>A <em>Data Protection Impact Assessment</em> (DPIA) is a structured, prospective risk-analysis process mandated under Article 35 GDPR — and incorporated by reference or analogy in a growing number of Global South data protection statutes — whenever a proposed processing operation is likely to result in high risk to data subjects' rights and freedoms. A compliant DPIA must, at minimum, describe the envisaged processing and purposes, assess necessity and proportionality, assess risks to data subjects, and document mitigation measures.</p>
+              <p class="secondary">In the AI context, DPIAs have acquired heightened relevance as a pre-deployment governance tool: where a system's logic is opaque by design, the DPIA process forces controllers to articulate the systemic effects of automated processing — effectively operating as a rudimentary AI impact assessment in jurisdictions that lack a purpose-built instrument.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">GDPR Art. 35 · WP29 Guidelines on DPIA (WP248 rev.01)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="glossary-row" data-category="Concept" data-term="algorithmic accountability">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">04</span>
+              <span class="term-name">Algorithmic Accountability</span>
+              <span class="cat-badge cat-concept">Concept</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Algorithmic accountability</em> is the normative and legal framework by which persons responsible for designing, deploying, or operating an automated decision-making system can be required to explain, justify, and where necessary remediate decisions affecting others. It synthesizes administrative law (procedural fairness), tort law (product liability and negligence), human rights law (non-discrimination, due process), and consumer protection — with growing consensus favouring an ex ante model imposing obligations at the design stage rather than relying solely on ex post litigation.</p>
+              <p class="secondary">The practical challenge in low-resource jurisdictions lies not in the absence of applicable legal doctrine but in the asymmetric information and technical capacity between regulators and regulated entities: an accountability regime is only as strong as the enforcing institution's ability to audit the system against which accountability is claimed.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">GDPR Art. 22 · OECD AI Principles (2019) · UNESCO Rec. on AI Ethics</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="glossary-row" data-category="Legal Tech" data-term="regulatory sandbox">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">05</span>
+              <span class="term-name">Regulatory Sandbox</span>
+              <span class="cat-badge cat-legal-tech">Legal Tech</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>A <em>regulatory sandbox</em> is a time-limited, supervised experimentation framework permitting designated firms to test novel products or business models in a live-market environment under relaxed or modified regulatory requirements, on the understanding that the regulator will observe outcomes and ultimately determine permanent regulatory treatment. Originally developed in financial services regulation (the UK FCA sandbox is the foundational model), the instrument has migrated to AI governance: the EU AI Act expressly mandates national AI regulatory sandboxes.</p>
+              <p class="secondary">For counsel advising technology clients where AI-specific regulation is nascent, the sandbox offers a strategically valuable pathway: legal certainty during the experimental period, proactive engagement with regulators before adverse enforcement positions crystallize, and evidence that can shape the eventual permanent framework.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">EU AI Act Art. 57–63 · FATF Guidance on RegTech · SBP Digital Banking Policy</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="data localisation localization">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">06</span>
+              <span class="term-name">Data Localisation</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Data localisation</em> describes a regulatory mandate — absolute or conditional — requiring personal data to be stored or processed on servers physically located within a designated territory, restricting or conditioning transfer abroad. The rationale ranges from national security and law enforcement access, to economic sovereignty, to privacy protection. Pakistan's PDPA and India's DPDP Act both contain localisation provisions, though scope and permissible transfer mechanisms differ materially.</p>
+              <p class="secondary">Localisation mandates create structural tension with global AI training pipelines, which depend on aggregating large, geographically dispersed datasets: a strict regime applicable to personal data effectively prohibits that data from cross-border LLM training without a jurisdiction-specific adequacy finding — a compliance burden most global GPAI providers have not yet operationalized for Global South jurisdictions.</p>
+              <div class="def-source"><span class="def-source-label">Instruments</span><span class="def-source-val">PDPA Pakistan · India DPDP Act 2023 · Nigeria NDPR 2019</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="glossary-row" data-category="Concept" data-term="explainability xai explainable ai">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">07</span>
+              <span class="term-name">Explainability (XAI)</span>
+              <span class="cat-badge cat-concept">Concept</span>
+              <span class="term-alt">Explainable AI</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Explainability</em> refers to an AI system's capacity to furnish intelligible, sufficient accounts of how it arrives at outputs, in a form useful to the relevant human audience — affected individuals, auditors, regulators, or courts. It must be distinguished from <em>interpretability</em> (a technical property of a model's internals) and <em>transparency</em> (a disclosure obligation): a system can be transparent about its limitations without being interpretable, and interpretable models may still fail to explain adequately to lay persons.</p>
+              <p class="secondary">The legal tension is acute for large language models: transformer architecture renders faithful mechanistic explanation practically impossible with current tools, creating a compliance gap wherever a regulatory framework imposes meaningful explanation obligations — a gap post-hoc methods (LIME, SHAP) address only partially.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">GDPR Arts. 13–15, 22 · EU AI Act Art. 13 · NIST AI RMF</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="glossary-row" data-category="Legal Tech" data-term="automated individual decision-making aidm article 22 gdpr">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">08</span>
+              <span class="term-name">Automated Individual Decision-Making</span>
+              <span class="cat-badge cat-legal-tech">Legal Tech</span>
+              <span class="term-alt">AIDM · Art. 22 GDPR</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Automated individual decision-making</em> (AIDM) is a legal or similarly significant determination reached solely through automated means — without meaningful human involvement — based on personal data. Article 22 GDPR gives data subjects the right not to be subject to such a decision, including profiling, except under defined exceptions (explicit consent, contract necessity, or domestic legal authorisation with safeguards). The qualification "solely" is operative: a reviewer who rubber-stamps AI output without genuine deliberation likely does not break the automated chain.</p>
+              <p class="secondary">For counsel advising on AI deployment in credit, employment, or criminal justice contexts, the practical advice is to design human-in-the-loop oversight as a substantive procedural safeguard rather than a formal check-box — documented, consequential, and capable of overriding the recommendation, or it will not survive regulatory scrutiny.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">GDPR Art. 22 · WP29 Guidelines (WP251)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 09 -->
+        <div class="glossary-row" data-category="Concept" data-term="contextual adequacy doctrine global south">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">09</span>
+              <span class="term-name">Contextual Adequacy</span>
+              <span class="cat-badge cat-concept">Concept</span>
+              <span class="term-alt">Proposed Doctrine</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Contextual adequacy</em> is a proposed regulatory doctrine — advanced in the author's forthcoming monograph — under which the legality of an AI system's deployment is assessed against the specific institutional, cultural, and rights environment of the receiving jurisdiction rather than a universal technical compliance standard. It proceeds from the observation that existing international AI governance frameworks are calibrated to the enforcement capacities of their originating jurisdictions, and systematically fail to account for weak regulatory institutions, high informality, resource asymmetry, and the absence of meaningful redress mechanisms elsewhere.</p>
+              <p class="secondary">The doctrine does not propose a lower standard of protection; it argues for a different starting question — what constitutes an adequate governance response given actual institutional conditions, rather than the institutions of the EU or US. It reframes AI governance from a matter of technology standards to one of institutional design and capacity-building.</p>
+              <div class="def-source"><span class="def-source-label">Primary source</span><span class="def-source-val">Naeem, Regulating Intelligence at the Periphery (forthcoming) · Part III</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="glossary-row" data-category="Legal Tech" data-term="ai liability product liability tort negligence">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">10</span>
+              <span class="term-name">AI Liability</span>
+              <span class="cat-badge cat-legal-tech">Legal Tech</span>
+              <span class="cat-badge cat-concept">Concept</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>AI liability</em> is the body of doctrine — drawn from tort, contract, product liability, and administrative law — determining who bears legal responsibility for harm caused by an AI system's operation. Mainstream ML systems combine characteristics that frustrate traditional liability attribution: opacity, emergent behaviour, distributed causation across a deployment chain, and non-determinism. The EU's proposed AI Liability Directive attempts to address causation difficulties through a rebuttable presumption of causal linkage where a defendant has breached an AI Act obligation and harm resulted.</p>
+              <p class="secondary">In Global South jurisdictions, AI liability questions arise within tort frameworks developed long before algorithmic harm was conceivable. Practitioners must work creatively within existing doctrine — negligence and product liability — while advocating for purpose-built legislative reform addressing causal attribution directly.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">EU AI Liability Directive (proposed) · EU Product Liability Directive (revised)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="glossary-row" data-category="International Law" data-term="digital sovereignty data sovereignty technological sovereignty">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">11</span>
+              <span class="term-name">Digital Sovereignty</span>
+              <span class="cat-badge cat-intl-law">International Law</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Digital sovereignty</em> is a contested political-legal concept describing a state's claimed right to exercise effective control over digital infrastructure, data flows, and technological systems within its territory. It encompasses related but distinct claims: <em>data sovereignty</em> (control over data flows), <em>platform sovereignty</em> (regulatory authority over global platforms operating domestically), <em>technological sovereignty</em> (capacity to develop strategic technologies without critical foreign dependence), and <em>AI sovereignty</em>. It has become a central organising concept for Global South states asserting a regulatory posture reflecting their own priorities rather than Brussels' or Washington's.</p>
+              <p class="secondary">The discourse carries an inherent tension: the most plausible interventions to assert sovereignty — localisation, platform access conditions, audit requirements — impose compliance costs that may deter foreign investment, entrenching the dependency sovereignty claims aim to address. Effective strategy requires distinguishing assertions that redistribute power from those that merely impose friction.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">ITU AI Policy · African Union Data Policy Framework · G20 AI Principles</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="glossary-row" data-category="Concept" data-term="algorithmic bias discrimination fairness equity">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">12</span>
+              <span class="term-name">Algorithmic Bias</span>
+              <span class="cat-badge cat-concept">Concept</span>
+              <span class="cat-badge cat-ai-gov">AI Governance</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Algorithmic bias</em> refers to systematic, unjustifiable disparities in AI outputs that disadvantage individuals or groups on protected or proxy characteristics, reproducing or amplifying existing inequalities. It encompasses <em>historical bias</em>, <em>representation bias</em>, <em>measurement bias</em>, and <em>feedback loops</em>. Whether algorithmic bias qualifies as unlawful discrimination depends on whether anti-discrimination frameworks designed for human decision-makers can be interpreted to capture automated systems — a question unresolved in most Global South legal systems.</p>
+              <p class="secondary">The Global South context adds a distributional dimension: systems deployed at scale here are frequently trained predominantly on Western, English-language data, producing both performance disparities and representational harms for out-of-distribution populations — a dimension that has received comparatively little regulatory attention despite its wide practical effect.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">EU AI Act Art. 10 · NIST AI RMF (Bias) · UNESCO AI Ethics Rec. §§ 28–31</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="glossary-row" data-category="International Law" data-term="adequacy decision cross-border data transfer gdpr sccs">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">13</span>
+              <span class="term-name">Adequacy Decision</span>
+              <span class="cat-badge cat-intl-law">International Law</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>An <em>adequacy decision</em> is a formal determination — most consequentially, by the European Commission under Article 45 GDPR — that a third country offers a level of data protection <em>essentially equivalent</em> to the EEA, permitting unrestricted personal data transfers without supplementary safeguards. Absent adequacy, organisations rely on alternative mechanisms — Standard Contractual Clauses, Binding Corporate Rules — each with limitations, particularly in the AI context where data flows are diffuse and continuous.</p>
+              <p class="secondary">As of 2026, none of the major Global South AI-relevant jurisdictions — Pakistan, Nigeria, Kenya, Indonesia, Bangladesh — holds a GDPR adequacy determination. This creates a persistent structural barrier to participation in European digital markets. Strengthening supervisory authority independence and enforcement capacity is the most direct lever available toward adequacy candidacy.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">GDPR Art. 45 · EC Adequacy Decisions List · Schrems II (C-311/18)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 — NEW -->
+        <div class="glossary-row" data-category="International Law" data-term="brussels effect anu bradford unilateral regulatory globalisation">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">14</span>
+              <span class="term-name">Brussels Effect</span>
+              <span class="cat-badge cat-intl-law">International Law</span>
+              <span class="cat-badge cat-concept">Concept</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>Coined by legal scholar Anu Bradford, the <em>Brussels Effect</em> describes the EU's capacity to unilaterally regulate global markets by setting standards so demanding that multinational firms find it cheaper to apply them worldwide than to maintain separate compliance regimes per jurisdiction. GDPR is the canonical case: companies with no EU establishment adopted GDPR-grade data practices globally rather than fragment their systems. The EU AI Act is widely expected to reproduce the pattern for AI governance.</p>
+              <p class="secondary">For Global South practitioners, the Brussels Effect is a double-edged tool: it can raise domestic compliance standards for free — riding on obligations firms have already built for the EU market — but it also means domestic regulators can end up enforcing rules they had no hand in drafting, calibrated to European institutional capacity and priorities rather than local ones.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">Anu Bradford, "The Brussels Effect" (2012, expanded 2020)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15 — NEW -->
+        <div class="glossary-row" data-category="Concept" data-term="regulatory capture public choice">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">15</span>
+              <span class="term-name">Regulatory Capture</span>
+              <span class="cat-badge cat-concept">Concept</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Regulatory capture</em> occurs when an agency created to act in the public interest instead comes to advance the interests of the industry it regulates — through information asymmetry (the regulator depends on the regulated for technical expertise), revolving-door staffing, or sustained lobbying pressure that a resource-poor agency cannot match. The concept originates in public-choice economics but is now a standard diagnostic tool in administrative law.</p>
+              <p class="secondary">The risk is structurally elevated in nascent AI regulators: a new authority with few in-house technical staff, facing well-resourced global AI firms as its primary source of both compliance data and technical briefing, is capture-prone almost by design. Guarding against it usually means building independent technical capacity before, not after, the first major enforcement dispute.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">George Stigler, "The Theory of Economic Regulation" (1971)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 — NEW -->
+        <div class="glossary-row" data-category="International Law" data-term="proportionality necessity balancing verhaltnismassigkeit">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">16</span>
+              <span class="term-name">Proportionality</span>
+              <span class="cat-badge cat-intl-law">International Law</span>
+              <span class="cat-badge cat-concept">Concept</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Proportionality</em>, rooted in German administrative law (<em>Verhältnismäßigkeit</em>) and now a foundational principle across EU and human-rights law, requires that any interference with a right be suitable to its stated aim, necessary (no less-intrusive alternative achieves the same result), and balanced against the burden imposed. It structures GDPR's data-minimisation principle, runs through the EU AI Act's risk-tiering logic, and is the standard courts apply under the ECHR when weighing state interference against individual rights.</p>
+              <p class="secondary">Proportionality analysis is where most AI governance arguments are actually won or lost: a measure that is facially legitimate can still fail if a narrower alternative was available. Drafting compliance justifications, or challenging a regulator's order, without walking through the three-part test is the single most common gap in submissions from jurisdictions where the doctrine is less embedded in legal training.</p>
+              <div class="def-source"><span class="def-source-label">Related</span><span class="def-source-val">GDPR Art. 5(1)(c) · EU AI Act Recitals · ECHR Art. 8 jurisprudence</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 17 — NEW -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="lawful basis article 6 gdpr legal basis for processing">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">17</span>
+              <span class="term-name">Lawful Basis</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+              <span class="term-alt">Art. 6 GDPR</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>A <em>lawful basis</em> is one of six grounds under Article 6 GDPR that must exist before any personal data processing is lawful: consent, contractual necessity, legal obligation, vital interests, performance of a public task, or legitimate interests. No amount of good-faith intent substitutes for identifying which basis applies — and it must be identified before processing starts, not retrofitted afterward. Most GDPR-modelled statutes across South Asia and the Gulf reproduce a version of this six-basis structure.</p>
+              <p class="secondary">In practice, "consent" is reached for by default far more often than it should be — it is also the weakest basis operationally, since it must be freely given, specific, and revocable at any time, which is awkward for anything resembling an ongoing AI training pipeline. Contractual necessity or legitimate interests are frequently the more defensible basis for AI-adjacent processing, provided the accompanying balancing test is actually documented.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">GDPR Art. 6(1)(a)–(f)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18 — NEW -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="data fiduciary india dpdpa controller equivalent">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">18</span>
+              <span class="term-name">Data Fiduciary</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+              <span class="term-alt">India · DPDPA 2023</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>India's Digital Personal Data Protection Act 2023 deliberately departs from GDPR's "data controller" terminology, naming the equivalent role a <em>Data Fiduciary</em> — the person who, alone or with others, determines the purpose and means of processing digital personal data. The word choice is not decorative: "fiduciary" imports a connotation of duty of care toward the individual, closer to trust law than to GDPR's more procedural "controller" framing, and India's Parliament has been explicit that this framing was intentional.</p>
+              <p class="secondary">For practitioners comparing India's regime to GDPR or Pakistan's PDPA, resist mapping "Data Fiduciary" onto "Data Controller" as a pure synonym — the enhanced duty language can matter in how Indian courts interpret a fiduciary's obligations in a dispute, particularly around purpose limitation and the "Significant Data Fiduciary" category, which carries extra obligations (DPO appointment, independent data audits) once notified by the central government.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">DPDPA 2023, s. 2(i) · India, Ministry of Electronics and Information Technology</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19 — NEW -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="data principal india dpdpa data subject equivalent">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">19</span>
+              <span class="term-name">Data Principal</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+              <span class="term-alt">India · DPDPA 2023</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>The DPDPA 2023's counterpart term to GDPR's "data subject" is <em>Data Principal</em> — the individual to whom the personal data relates. Where a minor or a person with a disability is concerned, the Act extends the definition to include a parent, lawful guardian, or the person acting as a lawful guardian on their behalf for purposes of exercising rights under the Act — a structural provision GDPR handles through separate, more scattered clauses on children's data.</p>
+              <p class="secondary">Pairing "Data Fiduciary" and "Data Principal" as India's own vocabulary — rather than translating them into GDPR's "controller" and "subject" by habit — matters when drafting cross-referenced compliance memos: citing the wrong term signals unfamiliarity with the statute to an Indian regulator or opposing counsel in a way that a generic "data subject" reference does not.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">DPDPA 2023, s. 2(j)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 20 — NEW -->
+        <div class="glossary-row" data-category="AI Governance" data-term="conformity assessment notified body eu ai act">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">20</span>
+              <span class="term-name">Conformity Assessment</span>
+              <span class="cat-badge cat-ai-gov">AI Governance</span>
+              <span class="cat-badge cat-legal-tech">Legal Tech</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>Under Article 43 EU AI Act, providers of high-risk AI systems must complete a <em>conformity assessment</em> before market placement — a formal evaluation that the system meets the Act's requirements on risk management, data governance, technical documentation, human oversight, and accuracy, robustness, and cybersecurity. Depending on the risk category, this is either an internal control procedure conducted by the provider, or a third-party assessment by a <em>notified body</em> — an organisation formally designated and audited by an EU member state to perform these evaluations.</p>
+              <p class="secondary">No jurisdiction outside the EU currently operates an equivalent notified-body infrastructure for AI. A Global South regulator drafting a conformity regime without first establishing (or contracting for) an accredited assessment capacity risks legislating an obligation that providers cannot practically discharge — the same institutional-substrate problem that recurs across this glossary.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">EU AI Act Art. 43 · Annex VII (Notified Body requirements)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 21 — NEW -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="legitimate interest article 6 1 f balancing test">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">21</span>
+              <span class="term-name">Legitimate Interest</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+              <span class="term-alt">Art. 6(1)(f) GDPR</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Legitimate interest</em> is the sixth lawful basis under GDPR — processing is permitted where necessary for the legitimate interests of the controller or a third party, unless overridden by the interests or fundamental rights of the data subject. It is the only basis that requires a documented, three-part balancing test on the controller's own initiative: identify a genuine interest, show the processing is necessary to achieve it, and weigh that necessity against the individual's rights.</p>
+              <p class="secondary">It is often the more defensible basis for internal AI system training and improvement than consent, precisely because it doesn't require the data subject's active, revocable agreement to an ongoing process — but only if the balancing test is actually written down before processing starts. An unwritten legitimate-interest assessment is functionally indistinguishable, on audit, from no legal basis at all.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">GDPR Art. 6(1)(f) · Recital 47</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 22 — NEW -->
+        <div class="glossary-row" data-category="Data Privacy" data-term="right to erasure right to be forgotten article 17">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">22</span>
+              <span class="term-name">Right to Erasure</span>
+              <span class="cat-badge cat-data-priv">Data Privacy</span>
+              <span class="term-alt">"Right to Be Forgotten" · Art. 17</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p>Article 17 GDPR's <em>right to erasure</em> — popularly the "right to be forgotten" — entitles a data subject to request deletion of their personal data where it is no longer necessary for the purpose collected, consent is withdrawn, processing was unlawful, or the data subject objects and no overriding legitimate ground exists. It is subject to significant exceptions: freedom of expression, legal compliance obligations, public interest archiving, and the establishment or defence of legal claims all can defeat an erasure request.</p>
+              <p class="secondary">In the AI context, erasure raises a genuinely unresolved technical question: deleting a record from a database is straightforward, but "unlearning" a data point that has already shaped a trained model's weights is, with current methods, extremely difficult and sometimes practically impossible without full retraining. Regulators and providers are still working out what a good-faith erasure obligation looks like once data has entered a model rather than sitting in a queryable store.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">GDPR Art. 17 · Google Spain v AEPD (C-131/12)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 23 — NEW -->
+        <div class="glossary-row" data-category="AI Governance" data-term="red-teaming adversarial testing systemic risk">
+          <button class="row-trigger" onclick="toggleRow(this)" aria-expanded="false">
+            <div class="row-left">
+              <span class="term-index">23</span>
+              <span class="term-name">Red-Teaming</span>
+              <span class="cat-badge cat-ai-gov">AI Governance</span>
+              <span class="term-alt">Adversarial Testing</span>
+            </div>
+            <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="definition-panel">
+            <div class="def-body">
+              <p><em>Red-teaming</em>, borrowed from cybersecurity practice, is structured adversarial testing in which evaluators deliberately attempt to elicit harmful, unsafe, or policy-violating outputs from an AI system before or after deployment, in order to identify and mitigate weaknesses that ordinary testing would miss. Under Article 55 EU AI Act, providers of GPAI models with systemic risk are required to conduct adversarial testing as part of their risk-mitigation obligations, alongside incident reporting and cybersecurity measures.</p>
+              <p class="secondary">Red-teaming is one of the few AI-safety practices that transfers reasonably well to low-resource regulatory environments without requiring heavy institutional infrastructure — it can be contracted out, run by a small internal team, or even crowdsourced — which makes it a comparatively practical starting obligation for a Global South regulator building an AI oversight regime from close to zero.</p>
+              <div class="def-source"><span class="def-source-label">Source</span><span class="def-source-val">EU AI Act Art. 55 · NIST AI RMF (Measure function)</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /glossary-list -->
+
+      <div id="no-results">No terms match your search.</div>
+
+      <div class="gl-count-row">
+        <span id="glossary-count" class="gl-count">Showing 23 of 23 terms</span>
+        <span class="gl-count-note">· More terms added regularly</span>
       </div>
+    </section>
+  </div>
 
+  <!-- ══ MONOGRAPH — compact related-work card ══ -->
+  <section id="monograph" aria-label="Related work">
+    <div class="wrap">
+      <div class="mono-card">
+        <div class="mono-mark" aria-hidden="true"></div>
+        <div>
+          <p class="mono-eyebrow">Currently writing · Forthcoming monograph</p>
+          <p class="mono-title">Regulating Intelligence at the Periphery</p>
+          <p class="mono-desc">The "Contextual Adequacy" entry above (term 09) is drawn from this in-progress book — a foundational legal theory for AI governance that starts from the conditions of the Global South rather than Brussels or Washington.</p>
+        </div>
+        <button class="mono-btn" onclick="document.getElementById('abstract-modal').classList.add('open')">Read abstract</button>
+      </div>
     </div>
   </section>
-
 
   <!-- ══ ABSTRACT MODAL ══ -->
-  <div id="abstract-modal"
-    class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
-    style="background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);"
-    onclick="if(event.target===this)this.classList.add('hidden')"
-  >
-    <div class="max-w-2xl w-full rounded-sm p-8 relative" style="background:#111318; border:1px solid #C9A84C44; max-height:85vh; overflow-y:auto;">
-      <button onclick="document.getElementById('abstract-modal').classList.add('hidden')"
-        class="absolute top-4 right-4 text-mist hover:text-gold transition-colors mono"
-        style="font-size:0.8rem; letter-spacing:0.1em; background:none; border:none; cursor:pointer;">ESC ✕</button>
-
-      <p class="eyebrow mb-4">Book Abstract</p>
-      <h2 class="display text-ivory mb-1" style="font-size:1.5rem;">Regulating Intelligence at the Periphery</h2>
-      <p class="display mb-6 text-mist" style="font-style:italic; font-size:0.9rem;">AI Law & Governance in Emerging Economies</p>
-      <hr class="gold-rule-faint mb-6" />
-
-      <div class="space-y-4 text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.8;">
-        <p>The global discourse on artificial intelligence regulation has, to date, been disproportionately shaped by the regulatory agendas of jurisdictions that are net exporters of AI technology — the European Union, the United States, and China. This monograph contends that such a framing is not merely analytically incomplete but is structurally incoherent: it produces governance frameworks calibrated to the interests of AI-deploying states rather than AI-receiving populations.</p>
+  <div id="abstract-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="abstract-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('abstract-modal').classList.remove('open')" aria-label="Close">Esc ✕</button>
+      <div class="modal-body">
+        <p class="modal-eyebrow">Book Abstract</p>
+        <h2 class="modal-title" id="abstract-title">Regulating Intelligence at the Periphery</h2>
+        <p class="modal-subtitle">AI Law &amp; Governance in Emerging Economies</p>
+        <hr>
+        <p>The global discourse on artificial intelligence regulation has, to date, been disproportionately shaped by the regulatory agendas of jurisdictions that are net exporters of AI technology — the European Union, the United States, and China. This monograph contends that such a framing is not merely analytically incomplete but structurally incoherent: it produces governance frameworks calibrated to the interests of AI-deploying states rather than AI-receiving populations.</p>
         <p>Drawing on comparative constitutional law, international technology law, and original fieldwork conducted across Pakistan, Nigeria, Kenya, and Indonesia, this work constructs an alternative regulatory theory. It argues that the foundational legal question is not how to govern AI systems in the abstract, but how to govern their deployment in specific institutional contexts characterised by weak enforcement capacity, high informality, and structural data asymmetry between global technology platforms and local users.</p>
-        <p>The monograph proceeds in three parts: the first undertakes a critical taxonomy of existing AI governance approaches (risk-based, rights-based, and sector-specific); the second analyses jurisdiction-specific case studies examining health, criminal justice, and financial services AI deployments; the third proposes a framework of <em>contextual adequacy</em> — a doctrine whereby the legality of an AI deployment is assessed not against a universal technical standard but against the specific institutional, cultural, and rights environment of the receiving jurisdiction.</p>
-        <p style="color:#8A919E; font-style:italic; font-size:0.85rem;">Forthcoming. Publication details to be announced. Use the notification button on the main page to receive updates.</p>
+        <p>The monograph proceeds in three parts: the first undertakes a critical taxonomy of existing AI governance approaches (risk-based, rights-based, and sector-specific); the second analyses jurisdiction-specific case studies examining health, criminal justice, and financial services AI deployments; the third proposes a framework of <em>contextual adequacy</em> — a doctrine whereby the legality of an AI deployment is assessed against the specific institutional, cultural, and rights environment of the receiving jurisdiction, not a universal technical standard.</p>
+        <p class="modal-foot">Forthcoming. Publication details to be announced.</p>
       </div>
     </div>
   </div>
-
-
-  <!-- ══ GLOSSARY SECTION ══ -->
-  <section class="max-w-6xl mx-auto px-6 py-20">
-
-    <div class="relative mb-12">
-      <span class="section-num">02</span>
-      <div class="flex items-center gap-4 mb-4">
-        <span class="eyebrow">Practitioner's Lexicon</span>
-        <hr class="gold-rule flex-1" />
-      </div>
-      <h2 class="display text-ivory" style="font-size:clamp(1.5rem, 3vw, 2.2rem);">
-        The Field Guide Glossary
-      </h2>
-      <p class="text-mist mt-2" style="font-size:0.9rem; max-width:560px;">
-        Authoritative working definitions for key terms at the intersection of law, AI governance, and data privacy — written for practitioners, not academics.
-      </p>
-    </div>
-
-    <!-- Controls row: filters + search -->
-    <div class="flex flex-col sm:flex-row gap-4 mb-8 items-start sm:items-center justify-between">
-      <div id="filter-bar" class="flex flex-wrap gap-2">
-        <button class="filter-pill active px-4 py-2 rounded-sm" data-filter="all">All</button>
-        <button class="filter-pill px-4 py-2 rounded-sm" data-filter="AI Governance">AI Governance</button>
-        <button class="filter-pill px-4 py-2 rounded-sm" data-filter="Data Privacy">Data Privacy</button>
-        <button class="filter-pill px-4 py-2 rounded-sm" data-filter="Legal Tech">Legal Tech</button>
-        <button class="filter-pill px-4 py-2 rounded-sm" data-filter="Concept">Concept</button>
-        <button class="filter-pill px-4 py-2 rounded-sm" data-filter="International Law">Intl. Law</button>
-      </div>
-      <input
-        type="text"
-        id="glossary-search"
-        placeholder="Search terms…"
-        class="px-4 py-2 rounded-sm w-full sm:w-56"
-        autocomplete="off"
-        spellcheck="false"
-      />
-    </div>
-
-    <!-- Glossary Table -->
-    <div id="glossary-list" class="border-t border-ink-4">
-
-      <!-- ── 01: High-Risk AI System ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="AI Governance" data-term="high-risk ai system">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">01</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">High-Risk AI System</span>
-            <span class="cat-badge cat-ai-gov">AI Governance</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              Under the EU AI Act's risk-stratified architecture, a <em>high-risk AI system</em> is one whose deployment in specified critical sectors — including biometric identification, critical infrastructure management, educational and vocational assessment, employment-related decision-making, essential public services, law enforcement, migration and border control, and the administration of justice — carries a materially elevated probability of causing harm to health, safety, or fundamental rights. The classification triggers a mandatory conformity assessment regime requiring documented technical robustness standards, human oversight obligations, data governance protocols, and registration in the EU's centralized AI database prior to market placement.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              For practitioners in the Global South, the critical question is how analogous risk-tiering principles can be transposed into domestic regulatory instruments that lack the institutional infrastructure — notified conformity bodies, enforcement agencies, sector-specific technical standards — that underpin EU implementation; a direct legislative copy without that institutional substrate produces a nominally rigorous regime that is functionally unenforceable.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Source Reference</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">EU AI Act, Annex III · Articles 6–7 · Recital 51</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 02: GPAI Model ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="AI Governance" data-term="gpai model general-purpose ai">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">02</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">GPAI Model</span>
-            <span class="cat-badge cat-ai-gov">AI Governance</span>
-            <span class="mono text-mist-2" style="font-size:0.65rem; letter-spacing:0.05em;">General-Purpose AI</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              A <em>general-purpose AI model</em> (GPAI model) is an AI model trained on broad data at scale that is capable of competently performing a wide range of distinct tasks and that can be integrated into a plurality of downstream systems or applications — the paradigm case being large language models and multimodal foundation models such as GPT-4, Gemini, or Claude. The EU AI Act's Chapter V introduces a tiered GPAI governance regime: all providers must maintain technical documentation and comply with copyright obligations regarding training data, while providers of GPAI models assessed to present <em>systemic risk</em> (operationalized by a computational threshold of 10²⁵ floating-point operations for model training) face heightened obligations including adversarial testing, incident reporting, and cybersecurity measures.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              The GPAI regime introduces a structural tension with data privacy law that is particularly acute in cross-border contexts: the training-data transparency obligations imposed on GPAI providers necessarily require disclosure of data sourcing practices, which in turn surfaces compliance questions under the personal data provisions of GDPR equivalents — a tension that emerging-market jurisdictions are only beginning to legislate.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Source Reference</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">EU AI Act, Chapter V · Articles 51–56 · Annex XIII</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 03: DPIA ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Data Privacy" data-term="data protection impact assessment dpia">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">03</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Data Protection Impact Assessment</span>
-            <span class="cat-badge cat-data-priv">Data Privacy</span>
-            <span class="mono text-mist-2" style="font-size:0.65rem; letter-spacing:0.05em;">DPIA</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              A <em>Data Protection Impact Assessment</em> (DPIA) is a structured, prospective risk-analysis process mandated under Article 35 of the GDPR — and incorporated by reference or analogy in an increasing number of Global South data protection statutes — whenever a proposed processing operation is likely to result in a high risk to the rights and freedoms of natural persons; paradigm triggers include systematic profiling, large-scale processing of special categories of data, and the use of new technologies whose privacy implications have not yet been assessed. A compliant DPIA must, at minimum, contain a systematic description of the envisaged processing operations and purposes; an assessment of the necessity and proportionality of the processing in relation to its stated purpose; an assessment of the risks to data subjects; and documentation of the risk mitigation measures contemplated by the data controller.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              In the AI context, DPIAs have acquired heightened relevance as a pre-deployment governance tool: where an AI system's logic is opaque by design, the DPIA process functions as the primary mechanism through which data controllers are forced to articulate and interrogate the systemic effects of automated processing — effectively operating as a rudimentary AI impact assessment in jurisdictions that lack a purpose-built instrument.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Source Reference</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">GDPR Article 35 · WP29 Guidelines on DPIA (WP248 rev.01)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 04: Algorithmic Accountability ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Concept" data-term="algorithmic accountability">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">04</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Algorithmic Accountability</span>
-            <span class="cat-badge cat-concept">Concept</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Algorithmic accountability</em> refers to the normative and legal framework by which natural or legal persons responsible for the design, deployment, or operation of an automated decision-making system can be required to explain, justify, and where necessary remediate decisions or outcomes that affect the rights or interests of others. The doctrine synthesizes elements of administrative law (procedural fairness, reasons obligations), tort law (product liability and negligence), human rights law (non-discrimination, due process), and consumer protection — with the emerging consensus favouring an ex ante accountability model that imposes obligations at the design stage rather than relying solely on ex post litigation.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              The practical challenge of algorithmic accountability in low-resource jurisdictions lies not in the absence of applicable legal doctrine but in the asymmetric information and technical capacity between regulators and regulated entities: an accountability regime is only as strong as the enforcing institution's ability to audit the system against which accountability is claimed.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Related Frameworks</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">GDPR Art. 22 · OECD AI Principles (2019) · UNESCO Rec. on AI Ethics</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 05: Regulatory Sandbox ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Legal Tech" data-term="regulatory sandbox">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">05</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Regulatory Sandbox</span>
-            <span class="cat-badge cat-legal-tech">Legal Tech</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              A <em>regulatory sandbox</em> is a time-limited, supervised experimentation framework that permits designated firms to test novel products, services, or business models in a live-market or near-market environment under relaxed or modified regulatory requirements — with the explicit understanding that the regulator will observe outcomes, issue guidance, and ultimately determine the permanent regulatory treatment of the innovation in question. Originally developed in financial services regulation (with the UK's FCA sandbox as the foundational model), the instrument has migrated to AI governance: the EU AI Act expressly mandates the establishment of national AI regulatory sandboxes, and several emerging-market financial regulators have deployed analogous frameworks.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              For legal counsel advising technology clients in jurisdictions where AI-specific regulation is nascent, the sandbox mechanism offers a strategically valuable pathway: it provides a degree of legal certainty during the experimental period, enables proactive engagement with regulators before adverse enforcement positions crystallize, and generates evidence that can shape the eventual permanent regulatory framework.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Related Frameworks</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">EU AI Act Art. 57–63 · FATF Guidance on RegTech · SBP Digital Banking Policy</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 06: Data Localisation ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Data Privacy" data-term="data localisation localization">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">06</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Data Localisation</span>
-            <span class="cat-badge cat-data-priv">Data Privacy</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Data localisation</em> describes a category of regulatory mandate — whether absolute or conditional — that requires personal data, or specified categories thereof, to be stored, processed, or copied on servers physically located within a designated territorial jurisdiction, and which restricts or conditions its transfer to foreign servers. The rationale invoked ranges from national security and law enforcement access (ensuring domestic legal process can compel disclosure) to economic sovereignty (retaining data as a locally controlled asset) to privacy protection (ensuring personal data remains subject to the enforcing jurisdiction's substantive law). The Pakistan Personal Data Protection Act and India's DPDP Act both contain localisation provisions, though their scope and the breadth of permissible cross-border transfer mechanisms differ materially.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              Localisation mandates create a structural tension with the architecture of global AI training pipelines, which depend on aggregating large, geographically dispersed datasets: a strict localisation regime applicable to personal data effectively prohibits that data from being incorporated into cross-border LLM training without a jurisdiction-specific adequacy finding or equivalent safeguard — a compliance burden that most global GPAI providers have not yet operationalized for Global South jurisdictions.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Domestic Instruments</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">PDPA Pakistan 2023 · India DPDP Act 2023 · Nigeria NDPR 2019</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 07: Explainability (XAI) ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Concept" data-term="explainability xai explainable ai">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">07</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Explainability (XAI)</span>
-            <span class="cat-badge cat-concept">Concept</span>
-            <span class="mono text-mist-2" style="font-size:0.65rem; letter-spacing:0.05em;">Explainable AI</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Explainability</em> — as a legal and technical concept — refers to the capacity of an AI system to furnish intelligible, sufficient accounts of the basis on which it arrives at outputs or decisions, in a form that is useful to the relevant human audience: affected individuals seeking to exercise rights (e.g., the GDPR's right to explanation under Articles 13–15 and 22), operators seeking to audit for bias or error, regulators conducting conformity assessments, or courts reviewing AI-assisted determinations. The concept must be distinguished from both <em>interpretability</em> (a technical property concerning the internal mechanics of a model) and <em>transparency</em> (an organisational and disclosure obligation): a system can be transparent about its limitations without being technically interpretable, and interpretable models may still fail to provide legally adequate explanations to lay persons.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              The legal tension is particularly acute for large language models: their transformer architecture renders faithful mechanistic explanation practically impossible with current tools, creating a compliance gap in any regulatory framework that imposes meaningful explanation obligations — a gap that post-hoc explanation methods (LIME, SHAP) partially but imperfectly address.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Related Frameworks</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">GDPR Arts. 13–15, 22 · EU AI Act Art. 13 · NIST AI RMF</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 08: AIDM ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Legal Tech" data-term="automated individual decision-making aidm article 22 gdpr">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">08</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Automated Individual Decision-Making</span>
-            <span class="cat-badge cat-legal-tech">Legal Tech</span>
-            <span class="mono text-mist-2" style="font-size:0.65rem; letter-spacing:0.05em;">AIDM · Art. 22 GDPR</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Automated individual decision-making</em> (AIDM) is the process by which a legal or similarly significant determination is reached solely through automated means — without any meaningful human deliberative involvement — on the basis of personal data relating to the individual affected. Under Article 22 GDPR, data subjects have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning them or similarly significantly affects them, except under defined exceptions including explicit consent, contract necessity, or domestic legal authorisation accompanied by appropriate safeguards. The qualification "solely" is the operative term: a nominally human reviewer who rubber-stamps AI output without genuine deliberation likely does not break the automated chain for the purposes of this provision.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              For legal counsel advising on AI deployment in credit, employment, or criminal justice contexts, the practical advice is to design human-in-the-loop oversight as a substantive procedural safeguard rather than a formal check-box: the oversight must be documented, consequential, and capable of overriding the algorithmic recommendation — otherwise it will not withstand regulatory scrutiny when challenged.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Source Reference</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">GDPR Art. 22 · WP29 Guidelines on Automated Decision-Making (WP251)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════ NEW TERMS ══════ -->
-
-      <!-- ── 09: Contextual Adequacy ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Concept" data-term="contextual adequacy doctrine global south">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">09</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Contextual Adequacy</span>
-            <span class="cat-badge cat-concept">Concept</span>
-            <span class="mono text-mist-2" style="font-size:0.65rem; letter-spacing:0.05em;">Proposed Doctrine</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Contextual adequacy</em> is a proposed regulatory doctrine — advanced in the author's forthcoming monograph — under which the legality of an AI system's deployment is assessed not against a universal technical compliance standard but against the specific institutional, cultural, and rights environment of the receiving jurisdiction. The doctrine proceeds from the observation that existing international AI governance frameworks are calibrated to the enforcement capacities, institutional architectures, and rights traditions of their originating jurisdictions, and therefore systematically fail to account for the structural conditions that characterise deployment in Global South contexts: weak or nascent regulatory institutions, high informality in affected sectors, acute resource asymmetry between platform providers and local actors, and the absence of meaningful appeal or redress mechanisms for affected individuals.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              The doctrine does not propose a lower standard of protection for Global South populations; it argues for a different analytical starting point — one that asks what constitutes an adequate governance response given actual institutional conditions, rather than what governance response would be adequate given the institutions of the EU or US. It thus reframes the question of AI governance from a matter of technology standards to a matter of institutional design and capacity-building.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Primary Source</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">Naeem, <em>Regulating Intelligence at the Periphery</em> (forthcoming) · Part III</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 10: AI Liability ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Legal Tech" data-term="ai liability product liability tort negligence">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">10</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">AI Liability</span>
-            <span class="cat-badge cat-legal-tech">Legal Tech</span>
-            <span class="cat-badge cat-concept">Concept</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>AI liability</em> refers to the body of legal doctrine — drawn from tort, contract, product liability, and administrative law — that determines which natural or legal persons bear legal responsibility for harm caused by the operation of an AI system, and the conditions under which such responsibility arises. The fundamental challenge is that mainstream AI systems, particularly those based on machine learning, exhibit a combination of characteristics that frustrate traditional liability attribution: opacity (the decision basis is not humanly interpretable), emergent behaviour (the system produces outputs not explicitly programmed), distributed causation (harm may result from compounded decisions across a deployment chain involving developer, deployer, and operator), and non-determinism (identical inputs do not reliably produce identical outputs). The EU's proposed AI Liability Directive — complementary to the AI Act — attempts to address causation difficulties through a rebuttable presumption of causal linkage where a defendant has breached an AI Act obligation and harm has resulted.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              In Global South jurisdictions, AI liability questions arise within tort frameworks developed long before the problems of algorithmic harm were conceivable. Legal practitioners must therefore work creatively within existing doctrine — notably negligence (duty of care, breach, causation, harm) and product liability (where the AI system constitutes a "product" or its output constitutes advice) — while advocating for purpose-built legislative reform that addresses the causal attribution problem directly.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Related Instruments</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">EU AI Liability Directive (proposed) · EU Product Liability Directive (revised) · OECD Guidelines</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 11: Digital Sovereignty ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="International Law" data-term="digital sovereignty data sovereignty technological sovereignty">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">11</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Digital Sovereignty</span>
-            <span class="cat-badge cat-intl-law">International Law</span>
-            <span class="cat-badge cat-data-priv">Data Privacy</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Digital sovereignty</em> is a contested political-legal concept describing the claimed right of a state — or, in some formulations, a regional bloc or a people — to exercise effective control over the digital infrastructure, data flows, and technological systems operating within or affecting its territory and population. The concept encompasses related but analytically distinct claims: <em>data sovereignty</em> (control over the generation, storage, and cross-border transfer of data); <em>platform sovereignty</em> (regulatory authority over the terms on which global technology platforms operate domestically); <em>technological sovereignty</em> (the capacity to develop and deploy strategic technologies without critical dependence on foreign supply chains); and <em>AI sovereignty</em> (the ambition to shape the development trajectory of AI through domestic investment, regulation, and standard-setting). In the AI governance context, digital sovereignty has become a central organising concept for Global South states seeking to assert a regulatory posture toward global AI developers that reflects their own policy priorities rather than those of Brussels or Washington.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              The sovereignty discourse carries an inherent tension: the most plausible regulatory interventions to assert sovereignty — data localisation, platform access conditions, algorithmic audit requirements — impose compliance costs that may deter foreign technology investment, thereby entrenching rather than reducing the technological dependency that sovereignty claims are designed to address. Effective digital sovereignty strategy requires distinguishing between assertions that redistribute power and assertions that merely impose friction without structural effect.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Related Frameworks</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">ITU AI Policy · African Union Data Policy Framework · G20 AI Principles</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 12: Algorithmic Bias ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="Concept" data-term="algorithmic bias discrimination fairness equity">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">12</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Algorithmic Bias</span>
-            <span class="cat-badge cat-concept">Concept</span>
-            <span class="cat-badge cat-ai-gov">AI Governance</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              <em>Algorithmic bias</em> refers to systematic and unjustifiable disparities in AI system outputs that disadvantage individuals or groups on the basis of characteristics — including race, gender, ethnicity, religion, disability, or socioeconomic status — in ways that reproduce or amplify existing social inequalities. The concept encompasses multiple analytically distinct mechanisms: <em>historical bias</em> (training data that reflects past discriminatory practices); <em>representation bias</em> (training datasets that underrepresent the demographics of the affected population); <em>measurement bias</em> (proxy variables that encode protected characteristics); and <em>feedback loops</em> (where biased system outputs generate further biased training data). The legal characterisation of algorithmic bias as unlawful discrimination depends on whether existing anti-discrimination frameworks — typically designed for human decision-makers — can be interpreted to capture automated systems as legally cognate actors; this question remains unresolved in most Global South legal systems.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              The Global South context adds a layer of structural complexity: AI systems deployed at scale in South Asian, African, or Southeast Asian contexts are frequently trained predominantly on data from Western, English-language sources, producing both performance disparities (the system performs less accurately on out-of-distribution populations) and representational harms (cultural, linguistic, and social norms of affected populations are poorly modelled). This dimension of bias — which might be termed <em>distributional bias</em> — has received relatively little regulatory attention compared to protected-characteristic discrimination, yet may have the most widespread practical effect on Global South users.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Related Frameworks</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">EU AI Act Art. 10 · NIST AI RMF (Bias) · UNESCO AI Ethics Rec. §§ 28–31</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 13: Adequacy Decision ── -->
-      <div class="glossary-row pl-4 pr-4 lg:pr-6" data-category="International Law" data-term="adequacy decision cross-border data transfer gdpr sccs">
-        <button class="w-full flex items-center justify-between py-5 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-gold" onclick="toggleRow(this)">
-          <div class="flex items-center gap-4 flex-wrap">
-            <span class="term-index">13</span>
-            <span class="display text-ivory font-semibold" style="font-size:1.05rem;">Adequacy Decision</span>
-            <span class="cat-badge cat-intl-law">International Law</span>
-            <span class="cat-badge cat-data-priv">Data Privacy</span>
-          </div>
-          <svg class="chevron shrink-0 ml-4 text-gold-dim" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="definition-panel">
-          <div class="pb-6 pr-8 lg:pr-16 border-l-2 ml-1 pl-5" style="border-color:#C9A84C22;">
-            <p class="text-ivory-dim leading-relaxed" style="font-size:0.95rem; line-height:1.85;">
-              An <em>adequacy decision</em> is a formal determination by a data protection authority or government — most consequentially, by the European Commission under Article 45 GDPR — that a third country, territory, sector, or international organisation offers a level of data protection <em>essentially equivalent</em> to that guaranteed within the European Economic Area, thereby permitting unrestricted personal data transfers to that destination without the need for supplementary safeguards. The standard is operationalised through an assessment of the receiving jurisdiction's rule of law, judicial redress mechanisms, substantive data protection rules, and the independence and effectiveness of its supervisory authority. The consequence of an adequacy determination is transformative for data-dependent industries: it converts a legally complex cross-border compliance burden into a straightforward operational pathway. Absent an adequacy decision, organisations must rely on alternative transfer mechanisms — Standard Contractual Clauses (SCCs), Binding Corporate Rules, or approved codes of conduct — each of which carries its own limitations, particularly in the AI context where data flows are diffuse, continuous, and not readily described in bilateral contractual terms.
-            </p>
-            <p class="mt-3 leading-relaxed" style="font-size:0.9rem; line-height:1.8; color:#8A919E;">
-              As of mid-2025, none of the major Global South AI-relevant jurisdictions — Pakistan, Nigeria, Kenya, Indonesia, Bangladesh — holds a GDPR adequacy determination from the European Commission. This creates a persistent structural barrier to the participation of organisations in these jurisdictions in European digital markets and limits their attractiveness as AI deployment partners for EU-regulated enterprises. Domestic data protection reform — specifically, the strengthening of supervisory authority independence and enforcement capacity — is the most direct lever available to these states to advance adequacy candidacy.
-            </p>
-            <div class="mt-4 flex items-center gap-3">
-              <span class="eyebrow" style="color:#5C6470; font-size:0.6rem;">Source Reference</span>
-              <span class="mono text-mist-2" style="font-size:0.7rem;">GDPR Art. 45 · EC Adequacy Decisions List · Schrems II (C-311/18)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /glossary-list -->
-
-    <div id="no-results">No terms match your search.</div>
-
-    <div class="mt-4 flex items-center gap-3">
-      <span id="glossary-count" class="mono text-mist-2" style="font-size:0.7rem;">Showing 13 of 13 terms</span>
-      <span class="mono text-gold-dim" style="font-size:0.7rem;">· More terms added regularly</span>
-    </div>
-
-  </section>
-
 
   <!-- ══ RESOURCES & DOWNLOADS ══ -->
-  <section id="resources" class="max-w-6xl mx-auto px-6 py-20">
-
-    <div class="relative mb-12">
-      <span class="section-num">03</span>
-      <div class="flex items-center gap-4 mb-4">
-        <span class="eyebrow">Resources & Downloads</span>
-        <hr class="gold-rule flex-1" />
+  <section id="resources" aria-labelledby="resources-heading">
+    <div class="wrap">
+      <div class="sec-hd">
+        <span class="sec-eyebrow">Downloads</span>
+        <h2 class="sec-title" id="resources-heading">Practitioner toolkits</h2>
       </div>
-      <h2 class="display text-ivory" style="font-size:clamp(1.5rem, 3vw, 2.2rem);">
-        Practitioner Toolkits
-      </h2>
-      <p class="text-mist mt-2" style="font-size:0.9rem; max-width:560px;">
-        Operational guides written for in-house counsel, compliance teams, and policy advisors. Free to download — attribution appreciated.
-      </p>
-    </div>
+      <p class="sec-sub">Operational guides written for in-house counsel, compliance teams, and policy advisors. Free to reference — attribution appreciated.</p>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-      <!-- Resource Card 1 -->
-      <div class="resource-card rounded-sm p-8 flex flex-col">
-        <div class="flex items-start justify-between mb-6">
-          <div>
-            <p class="eyebrow mb-2" style="color:#8A6F2E;">PDF Guide · 1 Page</p>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="cat-badge cat-ai-gov">AI Governance</span>
-              <span class="mono text-mist-2" style="font-size:0.6rem; letter-spacing:0.1em;">OPERATIONAL BLUEPRINT</span>
+      <div class="res-grid">
+        <div class="res-card">
+          <div class="res-top">
+            <div>
+              <p class="res-kind">PDF Guide · 1 Page</p>
+              <div class="res-badges"><span class="cat-badge cat-ai-gov">AI Governance</span></div>
             </div>
           </div>
-          <div class="shrink-0 w-10 h-12 rounded-sm flex items-center justify-center ml-4" style="background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.2);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="1.5">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <polyline points="10 9 9 9 8 9"/>
-            </svg>
+          <h3 class="res-title">The AI Governance Readiness Checklist for Legal Counsel</h3>
+          <p class="res-desc">A one-page blueprint enabling in-house legal teams to self-assess their organisation's AI governance posture — asset inventory, vendor risk, data provenance, human-in-the-loop controls, and continuous monitoring.</p>
+          <div class="res-meta">
+            <div class="res-meta-row"><span class="res-meta-key">Audience</span><span class="res-meta-val">In-House Counsel · Compliance</span></div>
+            <div class="res-meta-row"><span class="res-meta-key">Jurisdiction</span><span class="res-meta-val">Jurisdiction-agnostic</span></div>
+            <div class="res-meta-row"><span class="res-meta-key">Version</span><span class="res-meta-val">v1.0 · 2025</span></div>
+          </div>
+          <div class="res-actions">
+            <button class="btn-outline" onclick="document.getElementById('pdf1-modal').classList.add('open')">Read full content ↗</button>
+            <button class="btn-outline" disabled>Download PDF</button>
+            <span class="res-soon">PDF coming soon</span>
           </div>
         </div>
-        <h3 class="display text-ivory mb-3" style="font-size:1.2rem; line-height:1.4;">
-          The AI Governance Readiness Checklist for Legal Counsel
-        </h3>
-        <p class="text-mist leading-relaxed mb-6 flex-1" style="font-size:0.88rem; line-height:1.7;">
-          A one-page operational blueprint enabling in-house legal teams to conduct a rapid self-assessment of their organisation's AI governance posture. Covers asset inventory, third-party vendor risk, data provenance, human-in-the-loop controls, and continuous monitoring — distilled into five actionable checklist items with implementation guidance.
-        </p>
-        <div class="space-y-1 mb-6">
-          <div class="flex justify-between items-center">
-            <span class="mono text-mist-2" style="font-size:0.68rem; letter-spacing:0.08em;">AUDIENCE</span>
-            <span class="mono text-ivory-dim" style="font-size:0.68rem;">In-House Counsel · CLO Offices · Compliance Teams</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="mono text-mist-2" style="font-size:0.68rem; letter-spacing:0.08em;">JURISDICTION</span>
-            <span class="mono text-ivory-dim" style="font-size:0.68rem;">Jurisdiction-agnostic · Global South contexts</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="mono text-mist-2" style="font-size:0.68rem; letter-spacing:0.08em;">VERSION</span>
-            <span class="mono text-ivory-dim" style="font-size:0.68rem;">v1.0 · 2025</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 pt-4 border-t" style="border-color:#1F242F;">
-          <button onclick="document.getElementById('pdf1-modal').classList.remove('hidden')" class="btn-download px-5 py-2.5 rounded-sm">
-            Read Full Content ↗
-          </button>
-          <button class="btn-download px-5 py-2.5 rounded-sm cursor-not-allowed" style="opacity:0.4;" disabled>
-            Download PDF
-          </button>
-          <span class="mono text-mist-2" style="font-size:0.6rem; letter-spacing:0.08em; margin-left:auto;">PDF COMING SOON</span>
-        </div>
-      </div>
 
-      <!-- Resource Card 2 -->
-      <div class="resource-card rounded-sm p-8 flex flex-col">
-        <div class="flex items-start justify-between mb-6">
-          <div>
-            <p class="eyebrow mb-2" style="color:#8A6F2E;">PDF Briefing · 2 Pages</p>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="cat-badge cat-data-priv">Data Privacy</span>
-              <span class="cat-badge cat-ai-gov">AI Governance</span>
+        <div class="res-card">
+          <div class="res-top">
+            <div>
+              <p class="res-kind">PDF Briefing · 2 Pages</p>
+              <div class="res-badges">
+                <span class="cat-badge cat-data-priv">Data Privacy</span>
+                <span class="cat-badge cat-ai-gov">AI Governance</span>
+              </div>
             </div>
           </div>
-          <div class="shrink-0 w-10 h-12 rounded-sm flex items-center justify-center ml-4" style="background:rgba(20,184,166,0.1); border:1px solid rgba(20,184,166,0.2);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5eead4" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
+          <h3 class="res-title">Cross-Border Data Flows &amp; AI Training: A Primer for Emerging Markets</h3>
+          <p class="res-desc">An executive briefing on the legal friction between localised data privacy regimes and borderless LLM training pipelines, closing with three tactical compliance frameworks for jurisdictions where AI-specific legislation is still embryonic.</p>
+          <div class="res-meta">
+            <div class="res-meta-row"><span class="res-meta-key">Audience</span><span class="res-meta-val">Policy Advisors · DPOs</span></div>
+            <div class="res-meta-row"><span class="res-meta-key">Jurisdictions</span><span class="res-meta-val">PK · NG · KE · ID + GDPR</span></div>
+            <div class="res-meta-row"><span class="res-meta-key">Version</span><span class="res-meta-val">v1.0 · 2025</span></div>
           </div>
-        </div>
-        <h3 class="display text-ivory mb-3" style="font-size:1.2rem; line-height:1.4;">
-          Cross-Border Data Flows & AI Training: A Primer for Emerging Markets
-        </h3>
-        <p class="text-mist leading-relaxed mb-6 flex-1" style="font-size:0.88rem; line-height:1.7;">
-          A sharp two-page executive briefing analysing the legal friction between localised data privacy regimes and the territorial-agnostic imperatives of global LLM training pipelines. Concludes with three tactical compliance frameworks designed for organisations operating in jurisdictions where AI-specific legislation remains embryonic.
-        </p>
-        <div class="space-y-1 mb-6">
-          <div class="flex justify-between items-center">
-            <span class="mono text-mist-2" style="font-size:0.68rem; letter-spacing:0.08em;">AUDIENCE</span>
-            <span class="mono text-ivory-dim" style="font-size:0.68rem;">Policy Advisors · DPOs · International Counsel</span>
+          <div class="res-actions">
+            <button class="btn-outline" onclick="document.getElementById('pdf2-modal').classList.add('open')">Read full content ↗</button>
+            <button class="btn-outline" disabled>Download PDF</button>
+            <span class="res-soon">PDF coming soon</span>
           </div>
-          <div class="flex justify-between items-center">
-            <span class="mono text-mist-2" style="font-size:0.68rem; letter-spacing:0.08em;">JURISDICTIONS</span>
-            <span class="mono text-ivory-dim" style="font-size:0.68rem;">PK · NG · KE · ID — with GDPR cross-reference</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="mono text-mist-2" style="font-size:0.68rem; letter-spacing:0.08em;">VERSION</span>
-            <span class="mono text-ivory-dim" style="font-size:0.68rem;">v1.0 · 2025</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 pt-4 border-t" style="border-color:#1F242F;">
-          <button onclick="document.getElementById('pdf2-modal').classList.remove('hidden')" class="btn-download px-5 py-2.5 rounded-sm">
-            Read Full Content ↗
-          </button>
-          <button class="btn-download px-5 py-2.5 rounded-sm cursor-not-allowed" style="opacity:0.4;" disabled>
-            Download PDF
-          </button>
-          <span class="mono text-mist-2" style="font-size:0.6rem; letter-spacing:0.08em; margin-left:auto;">PDF COMING SOON</span>
         </div>
       </div>
-
     </div>
   </section>
 
+  </main>
 
   <!-- ══ PDF 1 MODAL ══ -->
-  <div id="pdf1-modal"
-    class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
-    style="background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);"
-    onclick="if(event.target===this)this.classList.add('hidden')"
-  >
-    <div class="max-w-3xl w-full rounded-sm p-8 lg:p-10 relative" style="background:#111318; border:1px solid #C9A84C44; max-height:90vh; overflow-y:auto;">
-      <button onclick="document.getElementById('pdf1-modal').classList.add('hidden')"
-        class="absolute top-4 right-4 text-mist hover:text-gold transition-colors mono"
-        style="font-size:0.8rem; letter-spacing:0.1em; background:none; border:none; cursor:pointer;">ESC ✕</button>
+  <div id="pdf1-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pdf1-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('pdf1-modal').classList.remove('open')" aria-label="Close">Esc ✕</button>
+      <div class="modal-body">
+        <p class="modal-eyebrow">Practitioner Guide · One-Page Operational Blueprint</p>
+        <h2 class="modal-title" id="pdf1-title">The AI Governance Readiness Checklist for Legal Counsel</h2>
+        <p class="modal-subtitle">A Five-Point Self-Assessment Framework for In-House Legal and Compliance Teams</p>
+        <hr>
+        <h4>Executive Summary</h4>
+        <p>The velocity of AI adoption within enterprise environments has consistently outpaced the development of internal governance infrastructure. Legal counsel are increasingly the first institutional line of accountability when AI deployments produce adverse outcomes, yet most in-house legal functions lack a structured framework for auditing the AI systems operating within their organisation.</p>
+        <p>This checklist provides a structured, jurisdictionally portable self-assessment tool enabling in-house legal teams to establish a baseline understanding of their organisation's AI governance posture within a single working session. The five domains — AI asset inventory, vendor risk management, data provenance, human-in-the-loop controls, and continuous monitoring — represent the foundational pillars of any defensible AI governance framework.</p>
 
-      <div class="space-y-1 mb-6">
-        <p class="eyebrow">Practitioner Guide · One-Page Operational Blueprint</p>
-        <h2 class="display text-ivory" style="font-size:1.6rem;">The AI Governance Readiness Checklist for Legal Counsel</h2>
-        <p class="display text-mist" style="font-size:0.9rem; font-style:italic;">A Five-Point Self-Assessment Framework for In-House Legal and Compliance Teams</p>
-      </div>
-      <hr class="gold-rule mb-6"/>
-
-      <div class="space-y-6 text-ivory-dim leading-relaxed" style="font-size:0.9rem; line-height:1.8;">
-        <div>
-          <p class="eyebrow mb-3" style="font-size:0.6rem;">Executive Summary</p>
-          <p>The velocity of AI adoption within enterprise environments has consistently outpaced the development of internal governance infrastructure. Legal counsel — positioned at the intersection of regulatory compliance, contract risk, and fiduciary duty — are increasingly the first institutional line of accountability when AI deployments produce adverse outcomes, yet most in-house legal functions lack a structured framework for auditing the AI systems operating within their organisation's footprint.</p>
-          <p class="mt-3">This checklist provides a structured, jurisdictionally portable self-assessment tool that enables in-house legal teams to establish a baseline understanding of their organisation's AI governance posture within a single working session. It is not a substitute for a comprehensive AI audit; it is an accelerant for identifying the most material governance gaps and prioritising remediation efforts. The five domains addressed — AI asset inventory, vendor risk management, data provenance, human-in-the-loop controls, and continuous monitoring — represent the foundational pillars of any defensible AI governance framework and are specifically calibrated for the institutional realities of organisations operating in or across emerging markets.</p>
+        <div class="modal-callout">
+          <h5>01. AI Asset Inventory — Know What You Have</h5>
+          <p>Your legal exposure begins with systems you cannot name. Conduct a structured inventory of every AI system deployed within the organisation — including third-party SaaS with embedded AI, API-connected tools, and vendor-supplied automated workflows. Capture: system name and vendor, the automated function performed, categories of personal data processed, and the legal basis for its use.</p>
+          <p class="action"><strong>Action item:</strong> Mandate annual declarations from each business unit confirming AI tools in use. Flag any system producing individual-level determinations for elevated scrutiny.</p>
         </div>
-
-        <div class="rounded-sm p-5" style="background:#181C24; border-left: 3px solid #C9A84C;">
-          <div class="flex items-start gap-4">
-            <span class="display text-gold shrink-0 mt-0.5" style="font-size:1.1rem; font-style:italic;">01.</span>
-            <div>
-              <h4 class="text-ivory font-semibold mb-2">AI Asset Inventory — Know What You Have</h4>
-              <p class="mb-3">Your legal exposure begins with systems you cannot name. Conduct a structured inventory of every AI system currently deployed within the organisation — including third-party SaaS platforms with embedded AI features, API-connected tools, and vendor-supplied automated workflows that affect personnel, customers, or regulated activities. The inventory should, at minimum, capture: system name and vendor, the specific automated function performed, the categories of personal data processed, the business process it operates within, and the legal basis (or asserted exemption) for its use.</p>
-              <p class="text-mist" style="font-size:0.85rem;"><strong style="color:#C9A84C;">Action item:</strong> Mandate annual declarations from each business unit confirming all AI tools in use. Map outputs to your organisation's data register. Flag any system producing individual-level determinations for elevated scrutiny.</p>
-            </div>
-          </div>
+        <div class="modal-callout">
+          <h5>02. Vendor AI Risk — Due Diligence Beyond the Contract</h5>
+          <p>Third-party AI vendors are the most significant unmanaged risk in most enterprise governance frameworks. Standard contracts typically address security but rarely impose governance obligations relevant in a regulatory investigation. Review whether the vendor's AI system is adequately described contractually, sub-processing and training rights over your data are scoped, and the contract preserves your right to audit.</p>
+          <p class="action"><strong>Action item:</strong> Develop a standardised AI rider for vendor contracts. Require AI transparency documentation as an onboarding condition for any vendor processing personal data.</p>
         </div>
-
-        <div class="rounded-sm p-5" style="background:#181C24; border-left: 3px solid #C9A84C;">
-          <div class="flex items-start gap-4">
-            <span class="display text-gold shrink-0 mt-0.5" style="font-size:1.1rem; font-style:italic;">02.</span>
-            <div>
-              <h4 class="text-ivory font-semibold mb-2">Vendor AI Risk — Due Diligence Beyond the Contract</h4>
-              <p class="mb-3">Third-party AI vendors are the most significant unmanaged risk in most enterprise AI governance frameworks. Standard commercial contracts typically address data security, but rarely impose governance obligations that would be relevant in the event of an AI-related regulatory investigation or civil claim. Conduct a focused review of your top vendor relationships to determine whether: the vendor's AI system is adequately described in contractual documentation; sub-processing and AI training rights over your data are clearly scoped; the contract preserves your right to audit; the vendor can produce documentation sufficient for your own regulatory compliance (e.g., DPIA support, model cards, incident notification procedures); and the governing law and jurisdiction clauses are coherent with your own regulatory environment.</p>
-              <p class="text-mist" style="font-size:0.85rem;"><strong style="color:#C9A84C;">Action item:</strong> Develop and implement a standardised AI rider or addendum for vendor contracts. Require AI transparency documentation as a condition of onboarding for any vendor whose services involve personal data processing or individual-affecting decisions.</p>
-            </div>
-          </div>
+        <div class="modal-callout">
+          <h5>03. Data Provenance — Training Data as a Legal Liability</h5>
+          <p>Where your organisation deploys a proprietary or fine-tuned model, the provenance of its training data is a distinct category of legal exposure. Training-data litigation has emerged in multiple jurisdictions; regulatory guidance in the EU and UK makes clear that using personal data to train AI is governed by data protection law like any other processing.</p>
+          <p class="action"><strong>Action item:</strong> Before deploying a fine-tuned model, prepare a data provenance memo documenting source, legal basis, and scope. Flag copyright risk where training data includes unlicensed third-party material.</p>
         </div>
-
-        <div class="rounded-sm p-5" style="background:#181C24; border-left: 3px solid #C9A84C;">
-          <div class="flex items-start gap-4">
-            <span class="display text-gold shrink-0 mt-0.5" style="font-size:1.1rem; font-style:italic;">03.</span>
-            <div>
-              <h4 class="text-ivory font-semibold mb-2">Data Provenance — Training Data as a Legal Liability</h4>
-              <p class="mb-3">Where your organisation is deploying a proprietary or fine-tuned AI model, the provenance of the model's training data constitutes a distinct category of legal exposure that in-house counsel must assess. Training data claims have emerged in litigation in multiple jurisdictions, and regulatory guidance in the EU and UK has made clear that the lawfulness of using personal data to train AI systems is governed by data protection law in the same way as any other processing operation. For models trained on web-scraped data, the legal basis chain (and any opt-out obligations) must be documented. For models fine-tuned on internal data, consent or legitimate interest analyses must be completed and retained as a compliance record.</p>
-              <p class="text-mist" style="font-size:0.85rem;"><strong style="color:#C9A84C;">Action item:</strong> Before deploying a fine-tuned model, prepare and retain a data provenance memo documenting the source, legal basis, and scope of all training data. Flag copyright risk where training data includes third-party materials not licensed for machine learning use.</p>
-            </div>
-          </div>
+        <div class="modal-callout">
+          <h5>04. Human-in-the-Loop — Substantive, Not Ceremonial</h5>
+          <p>Human oversight as a compliance strategy only works when substantive. A reviewer lacking the information, authority, or time to override an AI recommendation does not break the automated chain for legal purposes. Assess whether reviewers can see confidence scores, whether overrides are easy and tracked, and whether institutional pressure favours accepting AI output.</p>
+          <p class="action"><strong>Action item:</strong> Document oversight procedures in a Human-in-the-Loop Protocol specifying reviewer qualifications, information access, override mechanisms, and escalation paths.</p>
         </div>
-
-        <div class="rounded-sm p-5" style="background:#181C24; border-left: 3px solid #C9A84C;">
-          <div class="flex items-start gap-4">
-            <span class="display text-gold shrink-0 mt-0.5" style="font-size:1.1rem; font-style:italic;">04.</span>
-            <div>
-              <h4 class="text-ivory font-semibold mb-2">Human-in-the-Loop — Substantive, Not Ceremonial</h4>
-              <p class="mb-3">The deployment of human oversight as a regulatory compliance strategy is only effective when that oversight is substantive. Emerging regulatory guidance — including WP251's analysis of Article 22 GDPR — makes clear that a human reviewer who lacks the information, authority, time, or institutional incentive to override an AI system's recommendation does not break the automated chain for legal purposes. Conduct a critical assessment of every human oversight point in your AI deployment stack: does the reviewer have access to the system's confidence score or uncertainty indication? Are overrides possible and easy? Are override rates tracked? Is there institutional pressure to accept AI outputs to maintain productivity metrics?</p>
-              <p class="text-mist" style="font-size:0.85rem;"><strong style="color:#C9A84C;">Action item:</strong> Document human oversight procedures in a Human-in-the-Loop Protocol that specifies reviewer qualifications, information access requirements, override mechanisms, and escalation paths. Treat this document as a live regulatory defence artefact, not internal guidance.</p>
-            </div>
-          </div>
+        <div class="modal-callout">
+          <h5>05. Continuous Monitoring — Governance as a System, Not an Event</h5>
+          <p>Pre-deployment assessments go stale as models drift through retraining or shifting input distributions. Establish ongoing monitoring that triggers substantive review: performance threshold alerts, material vendor changes, regulatory updates, incident reports, and scheduled annual audits.</p>
+          <p class="action"><strong>Action item:</strong> Assign a named AI Governance Coordinator responsible for the asset register, vendor communications, and the annual governance review.</p>
         </div>
-
-        <div class="rounded-sm p-5" style="background:#181C24; border-left: 3px solid #C9A84C;">
-          <div class="flex items-start gap-4">
-            <span class="display text-gold shrink-0 mt-0.5" style="font-size:1.1rem; font-style:italic;">05.</span>
-            <div>
-              <h4 class="text-ivory font-semibold mb-2">Continuous Monitoring — Governance as a System, Not an Event</h4>
-              <p class="mb-3">Initial deployment-stage compliance assessments rapidly become stale as model behaviour evolves through retraining, drift, or changes in the data distribution of inputs. The organisations most exposed to AI governance failures are those that conducted rigorous pre-deployment assessment but then treated governance as a one-time checkbox. Establish ongoing monitoring mechanisms that trigger substantive review events: performance threshold alerts (accuracy, false positive rates for high-risk use cases), material changes to the vendor's model or terms, regulatory guidance updates, incident reports, and scheduled annual AI governance audits.</p>
-              <p class="text-mist" style="font-size:0.85rem;"><strong style="color:#C9A84C;">Action item:</strong> Assign a named AI Governance Coordinator (within legal, compliance, or risk) with responsibility for maintaining the AI asset register, managing vendor communications, and convening the annual AI governance review. Formalise this role in an organisational chart or terms of reference document.</p>
-            </div>
-          </div>
-        </div>
-
-        <p class="text-mist-2 italic border-t pt-4" style="border-color:#1F242F; font-size:0.8rem;">
-          This guide is a practitioner's operational reference and does not constitute legal advice. It is designed to be adapted to the specific institutional, jurisdictional, and sectoral context of the deploying organisation. © 2025. Attribution required for reproduction.
-        </p>
+        <p class="modal-foot">This guide is a practitioner's operational reference and does not constitute legal advice. Adapt it to your organisation's specific institutional, jurisdictional, and sectoral context.</p>
       </div>
     </div>
   </div>
-
 
   <!-- ══ PDF 2 MODAL ══ -->
-  <div id="pdf2-modal"
-    class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
-    style="background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);"
-    onclick="if(event.target===this)this.classList.add('hidden')"
-  >
-    <div class="max-w-3xl w-full rounded-sm p-8 lg:p-10 relative" style="background:#111318; border:1px solid #C9A84C44; max-height:90vh; overflow-y:auto;">
-      <button onclick="document.getElementById('pdf2-modal').classList.add('hidden')"
-        class="absolute top-4 right-4 text-mist hover:text-gold transition-colors mono"
-        style="font-size:0.8rem; letter-spacing:0.1em; background:none; border:none; cursor:pointer;">ESC ✕</button>
-
-      <div class="space-y-1 mb-6">
-        <p class="eyebrow">Executive Briefing · Two-Page Primer</p>
-        <h2 class="display text-ivory" style="font-size:1.6rem;">Cross-Border Data Flows & AI Training:</h2>
-        <h2 class="display text-gold-gradient" style="font-size:1.6rem;">A Primer for Emerging Markets</h2>
-        <p class="display text-mist mt-1" style="font-size:0.9rem; font-style:italic;">Navigating the Legal Friction Between Data Localisation and Global LLM Training Pipelines</p>
-      </div>
-      <hr class="gold-rule mb-6"/>
-
-      <div class="space-y-6 text-ivory-dim leading-relaxed" style="font-size:0.9rem; line-height:1.8;">
-
-        <div>
-          <p class="eyebrow mb-3" style="font-size:0.6rem;">Page 1 of 2 — The Legal Friction</p>
-          <h4 class="display text-ivory mb-3" style="font-size:1.1rem;">The Core Tension: Sovereign Data, Borderless Models</h4>
-          <p class="mb-3">The architecture of large language model (LLM) training is structurally incompatible with the emerging data governance frameworks of most Global South jurisdictions — and this incompatibility has not yet been resolved by legislation, regulatory guidance, or contractual practice. LLM training pipelines aggregate data at a scale and geographic breadth that is, by design, indifferent to territorial boundaries: a web-crawl dataset used to pre-train a frontier model may simultaneously include personal data subject to Pakistan's Personal Data Protection Act (PDPA), Nigeria's NDPR, Kenya's Data Protection Act, and Indonesia's Personal Data Protection Law (PDPL), without the model developer having specifically identified, isolated, or assessed its processing of any of these.</p>
-          <p class="mb-3">The legal friction this creates is not hypothetical. Each of the data protection instruments named above restricts the cross-border transfer of personal data to jurisdictions or recipients that do not offer an equivalent level of protection — an adequacy-equivalent test borrowed from the GDPR model. None of the major AI training infrastructure providers has sought or obtained an adequacy determination from any of these jurisdictions. The result is a structural state of technical non-compliance: personal data from these populations has almost certainly been processed in LLM training pipelines in circumstances that would not satisfy the transfer restriction provisions of the applicable domestic law.</p>
-          <h4 class="display text-ivory mb-3 mt-5" style="font-size:1.1rem;">Three Compounding Problems</h4>
-          <p class="mb-3"><strong style="color:#E8D08A;">1. The Identification Problem.</strong> Most data protection frameworks restrict the transfer of <em>personal data</em>, defined by reference to identifiability. LLM training data routinely contains identifiable information — names, correspondence, biographical text, and professional profiles — that would qualify as personal data under a broad, GDPR-aligned definition. The resulting interpretive uncertainty — does the processing of text containing personal data, for the purpose of statistical pattern extraction, constitute processing of personal data within the meaning of data protection law? — has not been resolved by any Global South regulator.</p>
-          <p class="mb-3"><strong style="color:#E8D08A;">2. The Consent Architecture Problem.</strong> Even where a legal basis beyond consent could theoretically be advanced, the asymmetric power relationship between global LLM providers and local data subjects makes the balancing test structurally difficult to satisfy: the benefit accrues primarily to the deploying organisation and its end-users in high-income markets, while the privacy intrusion falls on populations in lower-income markets who were not aware of, and could not reasonably have anticipated, this use of their publicly accessible content.</p>
-          <p><strong style="color:#E8D08A;">3. The Enforcement Gap.</strong> Even where a domestic DPA has a facially applicable basis for action, the practical capacity to investigate and sanction a non-resident technology company engaged in extraterritorial data collection is acutely constrained. Resource-limited DPAs face the same challenge as anti-monopoly regulators in small open economies: their legal authority is formally broad but their enforcement reach is practically narrow.</p>
+  <div id="pdf2-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pdf2-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('pdf2-modal').classList.remove('open')" aria-label="Close">Esc ✕</button>
+      <div class="modal-body">
+        <p class="modal-eyebrow">Executive Briefing · Two-Page Primer</p>
+        <h2 class="modal-title" id="pdf2-title">Cross-Border Data Flows &amp; AI Training: A Primer for Emerging Markets</h2>
+        <p class="modal-subtitle">Navigating the Legal Friction Between Data Localisation and Global LLM Training Pipelines</p>
+        <hr>
+        <h4>Page 1 — The Legal Friction</h4>
+        <p>The architecture of large language model training is structurally incompatible with the emerging data governance frameworks of most Global South jurisdictions, and this incompatibility has not yet been resolved by legislation, regulatory guidance, or contractual practice. LLM training pipelines aggregate data at a scale indifferent to territorial boundaries: a web-crawl dataset used to pre-train a frontier model may simultaneously include personal data subject to Pakistan's PDPA, Nigeria's NDPR, Kenya's Data Protection Act, and Indonesia's PDPL — without the developer having specifically identified or assessed any of it.</p>
+        <p>Each of these instruments restricts cross-border transfer to jurisdictions that do not offer equivalent protection. None of the major AI training infrastructure providers has sought or obtained an adequacy determination from any of them, producing a structural state of technical non-compliance across the industry.</p>
+        <h4>Three Compounding Problems</h4>
+        <p><strong>1. The Identification Problem.</strong> Most frameworks restrict transfer of "personal data," defined by identifiability. LLM training data routinely contains identifiable information — names, correspondence, biographical text — that would qualify under a broad definition. Whether processing text for statistical pattern extraction constitutes "processing personal data" remains unresolved by any Global South regulator.</p>
+        <p><strong>2. The Consent Architecture Problem.</strong> Even where a non-consent legal basis could theoretically apply, the asymmetric power between global LLM providers and local data subjects makes the balancing test difficult to satisfy: the benefit accrues mainly to high-income-market end-users, while the privacy intrusion falls on populations who could not reasonably have anticipated this use of their content.</p>
+        <p><strong>3. The Enforcement Gap.</strong> Even with a facially applicable basis for action, a resource-limited data protection authority's practical capacity to investigate a non-resident technology company is acutely constrained — legal authority that is formally broad but practically narrow.</p>
+        <hr>
+        <h4>Page 2 — Tactical Compliance Frameworks</h4>
+        <p>The following are designed for organisations building or deploying AI where domestic AI-specific legislation is absent or embryonic.</p>
+        <div class="modal-callout">
+          <h5>Framework 1 — The GDPR-as-Ceiling Approach</h5>
+          <p>Adopt GDPR's substantive standards as a voluntary compliance ceiling, calibrated to local enforcement realities: document a lawful basis for all AI-relevant processing, complete DPIAs for profiling or sensitive-category processing, and implement data-subject rights mechanisms ahead of domestic mandate.</p>
+          <p class="action"><strong>Best suited for:</strong> organisations with EU market exposure, those seeking international investment, and regulated financial institutions.</p>
         </div>
-
-        <hr class="gold-rule-faint"/>
-
-        <div>
-          <p class="eyebrow mb-3" style="font-size:0.6rem;">Page 2 of 2 — Tactical Compliance Frameworks</p>
-          <h4 class="display text-ivory mb-4" style="font-size:1.1rem;">Three Tactical Compliance Frameworks for Organisations Without Mature AI Legislation</h4>
-          <p class="mb-5 text-mist">The following frameworks are designed for organisations — local technology companies, regional banks, public-sector digital programmes — that are building or deploying AI systems in jurisdictions where AI-specific legislation is absent or embryonic.</p>
-
-          <div class="rounded-sm p-5 mb-4" style="background:#181C24; border-left: 3px solid #5eead4;">
-            <h5 class="font-semibold mb-2" style="color:#5eead4;">Framework 1 — The GDPR-as-Ceiling Approach</h5>
-            <p class="mb-3">In the absence of domestic AI legislation, adopt the GDPR's substantive data governance standards as a voluntary compliance ceiling, calibrated to local enforcement realities. This means treating all data processing for AI training or inference purposes as if it required a documented lawful basis; completing DPIAs for any processing involving profiling, sensitive data categories, or individual-affecting automated decisions; and implementing data subject rights mechanisms even where domestic law does not yet mandatorily require them.</p>
-            <p class="text-mist" style="font-size:0.84rem;"><strong style="color:#5eead4;">Best suited for:</strong> Organisations with significant EU market exposure, those seeking international investment, and regulated financial institutions managing correspondent banking relationships.</p>
-          </div>
-
-          <div class="rounded-sm p-5 mb-4" style="background:#181C24; border-left: 3px solid #C9A84C;">
-            <h5 class="font-semibold mb-2" style="color:#C9A84C;">Framework 2 — The Regulatory Dialogue Strategy</h5>
-            <p class="mb-3">In jurisdictions where the DPA or sector regulator is nascent but engaged, proactively structure a regulatory dialogue around AI deployment plans. This involves voluntarily notifying the relevant authority of planned AI use cases prior to deployment, providing a plain-language briefing on the technology and its risk profile, and proposing a monitoring and reporting arrangement. This approach has been successfully employed by fintech innovators in Pakistan (with SECP and SBP), Kenya (CBK's regulatory sandbox), and Nigeria (CBN FinTech Unit).</p>
-            <p class="text-mist" style="font-size:0.84rem;"><strong style="color:#C9A84C;">Best suited for:</strong> Organisations deploying in regulated sectors (finance, health, education) where sector-specific regulators have existing technology oversight mandates and an interest in enabling responsible innovation.</p>
-          </div>
-
-          <div class="rounded-sm p-5 mb-4" style="background:#181C24; border-left: 3px solid #a5b4fc;">
-            <h5 class="font-semibold mb-2" style="color:#a5b4fc;">Framework 3 — The Minimal Viable Governance (MVG) Architecture</h5>
-            <p class="mb-3">For organisations that lack the resources to implement a full GDPR-equivalent regime, a Minimal Viable Governance architecture establishes the foundational documentation and process infrastructure that preserves future compliance optionality at minimum current cost. The MVG comprises five artefacts: (i) an AI system register; (ii) a standard privacy notice addendum disclosing AI processing; (iii) a contractual AI governance rider for vendor agreements; (iv) an incident response protocol covering AI-related adverse events; and (v) a board-level AI governance statement acknowledging responsibility for AI deployment decisions.</p>
-            <p class="text-mist" style="font-size:0.84rem;"><strong style="color:#a5b4fc;">Best suited for:</strong> SMEs, NGOs, and early-stage technology companies in emerging markets deploying AI in low-risk, non-regulated contexts who need a proportionate, resource-conscious compliance baseline.</p>
-          </div>
-
-          <p class="mt-5">The convergence of data localisation requirements, extraterritorial AI regulation, and the structural data asymmetry between Global South populations and Global North AI developers is creating a compliance environment of rapidly escalating complexity. The organisations best positioned to navigate this environment are those that begin building governance infrastructure now — ahead of mandatory requirements. Regulatory frameworks, when they arrive, consistently reward demonstrated prior practice.</p>
+        <div class="modal-callout">
+          <h5>Framework 2 — The Regulatory Dialogue Strategy</h5>
+          <p>Where the DPA or sector regulator is nascent but engaged, proactively structure a dialogue: notify the authority of planned AI use cases before deployment, provide a plain-language risk briefing, and propose a monitoring arrangement — an approach already used with SECP and SBP in Pakistan, CBK's sandbox in Kenya, and CBN's FinTech unit in Nigeria.</p>
+          <p class="action"><strong>Best suited for:</strong> regulated sectors (finance, health, education) where sector regulators already have technology oversight mandates.</p>
         </div>
-
-        <p class="text-mist-2 italic border-t pt-4" style="border-color:#1F242F; font-size:0.8rem;">
-          This briefing paper is a practitioner's reference document and does not constitute legal advice. © 2025. Attribution required for reproduction.
-        </p>
+        <div class="modal-callout">
+          <h5>Framework 3 — Minimal Viable Governance (MVG)</h5>
+          <p>For organisations without resources for a full GDPR-equivalent regime, an MVG architecture preserves future compliance optionality at minimum current cost: an AI system register, a privacy-notice AI addendum, a contractual AI governance rider, an incident response protocol, and a board-level AI governance statement.</p>
+          <p class="action"><strong>Best suited for:</strong> SMEs, NGOs, and early-stage technology companies deploying AI in low-risk, non-regulated contexts.</p>
+        </div>
+        <p>The convergence of data localisation requirements, extraterritorial AI regulation, and structural data asymmetry between Global South populations and Global North AI developers is creating a compliance environment of rapidly escalating complexity. The organisations best positioned to navigate it are those building governance infrastructure now, ahead of mandatory requirements.</p>
+        <p class="modal-foot">This briefing is a practitioner's reference and does not constitute legal advice.</p>
       </div>
     </div>
   </div>
 
-
-  <!-- ══ FOOTER ══ -->
-  <footer class="border-t" style="border-color:#181C24;">
-    <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-      <div>
-        <p class="eyebrow mb-1">Field Guide</p>
-        <p class="text-mist-2" style="font-size:0.82rem;">Resources & Insights · Law × AI Governance × Data Privacy × Legal Tech</p>
-        <p class="text-mist-2 mt-1" style="font-size:0.78rem;">Updated continuously · Global South focus</p>
-      </div>
-      <div class="flex items-center gap-6">
-        <a href="#" class="mono text-mist-2 hover:text-gold transition-colors" style="font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;">Contact</a>
-        <a href="#" class="mono text-mist-2 hover:text-gold transition-colors" style="font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;">LinkedIn</a>
-        <a href="#" class="mono text-mist-2 hover:text-gold transition-colors" style="font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;">SSRN</a>
-      </div>
-    </div>
+  <footer>
+    <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
+    <ul class="footer-links" role="list">
+      <li><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="https://digitalgavel.substack.com" target="_blank" rel="noopener noreferrer">Substack</a></li>
+      <li><a href="https://github.com/HamidNaeem12" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="mailto:hamidnaeem2223ab@gmail.com">Email</a></li>
+    </ul>
   </footer>
 
-
   <script>
-    /* ── Glossary accordion ── */
+    // ── Custom cursor ──
+    (function initCursor() {
+      if (window.matchMedia('(max-width: 860px)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const cursor = document.getElementById('cursor');
+      const cursorRing = document.getElementById('cursor-ring');
+      if (!cursor || !cursorRing) return;
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      document.body.classList.add('cursor-active');
+      function animCursor() {
+        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+        rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+        cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+        requestAnimationFrame(animCursor);
+      }
+      animCursor();
+    })();
+
+    const prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (docH > 0 ? window.scrollY / docH * 100 : 0) + '%';
+    }, { passive: true });
+
+    const navEl = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => { navEl.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+    function openMobNav(btn) {
+      document.getElementById('mobile-nav').classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobNav() {
+      document.getElementById('mobile-nav').classList.remove('open');
+      const btn = document.querySelector('.nav-burger');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    // ── Glossary accordion ──
     function toggleRow(btn) {
-      const row    = btn.closest('.glossary-row');
-      const panel  = row.querySelector('.definition-panel');
-      const chev   = btn.querySelector('.chevron');
+      const row = btn.closest('.glossary-row');
+      const panel = row.querySelector('.definition-panel');
+      const chev = btn.querySelector('.chevron');
       const isOpen = panel.classList.contains('open');
 
       document.querySelectorAll('.definition-panel.open').forEach(p => {
         p.classList.remove('open');
-        p.closest('.glossary-row').classList.remove('open');
-        p.closest('.glossary-row').querySelector('.chevron').classList.remove('open');
+        const r = p.closest('.glossary-row');
+        r.classList.remove('open');
+        r.querySelector('.chevron').classList.remove('open');
+        r.querySelector('.row-trigger').setAttribute('aria-expanded', 'false');
       });
 
       if (!isOpen) {
         panel.classList.add('open');
         row.classList.add('open');
         chev.classList.add('open');
-        // Smooth scroll into view on mobile
+        btn.setAttribute('aria-expanded', 'true');
         setTimeout(() => {
           const rect = row.getBoundingClientRect();
-          if (rect.top < 80) row.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (rect.top < 70) row.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
       }
     }
 
-    /* ── Category filter ── */
-    const filterBar    = document.getElementById('filter-bar');
-    const searchInput  = document.getElementById('glossary-search');
-    const allRows      = document.querySelectorAll('#glossary-list .glossary-row');
-    const countEl      = document.getElementById('glossary-count');
-    const noResults    = document.getElementById('no-results');
-    let activeFilter   = 'all';
+    // ── Filter + search ──
+    const filterBar = document.getElementById('filter-bar');
+    const searchInput = document.getElementById('glossary-search');
+    const allRows = document.querySelectorAll('#glossary-list .glossary-row');
+    const countEl = document.getElementById('glossary-count');
+    const noResults = document.getElementById('no-results');
+    let activeFilter = 'all';
 
     function applyFilters() {
       const q = searchInput.value.trim().toLowerCase();
       let visible = 0;
 
       allRows.forEach(row => {
-        const cat   = row.dataset.category;
-        const term  = row.dataset.term || '';
-        const text  = row.textContent.toLowerCase();
-
-        const catMatch  = activeFilter === 'all' || cat === activeFilter;
+        const cat = row.dataset.category;
+        const term = row.dataset.term || '';
+        const text = row.textContent.toLowerCase();
+        const catMatch = activeFilter === 'all' || cat === activeFilter;
         const termMatch = q === '' || term.includes(q) || text.includes(q);
-        const show      = catMatch && termMatch;
-
+        const show = catMatch && termMatch;
         row.style.display = show ? '' : 'none';
         if (show) visible++;
-
-        // Close open panels on filter change
         if (!show) {
           const panel = row.querySelector('.definition-panel');
           if (panel && panel.classList.contains('open')) {
@@ -1187,10 +1120,9 @@
       const total = allRows.length;
       const filterLabel = activeFilter === 'all' ? '' : ` — ${activeFilter}`;
       const searchLabel = q ? ` · "${q}"` : '';
-      countEl.textContent = visible === total && !q
+      countEl.textContent = (visible === total && !q)
         ? `Showing ${total} of ${total} terms`
         : `Showing ${visible} of ${total} terms${filterLabel}${searchLabel}`;
-
       noResults.style.display = visible === 0 ? 'block' : 'none';
     }
 
@@ -1202,16 +1134,17 @@
       activeFilter = pill.dataset.filter;
       applyFilters();
     });
-
     searchInput.addEventListener('input', applyFilters);
 
-    /* ── ESC to close modals ── */
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        document.querySelectorAll('[id$="-modal"]').forEach(m => m.classList.add('hidden'));
+        document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+        if (document.getElementById('mobile-nav').classList.contains('open')) closeMobNav();
       }
     });
+    document.querySelectorAll('.modal-overlay').forEach(m => {
+      m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+    });
   </script>
-
 </body>
 </html>
