@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act Compliance Mapper — Global South Edition | Lex Lata Tools</title>
+<meta name="description" content="A risk-tier docket generator mapping AI systems against the EU AI Act, built for institutions operating outside the EU's regulatory perimeter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1B33;
+    --navy-2:#132A4C;
+    --cream:#F3EEE1;
+    --parchment:#EAE2CC;
+    --parchment-2:#E1D7B8;
+    --gold:#B4893A;
+    --gold-bright:#D4AF6A;
+    --ink:#181F2B;
+    --ink-muted:#5B6472;
+    --line: rgba(11,27,51,0.14);
+    --prohibited:#7A2A2A;
+    --highrisk:#96591B;
+    --limited:#3A6558;
+    --minimal:#535D5A;
+    --radius: 3px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 800px at 85% -10%, rgba(180,137,58,0.08), transparent 60%),
+      var(--cream);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px 80px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--navy);
+    color:var(--cream);
+    padding:22px 0;
+    border-bottom:3px solid var(--gold);
+  }
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .monogram{
+    display:flex;align-items:center;gap:12px;
+  }
+  .monogram .mark{
+    width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:14px;letter-spacing:0.5px;
+    color:var(--gold-bright);
+  }
+  .monogram .name{font-family:'Fraunces',serif;font-size:15px;letter-spacing:0.4px;color:var(--cream);}
+  .monogram .name span{color:var(--gold-bright);}
+  .site-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;
+    text-transform:uppercase;color:rgba(243,238,225,0.55);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:52px 0 34px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--gold);margin:0 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);display:inline-block;}
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.2vw,46px);
+    line-height:1.08;margin:0 0 16px;letter-spacing:-0.5px;color:var(--navy);
+  }
+  h1 em{font-style:italic;font-weight:450;color:var(--gold);}
+  .hero p.lede{
+    max-width:660px;font-size:17px;color:var(--ink-muted);margin:0 0 6px;
+  }
+  .hero .disclaimer{
+    margin-top:22px;font-size:13px;color:var(--ink-muted);
+    border-left:2px solid var(--parchment-2);padding-left:14px;max-width:660px;
+  }
+
+  /* ---------- Layout ---------- */
+  .stage{display:grid;grid-template-columns:1fr;gap:0;margin-top:36px;}
+  @media (min-width: 980px){
+    .stage{grid-template-columns:64px minmax(0,1fr) 380px;gap:0;}
+  }
+
+  /* spine / progress rail */
+  .spine{display:none;}
+  @media (min-width:980px){
+    .spine{
+      display:flex;flex-direction:column;align-items:center;gap:0;
+      padding-top:6px;
+    }
+    .spine .tab{
+      writing-mode:vertical-rl;text-orientation:mixed;
+      font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--ink-muted);
+      padding:18px 0;border-left:2px solid var(--line);
+      transition:color .2s, border-color .2s;
+    }
+    .spine .tab.active{color:var(--navy);border-left-color:var(--gold);font-weight:600;}
+    .spine .tab.done{color:var(--gold);}
+  }
+
+  /* main card */
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:34px 32px;
+    box-shadow:0 1px 0 rgba(11,27,51,0.03);
+  }
+  .step-label{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.6px;
+    text-transform:uppercase;color:var(--gold);margin:0 0 10px;
+  }
+  .step-title{
+    font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--navy);
+    margin:0 0 8px;
+  }
+  .step-sub{color:var(--ink-muted);font-size:14.5px;margin:0 0 26px;max-width:52ch;}
+
+  fieldset{border:none;margin:0 0 22px;padding:0;}
+  .field-group{margin-bottom:20px;}
+  .field-group:last-child{margin-bottom:0;}
+  label.field-label{
+    display:block;font-weight:600;font-size:14.5px;color:var(--navy);margin-bottom:6px;
+  }
+  select, .radio-row{width:100%;}
+  select{
+    font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;padding:10px 12px;
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--cream);color:var(--ink);
+    width:100%;
+  }
+
+  .question{
+    border-top:1px solid var(--line);padding:18px 0;
+    display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;
+  }
+  .question:first-of-type{border-top:none;}
+  .question .qtext{font-size:14.5px;color:var(--ink);}
+  .question .qtext .art{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);
+    margin-bottom:4px;letter-spacing:0.5px;
+  }
+  .toggle{display:flex;gap:6px;flex-shrink:0;}
+  .toggle button{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.5px;
+    padding:7px 14px;border:1px solid var(--line);background:#fff;color:var(--ink-muted);
+    border-radius:var(--radius);cursor:pointer;transition:all .15s;
+  }
+  .toggle button:hover{border-color:var(--gold);}
+  .toggle button.sel-yes.active{background:var(--prohibited);border-color:var(--prohibited);color:#fff;}
+  .toggle button.sel-no.active{background:var(--navy);border-color:var(--navy);color:var(--cream);}
+
+  .checkbox-row{
+    border-top:1px solid var(--line);padding:16px 0;
+    display:flex;gap:14px;align-items:flex-start;cursor:pointer;
+  }
+  .checkbox-row:first-of-type{border-top:none;}
+  .checkbox-row input{margin-top:4px;width:16px;height:16px;accent-color:var(--navy);flex-shrink:0;}
+  .checkbox-row .clabel{font-weight:600;font-size:14.5px;color:var(--navy);}
+  .checkbox-row .cdesc{font-size:13.5px;color:var(--ink-muted);margin-top:2px;}
+
+  .nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:30px;padding-top:22px;border-top:1px solid var(--line);}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.8px;text-transform:uppercase;
+    padding:12px 22px;border-radius:var(--radius);cursor:pointer;border:1px solid var(--navy);
+    background:var(--navy);color:var(--cream);transition:all .15s;
+  }
+  .btn:hover{background:var(--navy-2);}
+  .btn.ghost{background:transparent;color:var(--navy);border-color:var(--line);}
+  .btn.ghost:hover{border-color:var(--navy);}
+  .btn:disabled{opacity:0.35;cursor:not-allowed;}
+  .btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:600;}
+  .btn.gold:hover{background:var(--gold-bright);}
+
+  /* ---------- Docket side panel (live preview) ---------- */
+  .docket-rail{padding-top:0;}
+  @media (min-width:980px){.docket-rail{padding-left:26px;position:sticky;top:22px;align-self:start;}}
+  .docket-mini{
+    background:var(--navy);color:var(--cream);border-radius:var(--radius);
+    padding:24px 22px;border:1px solid var(--navy);
+  }
+  .docket-mini .filenum{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold-bright);letter-spacing:1px;margin-bottom:14px;}
+  .docket-mini h3{font-family:'Fraunces',serif;font-size:17px;font-weight:600;margin:0 0 16px;color:var(--cream);}
+  .status-line{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid rgba(243,238,225,0.14);color:rgba(243,238,225,0.75);}
+  .status-line:first-of-type{border-top:none;}
+  .status-line b{color:var(--cream);font-weight:600;}
+  .mini-note{margin-top:16px;font-size:12.5px;color:rgba(243,238,225,0.55);line-height:1.5;}
+
+  /* ---------- Result view (the "docket") ---------- */
+  #resultView{display:none;}
+  .docket{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:0;overflow:hidden;
+  }
+  .docket-head{
+    background:var(--navy);color:var(--cream);padding:30px 34px 26px;position:relative;
+    border-bottom:4px solid var(--gold);
+  }
+  .docket-head .filenum{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;color:var(--gold-bright);margin-bottom:10px;}
+  .docket-head h2{font-family:'Fraunces',serif;font-size:26px;font-weight:600;margin:0 0 6px;}
+  .docket-head .meta{font-size:13px;color:rgba(243,238,225,0.65);}
+
+  .seal{
+    position:absolute;top:26px;right:34px;
+    border:3px solid var(--gold-bright);border-radius:8px;
+    padding:10px 18px;transform:rotate(-6deg);
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--gold-bright);
+    text-align:center;line-height:1.3;
+  }
+  .seal.tier-prohibited{border-color:#E8A3A3;color:#F0BEBE;}
+  .seal.tier-high{border-color:#F0C27B;color:#F0C27B;}
+  .seal.tier-limited{border-color:#9FD1BE;color:#9FD1BE;}
+  .seal.tier-minimal{border-color:#C7CDCB;color:#C7CDCB;}
+
+  .docket-body{padding:30px 34px;}
+  .docket-section{margin-bottom:30px;}
+  .docket-section:last-child{margin-bottom:0;}
+  .docket-section h4{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--gold);margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);
+  }
+  .entry{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-top:1px dashed var(--line);}
+  .entry:first-of-type{border-top:none;}
+  .entry .cite{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--navy);font-weight:600;padding-top:2px;}
+  .entry .body-title{font-weight:600;font-size:14.5px;color:var(--navy);margin-bottom:3px;}
+  .entry .body-text{font-size:13.5px;color:var(--ink-muted);}
+  @media (max-width:600px){.entry{grid-template-columns:1fr;gap:4px;}}
+
+  .roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  @media (max-width:800px){.roadmap{grid-template-columns:1fr 1fr;}}
+  @media (max-width:480px){.roadmap{grid-template-columns:1fr;}}
+  .phase{background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);padding:16px;}
+  .phase .pnum{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:8px;}
+  .phase .ptitle{font-weight:600;font-size:13.5px;color:var(--navy);margin-bottom:6px;}
+  .phase .ptext{font-size:12.5px;color:var(--ink-muted);line-height:1.5;}
+
+  .callout{
+    background:var(--parchment);border-left:3px solid var(--gold);border-radius:var(--radius);
+    padding:16px 18px;font-size:13.5px;color:var(--ink);line-height:1.6;
+  }
+  .callout b{color:var(--navy);}
+
+  .docket-foot{
+    padding:22px 34px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:14px;background:var(--cream);
+  }
+  .foot-note{font-size:12px;color:var(--ink-muted);max-width:56ch;}
+  .foot-actions{display:flex;gap:10px;}
+
+  footer.site{padding:40px 0 60px;text-align:center;}
+  footer.site p{font-size:12.5px;color:var(--ink-muted);font-family:'IBM Plex Mono',monospace;}
+
+  @media print{
+    header.site, .hero, .stage > *:not(.docket-rail), .foot-actions, footer.site{display:none !important;}
+    body{background:#fff;}
+    .docket{border:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="monogram">
+      <div class="mark">MHN</div>
+      <div class="name">Lex Lata Tools <span>/ The Digital Gavel</span></div>
+    </div>
+    <div class="site-tag">Legal-Tech Instrument No. 003</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <p class="eyebrow">AI Governance / Comparative Regulation</p>
+    <h1>EU AI Act Compliance Mapper<br><em>— Global South Edition</em></h1>
+    <p class="lede">Answer a short intake on how your institution builds or uses an AI system. This instrument classifies it against the EU AI Act's four risk tiers and drafts a docket of the obligations that would attach — with a separate note on what actually binds an institution operating outside the EU.</p>
+    <p class="disclaimer">This is a governance screening tool, not legal advice. It follows the AI Act's public text as of early 2026 and does not substitute for review by qualified counsel, particularly on territorial scope and sector-specific overlays.</p>
+  </section>
+
+  <div class="stage">
+    <nav class="spine" id="spine"></nav>
+
+    <main>
+      <div id="wizard" class="card"></div>
+
+      <div id="resultView">
+        <div class="docket" id="docketOutput"></div>
+      </div>
+    </main>
+
+    <aside class="docket-rail">
+      <div class="docket-mini" id="miniDocket">
+        <div class="filenum" id="fileNumMini">FILE NO. —</div>
+        <h3>Assessment in progress</h3>
+        <div id="miniStatus"></div>
+        <p class="mini-note">This panel updates as you answer. Nothing is sent anywhere — the assessment runs entirely in your browser.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="site">
+  <p>PREPARED AS A STATIC INSTRUMENT · NO DATA LEAVES THIS BROWSER · HAMIDNAEEM.ME</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const fileNumber = "EU-AIA/" + new Date().getFullYear() + "/" + String(Math.floor(1000 + Math.random()*8999));
+  document.getElementById('fileNumMini').textContent = "FILE NO. " + fileNumber;
+
+  const state = {
+    step: 0,
+    orgType: "",
+    role: [],        // provider / deployer
+    euTouch: "",      // yes/no/unsure
+    gpai: "",         // yes/no
+    prohibited: {},   // id -> 'yes'/'no'
+    annex: {},        // id -> bool
+    transparency: {}  // id -> 'yes'/'no'
+  };
+
+  const PROHIBITED_Q = [
+    {id:'p1', art:'Art. 5(1)(a)', label:'Subliminal or manipulative techniques', text:"Does the system deploy subliminal techniques beyond a person's awareness, or purposefully manipulative or deceptive techniques, with the effect of materially distorting behaviour in a way likely to cause significant harm?"},
+    {id:'p2', art:'Art. 5(1)(b)', label:'Exploiting vulnerabilities', text:"Does it exploit vulnerabilities due to age, disability, or a specific social or economic situation, distorting a person's behaviour in a way likely to cause significant harm?"},
+    {id:'p3', art:'Art. 5(1)(c)', label:'Social scoring', text:"Is it used by or on behalf of a public authority to evaluate or classify people over time based on social behaviour or inferred traits, leading to detrimental treatment unrelated to the context in which the data arose?"},
+    {id:'p4', art:'Art. 5(1)(d)', label:'Individual crime-risk profiling', text:"Does it assess the risk of a person committing a criminal offence based solely on profiling or personality traits, without objective facts directly linked to criminal activity?"},
+    {id:'p5', art:'Art. 5(1)(e)', label:'Untargeted facial-image scraping', text:"Does it build or expand a facial recognition database through untargeted scraping of images from the internet or CCTV footage?"},
+    {id:'p6', art:'Art. 5(1)(f)', label:'Workplace or education emotion inference', text:"Does it infer emotions of individuals in the workplace or in educational settings, outside narrow medical or safety exceptions?"},
+    {id:'p7', art:'Art. 5(1)(g)', label:'Sensitive biometric categorisation', text:"Does it categorise individuals using biometric data to infer race, political opinions, trade union membership, religious belief, or sexual orientation?"},
+    {id:'p8', art:'Art. 5(1)(h)', label:'Real-time remote biometric ID in public', text:"Is it used for real-time remote biometric identification of individuals in publicly accessible spaces for law enforcement, outside the narrow statutory exceptions?"}
+  ];
+
+  const ANNEX_III = [
+    {id:'a1', label:'Biometrics', text:"Remote biometric identification, sensitive biometric categorisation, or emotion recognition, in uses not already prohibited."},
+    {id:'a2', label:'Critical infrastructure', text:"A safety component in the management or operation of critical digital infrastructure, road traffic, or water, gas, heating, or electricity supply."},
+    {id:'a3', label:'Education & vocational training', text:"Determines admission or access, evaluates learning outcomes, assesses the appropriate level of education, or monitors/detects prohibited behaviour during tests."},
+    {id:'a4', label:'Employment & worker management', text:"Recruitment or targeted job ads, evaluating candidates, decisions on promotion or termination, task allocation, or monitoring/evaluating performance."},
+    {id:'a5', label:'Access to essential services', text:"Eligibility for public benefits, creditworthiness or credit scoring, risk-pricing for life or health insurance, or emergency-call dispatch prioritisation."},
+    {id:'a6', label:'Law enforcement', text:"Risk assessment of offending or reoffending, polygraph-type tools, evaluating evidence reliability, or profiling during criminal investigation."},
+    {id:'a7', label:'Migration, asylum & border control', text:"Polygraph-type tools, examining eligibility for asylum, visa, or residence applications, or risk assessment of migrants."},
+    {id:'a8', label:'Justice & democratic processes', text:"Assisting judicial research or the interpretation of facts and law, or intended to influence the outcome of an election or referendum, or voting behaviour."}
+  ];
+
+  const TRANSPARENCY_Q = [
+    {id:'t1', art:'Art. 50(1)', text:"Does the system interact directly with individuals — a chatbot, virtual assistant, or similar interface?"},
+    {id:'t2', art:'Art. 50(4)', text:"Does it generate or manipulate image, audio, or video content that could reasonably appear authentic (synthetic media / deepfakes)?"},
+    {id:'t3', art:'Art. 50(4)', text:"Does it generate text that is published to inform the public on matters of public interest?"},
+    {id:'t4', art:'Art. 50(3)', text:"Does it perform emotion recognition or biometric categorisation on individuals, in a use not already prohibited above?"}
+  ];
+
+  const STEPS = ['Intake','Prohibited Practices','High-Risk Domains','Transparency Triggers','Docket'];
+
+  function renderSpine(){
+    const spine = document.getElementById('spine');
+    spine.innerHTML = STEPS.map((s,i)=>{
+      let cls = '';
+      if(i < state.step) cls = 'done';
+      if(i === state.step) cls = 'active';
+      return `<div class="tab ${cls}">${s}</div>`;
+    }).join('');
+  }
+
+  function go(step){
+    state.step = step;
+    renderSpine();
+    renderMini();
+    if(step === 4){
+      document.getElementById('wizard').style.display = 'none';
+      document.getElementById('resultView').style.display = 'block';
+      renderDocket();
+    } else {
+      document.getElementById('wizard').style.display = 'block';
+      document.getElementById('resultView').style.display = 'none';
+      const renderers = [renderIntake, renderProhibited, renderAnnex, renderTransparency];
+      renderers[step]();
+    }
+    window.scrollTo({top: document.getElementById('wizard').offsetTop - 20 || 0, behavior:'smooth'});
+  }
+
+  function renderMini(){
+    const anyProhibited = Object.values(state.prohibited).includes('yes');
+    const anyAnnex = Object.values(state.annex).some(Boolean);
+    const anyTransparency = Object.values(state.transparency).includes('yes');
+    let tierGuess = '—';
+    if(state.step >= 1 && anyProhibited) tierGuess = 'Prohibited';
+    else if(state.step >= 2 && anyAnnex) tierGuess = 'High-Risk';
+    else if(state.step >= 3 && anyTransparency) tierGuess = 'Limited Risk';
+    else if(state.step >= 3) tierGuess = 'Minimal Risk';
+    document.getElementById('miniStatus').innerHTML = `
+      <div class="status-line"><span>Org type</span><b>${state.orgType || '—'}</b></div>
+      <div class="status-line"><span>Role</span><b>${state.role.length ? state.role.join(' + ') : '—'}</b></div>
+      <div class="status-line"><span>EU footprint</span><b>${state.euTouch || '—'}</b></div>
+      <div class="status-line"><span>Step</span><b>${state.step+1} / 5</b></div>
+      <div class="status-line"><span>Indicative tier</span><b>${tierGuess}</b></div>
+    `;
+  }
+
+  function shell(stepIdx, title, sub, bodyHTML, opts){
+    opts = opts || {};
+    const backDisabled = stepIdx === 0 ? 'disabled' : '';
+    return `
+      <p class="step-label">Step ${stepIdx+1} of 5</p>
+      <h2 class="step-title">${title}</h2>
+      <p class="step-sub">${sub}</p>
+      ${bodyHTML}
+      <div class="nav-row">
+        <button class="btn ghost" id="backBtn" ${backDisabled}>← Back</button>
+        <button class="btn gold" id="nextBtn">${opts.nextLabel || 'Continue →'}</button>
+      </div>
+    `;
+  }
+
+  function wireNav(nextHandler){
+    document.getElementById('backBtn').onclick = () => { if(state.step>0) go(state.step-1); };
+    document.getElementById('nextBtn').onclick = nextHandler;
+  }
+
+  function renderIntake(){
+    const body = `
+      <div class="field-group">
+        <label class="field-label">What kind of institution is this for?</label>
+        <select id="orgType">
+          <option value="">Select one…</option>
+          <option>Law firm / legal services</option>
+          <option>Government or regulatory body</option>
+          <option>University / research institution</option>
+          <option>Bank / financial institution</option>
+          <option>Healthcare provider</option>
+          <option>Startup / product company</option>
+          <option>NGO / civil society</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">What is your institution's role with the AI system?</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;"><input type="checkbox" id="roleProvider" style="accent-color:var(--navy);width:16px;height:16px;"> Provider — we build or substantially modify it</label>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px;"><input type="checkbox" id="roleDeployer" style="accent-color:var(--navy);width:16px;height:16px;"> Deployer — we use a system someone else built</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Does the system, or its output, touch the EU — an EU establishment, the EU market, or people located in the EU?</label>
+        <select id="euTouch">
+          <option value="">Select one…</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Unsure">Unsure</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Is the system built primarily on top of a general-purpose model (e.g. GPT, Claude, Llama, Gemini) via API, rather than built from scratch?</label>
+        <select id="gpai">
+          <option value="">Select one…</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+    `;
+    document.getElementById('wizard').innerHTML = shell(0, "Intake", "A few facts about the institution and the system under review, to frame the rest of the docket.", body);
+    document.getElementById('orgType').value = state.orgType;
+    document.getElementById('roleProvider').checked = state.role.includes('Provider');
+    document.getElementById('roleDeployer').checked = state.role.includes('Deployer');
+    document.getElementById('euTouch').value = state.euTouch;
+    document.getElementById('gpai').value = state.gpai;
+
+    wireNav(() => {
+      state.orgType = document.getElementById('orgType').value;
+      state.role = [];
+      if(document.getElementById('roleProvider').checked) state.role.push('Provider');
+      if(document.getElementById('roleDeployer').checked) state.role.push('Deployer');
+      state.euTouch = document.getElementById('euTouch').value;
+      state.gpai = document.getElementById('gpai').value;
+      go(1);
+    });
+  }
+
+  function renderProhibited(){
+    const rows = PROHIBITED_Q.map(q => `
+      <div class="question" data-id="${q.id}">
+        <div class="qtext"><span class="art">${q.art} — ${q.label}</span>${q.text}</div>
+        <div class="toggle">
+          <button class="sel-yes ${state.prohibited[q.id]==='yes'?'active':''}" data-val="yes">Yes</button>
+          <button class="sel-no ${state.prohibited[q.id]==='no'?'active':''}" data-val="no">No</button>
+        </div>
+      </div>
+    `).join('');
+    document.getElementById('wizard').innerHTML = shell(1, "Prohibited Practices Screen", "Article 5 bans these outright. A single \u201cYes\u201d ends the assessment at the Prohibited tier — no compliance pathway applies.", `<div>${rows}</div>`);
+
+    document.querySelectorAll('.question .toggle button').forEach(btn => {
+      btn.onclick = () => {
+        const q = btn.closest('.question');
+        const id = q.dataset.id;
+        state.prohibited[id] = btn.dataset.val;
+        q.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMini();
+      };
+    });
+
+    wireNav(() => go(2));
+  }
+
+  function renderAnnex(){
+    const rows = ANNEX_III.map(a => `
+      <label class="checkbox-row">
+        <input type="checkbox" data-id="${a.id}" ${state.annex[a.id] ? 'checked':''}>
+        <div>
+          <div class="clabel">${a.label}</div>
+          <div class="cdesc">${a.text}</div>
+        </div>
+      </label>
+    `).join('');
+    document.getElementById('wizard').innerHTML = shell(2, "Annex III — High-Risk Domains", "Check every box that describes what the system actually does. Any match places it in the High-Risk tier under Article 6.", `<div>${rows}</div>`);
+
+    document.querySelectorAll('#wizard .checkbox-row input').forEach(cb => {
+      cb.onchange = () => { state.annex[cb.dataset.id] = cb.checked; renderMini(); };
+    });
+
+    wireNav(() => {
+      const anyProhibited = Object.values(state.prohibited).includes('yes');
+      const anyAnnex = Object.values(state.annex).some(Boolean);
+      if(anyProhibited || anyAnnex){
+        go(4);
+      } else {
+        go(3);
+      }
+    });
+  }
+
+  function renderTransparency(){
+    const rows = TRANSPARENCY_Q.map(q => `
+      <div class="question" data-id="${q.id}">
+        <div class="qtext"><span class="art">${q.art}</span>${q.text}</div>
+        <div class="toggle">
+          <button class="sel-yes ${state.transparency[q.id]==='yes'?'active':''}" data-val="yes">Yes</button>
+          <button class="sel-no ${state.transparency[q.id]==='no'?'active':''}" data-val="no">No</button>
+        </div>
+      </div>
+    `).join('');
+    document.getElementById('wizard').innerHTML = shell(3, "Transparency Triggers", "Below the high-risk threshold, these specific behaviours still carry disclosure duties under Article 50.", `<div>${rows}</div>`, {nextLabel:'Generate Docket →'});
+
+    document.querySelectorAll('.question .toggle button').forEach(btn => {
+      btn.onclick = () => {
+        const q = btn.closest('.question');
+        const id = q.dataset.id;
+        state.transparency[id] = btn.dataset.val;
+        q.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMini();
+      };
+    });
+
+    wireNav(() => go(4));
+  }
+
+  function computeTier(){
+    const triggeredProhibited = PROHIBITED_Q.filter(q => state.prohibited[q.id] === 'yes');
+    if(triggeredProhibited.length) return {tier:'prohibited', triggered:triggeredProhibited};
+
+    const triggeredAnnex = ANNEX_III.filter(a => state.annex[a.id]);
+    if(triggeredAnnex.length) return {tier:'high', triggered:triggeredAnnex};
+
+    const triggeredTransparency = TRANSPARENCY_Q.filter(q => state.transparency[q.id] === 'yes');
+    if(triggeredTransparency.length) return {tier:'limited', triggered:triggeredTransparency};
+
+    return {tier:'minimal', triggered:[]};
+  }
+
+  function euApplicabilityNote(){
+    if(state.euTouch === 'No'){
+      return `Based on your intake, the system has <b>no described EU establishment, market placement, or EU-located users</b> — so Article 2's territorial trigger likely does not reach it directly. Treat this docket as a <b>governance benchmark</b>, not a compliance filing: useful for board reporting, donor due diligence, and cross-border partnership requirements, but not something a regulator would enforce against you today.`;
+    }
+    if(state.euTouch === 'Yes'){
+      return `Based on your intake, the system's footprint touches the EU — through an establishment, market placement, or EU-located users. This is enough to bring you within <b>Article 2's territorial scope</b>. This docket should be treated as a genuine starting compliance map, not a benchmark, and reviewed against counsel before reliance.`;
+    }
+    return `Your intake marked the EU footprint as <b>unsure</b>. Article 2 turns on where the system is placed on the market or whose outputs it affects — not on where your institution is headquartered. Before treating this docket as a benchmark exercise, confirm whether any output, user base, or downstream customer sits inside the EU.`;
+  }
+
+  function gpaiNote(){
+    if(state.gpai !== 'Yes') return '';
+    return `
+      <div class="docket-section">
+        <h4>General-Purpose Model Layer</h4>
+        <div class="callout">
+          The system is described as built on a general-purpose AI model accessed via API. Under the Act, most <b>Article 53 obligations</b> (technical documentation, training-content summaries, copyright policy) sit with the <b>model provider</b> — not with an institution that merely calls the API. That changes if your institution fine-tunes, retrains, or otherwise substantially modifies the model: Article 25 can then re-classify your institution as a provider in its own right, carrying that layer's obligations alongside whatever tier this docket assigns to the downstream use case.
+        </div>
+      </div>
+    `;
+  }
+
+  function roadmap(){
+    return `
+      <div class="docket-section">
+        <h4>Phased Adoption Roadmap</h4>
+        <div class="roadmap">
+          <div class="phase"><div class="pnum">Phase 1</div><div class="ptitle">Inventory & classify</div><div class="ptext">List every AI system in use or development; run this docket, or its equivalent, against each one.</div></div>
+          <div class="phase"><div class="pnum">Phase 2</div><div class="ptitle">Document governance</div><div class="ptext">Write down the risk-management process and data-governance practices you already follow, even informally.</div></div>
+          <div class="phase"><div class="pnum">Phase 3</div><div class="ptitle">Build technical controls</div><div class="ptext">Add logging, human-oversight interfaces, and accuracy testing where the docket calls for them.</div></div>
+          <div class="phase"><div class="pnum">Phase 4</div><div class="ptitle">Monitor & re-assess</div><div class="ptext">Re-run the classification whenever the system's purpose, training data, or deployment context changes.</div></div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderDocket(){
+    const result = computeTier();
+    const tierMeta = {
+      prohibited: {label:'Prohibited', sealClass:'tier-prohibited', color:'var(--prohibited)'},
+      high:       {label:'High-Risk', sealClass:'tier-high', color:'var(--highrisk)'},
+      limited:    {label:'Limited Risk', sealClass:'tier-limited', color:'var(--limited)'},
+      minimal:    {label:'Minimal Risk', sealClass:'tier-minimal', color:'var(--minimal)'}
+    };
+    const meta = tierMeta[result.tier];
+    const dateStr = new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'long', year:'numeric'});
+
+    let obligationsHTML = '';
+    let headline = '';
+
+    if(result.tier === 'prohibited'){
+      headline = `This use falls under Article 5 as an outright prohibition. There is no compliance pathway — the system must not be placed on the market, put into service, or used, in this configuration, regardless of provider or deployer role.`;
+      obligationsHTML = `
+        <div class="docket-section">
+          <h4>Triggered Prohibitions</h4>
+          ${result.triggered.map(q => `
+            <div class="entry">
+              <div class="cite">${q.art}</div>
+              <div><div class="body-title">${q.label}</div><div class="body-text">${q.text}</div></div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    if(result.tier === 'high'){
+      headline = `The system matches ${result.triggered.length} Annex III ${result.triggered.length === 1 ? 'category' : 'categories'}, placing it in the High-Risk tier under Article 6. This is the Act's heaviest tier: documentation, oversight, and — for providers — a conformity assessment before market placement.`;
+      const coreObligations = [
+        {art:'Art. 9', title:'Risk management system', text:"A continuous, iterative process across the system's lifecycle — identify, estimate, evaluate, and mitigate foreseeable risks."},
+        {art:'Art. 10', title:'Data governance', text:"Training, validation, and testing data must be relevant and representative, and examined for bias — a real constraint where local datasets are thin."},
+        {art:'Art. 11 & Annex IV', title:'Technical documentation', text:"Documentation of the system's purpose, design, and performance, sufficient for an authority to assess compliance."},
+        {art:'Art. 12', title:'Record-keeping', text:"Automatic logging of events across the system's lifetime, to enable traceability of its decisions."},
+        {art:'Art. 13', title:'Instructions for use', text:"Clear instructions so a deployer can interpret outputs correctly and operate the system as intended."},
+        {art:'Art. 14', title:'Human oversight', text:"Interface tools letting a natural person effectively supervise the system, including the ability to override or halt it."},
+        {art:'Art. 15', title:'Accuracy, robustness & cybersecurity', text:"Appropriate levels of accuracy, resilience to error, and resistance to adversarial manipulation."}
+      ];
+      if(state.role.includes('Deployer')){
+        coreObligations.push({art:'Art. 26 & 27', title:'Deployer duties & rights impact assessment', text:"Use the system per its instructions, keep human oversight real in practice, monitor its operation, and — for public-facing or essential-service uses — complete a Fundamental Rights Impact Assessment before deployment."});
+      }
+      if(state.role.includes('Provider')){
+        coreObligations.push({art:'Art. 16, 43 & 49', title:'Provider duties, conformity assessment & registration', text:"Conformity assessment, a declaration of conformity, and registration in the EU high-risk AI database before the system reaches the market."});
+      }
+      obligationsHTML = `
+        <div class="docket-section">
+          <h4>Matched Annex III Categories</h4>
+          ${result.triggered.map(a => `
+            <div class="entry">
+              <div class="cite">Annex III</div>
+              <div><div class="body-title">${a.label}</div><div class="body-text">${a.text}</div></div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="docket-section">
+          <h4>Core Obligations</h4>
+          ${coreObligations.map(o => `
+            <div class="entry">
+              <div class="cite">${o.art}</div>
+              <div><div class="body-title">${o.title}</div><div class="body-text">${o.text}</div></div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    if(result.tier === 'limited'){
+      headline = `No Annex III match, but the system triggers Article 50 disclosure duties. These are narrower than the High-Risk tier — mostly about telling people what they're dealing with.`;
+      obligationsHTML = `
+        <div class="docket-section">
+          <h4>Transparency Obligations</h4>
+          ${result.triggered.map(q => `
+            <div class="entry">
+              <div class="cite">${q.art}</div>
+              <div><div class="body-title">Disclosure required</div><div class="body-text">${q.text}</div></div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    if(result.tier === 'minimal'){
+      headline = `On the facts given, the system does not match a prohibited practice, an Annex III high-risk domain, or an Article 50 transparency trigger. No mandatory obligations attach under the Act.`;
+      obligationsHTML = `
+        <div class="docket-section">
+          <h4>Recommended Baseline</h4>
+          <div class="entry">
+            <div class="cite">Art. 95</div>
+            <div><div class="body-title">Voluntary codes of conduct</div><div class="body-text">The Act encourages voluntary adoption of high-risk-style practices even where not mandatory — useful groundwork if the system's scope later expands.</div></div>
+          </div>
+        </div>
+      `;
+    }
+
+    const html = `
+      <div class="docket-head">
+        <div class="seal ${meta.sealClass}">${meta.label}</div>
+        <div class="filenum">FILE NO. ${fileNumber} · ${dateStr}</div>
+        <h2>Compliance Docket</h2>
+        <div class="meta">${state.orgType || 'Institution'} · ${state.role.length ? state.role.join(' + ') : 'Role not specified'}</div>
+      </div>
+      <div class="docket-body">
+        <div class="docket-section">
+          <h4>Finding</h4>
+          <div class="callout">${headline}</div>
+        </div>
+        ${obligationsHTML}
+        ${gpaiNote()}
+        <div class="docket-section">
+          <h4>Global South Applicability Note</h4>
+          <div class="callout">${euApplicabilityNote()}</div>
+        </div>
+        ${roadmap()}
+      </div>
+      <div class="docket-foot">
+        <p class="foot-note">Generated entirely client-side from your answers. No submission is stored or transmitted. Re-run the intake any time the system's purpose or deployment context changes.</p>
+        <div class="foot-actions">
+          <button class="btn ghost" id="restartBtn">↺ Start Over</button>
+          <button class="btn gold" id="printBtn">Export / Print</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('docketOutput').innerHTML = html;
+    document.getElementById('restartBtn').onclick = () => {
+      state.prohibited = {}; state.annex = {}; state.transparency = {};
+      state.orgType=''; state.role=[]; state.euTouch=''; state.gpai='';
+      go(0);
+    };
+    document.getElementById('printBtn').onclick = () => window.print();
+  }
+
+  renderSpine();
+  renderMini();
+  renderIntake();
+})();
+</script>
+</body>
+</html>
