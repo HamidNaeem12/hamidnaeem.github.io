@@ -1,1061 +1,407 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KH3MQVKF');</script>
-<!-- End Google Tag Manager -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Filing deadlines under the Limitation Act 1908 (Pakistan) — First Schedule, all 183 articles. Built for Pakistani practitioners. By Muhammad Hamid Naeem.">
-<meta name="author" content="Muhammad Hamid Naeem">
-<meta name="google-site-verification" content="6pj3oc4KSDpdFCOg_j_UY7DY-4J4yeaHYTo1Sdz3Q3Y">
-<link rel="canonical" href="https://hamidnaeem.me/calculator">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/favicon.svg">
-<meta property="og:title" content="Limitation Calculator · LA 1908 · Pakistan — Hamid Naeem">
-<meta property="og:description" content="All 183 articles of the Limitation Act 1908, searchable, with s.12 and s.14 exclusion support.">
-<meta property="og:url" content="https://hamidnaeem.me/calculator">
-<meta property="og:type" content="website">
-<title>Limitation Calculator · Limitation Act 1908 · Pakistan — Hamid Naeem</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet">
-
-<style>
-/* ─── RESET & TOKENS ──────────────────────────────────────────────── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { font-size: 16px; scroll-behavior: smooth; }
-
-:root {
-  --ink:        #0e0d09;
-  --ink-mid:    #38342c;
-  --ink-soft:   #5e5a52;
-  --ink-muted:  #8a8680;
-  --ink-ghost:  #b8b4ae;
-  --rule:       #E2E8F0;
-  --rule-dk:    #CBD5E1;
-  --paper:      #f8f6f1;
-  --cream:      #f0ece3;
-  --white:      #fdfcfa;
-  --red:        #8b2020;
-  --red-lt:     #f5eaea;
-  --red-glow:   rgba(139,32,32,0.15);
-  /* Functional (non-brand) status colors — real semantic work, not decorative */
-  --amber:      #B45309;
-  --amber-lt:   #FFFBEB;
-  --green:      #15803D;
-  --green-lt:   #F0FDF4;
-  --serif:      'Cormorant', Georgia, serif;
-  --sans:       'Instrument Sans', sans-serif;
-  --mono:       'Martian Mono', monospace;
-  --font:       var(--sans);
-  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body {
-  font-family: var(--font);
-  background: var(--paper);
-  color: var(--ink);
-  font-weight: 300;
-  line-height: 1.55;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  cursor: auto;
-}
-body.cursor-active { cursor: none; }
-
-/* ── SKIP LINK ── */
-.skip-link {
-  position: fixed; top: -100%; left: 1rem; z-index: 9999;
-  background: var(--red); color: var(--white);
-  padding: 0.75rem 1.5rem;
-  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
-  text-decoration: none; text-transform: uppercase; transition: top 0.2s;
-}
-.skip-link:focus { top: 1rem; }
-
-/* ── CURSOR ── */
-#cursor {
-  position: fixed; pointer-events: none; z-index: 9998; display: none;
-  width: 10px; height: 10px; background: var(--red); border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out);
-  mix-blend-mode: multiply;
-}
-#cursor-ring {
-  position: fixed; pointer-events: none; z-index: 9997; display: none;
-  width: 32px; height: 32px; border: 1px solid rgba(139,32,32,0.25); border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), opacity 0.3s;
-}
-body.cursor-active #cursor, body.cursor-active #cursor-ring { display: block; }
-body.cursor-active:has(a:hover) #cursor, body.cursor-active:has(button:hover) #cursor { width: 18px; height: 18px; }
-body.cursor-active:has(a:hover) #cursor-ring, body.cursor-active:has(button:hover) #cursor-ring { width: 48px; height: 48px; opacity: 0.45; }
-
-/* ── SCROLL PROGRESS ── */
-#scroll-progress { position: fixed; top: 0; left: 0; z-index: 999; height: 1px; background: var(--red); width: 0%; transition: width 0.1s linear; }
-
-/* ── NAV (shared component) ── */
-nav {
-  position: sticky; top: 0; z-index: 900;
-  background: rgba(253,252,250,0.94); backdrop-filter: blur(20px) saturate(1.6);
-  border-bottom: 1px solid var(--rule);
-  height: 58px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem;
-}
-.nav-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
-.nav-logo:hover { color: var(--red); }
-.nav-links { display: flex; list-style: none; gap: 0.15rem; }
-.nav-links a {
-  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--ink-muted); text-decoration: none; padding: 0 0.7rem; position: relative;
-  transition: color 0.2s; height: 58px; display: flex; align-items: center;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 50%; right: 50%; height: 1px; background: var(--red);
-  transition: left 0.25s var(--ease-out), right 0.25s var(--ease-out);
-}
-.nav-links a:hover { color: var(--ink); }
-.nav-links a:hover::after, .nav-links a.active::after { left: 0.7rem; right: 0.7rem; }
-.nav-links a.active { color: var(--ink); }
-.nav-cta {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.55rem 1.25rem; background: var(--red); color: var(--white);
-  font-family: var(--mono); font-size: 0.58rem; font-weight: 400;
-  letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-  border: 1px solid var(--red); transition: background 0.2s, border-color 0.2s;
-  white-space: nowrap;
-}
-.nav-cta:hover { background: #6d1818; border-color: #6d1818; }
-.nav-burger {
-  display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none;
-  padding: 10px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center;
-}
-.nav-burger span { display: block; width: 20px; height: 1px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
-
-/* ── MOBILE NAV ── */
-.mob-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 1000; flex-direction: column; align-items: flex-start; justify-content: center; }
-.mob-nav.open { display: flex; }
-.mob-nav-inner { padding: 3rem 2rem; display: flex; flex-direction: column; width: 100%; }
-.mob-nav a {
-  font-family: var(--serif); font-size: 2.2rem; font-weight: 300; font-style: italic; color: var(--ink);
-  text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); display: block;
-  transition: color 0.2s, padding-left 0.3s var(--ease-out);
-}
-.mob-nav a:first-of-type { border-top: 1px solid var(--rule); }
-.mob-nav a:hover { color: var(--red); padding-left: 0.75rem; }
-.mob-close {
-  position: fixed; top: 1.1rem; right: 1.5rem; background: none; border: none; cursor: pointer;
-  font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); z-index: 1100; padding: 10px;
-  min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: flex-end; letter-spacing: 0.05em;
-}
-.mob-close:hover { color: var(--ink); }
-.mob-nav-label { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 2.5rem; }
-
-/* ─── MASTHEAD (dark inversion — same pattern as homepage Contact) ──── */
-.masthead {
-  background: var(--ink);
-  padding: 4.5rem 2.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  position: relative; overflow: hidden;
-}
-.masthead::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-}
-.masthead-inner { max-width: 1200px; margin: 0 auto; position: relative; }
-.masthead-eyebrow { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; }
-.masthead-eyebrow-line { width: 28px; height: 1px; background: var(--red); flex-shrink: 0; }
-.masthead-eyebrow-text { font-family: var(--mono); font-size: 0.62rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
-
-.masthead h1 {
-  font-family: var(--serif); font-weight: 300;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  color: var(--white); line-height: 0.98; letter-spacing: -0.025em;
-  margin-bottom: 1.75rem;
-}
-.masthead h1 .dim { font-style: italic; color: rgba(255,255,255,0.3); }
-
-.masthead-sub {
-  font-family: var(--serif); font-size: 1.12rem; font-style: italic; font-weight: 400;
-  color: rgba(255,255,255,0.55); max-width: 560px; line-height: 1.75;
-  border-left: 2px solid rgba(255,255,255,0.2); padding-left: 1.1rem;
-  margin-bottom: 3rem;
-}
-
-.masthead-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,0.08); }
-.masthead-stat { padding: 1.5rem 2rem; border-right: 1px solid rgba(255,255,255,0.08); }
-.masthead-stat:last-child { border-right: none; }
-.masthead-stat-n { font-family: var(--serif); font-size: 1.9rem; font-weight: 300; color: var(--white); letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.3rem; }
-.masthead-stat-l { font-family: var(--mono); font-size: 0.53rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-
-/* ─── DISCLAIMER ─────────────────────────────────────────────────── */
-.disclaimer { background: var(--red-lt); border-bottom: 1px solid var(--rule); padding: 0.85rem 2.5rem; }
-.disclaimer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-start; gap: 0.75rem; }
-.disclaimer-badge {
-  font-family: var(--mono); font-size: 0.5rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--red); background: var(--white); border: 1px solid var(--red);
-  padding: 0.2rem 0.5rem; white-space: nowrap; flex-shrink: 0; margin-top: 1px;
-}
-.disclaimer p { font-size: 0.78rem; color: var(--ink-mid); line-height: 1.6; }
-.disclaimer strong { color: var(--red); font-weight: 500; }
-
-/* ─── PAGE BODY ──────────────────────────────────────────────────── */
-.page-body {
-  max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem;
-  display: grid; grid-template-columns: 380px 1fr; gap: 3rem; align-items: start;
-}
-
-/* ─── CALCULATOR PANEL ───────────────────────────────────────────── */
-.calc-panel { position: sticky; top: 78px; border: 1px solid var(--rule); border-top: 3px solid var(--red); background: var(--white); }
-.calc-panel-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); background: var(--cream); display: flex; align-items: center; justify-content: space-between; }
-.calc-panel-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
-.calc-panel-sub { font-family: var(--mono); font-size: 0.52rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-ghost); }
-
-.calc-body { padding: 1.5rem; }
-.field-group { margin-bottom: 1.25rem; }
-.field-group:last-child { margin-bottom: 0; }
-.field-label { display: block; font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.4rem; }
-.field-label .note { color: var(--ink-ghost); font-size: 0.5rem; font-weight: 300; letter-spacing: 0.02em; text-transform: none; margin-left: 0.4rem; }
-
-/* Segmented control */
-.seg-control { display: flex; border: 1px solid var(--rule-dk); overflow: hidden; }
-.seg-control button {
-  flex: 1; padding: 0.55rem 0.4rem; font-family: var(--mono); font-size: 0.56rem; font-weight: 400;
-  letter-spacing: 0.06em; text-transform: uppercase; background: var(--white); border: none;
-  border-right: 1px solid var(--rule-dk); cursor: pointer; color: var(--ink-soft); transition: all 0.12s;
-}
-.seg-control button:last-child { border-right: none; }
-.seg-control button.active { background: var(--red); color: var(--white); }
-.seg-control button:hover:not(.active) { background: var(--cream); color: var(--ink); }
-
-select, input[type="date"], input[type="number"] {
-  width: 100%; padding: 0.55rem 0.75rem; font-family: var(--sans); font-size: 0.83rem; font-weight: 300;
-  background: var(--white); border: 1px solid var(--rule-dk); color: var(--ink);
-  appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.12s; min-height: 40px;
-}
-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238a8680' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; cursor: pointer;
-}
-select:focus, input:focus { border-color: var(--red); outline: 2px solid var(--red-lt); }
-
-.date-shortcuts { display: flex; gap: 0.25rem; margin-top: 0.4rem; }
-.date-shortcuts button {
-  font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.04em;
-  padding: 0.25rem 0.5rem; background: var(--cream); border: 1px solid var(--rule);
-  color: var(--ink-soft); cursor: pointer; transition: all 0.1s;
-}
-.date-shortcuts button:hover { background: var(--red); color: var(--white); border-color: var(--red); }
-
-.calc-divider { height: 1px; background: var(--rule); margin: 1.25rem 0; }
-
-.excl-toggle-row { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-bottom: 0.5rem; }
-.excl-toggle-row input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--red); cursor: pointer; }
-.excl-toggle-row .excl-label { font-size: 0.72rem; font-weight: 400; color: var(--ink-soft); }
-
-.excl-fields { display: none; padding: 1rem; background: var(--cream); border: 1px solid var(--rule); margin-top: 0.25rem; }
-.excl-fields.visible { display: block; }
-.excl-fields .field-group { margin-bottom: 0.75rem; }
-.excl-fields .field-group:last-of-type { margin-bottom: 0; }
-.excl-note { font-size: 0.72rem; color: var(--ink-muted); line-height: 1.55; margin-top: 0.6rem; border-left: 2px solid var(--rule-dk); padding-left: 0.6rem; }
-
-.calc-btn {
-  width: 100%; padding: 0.85rem 1.25rem; background: var(--red); color: var(--white);
-  font-family: var(--mono); font-size: 0.62rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
-  border: 1px solid var(--red); cursor: pointer; transition: background 0.15s, border-color 0.15s;
-  display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 46px;
-  box-shadow: 0 4px 20px rgba(139,32,32,0.2);
-}
-.calc-btn:hover { background: #6d1818; border-color: #6d1818; }
-
-/* ─── RESULT ─────────────────────────────────────────────────────── */
-.result-panel { display: none; border: 1px solid var(--rule); margin-top: 1rem; overflow: hidden; }
-.result-panel.visible { display: block; }
-.result-header { padding: 0.65rem 1rem; background: var(--ink); display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-.result-header-label { font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.result-badge { font-family: var(--mono); font-size: 0.5rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.5rem; flex-shrink: 0; }
-.result-badge.ok      { background: var(--green-lt); color: var(--green); }
-.result-badge.warn    { background: var(--amber-lt); color: var(--amber); }
-.result-badge.expired { background: var(--red-lt); color: var(--red); }
-
-.result-body { padding: 1.25rem 1rem; }
-.result-deadline { font-family: var(--serif); font-size: 1.65rem; font-weight: 400; color: var(--ink); letter-spacing: -0.015em; line-height: 1.1; margin-bottom: 0.25rem; }
-.result-days { font-family: var(--sans); font-size: 0.75rem; font-weight: 300; color: var(--ink-muted); letter-spacing: 0.01em; margin-bottom: 0.9rem; }
-
-.timeline { height: 4px; background: var(--rule); margin-bottom: 1rem; overflow: hidden; }
-.timeline-fill { height: 100%; background: var(--green); transition: width 0.4s ease; }
-.timeline-fill.warn    { background: var(--amber); }
-.timeline-fill.expired { background: var(--red); width: 100% !important; }
-
-.result-rows { border-top: 1px solid var(--rule); }
-.result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); gap: 0.5rem; }
-.result-row:last-child { border-bottom: none; }
-.result-row-key { font-family: var(--mono); font-size: 0.54rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-ghost); flex-shrink: 0; }
-.result-row-val { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; color: var(--ink); text-align: right; }
-
-/* ─── REFERENCE TABLE PANEL ──────────────────────────────────────── */
-.reference-panel { min-width: 0; }
-.ref-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
-.ref-eyebrow { font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 0.35rem; }
-.ref-title { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 300; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
-
-.ref-controls { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
-.search-wrap { position: relative; }
-.search-wrap input { width: 200px; padding-left: 30px; font-size: 0.78rem; }
-.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: var(--ink-ghost); pointer-events: none; line-height: 1; }
-
-.filter-tabs { display: flex; border: 1px solid var(--rule-dk); overflow: hidden; }
-.filter-tabs button {
-  font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 0.45rem 0.85rem; background: var(--white); border: none; border-right: 1px solid var(--rule-dk);
-  cursor: pointer; color: var(--ink-soft); transition: all 0.1s;
-}
-.filter-tabs button:last-child { border-right: none; }
-.filter-tabs button.active { background: var(--red); color: var(--white); }
-.filter-tabs button:hover:not(.active) { background: var(--cream); color: var(--ink); }
-
-.table-wrap { border: 1px solid var(--rule); overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; }
-thead { background: var(--ink); position: sticky; top: 58px; }
-thead th { font-family: var(--mono); font-size: 0.5rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); padding: 0.6rem 1rem; text-align: left; white-space: nowrap; }
-thead th:first-child { width: 56px; text-align: center; }
-thead th:nth-child(3) { width: 100px; }
-thead th:nth-child(4) { width: 110px; }
-
-tbody tr { border-bottom: 1px solid var(--rule); cursor: pointer; transition: background 0.08s; }
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--cream); }
-tbody tr.highlighted { background: var(--red-lt); border-left: 3px solid var(--red); }
-
-td { padding: 0.6rem 1rem; vertical-align: top; font-size: 0.76rem; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
-td:first-child { font-family: var(--mono); font-size: 0.68rem; font-weight: 400; color: var(--ink-ghost); text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
-td:nth-child(2) { font-size: 0.78rem; color: var(--ink); }
-td:nth-child(3) { font-family: var(--mono); font-size: 0.66rem; font-weight: 400; color: var(--ink); white-space: nowrap; }
-
-.div-badge { display: inline-block; font-family: var(--mono); font-size: 0.5rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.15rem 0.45rem; border: 1px solid transparent; }
-.div-badge.suits        { background: var(--cream); color: var(--ink-soft); border-color: var(--rule-dk); }
-.div-badge.appeals      { background: var(--red-lt); color: var(--red); border-color: rgba(139,32,32,0.2); }
-.div-badge.applications { background: var(--amber-lt); color: var(--amber); border-color: #FED7AA; }
-
-.table-count { font-family: var(--mono); font-size: 0.58rem; font-weight: 400; color: var(--ink-muted); margin-top: 0.75rem; letter-spacing: 0.04em; }
-.no-results { text-align: center; padding: 3rem; font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--ink-muted); }
-
-/* ─── FOOTER (shared component) ──────────────────────────────────── */
-footer {
-  background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05); padding: 1.75rem 2.5rem;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-}
-.footer-copy { font-family: var(--serif); font-size: 0.82rem; font-style: italic; color: rgba(248,246,241,0.16); }
-.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; list-style: none; }
-.footer-links a {
-  font-family: var(--mono); font-size: 0.58rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(248,246,241,0.2); text-decoration: none; transition: color 0.2s;
-}
-.footer-links a:hover { color: rgba(248,246,241,0.75); }
-
-/* ─── ACCESSIBILITY / MOTION ─────────────────────────────────────── */
-:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  html { scroll-behavior: auto; }
-}
-
-/* ─── RESPONSIVE ─────────────────────────────────────────────────── */
-@media (max-width: 960px) {
-  nav { padding: 0 1.25rem; }
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-burger { display: flex; }
-  .masthead { padding: 3.5rem 1.25rem 0; }
-  .masthead-stats { grid-template-columns: repeat(2, 1fr); }
-  .disclaimer { padding: 0.75rem 1.25rem; }
-  .page-body { grid-template-columns: 1fr; padding: 2rem 1.25rem 4rem; gap: 2rem; }
-  .calc-panel { position: static; }
-  footer { padding: 1.5rem 1.25rem; flex-direction: column; text-align: center; }
-  .footer-links { justify-content: center; }
-  #cursor, #cursor-ring { display: none !important; }
-}
-@media (max-width: 600px) {
-  nav { padding: 0 1rem; }
-  .masthead { padding: 3rem 1rem 0; }
-  .masthead h1 { font-size: 2.4rem; }
-  .masthead-stats { grid-template-columns: repeat(2, 1fr); }
-  .masthead-stat { padding: 1rem 1.25rem; }
-  .disclaimer { padding: 0.65rem 1rem; }
-  .page-body { padding: 1.5rem 1rem 3rem; }
-  .ref-header { flex-direction: column; align-items: flex-start; }
-  .search-wrap input { width: 100%; }
-  .ref-controls { width: 100%; }
-  footer { padding: 1.5rem 1rem; }
-}
-</style>
-</head>
-<body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
-<div id="cursor" aria-hidden="true"></div>
-<div id="cursor-ring" aria-hidden="true"></div>
-<div id="scroll-progress" role="progressbar" aria-label="Reading progress"></div>
-
-<!-- ── NAV ────────────────────────────────────────────────────────── -->
-<nav id="main-nav" role="navigation" aria-label="Main navigation">
-  <a href="/" class="nav-logo">Muhammad Hamid Naeem</a>
-  <ul class="nav-links" role="list">
-    <li><a href="/#about">About</a></li>
-    <li><a href="/blog">Writing</a></li>
-    <li><a href="/calculator" class="active">Calculator</a></li>
-    <li><a href="/newsletter">Newsletter</a></li>
-    <li><a href="/#contact">Contact</a></li>
-  </ul>
-  <a href="/#contact" class="nav-cta">Commission research</a>
-  <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="openMobNav(this)">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- ── MOBILE NAV ── -->
-<div class="mob-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-modal="true">
-  <button class="mob-close" onclick="closeMobNav()" aria-label="Close menu">✕</button>
-  <div class="mob-nav-inner">
-    <span class="mob-nav-label">Navigation</span>
-    <a href="/#about" onclick="closeMobNav()">About</a>
-    <a href="/blog" onclick="closeMobNav()">Writing</a>
-    <a href="/calculator" onclick="closeMobNav()">Calculator</a>
-    <a href="/newsletter" onclick="closeMobNav()">Newsletter</a>
-    <a href="/#contact" onclick="closeMobNav()">Contact</a>
-  </div>
-</div>
-
-<main id="main-content">
-
-<!-- ── MASTHEAD ───────────────────────────────────────────────────── -->
-<div class="masthead" role="banner">
-  <div class="masthead-inner">
-    <div class="masthead-eyebrow">
-      <div class="masthead-eyebrow-line" aria-hidden="true"></div>
-      <span class="masthead-eyebrow-text">Legal Tech Tool · Limitation Act 1908 · Pakistan</span>
-    </div>
-    <h1>Limitation <span class="dim">Calculator</span></h1>
-    <p class="masthead-sub">Pick a case type, enter the trigger date, get the exact filing deadline — with s.12 and s.14 exclusion support and the full First Schedule reference below.</p>
-    <div class="masthead-stats" role="list" aria-label="Tool statistics">
-      <div class="masthead-stat" role="listitem">
-        <div class="masthead-stat-n">183</div>
-        <div class="masthead-stat-l">Articles covered</div>
-      </div>
-      <div class="masthead-stat" role="listitem">
-        <div class="masthead-stat-n">3</div>
-        <div class="masthead-stat-l">Divisions</div>
-      </div>
-      <div class="masthead-stat" role="listitem">
-        <div class="masthead-stat-n">s.12</div>
-        <div class="masthead-stat-l">Copy exclusion support</div>
-      </div>
-      <div class="masthead-stat" role="listitem">
-        <div class="masthead-stat-n">s.14</div>
-        <div class="masthead-stat-l">Prior proceedings support</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── DISCLAIMER ────────────────────────────────────────────────── -->
-<div class="disclaimer" role="alert" aria-label="Legal disclaimer">
-  <div class="disclaimer-inner">
-    <span class="disclaimer-badge" aria-hidden="true">Notice</span>
-    <p>Limitation runs differently when fraud, disability, acknowledgement, or a stay order is involved. Court closures extend deadlines; registry practice varies by court. Verify against the statute before acting on any result. <strong>This tool does not constitute legal advice.</strong></p>
-  </div>
-</div>
-
-<!-- ── MAIN ───────────────────────────────────────────────────────── -->
-<div class="page-body">
-
-  <!-- CALCULATOR -->
-  <div class="calc-panel" role="complementary" aria-label="Deadline calculator">
-    <div class="calc-panel-header">
-      <span class="calc-panel-title">Configure calculation</span>
-      <span class="calc-panel-sub">LA 1908</span>
-    </div>
-    <div class="calc-body">
-
-      <div class="field-group">
-        <label class="field-label">Division</label>
-        <div class="seg-control" role="group" aria-label="Select division">
-          <button class="active" data-div="suits"        onclick="setDivision('suits', this)">Suits</button>
-          <button               data-div="appeals"       onclick="setDivision('appeals', this)">Appeals</button>
-          <button               data-div="applications"  onclick="setDivision('applications', this)">Applications</button>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="articleSelect">Article / case type</label>
-        <select id="articleSelect" onchange="onArticleChange()">
-          <option value="">— select article —</option>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="triggerDate">
-          Trigger date
-          <span class="note">— cause of action / event</span>
-        </label>
-        <input type="date" id="triggerDate" aria-required="true">
-        <div class="date-shortcuts" aria-label="Date shortcuts">
-          <button onclick="shiftDate('trigger', -7)"  aria-label="7 days ago">−7d</button>
-          <button onclick="shiftDate('trigger', -30)" aria-label="30 days ago">−30d</button>
-          <button onclick="shiftDate('trigger', -90)" aria-label="90 days ago">−90d</button>
-          <button onclick="setToday('trigger')"       aria-label="Set today">Today</button>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="refDate">
-          Reference date
-          <span class="note">— defaults to today</span>
-        </label>
-        <input type="date" id="refDate">
-        <div class="date-shortcuts">
-          <button onclick="setToday('ref')">Today</button>
-        </div>
-      </div>
-
-      <div class="calc-divider" aria-hidden="true"></div>
-
-      <div class="field-group">
-        <label class="excl-toggle-row">
-          <input type="checkbox" id="s12toggle" onchange="toggleExclusion('s12')" aria-controls="s12fields">
-          <span class="excl-label">s.12 — certified copy time exclusion</span>
-        </label>
-        <div class="excl-fields" id="s12fields">
-          <div class="field-group">
-            <label class="field-label" for="s12applied">Date applied for copy</label>
-            <input type="date" id="s12applied">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="s12received">Date copy received</label>
-            <input type="date" id="s12received">
-          </div>
-          <p class="excl-note">Days between application and receipt are excluded under s.12(2). Applies to appeals and review applications.</p>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="excl-toggle-row">
-          <input type="checkbox" id="s14toggle" onchange="toggleExclusion('s14')" aria-controls="s14fields">
-          <span class="excl-label">s.14 — prior bona fide proceedings</span>
-        </label>
-        <div class="excl-fields" id="s14fields">
-          <div class="field-group">
-            <label class="field-label" for="s14filed">Prior proceeding filed</label>
-            <input type="date" id="s14filed">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="s14dismissed">Prior proceeding dismissed</label>
-            <input type="date" id="s14dismissed">
-          </div>
-          <p class="excl-note">Excludes time bona fide prosecuted in a court without jurisdiction or wrongly selected (s.14 conditions must be met).</p>
-        </div>
-      </div>
-
-      <div class="calc-divider" aria-hidden="true"></div>
-
-      <button class="calc-btn" onclick="calculate()" aria-label="Calculate filing deadline">
-        Calculate filing deadline
-      </button>
-
-      <div class="result-panel" id="resultPanel" role="status" aria-live="polite" aria-label="Calculation result">
-        <div class="result-header">
-          <span class="result-header-label" id="resultLabel">Result</span>
-          <span class="result-badge" id="resultBadge"></span>
-        </div>
-        <div class="result-body">
-          <div class="result-deadline" id="resultDeadline">—</div>
-          <div class="result-days"     id="resultDays"></div>
-          <div class="timeline"><div class="timeline-fill" id="timelineFill" style="width:0%"></div></div>
-          <div class="result-rows">
-            <div class="result-row">
-              <span class="result-row-key">Trigger date</span>
-              <span class="result-row-val" id="rTrigger">—</span>
-            </div>
-            <div class="result-row">
-              <span class="result-row-key">Period</span>
-              <span class="result-row-val" id="rPeriod">—</span>
-            </div>
-            <div class="result-row">
-              <span class="result-row-key">s.12 excluded</span>
-              <span class="result-row-val" id="rS12">—</span>
-            </div>
-            <div class="result-row">
-              <span class="result-row-key">s.14 excluded</span>
-              <span class="result-row-val" id="rS14">—</span>
-            </div>
-            <div class="result-row">
-              <span class="result-row-key">Article</span>
-              <span class="result-row-val" id="rArticle">—</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- REFERENCE TABLE -->
-  <div class="reference-panel">
-    <div class="ref-header">
-      <div class="ref-title-block">
-        <div class="ref-eyebrow">First Schedule — Limitation Act 1908</div>
-        <h2 class="ref-title">All limitation periods</h2>
-      </div>
-      <div class="ref-controls">
-        <div class="search-wrap">
-          <span class="search-icon" aria-hidden="true">⌕</span>
-          <input
-            type="text"
-            placeholder="Search articles…"
-            oninput="filterTable(this.value)"
-            id="tableSearch"
-            aria-label="Search limitation articles"
-          >
-        </div>
-        <div class="filter-tabs" role="group" aria-label="Filter by division">
-          <button class="active" onclick="filterDiv('all', this)">All</button>
-          <button onclick="filterDiv('suits', this)">Suits</button>
-          <button onclick="filterDiv('appeals', this)">Appeals</button>
-          <button onclick="filterDiv('applications', this)">Applications</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="table-wrap">
-      <table id="refTable" aria-label="Limitation Act 1908 First Schedule">
-        <thead>
-          <tr>
-            <th scope="col">Art.</th>
-            <th scope="col">Description</th>
-            <th scope="col">Period</th>
-            <th scope="col">Division</th>
-            <th scope="col">Time begins</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </div>
-    <div class="table-count" id="tableCount" aria-live="polite"></div>
-  </div>
-
-</div>
-
-</main>
-
-<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
-<footer>
-  <span class="footer-copy">© 2026 Muhammad Hamid Naeem</span>
-  <ul class="footer-links" role="list">
-    <li><a href="https://linkedin.com/in/hamidnaeemadvocate" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-    <li><a href="https://digitalgavel.substack.com"          target="_blank" rel="noopener noreferrer">Substack</a></li>
-    <li><a href="https://github.com/HamidNaeem12"            target="_blank" rel="noopener noreferrer">GitHub</a></li>
-    <li><a href="mailto:hamidnaeem2223ab@gmail.com">Email</a></li>
-  </ul>
-</footer>
-
-<script>
-// ── Custom cursor: only disable native cursor once the JS loop actually starts ──
-(function initCursor() {
-  if (window.matchMedia('(max-width: 960px)').matches) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursor-ring');
-  if (!cursor || !cursorRing) return;
-  let mx = -100, my = -100, rx = -100, ry = -100;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  document.body.classList.add('cursor-active');
-  function animCursor() {
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
-  }
-  animCursor();
-})();
-
-// ── Scroll progress ──
-(function initScrollProgress() {
-  const prog = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', () => {
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    prog.style.width = (docH > 0 ? window.scrollY / docH * 100 : 0) + '%';
-  }, { passive: true });
-})();
-
-// ── Mobile nav ──
-function openMobNav(btn) {
-  document.getElementById('mobile-nav').classList.add('open');
-  btn.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-}
-function closeMobNav() {
-  document.getElementById('mobile-nav').classList.remove('open');
-  const btn = document.querySelector('.nav-burger');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) closeMobNav();
-});
-
-// ── DATA ──────────────────────────────────────────────────────────────────────
-// [artNum, description, years, months, days, division, timeBegins]
-const ARTICLES = [
-  // SUITS
-  [1,"Accounts stated between merchants",3,0,0,"suits","Date of last item of account"],
-  [2,"Money payable for money lent",3,0,0,"suits","Date money lent"],
-  [3,"Money lent under an agreement that repaid on demand",3,0,0,"suits","Date of loan"],
-  [4,"Money payable for money paid for use of another",3,0,0,"suits","Date of payment"],
-  [5,"Goods sold and delivered",3,0,0,"suits","Date of delivery"],
-  [6,"Goods supplied under agreement that price to be fixed later",3,0,0,"suits","Date price fixed or if not fixed, date of delivery"],
-  [7,"Money payable for work done",3,0,0,"suits","Date work done"],
-  [8,"Arrears of rent",3,0,0,"suits","Date rent became due"],
-  [9,"Arrears of interest on mortgage",3,0,0,"suits","Date interest became due"],
-  [10,"Mortgage money payable on demand",3,0,0,"suits","Date mortgage executed"],
-  [11,"Arrears of interest on bond",3,0,0,"suits","Date interest became due"],
-  [12,"Money due on promissory note or bond",3,0,0,"suits","Date note or bond became payable"],
-  [13,"Money payable under promissory note payable by installments",3,0,0,"suits","Date of default of each installment"],
-  [14,"Money payable to plaintiff for money paid for defendant under court order",3,0,0,"suits","Date of payment"],
-  [15,"Compensation for breach of promise of marriage",1,0,0,"suits","Date of refusal"],
-  [16,"Compensation for false imprisonment",1,0,0,"suits","Date of discharge from imprisonment"],
-  [17,"Compensation for malicious prosecution",1,0,0,"suits","Date of acquittal or dismissal of charge"],
-  [18,"Compensation for seduction",1,0,0,"suits","Date of act"],
-  [19,"Compensation for obstruction to an easement",3,0,0,"suits","Date of obstruction"],
-  [20,"Compensation for injury to person by act or omission",1,0,0,"suits","Date of act or omission"],
-  [21,"Compensation for injury to animals",1,0,0,"suits","Date of injury"],
-  [22,"Compensation for injury to movable property",3,0,0,"suits","Date of injury"],
-  [23,"Compensation for wrongs to immovable property",3,0,0,"suits","Date of wrong"],
-  [24,"Compensation for breach of contract",3,0,0,"suits","Date breach occurs"],
-  [25,"Declaring validity of instrument",3,0,0,"suits","Date instrument made"],
-  [26,"Relief for fraud",3,0,0,"suits","Date fraud discovered"],
-  [27,"Relief for mistake",3,0,0,"suits","Date mistake discovered"],
-  [28,"Movable property or compensation for wrongful taking/detaining",3,0,0,"suits","Date taking or detention"],
-  [29,"Recovering specific movable property",3,0,0,"suits","Date of conversion or detention or demand"],
-  [30,"Redemption of mortgage",30,0,0,"suits","Date of mortgage"],
-  [31,"Foreclosure of mortgage",12,0,0,"suits","Date money secured became due"],
-  [32,"Foreclosure when mortgagee in possession",12,0,0,"suits","Date of dispossession"],
-  [33,"Redemption of pledge",30,0,0,"suits","Date of pledge"],
-  [34,"Dissolution of partnership",3,0,0,"suits","Date of dissolution"],
-  [35,"Account between partners",3,0,0,"suits","Date of dissolution of partnership"],
-  [36,"Share in deceased partner's estate",3,0,0,"suits","Date of death"],
-  [37,"Portion of estate of deceased intestate",12,0,0,"suits","Date death"],
-  [38,"Legacy bequeathed by will",12,0,0,"suits","Date of probate or letters of administration"],
-  [39,"Decree for specific performance",3,0,0,"suits","Date of refusal to perform"],
-  [40,"Specific performance, contract providing fixed period",3,0,0,"suits","Date fixed period expires"],
-  [41,"Declaration without further relief",3,0,0,"suits","Date right to sue accrues"],
-  [42,"Injunction",3,0,0,"suits","Date of act or omission"],
-  [43,"Recovery of immovable property under easement",12,0,0,"suits","Date of disturbance"],
-  [44,"Arrears of rent of immovable property",3,0,0,"suits","Date rent fell due"],
-  [45,"Compensation for land acquisition",0,3,0,"suits","Date of award"],
-  [46,"Compensation for dispossession without legal process",12,0,0,"suits","Date of dispossession"],
-  [47,"Possession of immovable property in defendant's possession as agent",12,0,0,"suits","Date defendant denies title"],
-  [48,"Possession of immovable property from mortgagor",30,0,0,"suits","Date mortgage executed"],
-  [49,"Possession when mortgage redeemed",12,0,0,"suits","Date of redemption"],
-  [50,"Possession when decree passed for redemption",12,0,0,"suits","Date of decree"],
-  [51,"Possession of immovable property from co-sharer",12,0,0,"suits","Date of partition"],
-  [52,"Recovery of possession on dispossession",12,0,0,"suits","Date of dispossession"],
-  [53,"Recovery of possession by purchaser",12,0,0,"suits","Date of possession taken by vendor"],
-  [54,"Recovery of specific immovable property",12,0,0,"suits","Date of limitation starts from adverse possession"],
-  [55,"Recovery of possession after lease",12,0,0,"suits","Date lease expires"],
-  [56,"Recovery of possession by lessor, when lessee denies",12,0,0,"suits","Date of denial"],
-  [57,"Specific performance of contract concerning immovable property",3,0,0,"suits","Date contract executed"],
-  [58,"Declaration that judgment is void",3,0,0,"suits","Date of judgment"],
-  [59,"Setting aside decree obtained by fraud",3,0,0,"suits","Date fraud discovered"],
-  [60,"Setting aside sale in execution",1,0,0,"suits","Date of sale"],
-  [61,"Setting aside sale by revenue authority",1,0,0,"suits","Date of sale"],
-  [62,"Probate or letters of administration",12,0,0,"suits","Date of death"],
-  [63,"Grant of probate when improperly granted",12,0,0,"suits","Date grant made"],
-  [64,"Succession certificate",12,0,0,"suits","Date of death"],
-  [65,"Recovery of share in joint family property",12,0,0,"suits","Date of partition"],
-  [66,"Profits of immovable property withheld by defendant",3,0,0,"suits","Date withholding begins"],
-  [67,"Money secured by mortgage on immovable property",12,0,0,"suits","Date mortgage money became payable"],
-  [68,"Compensation for breach of bond",3,0,0,"suits","Date of breach"],
-  [69,"Compensation for the breach of warranty",3,0,0,"suits","Date of sale"],
-  [70,"Recovery of buildings or other structures",12,0,0,"suits","Date of erection or completion"],
-  [71,"Recovery of land held on service tenure",12,0,0,"suits","Date service ended"],
-  [72,"Recovery of land for default in payment of revenue",30,0,0,"suits","Date of forfeiture"],
-  [73,"Recovery of land purchased by Government",30,0,0,"suits","Date of purchase"],
-  [74,"Recovery of land dedicated to religious purposes",12,0,0,"suits","Date of dedication"],
-  [75,"Recovery of land purchased by a company",12,0,0,"suits","Date of purchase"],
-  [76,"Compensation for wrongful seizure of property",1,0,0,"suits","Date of seizure"],
-  [77,"Cancellation of instruments",3,0,0,"suits","Date facts entitling relief first known"],
-  [78,"Suits on judgment",3,0,0,"suits","Date of judgment"],
-  [79,"Suits on foreign judgment",3,0,0,"suits","Date of judgment"],
-  [80,"Suits against Government",0,3,0,"suits","Date act or omission"],
-  [81,"Suits for which no period prescribed",3,0,0,"suits","Date right to sue accrues"],
-  // APPEALS
-  [156,"Appeal to High Court from decree in original suit",0,0,90,"appeals","Date of decree"],
-  [157,"Appeal to High Court from order in original suit",0,0,90,"appeals","Date of order"],
-  [158,"Appeal to High Court from appellate decree (first appeal)",0,0,90,"appeals","Date of decree"],
-  [159,"Appeal to High Court from appellate order",0,0,90,"appeals","Date of order"],
-  [160,"Appeal under CPC s.104 to High Court",0,0,90,"appeals","Date of order"],
-  [161,"Appeal to Supreme Court from High Court",0,0,90,"appeals","Date of decree or order"],
-  [162,"Appeal to High Court from revenue authority",0,0,90,"appeals","Date of order appealed"],
-  [163,"Appeal under Letters Patent from single judge",0,0,30,"appeals","Date of judgment"],
-  [164,"Appeal under the Code of Civil Procedure against original order",0,0,30,"appeals","Date of order"],
-  [165,"Appeal from decree in a suit under specific enactment",0,0,30,"appeals","Date of decree"],
-  [166,"Appeal from decree or order in matrimonial proceedings",0,0,30,"appeals","Date of decree or order"],
-  // APPLICATIONS
-  [167,"Application for leave to appeal from decree or order",0,0,90,"applications","Date of decree or order"],
-  [168,"Application for review of judgment",0,0,90,"applications","Date of decree or order"],
-  [169,"Application for execution of decree",3,0,0,"applications","Date decree becomes enforceable"],
-  [170,"Application for execution to another court",3,0,0,"applications","Date of last order in previous execution"],
-  [171,"Application to set aside dismissal for default",0,0,30,"applications","Date of dismissal"],
-  [172,"Application to set aside exparte decree",0,0,30,"applications","Date of decree"],
-  [173,"Application to set aside abatement",0,0,60,"applications","Date of abatement"],
-  [174,"Application for an order to admit appeal",0,0,30,"applications","Date appeal dismissed"],
-  [175,"Application for substitution of legal representative",0,0,90,"applications","Date of death"],
-  [176,"Application for restitution",0,0,30,"applications","Date decree reversed or modified"],
-  [177,"Application under CPC for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
-  [178,"Criminal revision application to High Court",0,0,90,"applications","Date of order"],
-  [179,"Application for bail",0,3,0,"applications","Date of refusal by lower court"],
-  [180,"Application to set aside order of attachment",0,0,30,"applications","Date of order of attachment"],
-  [181,"Application to enhance compensation under Land Acquisition Act",0,0,30,"applications","Date of award"],
-  [182,"Application to revenue authority for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
-  [183,"Application under any other Act for which no period prescribed",3,0,0,"applications","Date right to apply accrues"],
-];
-
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let currentDivision = 'suits';
-let filterDivision  = 'all';
-let searchQuery     = '';
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  setToday('ref');
-  populateArticleSelect('suits');
-  renderTable();
-});
-
-// ── DIVISION ──────────────────────────────────────────────────────────────────
-function setDivision(div, btn) {
-  currentDivision = div;
-  document.querySelectorAll('.seg-control button').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  populateArticleSelect(div);
-}
-
-function populateArticleSelect(div) {
-  const sel = document.getElementById('articleSelect');
-  sel.innerHTML = '<option value="">— select article —</option>';
-  ARTICLES.filter(a => a[5] === div).forEach(a => {
-    const opt = document.createElement('option');
-    opt.value = a[0];
-    opt.textContent = `Art. ${a[0]} — ${a[1]}`;
-    sel.appendChild(opt);
+/*  Limitation Calculator — upgrade layer
+ *  Load AFTER your existing inline <script>, just before </body>:
+ *    <script src="/calculator-upgrade.js" defer></script>   (or paste inside a <script> tag)
+ *  Overrides global functions only; your markup, data and design stay as they are.
+ */
+(function () {
+  'use strict';
+
+  /* ── 0. Dataset rebuilt from the First Schedule (Pakistan text supplied by the user) ── */
+  // id | description | period (d/m/y) | time begins.  Repealed/omitted: 4, 45, 46, 133, 144, 150A, 182.
+  const RAW = `
+1|Contest award of Board of Revenue (Waste Lands (Claims) Act 1863)|30d|Notice of award delivered to plaintiff
+2|Compensation for act done under an enactment|90d|Act or omission
+3|Recover possession of immoveable property (Specific Relief Act s.9)|6m|Dispossession
+5|Summary procedure, CPC s.128(2)(f), debt or liquidated demand|1y|Debt payable / property recoverable
+6|Penalty or forfeiture under statute, Act, regulation or bye-law|1y|Penalty or forfeiture incurred
+7|Wages of household servant, artisan or labourer|1y|Wages accrue due
+8|Price of food or drink sold by hotel/tavern/lodging-house keeper|1y|Food or drink delivered
+9|Price of lodging|1y|Price becomes payable
+10|Enforce right of pre-emption|1y|Purchaser takes physical possession (or sale registered if not possible)
+11|Establish right after CPC attachment claim/objection order|1y|Date of order
+11A|Establish right after order on resistance/obstruction to possession|1y|Date of order
+12|Set aside execution, revenue, arrears or patni sale|1y|Sale confirmed / would have become final
+13|Alter or set aside Civil Court decision in non-suit proceeding|1y|Final decision by competent Court
+14|Set aside act or order of Government officer (not otherwise provided)|1y|Act or order
+15|Against Government: set aside revenue attachment, lease or transfer|1y|Attachment, lease or transfer made
+16|Against Government: recover money paid under protest to revenue authorities|1y|Payment made
+17|Against Government: compensation for land acquired|1y|Compensation determined
+18|Compensation where acquisition not completed|1y|Refusal to complete
+19|Compensation for false imprisonment|1y|Imprisonment ends
+20|Legal Representatives' Suits Act 1855, by representatives|1y|Death of person wronged
+21|Fatal Accidents Act 1855, by representatives|1y|Death of person killed
+22|Compensation for other injury to the person|1y|Injury committed
+23|Compensation for malicious prosecution|1y|Acquittal / prosecution terminated
+24|Compensation for libel|1y|Libel published
+25|Compensation for slander|1y|Words spoken (or special damage results)
+26|Loss of service by seduction of servant or daughter|1y|Loss occurs
+27|Inducing a person to break contract|1y|Breach
+28|Illegal, irregular or excessive distress|1y|Distress
+29|Wrongful seizure of moveable property under legal process|1y|Seizure
+30|Against carrier: loss or injury to goods|1y|Loss or injury occurs
+31|Against carrier: non-delivery or delay|1y|Goods ought to be delivered
+32|Perversion of property held for specific purposes|2y|Perversion first becomes known
+33|Legal Representatives' Suits Act 1855, against executor|2y|Wrong complained of is done
+34|Same Act, against administrator|2y|Same as Art. 33
+35|Same Act, against any other representative|2y|Same as Art. 33
+36|Malfeasance, misfeasance or nonfeasance independent of contract|2y|It takes place
+37|Obstructing a way or watercourse|3y|Obstruction
+38|Diverting a watercourse|3y|Diversion
+39|Trespass upon immoveable property|3y|Trespass
+40|Infringing copyright or exclusive privilege|3y|Infringement
+41|Restrain waste|3y|Waste begins
+42|Injury from wrongfully obtained injunction|3y|Injunction ceases
+43|Succession Act ss.360/361: refund of legacy or assets|3y|Payment or distribution
+44|Ward after majority: set aside guardian's transfer|3y|Ward attains majority
+47|Recover property under CrPC possession order|3y|Final order in the case
+48|Specific moveable property lost, stolen or misappropriated|3y|Owner first learns who holds it
+48-A|Moveable property held in trust/pawn, later bought from trustee|3y|Sale becomes known to plaintiff
+48-B|Set aside sale of moveable endowment property by manager|3y|Sale becomes known to plaintiff
+49|Other specific moveable property / wrongful taking, injury or detention|3y|Wrongful taking or injury, or detention becomes unlawful
+50|Hire of animals, vehicles, boats, household furniture|3y|Hire payable
+51|Balance of money advanced for goods to be delivered|3y|Goods ought to be delivered
+52|Price of goods sold and delivered, no fixed credit|3y|Delivery
+53|Price of goods sold on fixed credit|3y|Credit period expires
+54|Price of goods to be paid by bill, none given|3y|Period of proposed bill elapses
+55|Price of trees or growing crops, no fixed credit|3y|Date of sale
+56|Price of work done, no time fixed for payment|3y|Work done
+57|Money lent|3y|Loan made
+58|Money lent by cheque|3y|Cheque paid
+59|Money lent payable on demand|3y|Loan made
+60|Money deposited payable on demand (incl. banker)|3y|Demand made
+61|Money paid for the defendant|3y|Money paid
+62|Money received by defendant for plaintiff's use|3y|Money received
+63|Interest on money due|3y|Interest becomes due
+64|Accounts stated in writing|3y|Accounts stated in signed writing (or future payment date)
+64A|CPC Order XXXVII summary suit|3y|Debt becomes payable
+65|Breach of promise to act at specified time/contingency|3y|Time arrives / contingency happens
+66|Single bond, day specified|3y|Day specified
+67|Single bond, no day specified|3y|Date of executing bond
+68|Bond subject to a condition|3y|Condition broken
+69|Bill or note payable at fixed time after date|3y|Bill or note falls due
+70|Bill payable at/after sight, no fixed time|3y|Bill presented
+71|Accepted bill payable at particular place|3y|Presented at that place
+72|Bill or note payable at fixed time after sight/demand|3y|Fixed time expires
+73|Bill or note payable on demand, no restraint on right to sue|3y|Date of bill or note
+74|Note or bond payable by instalments|3y|End of each instalment term
+75|Instalment note/bond with default (acceleration) clause|3y|Default (unless waived; then fresh default)
+76|Note given to third person for delivery to payee|3y|Delivery to payee
+77|Dishonoured foreign bill, protest and notice|3y|Notice given
+78|Payee against drawer, dishonoured by non-acceptance|3y|Refusal to accept
+79|Acceptor of accommodation bill against drawer|3y|Acceptor pays the bill
+80|Bill, note or bond not otherwise provided for|3y|Becomes payable
+81|Surety against principal debtor|3y|Surety pays creditor
+82|Surety against co-surety|3y|Surety pays in excess of share
+83|Other contract to indemnify|3y|Plaintiff actually damnified
+84|Attorney or vakil for costs, no agreement on timing|3y|Termination or proper discontinuance of suit/business
+85|Balance on mutual, open and current account|3y|Close of year of last admitted/proved item
+86(a)|Insurance policy payable after proof of death|3y|Date of death
+86(b)|Insurance policy payable after proof of loss|3y|Date of occurrence causing the loss
+87|Recover premia paid on policy voidable by insurers|3y|Insurers elect to avoid policy
+88|Against factor for an account|3y|Account demanded and refused / agency terminates
+89|Principal against agent for moveable property not accounted for|3y|Same as Art. 88
+90|Principal against agent for neglect or misconduct|3y|Neglect or misconduct becomes known
+91|Cancel or set aside instrument (not otherwise provided)|3y|Facts entitling relief become known
+92|Declare forgery of instrument issued or registered|3y|Issue or registration becomes known
+93|Declare forgery of instrument attempted to be enforced|3y|Date of attempt
+94|Property conveyed by plaintiff while insane|3y|Restored to sanity with knowledge of conveyance
+95|Set aside decree or other relief on ground of fraud|3y|Fraud becomes known
+96|Relief on ground of mistake|3y|Mistake becomes known
+97|Money paid on consideration that later fails|3y|Failure
+98|Loss from breach of trust, out of deceased trustee's estate|3y|Trustee's death (or later date of loss)
+99|Contribution: joint decree or joint-estate revenue|3y|Payment in excess of own share
+100|Co-trustee contribution against deceased trustee's estate|3y|Right to contribution accrues
+101|Seaman's wages|3y|End of voyage
+102|Wages not otherwise provided for|3y|Wages accrue due
+103|Exigible dower (mu'ajjal)|3y|Demand and refusal, or marriage dissolved by death/divorce
+104|Deferred dower (mu'wajjal)|3y|Marriage dissolved by death or divorce
+105|Mortgagor: surplus collections after mortgage satisfied|3y|Mortgagor re-enters property
+106|Account and profits of dissolved partnership|3y|Dissolution
+107|Joint-family manager: contribution for payment made|3y|Payment
+108|Lessor: value of trees cut contrary to lease|3y|Trees cut down
+109|Profits of immoveable property wrongfully received|3y|Profits received
+110|Arrears of rent|3y|Arrears become due
+111|Vendor: unpaid purchase-money of immoveable property|3y|Time fixed for completion (or acceptance of title, if later)
+112|Call by registered company|3y|Call payable
+113|Specific performance of contract|3y|Date fixed, or notice that performance is refused
+114|Rescission of contract|3y|Facts entitling rescission become known
+115|Breach of contract not in registered writing|3y|Breach (successive: that breach; continuing: when it ceases)
+116|Breach of registered written contract|6y|As for a similar unregistered contract (Art. 115)
+117|Foreign judgment (CPC)|6y|Date of judgment
+118|Declaration that adoption is invalid / did not occur|6y|Adoption becomes known to plaintiff
+119|Declaration that adoption is valid|6y|Adopted son's rights interfered with
+120|Suit with no period provided elsewhere in the Schedule|6y|Right to sue accrues
+121|Avoid incumbrances on estate/tenure sold for arrears|12y|Sale becomes final and conclusive
+122|Judgment obtained in Pakistan, or recognisance|12y|Date of judgment or recognisance
+123|Legacy, residue share, or intestate distributive share|12y|Legacy or share becomes payable/deliverable
+124|Possession of hereditary office|12y|Defendant takes possession adversely
+125|Declare female's alienation void beyond her life|12y|Date of alienation
+126|Mitakshara Hindu: set aside father's alienation|12y|Alienee takes possession
+127|Person excluded from joint family property: enforce share|12y|Exclusion becomes known to plaintiff
+128|Hindu: arrears of maintenance|12y|Arrears payable
+129|Hindu: declaration of right to maintenance|12y|Right denied
+130|Resumption or assessment of rent-free land|12y|Right first accrues
+131|Establish periodically recurring right|12y|Plaintiff first refused enjoyment
+132|Money charged upon immoveable property|12y|Money sued for becomes due
+134|Possession of trust/mortgaged property later transferred for value|12y|Transfer becomes known to plaintiff
+134-A|Set aside manager's transfer of endowment immoveable property|12y|Transfer becomes known to plaintiff
+134-B|Manager: recover endowment immoveable property transferred by predecessor|12y|Death, resignation or removal of transferor
+134-C|Manager: recover endowment moveable property sold by predecessor|12y|Death, resignation or removal of seller
+135|Mortgagee: possession of mortgaged immoveable property (non-High Court)|12y|Mortgagor's right to possession determines
+136|Purchaser at private sale: possession, vendor out of possession|12y|Vendor first entitled to possession
+137|Execution purchaser: possession, judgment-debtor out of possession|12y|Judgment-debtor first entitled to possession
+138|Execution purchaser: possession, judgment-debtor in possession|12y|Sale becomes absolute
+139|Landlord: possession from tenant|12y|Tenancy determined
+140|Remainderman, reversioner or devisee: possession|12y|Estate falls into possession
+141|Hindu/Muslim entitled on death of female: possession|12y|Female dies
+142|Possession where plaintiff dispossessed or discontinued possession|12y|Dispossession or discontinuance
+143|Possession on forfeiture or breach of condition|12y|Forfeiture incurred / condition broken
+145|Against depositary or pawnee: moveable property|30y|Date of deposit or pawn
+146|High Court original side: mortgagee's possession|30y|Part of principal or interest last paid
+146A|Local authority: possession of public street or road|30y|Dispossession or discontinuance
+147|Mortgagee: foreclosure or sale|60y|Mortgage money becomes due
+148|Against mortgagee: redeem or recover possession|60y|Right to redeem or recover accrues
+149|Suit by or on behalf of Federal or Provincial Government|60y|As for a like suit by a private person
+150|Appeal: CrPC, sentence of death (Sessions/High Court original)|7d|Date of sentence
+151|Appeal: decree/order of High Court original jurisdiction|20d|Date of decree or order
+152|Appeal: CPC, to District Judge|30d|Date of decree or order appealed from
+153|Appeal: CPC, to High Court from refusal of leave to appeal to Supreme Court|30d|Date of order
+154|Appeal: CrPC, to any Court other than High Court|30d|Date of sentence or order appealed from
+155|Appeal: CrPC, to High Court (except Arts. 150, 157)|60d|Date of sentence or order appealed from
+156|Appeal: CPC, to High Court (except Arts. 151, 153)|90d|Date of decree or order appealed from
+157|Appeal: CrPC, from order of acquittal|6m|Date of order appealed from
+158|Arbitration Act 1940: set aside or remit award|30d|Service of notice of filing of award
+159|Leave to appear and defend (summary procedure / Order XXXVII)|10d|Summons served
+160|Restore review application rejected for non-appearance|15d|Review application rejected
+161|Review by Small Causes Court|15d|Date of decree or order
+162|Review by High Court (original jurisdiction)|20d|Date of decree or order
+162-A|Revision, CPC s.115|90d|Date of decision sought to be revised
+163|Plaintiff: set aside dismissal for default or non-payment of costs|30d|Date of dismissal
+164|Defendant: set aside ex parte decree|30d|Date of decree (or knowledge, if summons not duly served)
+165|Person dispossessed: dispute decree-holder's right to possession|30d|Dispossession
+166|Set aside execution sale (incl. by judgment-debtor)|30d|Date of sale
+167|Complain of resistance/obstruction to delivery of possession|30d|Resistance or obstruction
+168|Readmission of appeal dismissed for want of prosecution|30d|Date of dismissal
+169|Re-hearing of appeal heard ex parte|30d|Date of appellate decree (or knowledge, if notice not duly served)
+170|Leave to appeal as a pauper|30d|Date of decree appealed from
+171|Legal representative: set aside order/judgment made in deceased's absence|60d|Date of order or judgment
+172|Assignee/receiver of insolvent: set aside dismissal of suit or appeal|60d|Date of order of dismissal
+173|Review of judgment (except Arts. 161, 162)|90d|Date of decree or order
+174|Notice to show cause why out-of-court payment/adjustment not certified|90d|Payment or adjustment made
+175|Payment of decree amount by instalments|6m|Date of decree
+176|Make legal representative of deceased plaintiff/appellant a party|90d|Date of death
+177|Make legal representative of deceased defendant/respondent a party|90d|Date of death
+178|Arbitration Act 1940: file award in Court|90d|Service of notice of making of award
+179|Leave to appeal to Supreme Court (CPC)|90d|Date of decree appealed from
+180|Execution purchaser: delivery of possession|3y|Sale becomes absolute
+181|Applications with no period provided elsewhere|3y|Right to apply accrues
+183|Enforce High Court (original side) or Supreme Court judgment/decree/order|6y|Present right to enforce accrues (revived/part-paid/acknowledged: from that date, 12 yrs per proviso text)`;
+  const UNIT = { d: [0, 0, 1], m: [0, 1, 0], y: [1, 0, 0] };
+  ARTICLES.length = 0;
+  RAW.trim().split('\n').forEach(line => {
+    const [id, desc, per, begins] = line.split('|');
+    const n = parseInt(id, 10), q = parseInt(per, 10), u = per.slice(-1);
+    const y = u === 'y' ? q : 0, m = u === 'm' ? q : 0, d = u === 'd' ? q : 0;
+    ARTICLES.push([id, desc, y, m, d, n <= 149 ? 'suits' : n <= 157 ? 'appeals' : 'applications', begins]);
   });
-}
+  window.onArticleChange = function () {
+    const id = document.getElementById('articleSelect').value;
+    document.querySelectorAll('#tableBody tr').forEach(tr => tr.classList.toggle('highlighted', !!id && tr.dataset.art === id));
+  };
+  populateArticleSelect(currentDivision);
 
-function onArticleChange() {
-  const artNum = parseInt(document.getElementById('articleSelect').value);
-  if (!artNum) return;
-  document.querySelectorAll('#tableBody tr').forEach(tr => {
-    tr.classList.toggle('highlighted', parseInt(tr.dataset.art) === artNum);
+
+  /* ── 1. Date handling: local time, no UTC drift, no month overflow ───────── */
+  const pad = n => String(n).padStart(2, '0');
+  const toISO = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const midnight = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+  // Bug fix: toISOString() is UTC, so between 00:00 and 05:00 in Pakistan "Today" gave yesterday.
+  window.todayStr = () => toISO(new Date());
+
+  window.shiftDate = function (field, days) {
+    const el = document.getElementById(field === 'trigger' ? 'triggerDate' : 'refDate');
+    const base = el.value ? parseDate(el.value) : midnight(new Date());
+    base.setDate(base.getDate() + days);
+    el.value = toISO(base);
+  };
+
+  // Bug fix: 29 Feb + 1 year used to roll into March. Clamp to the last day of the month.
+  window.addPeriod = function (date, y, m, d) {
+    const t = new Date(date.getFullYear() + y, date.getMonth() + m, 1);
+    const last = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
+    t.setDate(Math.min(date.getDate(), last));
+    t.setDate(t.getDate() + d);
+    return t;
+  };
+
+  /* ── 2. Inline errors instead of alert() ─────────────────────────────────── */
+  const style = document.createElement('style');
+  style.textContent = `
+    .calc-error{display:none;margin-top:.75rem;padding:.6rem .75rem;font-size:.75rem;line-height:1.5;
+      color:var(--red);background:var(--red-lt);border-left:3px solid var(--red)}
+    .calc-error.visible{display:block}
+    .result-note{margin-top:.9rem;padding:.55rem .75rem;font-size:.72rem;line-height:1.55;color:var(--ink-soft);
+      background:var(--cream);border-left:2px solid var(--rule-dk)}
+    .result-note.flag{background:var(--amber-lt);border-left-color:var(--amber);color:var(--ink-mid)}
+    .copy-btn{margin-top:.75rem;width:100%;padding:.55rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;
+      text-transform:uppercase;background:var(--white);border:1px solid var(--rule-dk);color:var(--ink-soft);cursor:pointer}
+    .copy-btn:hover{background:var(--cream);color:var(--ink)}
+    tbody tr:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+    @media print{nav,.mob-nav,.disclaimer .disclaimer-badge,.reference-panel,.date-shortcuts,.calc-btn,.copy-btn,#cursor,#cursor-ring,#scroll-progress{display:none!important}
+      .page-body{display:block;padding:1rem}.calc-panel{position:static}}
+  `;
+  document.head.appendChild(style);
+
+  const calcBtn = document.querySelector('.calc-btn');
+  const errBox = document.createElement('div');
+  errBox.className = 'calc-error';
+  errBox.id = 'calcError';
+  errBox.setAttribute('role', 'alert');
+  calcBtn.parentNode.insertBefore(errBox, calcBtn.nextSibling);
+  const showError = msg => { errBox.textContent = msg; errBox.classList.add('visible'); };
+  const clearError = () => errBox.classList.remove('visible');
+
+  const body = document.querySelector('#resultPanel .result-body');
+  const note = document.createElement('div');
+  note.className = 'result-note';
+  note.id = 's4note';
+  body.appendChild(note);
+  const copyBtn = document.createElement('button');
+  copyBtn.type = 'button';
+  copyBtn.className = 'copy-btn';
+  copyBtn.textContent = 'Copy result';
+  body.appendChild(copyBtn);
+
+  let lastSummary = '';
+  copyBtn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(lastSummary); copyBtn.textContent = 'Copied'; }
+    catch { copyBtn.textContent = 'Copy failed — select the text manually'; }
+    setTimeout(() => (copyBtn.textContent = 'Copy result'), 1800);
   });
-}
 
-// ── DATE HELPERS ──────────────────────────────────────────────────────────────
-function todayStr() { return new Date().toISOString().split('T')[0]; }
+  /* ── 3. Calculation ──────────────────────────────────────────────────────── */
+  const fmt = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const fmtDay = d => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const val = id => document.getElementById(id).value;
 
-function setToday(field) {
-  document.getElementById(field === 'trigger' ? 'triggerDate' : 'refDate').value = todayStr();
-}
-
-function shiftDate(field, days) {
-  const id = field === 'trigger' ? 'triggerDate' : 'refDate';
-  const el = document.getElementById(id);
-  const base = el.value ? new Date(el.value + 'T12:00:00') : new Date();
-  base.setDate(base.getDate() + days);
-  el.value = base.toISOString().split('T')[0];
-}
-
-function parseDate(str) {
-  if (!str) return null;
-  const [y, m, d] = str.split('-').map(Number);
-  return new Date(y, m - 1, d);
-}
-
-function addPeriod(date, years, months, days) {
-  const d = new Date(date);
-  d.setFullYear(d.getFullYear() + years);
-  d.setMonth(d.getMonth() + months);
-  d.setDate(d.getDate() + days);
-  return d;
-}
-
-function daysBetween(a, b) { return Math.round((b - a) / 86400000); }
-
-function formatDate(d) {
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-}
-
-function periodStr(y, mo, d) {
-  const parts = [];
-  if (y)  parts.push(`${y} year${y  !== 1 ? 's' : ''}`);
-  if (mo) parts.push(`${mo} month${mo !== 1 ? 's' : ''}`);
-  if (d)  parts.push(`${d} day${d   !== 1 ? 's' : ''}`);
-  return parts.join(', ');
-}
-
-// ── EXCLUSION TOGGLES ─────────────────────────────────────────────────────────
-function toggleExclusion(id) {
-  const checked = document.getElementById(id + 'toggle').checked;
-  document.getElementById(id + 'fields').classList.toggle('visible', checked);
-}
-
-// ── CALCULATE ─────────────────────────────────────────────────────────────────
-function calculate() {
-  const artNum = parseInt(document.getElementById('articleSelect').value);
-  if (!artNum) { alert('Please select a case type.'); return; }
-
-  const art = ARTICLES.find(a => a[0] === artNum);
-  if (!art) return;
-
-  const triggerStr = document.getElementById('triggerDate').value;
-  const refStr     = document.getElementById('refDate').value;
-  if (!triggerStr) { alert('Please enter a trigger date.'); return; }
-
-  const trigger  = parseDate(triggerStr);
-  const ref      = refStr ? parseDate(refStr) : new Date();
-  const [, desc, y, mo, d] = art;
-
-  let deadline = addPeriod(trigger, y, mo, d);
-
-  let s12days = 0;
-  if (document.getElementById('s12toggle').checked) {
-    const app = parseDate(document.getElementById('s12applied').value);
-    const rec = parseDate(document.getElementById('s12received').value);
-    if (app && rec && rec > app) {
-      s12days = daysBetween(app, rec);
-      deadline.setDate(deadline.getDate() + s12days);
-    }
+  // Returns excluded days, or an error string. Validates every field the user ticked.
+  function exclusion(prefix, label, aId, bId, aName, bName) {
+    if (!document.getElementById(prefix + 'toggle').checked) return { days: 0 };
+    const a = parseDate(val(aId)), b = parseDate(val(bId));
+    if (!a || !b) return { error: `${label}: enter both dates, or untick the exclusion.` };
+    if (b <= a) return { error: `${label}: "${bName}" must be after "${aName}".` };
+    return { days: daysBetween(a, b) + (prefix === 's14' ? 1 : 0) }; // s.14 Expl. I: both end days count
   }
 
-  let s14days = 0;
-  if (document.getElementById('s14toggle').checked) {
-    const filed     = parseDate(document.getElementById('s14filed').value);
-    const dismissed = parseDate(document.getElementById('s14dismissed').value);
-    if (filed && dismissed && dismissed > filed) {
-      s14days = daysBetween(filed, dismissed);
-      deadline.setDate(deadline.getDate() + s14days);
-    }
-  }
+  window.calculate = function () {
+    clearError();
+    const artNum = val('articleSelect');
+    if (!artNum) return showError('Select an article first.');
+    const art = ARTICLES.find(a => a[0] === artNum);
+    if (!art) return showError('That article is not in the dataset.');
+    if (!val('triggerDate')) return showError('Enter the trigger date.');
 
-  const remaining = daysBetween(ref, deadline);
-  const total     = daysBetween(trigger, deadline);
-  const elapsed   = daysBetween(trigger, ref);
-  const pct       = Math.max(0, Math.min(100, total > 0 ? (elapsed / total) * 100 : 100));
+    const trigger = parseDate(val('triggerDate'));
+    const ref = val('refDate') ? parseDate(val('refDate')) : midnight(new Date());
+    if (ref < trigger) return showError('Reference date is before the trigger date.');
 
-  const panel = document.getElementById('resultPanel');
-  panel.classList.add('visible');
+    if (document.getElementById('s12toggle').checked && ARTICLES.find(a => a[0] === artNum)[5] === 'suits')
+      return showError('s.12 covers appeals, leave to appeal, review and award applications — not suits. Untick it.');
+    const s12 = exclusion('s12', 's.12', 's12applied', 's12received', 'Date applied for copy', 'Date copy received');
+    if (s12.error) return showError(s12.error);
+    const s14 = exclusion('s14', 's.14', 's14filed', 's14dismissed', 'Prior proceeding filed', 'Prior proceeding dismissed');
+    if (s14.error) return showError(s14.error);
 
-  document.getElementById('resultDeadline').textContent = formatDate(deadline);
-  document.getElementById('rTrigger').textContent = formatDate(trigger);
-  document.getElementById('rPeriod').textContent  = periodStr(y, mo, d);
-  document.getElementById('rS12').textContent     = s12days ? `${s12days} days excluded` : '—';
-  document.getElementById('rS14').textContent     = s14days ? `${s14days} days excluded` : '—';
-  document.getElementById('rArticle').textContent = `Art. ${artNum}`;
-  document.getElementById('resultLabel').textContent = `Art. ${artNum} · ${desc.substring(0, 32)}…`;
+    const [, desc, y, mo, d] = art;
+    const deadline = addPeriod(trigger, y, mo, d);
+    deadline.setDate(deadline.getDate() + s12.days + s14.days);
 
-  const fill  = document.getElementById('timelineFill');
-  const badge = document.getElementById('resultBadge');
-  const daysEl = document.getElementById('resultDays');
-  fill.className = 'timeline-fill';
+    const remaining = daysBetween(ref, deadline);
+    const total = daysBetween(trigger, deadline);
+    const pct = Math.max(0, Math.min(100, total > 0 ? (daysBetween(trigger, ref) / total) * 100 : 100));
 
-  if (remaining < 0) {
-    badge.textContent = 'Expired';
-    badge.className   = 'result-badge expired';
-    daysEl.textContent = `Deadline passed ${Math.abs(remaining)} day${Math.abs(remaining) !== 1 ? 's' : ''} ago`;
-    fill.classList.add('expired');
-  } else if (remaining <= 30) {
-    badge.textContent = 'Urgent';
-    badge.className   = 'result-badge warn';
-    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining — act promptly`;
-    fill.classList.add('warn');
+    document.getElementById('resultPanel').classList.add('visible');
+    document.getElementById('resultDeadline').textContent = fmtDay(deadline);
+    document.getElementById('rTrigger').textContent = fmt(trigger);
+    document.getElementById('rPeriod').textContent = periodStr(y, mo, d);
+    document.getElementById('rS12').textContent = s12.days ? `${s12.days} days excluded` : '—';
+    document.getElementById('rS14').textContent = s14.days ? `${s14.days} days excluded` : '—';
+    document.getElementById('rArticle').textContent = `Art. ${artNum}`;
+    document.getElementById('resultLabel').textContent = `Art. ${artNum} · ${desc.length > 32 ? desc.slice(0, 32) + '…' : desc}`;
+
+    const fill = document.getElementById('timelineFill');
+    const badge = document.getElementById('resultBadge');
+    const daysEl = document.getElementById('resultDays');
+    const plural = n => `${n} day${n === 1 ? '' : 's'}`;
+    fill.className = 'timeline-fill';
     fill.style.width = pct + '%';
-  } else {
-    badge.textContent = 'Within Time';
-    badge.className   = 'result-badge ok';
-    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining`;
-    fill.style.width = pct + '%';
-  }
+    if (remaining < 0) {
+      badge.textContent = 'Expired'; badge.className = 'result-badge expired';
+      daysEl.textContent = `Deadline passed ${plural(-remaining)} ago`;
+      fill.classList.add('expired');
+    } else if (remaining <= 30) {
+      badge.textContent = 'Urgent'; badge.className = 'result-badge warn';
+      daysEl.textContent = remaining === 0 ? 'Last day to file is today' : `${plural(remaining)} remaining — act promptly`;
+      fill.classList.add('warn');
+    } else {
+      badge.textContent = 'Within time'; badge.className = 'result-badge ok';
+      daysEl.textContent = `${plural(remaining)} remaining`;
+    }
 
-  onArticleChange();
-  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
+    // s.4: if the court is closed on the last day, filing is allowed when it reopens.
+    const sunday = deadline.getDay() === 0;
+    note.className = 'result-note' + (sunday ? ' flag' : '');
+    note.textContent = sunday
+      ? 'The last day falls on a Sunday. Under s.4 you may file on the next day the court is open — confirm with the registry.'
+      : 'If the court is closed on the last day (holiday or vacation), s.4 lets you file on the day it reopens.';
 
-// ── TABLE ─────────────────────────────────────────────────────────────────────
-function renderTable() {
-  const tbody = document.getElementById('tableBody');
-  const q     = searchQuery.toLowerCase();
+    lastSummary = `Limitation Act 1908, Art. ${artNum} — ${desc}\n` +
+      `Trigger: ${fmt(trigger)} | Period: ${periodStr(y, mo, d)}` +
+      (s12.days ? ` | s.12: +${s12.days}d` : '') + (s14.days ? ` | s.14: +${s14.days}d` : '') +
+      `\nLast day to file: ${fmtDay(deadline)} (${remaining < 0 ? 'expired' : plural(remaining) + ' left'} as of ${fmt(ref)})`;
 
-  const filtered = ARTICLES.filter(a => {
-    const divMatch    = filterDivision === 'all' || a[5] === filterDivision;
-    const searchMatch = !q || a[1].toLowerCase().includes(q) || String(a[0]).includes(q);
-    return divMatch && searchMatch;
-  });
+    onArticleChange();
+    document.getElementById('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
 
-  tbody.innerHTML = '';
-
-  if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="no-results">No articles match your search.</td></tr>';
-    document.getElementById('tableCount').textContent = '0 results';
-    return;
-  }
-
-  filtered.forEach(a => {
-    const tr = document.createElement('tr');
-    tr.dataset.art = a[0];
-    tr.innerHTML = `
-      <td>${a[0]}</td>
-      <td>${a[1]}</td>
-      <td>${periodStr(a[2], a[3], a[4])}</td>
-      <td><span class="div-badge ${a[5]}">${a[5]}</span></td>
-      <td>${a[6]}</td>
-    `;
-    tr.addEventListener('click', () => {
-      if (a[5] !== currentDivision) {
-        currentDivision = a[5];
-        document.querySelectorAll('.seg-control button').forEach(b => {
-          b.classList.toggle('active', b.dataset.div === a[5]);
-        });
-        populateArticleSelect(a[5]);
-      }
-      document.getElementById('articleSelect').value = a[0];
-      onArticleChange();
-      document.querySelector('.calc-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  /* ── 4. Table: keyboard access, broader search ───────────────────────────── */
+  const baseRender = window.renderTable;
+  window.renderTable = function () {
+    // Render everything (division filter still applies), then narrow by search incl. "time begins" text.
+    const q = searchQuery.trim().toLowerCase();
+    const keep = searchQuery;
+    searchQuery = '';
+    baseRender();
+    searchQuery = keep;
+    const tbody = document.getElementById('tableBody');
+    let n = 0;
+    tbody.querySelectorAll('tr[data-art]').forEach(tr => {
+      const a = ARTICLES.find(x => x[0] === tr.dataset.art);
+      const hit = !q || a[1].toLowerCase().includes(q) || String(a[0]).includes(q) || a[6].toLowerCase().includes(q);
+      if (!hit) { tr.remove(); return; }
+      n++;
+      tr.tabIndex = 0;
+      tr.setAttribute('role', 'button');
+      tr.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tr.click(); }
+      });
     });
-    tbody.appendChild(tr);
-  });
+    if (!n) tbody.innerHTML = '<tr><td colspan="5" class="no-results">No articles match. Try a keyword like \u201cmortgage\u201d or an article number.</td></tr>';
+    document.getElementById('tableCount').textContent = `${n} of ${ARTICLES.length} articles`;
+  };
+  window.renderTable();
 
-  document.getElementById('tableCount').textContent =
-    `${filtered.length} of ${ARTICLES.length} articles`;
-}
-
-function filterTable(val) { searchQuery = val; renderTable(); }
-
-function filterDiv(div, btn) {
-  filterDivision = div;
-  document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderTable();
-}
-</script>
-</body>
-</html>
+  /* ── 5. Honest stats + accessibility cleanup ─────────────────────────────── */
+  const stat = document.querySelector('.masthead-stat-n');
+  if (stat) { stat.textContent = ARTICLES.length; stat.nextElementSibling.textContent = 'In-force entries'; }
+  const disc = document.querySelector('.disclaimer');
+  if (disc) disc.setAttribute('role', 'note');                 // role=alert interrupted screen readers on load
+  const mast = document.querySelector('.masthead');
+  if (mast) mast.removeAttribute('role');                      // banner role is invalid inside <main>
+  const prog = document.getElementById('scroll-progress');
+  if (prog) { prog.removeAttribute('role'); prog.setAttribute('aria-hidden', 'true'); }
+  document.querySelectorAll('.field-label:not([for])').forEach(l => (l.tagName === 'LABEL') && l.replaceWith(Object.assign(document.createElement('span'), { className: l.className, textContent: l.textContent })));
+  const ref = document.getElementById('refDate');
+  if (ref && !ref.value) ref.value = toISO(new Date());
+})();
