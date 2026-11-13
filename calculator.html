@@ -6,198 +6,10 @@
   'use strict';
 
   /* ── 0. Dataset rebuilt from the First Schedule (Pakistan text supplied by the user) ── */
-  // id | description | period (d/m/y) | time begins.  Repealed/omitted: 4, 45, 46, 133, 144, 150A, 182.
-  const RAW = `
-1|Contest award of Board of Revenue (Waste Lands (Claims) Act 1863)|30d|Notice of award delivered to plaintiff
-2|Compensation for act done under an enactment|90d|Act or omission
-3|Recover possession of immoveable property (Specific Relief Act s.9)|6m|Dispossession
-5|Summary procedure, CPC s.128(2)(f), debt or liquidated demand|1y|Debt payable / property recoverable
-6|Penalty or forfeiture under statute, Act, regulation or bye-law|1y|Penalty or forfeiture incurred
-7|Wages of household servant, artisan or labourer|1y|Wages accrue due
-8|Price of food or drink sold by hotel/tavern/lodging-house keeper|1y|Food or drink delivered
-9|Price of lodging|1y|Price becomes payable
-10|Enforce right of pre-emption|1y|Purchaser takes physical possession (or sale registered if not possible)
-11|Establish right after CPC attachment claim/objection order|1y|Date of order
-11A|Establish right after order on resistance/obstruction to possession|1y|Date of order
-12|Set aside execution, revenue, arrears or patni sale|1y|Sale confirmed / would have become final
-13|Alter or set aside Civil Court decision in non-suit proceeding|1y|Final decision by competent Court
-14|Set aside act or order of Government officer (not otherwise provided)|1y|Act or order
-15|Against Government: set aside revenue attachment, lease or transfer|1y|Attachment, lease or transfer made
-16|Against Government: recover money paid under protest to revenue authorities|1y|Payment made
-17|Against Government: compensation for land acquired|1y|Compensation determined
-18|Compensation where acquisition not completed|1y|Refusal to complete
-19|Compensation for false imprisonment|1y|Imprisonment ends
-20|Legal Representatives' Suits Act 1855, by representatives|1y|Death of person wronged
-21|Fatal Accidents Act 1855, by representatives|1y|Death of person killed
-22|Compensation for other injury to the person|1y|Injury committed
-23|Compensation for malicious prosecution|1y|Acquittal / prosecution terminated
-24|Compensation for libel|1y|Libel published
-25|Compensation for slander|1y|Words spoken (or special damage results)
-26|Loss of service by seduction of servant or daughter|1y|Loss occurs
-27|Inducing a person to break contract|1y|Breach
-28|Illegal, irregular or excessive distress|1y|Distress
-29|Wrongful seizure of moveable property under legal process|1y|Seizure
-30|Against carrier: loss or injury to goods|1y|Loss or injury occurs
-31|Against carrier: non-delivery or delay|1y|Goods ought to be delivered
-32|Perversion of property held for specific purposes|2y|Perversion first becomes known
-33|Legal Representatives' Suits Act 1855, against executor|2y|Wrong complained of is done
-34|Same Act, against administrator|2y|Same as Art. 33
-35|Same Act, against any other representative|2y|Same as Art. 33
-36|Malfeasance, misfeasance or nonfeasance independent of contract|2y|It takes place
-37|Obstructing a way or watercourse|3y|Obstruction
-38|Diverting a watercourse|3y|Diversion
-39|Trespass upon immoveable property|3y|Trespass
-40|Infringing copyright or exclusive privilege|3y|Infringement
-41|Restrain waste|3y|Waste begins
-42|Injury from wrongfully obtained injunction|3y|Injunction ceases
-43|Succession Act ss.360/361: refund of legacy or assets|3y|Payment or distribution
-44|Ward after majority: set aside guardian's transfer|3y|Ward attains majority
-47|Recover property under CrPC possession order|3y|Final order in the case
-48|Specific moveable property lost, stolen or misappropriated|3y|Owner first learns who holds it
-48-A|Moveable property held in trust/pawn, later bought from trustee|3y|Sale becomes known to plaintiff
-48-B|Set aside sale of moveable endowment property by manager|3y|Sale becomes known to plaintiff
-49|Other specific moveable property / wrongful taking, injury or detention|3y|Wrongful taking or injury, or detention becomes unlawful
-50|Hire of animals, vehicles, boats, household furniture|3y|Hire payable
-51|Balance of money advanced for goods to be delivered|3y|Goods ought to be delivered
-52|Price of goods sold and delivered, no fixed credit|3y|Delivery
-53|Price of goods sold on fixed credit|3y|Credit period expires
-54|Price of goods to be paid by bill, none given|3y|Period of proposed bill elapses
-55|Price of trees or growing crops, no fixed credit|3y|Date of sale
-56|Price of work done, no time fixed for payment|3y|Work done
-57|Money lent|3y|Loan made
-58|Money lent by cheque|3y|Cheque paid
-59|Money lent payable on demand|3y|Loan made
-60|Money deposited payable on demand (incl. banker)|3y|Demand made
-61|Money paid for the defendant|3y|Money paid
-62|Money received by defendant for plaintiff's use|3y|Money received
-63|Interest on money due|3y|Interest becomes due
-64|Accounts stated in writing|3y|Accounts stated in signed writing (or future payment date)
-64A|CPC Order XXXVII summary suit|3y|Debt becomes payable
-65|Breach of promise to act at specified time/contingency|3y|Time arrives / contingency happens
-66|Single bond, day specified|3y|Day specified
-67|Single bond, no day specified|3y|Date of executing bond
-68|Bond subject to a condition|3y|Condition broken
-69|Bill or note payable at fixed time after date|3y|Bill or note falls due
-70|Bill payable at/after sight, no fixed time|3y|Bill presented
-71|Accepted bill payable at particular place|3y|Presented at that place
-72|Bill or note payable at fixed time after sight/demand|3y|Fixed time expires
-73|Bill or note payable on demand, no restraint on right to sue|3y|Date of bill or note
-74|Note or bond payable by instalments|3y|End of each instalment term
-75|Instalment note/bond with default (acceleration) clause|3y|Default (unless waived; then fresh default)
-76|Note given to third person for delivery to payee|3y|Delivery to payee
-77|Dishonoured foreign bill, protest and notice|3y|Notice given
-78|Payee against drawer, dishonoured by non-acceptance|3y|Refusal to accept
-79|Acceptor of accommodation bill against drawer|3y|Acceptor pays the bill
-80|Bill, note or bond not otherwise provided for|3y|Becomes payable
-81|Surety against principal debtor|3y|Surety pays creditor
-82|Surety against co-surety|3y|Surety pays in excess of share
-83|Other contract to indemnify|3y|Plaintiff actually damnified
-84|Attorney or vakil for costs, no agreement on timing|3y|Termination or proper discontinuance of suit/business
-85|Balance on mutual, open and current account|3y|Close of year of last admitted/proved item
-86(a)|Insurance policy payable after proof of death|3y|Date of death
-86(b)|Insurance policy payable after proof of loss|3y|Date of occurrence causing the loss
-87|Recover premia paid on policy voidable by insurers|3y|Insurers elect to avoid policy
-88|Against factor for an account|3y|Account demanded and refused / agency terminates
-89|Principal against agent for moveable property not accounted for|3y|Same as Art. 88
-90|Principal against agent for neglect or misconduct|3y|Neglect or misconduct becomes known
-91|Cancel or set aside instrument (not otherwise provided)|3y|Facts entitling relief become known
-92|Declare forgery of instrument issued or registered|3y|Issue or registration becomes known
-93|Declare forgery of instrument attempted to be enforced|3y|Date of attempt
-94|Property conveyed by plaintiff while insane|3y|Restored to sanity with knowledge of conveyance
-95|Set aside decree or other relief on ground of fraud|3y|Fraud becomes known
-96|Relief on ground of mistake|3y|Mistake becomes known
-97|Money paid on consideration that later fails|3y|Failure
-98|Loss from breach of trust, out of deceased trustee's estate|3y|Trustee's death (or later date of loss)
-99|Contribution: joint decree or joint-estate revenue|3y|Payment in excess of own share
-100|Co-trustee contribution against deceased trustee's estate|3y|Right to contribution accrues
-101|Seaman's wages|3y|End of voyage
-102|Wages not otherwise provided for|3y|Wages accrue due
-103|Exigible dower (mu'ajjal)|3y|Demand and refusal, or marriage dissolved by death/divorce
-104|Deferred dower (mu'wajjal)|3y|Marriage dissolved by death or divorce
-105|Mortgagor: surplus collections after mortgage satisfied|3y|Mortgagor re-enters property
-106|Account and profits of dissolved partnership|3y|Dissolution
-107|Joint-family manager: contribution for payment made|3y|Payment
-108|Lessor: value of trees cut contrary to lease|3y|Trees cut down
-109|Profits of immoveable property wrongfully received|3y|Profits received
-110|Arrears of rent|3y|Arrears become due
-111|Vendor: unpaid purchase-money of immoveable property|3y|Time fixed for completion (or acceptance of title, if later)
-112|Call by registered company|3y|Call payable
-113|Specific performance of contract|3y|Date fixed, or notice that performance is refused
-114|Rescission of contract|3y|Facts entitling rescission become known
-115|Breach of contract not in registered writing|3y|Breach (successive: that breach; continuing: when it ceases)
-116|Breach of registered written contract|6y|As for a similar unregistered contract (Art. 115)
-117|Foreign judgment (CPC)|6y|Date of judgment
-118|Declaration that adoption is invalid / did not occur|6y|Adoption becomes known to plaintiff
-119|Declaration that adoption is valid|6y|Adopted son's rights interfered with
-120|Suit with no period provided elsewhere in the Schedule|6y|Right to sue accrues
-121|Avoid incumbrances on estate/tenure sold for arrears|12y|Sale becomes final and conclusive
-122|Judgment obtained in Pakistan, or recognisance|12y|Date of judgment or recognisance
-123|Legacy, residue share, or intestate distributive share|12y|Legacy or share becomes payable/deliverable
-124|Possession of hereditary office|12y|Defendant takes possession adversely
-125|Declare female's alienation void beyond her life|12y|Date of alienation
-126|Mitakshara Hindu: set aside father's alienation|12y|Alienee takes possession
-127|Person excluded from joint family property: enforce share|12y|Exclusion becomes known to plaintiff
-128|Hindu: arrears of maintenance|12y|Arrears payable
-129|Hindu: declaration of right to maintenance|12y|Right denied
-130|Resumption or assessment of rent-free land|12y|Right first accrues
-131|Establish periodically recurring right|12y|Plaintiff first refused enjoyment
-132|Money charged upon immoveable property|12y|Money sued for becomes due
-134|Possession of trust/mortgaged property later transferred for value|12y|Transfer becomes known to plaintiff
-134-A|Set aside manager's transfer of endowment immoveable property|12y|Transfer becomes known to plaintiff
-134-B|Manager: recover endowment immoveable property transferred by predecessor|12y|Death, resignation or removal of transferor
-134-C|Manager: recover endowment moveable property sold by predecessor|12y|Death, resignation or removal of seller
-135|Mortgagee: possession of mortgaged immoveable property (non-High Court)|12y|Mortgagor's right to possession determines
-136|Purchaser at private sale: possession, vendor out of possession|12y|Vendor first entitled to possession
-137|Execution purchaser: possession, judgment-debtor out of possession|12y|Judgment-debtor first entitled to possession
-138|Execution purchaser: possession, judgment-debtor in possession|12y|Sale becomes absolute
-139|Landlord: possession from tenant|12y|Tenancy determined
-140|Remainderman, reversioner or devisee: possession|12y|Estate falls into possession
-141|Hindu/Muslim entitled on death of female: possession|12y|Female dies
-142|Possession where plaintiff dispossessed or discontinued possession|12y|Dispossession or discontinuance
-143|Possession on forfeiture or breach of condition|12y|Forfeiture incurred / condition broken
-145|Against depositary or pawnee: moveable property|30y|Date of deposit or pawn
-146|High Court original side: mortgagee's possession|30y|Part of principal or interest last paid
-146A|Local authority: possession of public street or road|30y|Dispossession or discontinuance
-147|Mortgagee: foreclosure or sale|60y|Mortgage money becomes due
-148|Against mortgagee: redeem or recover possession|60y|Right to redeem or recover accrues
-149|Suit by or on behalf of Federal or Provincial Government|60y|As for a like suit by a private person
-150|Appeal: CrPC, sentence of death (Sessions/High Court original)|7d|Date of sentence
-151|Appeal: decree/order of High Court original jurisdiction|20d|Date of decree or order
-152|Appeal: CPC, to District Judge|30d|Date of decree or order appealed from
-153|Appeal: CPC, to High Court from refusal of leave to appeal to Supreme Court|30d|Date of order
-154|Appeal: CrPC, to any Court other than High Court|30d|Date of sentence or order appealed from
-155|Appeal: CrPC, to High Court (except Arts. 150, 157)|60d|Date of sentence or order appealed from
-156|Appeal: CPC, to High Court (except Arts. 151, 153)|90d|Date of decree or order appealed from
-157|Appeal: CrPC, from order of acquittal|6m|Date of order appealed from
-158|Arbitration Act 1940: set aside or remit award|30d|Service of notice of filing of award
-159|Leave to appear and defend (summary procedure / Order XXXVII)|10d|Summons served
-160|Restore review application rejected for non-appearance|15d|Review application rejected
-161|Review by Small Causes Court|15d|Date of decree or order
-162|Review by High Court (original jurisdiction)|20d|Date of decree or order
-162-A|Revision, CPC s.115|90d|Date of decision sought to be revised
-163|Plaintiff: set aside dismissal for default or non-payment of costs|30d|Date of dismissal
-164|Defendant: set aside ex parte decree|30d|Date of decree (or knowledge, if summons not duly served)
-165|Person dispossessed: dispute decree-holder's right to possession|30d|Dispossession
-166|Set aside execution sale (incl. by judgment-debtor)|30d|Date of sale
-167|Complain of resistance/obstruction to delivery of possession|30d|Resistance or obstruction
-168|Readmission of appeal dismissed for want of prosecution|30d|Date of dismissal
-169|Re-hearing of appeal heard ex parte|30d|Date of appellate decree (or knowledge, if notice not duly served)
-170|Leave to appeal as a pauper|30d|Date of decree appealed from
-171|Legal representative: set aside order/judgment made in deceased's absence|60d|Date of order or judgment
-172|Assignee/receiver of insolvent: set aside dismissal of suit or appeal|60d|Date of order of dismissal
-173|Review of judgment (except Arts. 161, 162)|90d|Date of decree or order
-174|Notice to show cause why out-of-court payment/adjustment not certified|90d|Payment or adjustment made
-175|Payment of decree amount by instalments|6m|Date of decree
-176|Make legal representative of deceased plaintiff/appellant a party|90d|Date of death
-177|Make legal representative of deceased defendant/respondent a party|90d|Date of death
-178|Arbitration Act 1940: file award in Court|90d|Service of notice of making of award
-179|Leave to appeal to Supreme Court (CPC)|90d|Date of decree appealed from
-180|Execution purchaser: delivery of possession|3y|Sale becomes absolute
-181|Applications with no period provided elsewhere|3y|Right to apply accrues
-183|Enforce High Court (original side) or Supreme Court judgment/decree/order|6y|Present right to enforce accrues (revived/part-paid/acknowledged: from that date, 12 yrs per proviso text)`;
+  const RAW = `1|Contest award of Board of Revenue (Waste Lands (Claims) Act 1863)|30d|Notice of award delivered to plaintiff~2|Compensation for act done under an enactment|90d|Act or omission~3|Recover possession of immoveable property (Specific Relief Act s.9)|6m|Dispossession~5|Summary procedure, CPC s.128(2)(f), debt or liquidated demand|1y|Debt payable / property recoverable~6|Penalty or forfeiture under statute, Act, regulation or bye-law|1y|Penalty or forfeiture incurred~7|Wages of household servant, artisan or labourer|1y|Wages accrue due~8|Price of food or drink sold by hotel/tavern/lodging-house keeper|1y|Food or drink delivered~9|Price of lodging|1y|Price becomes payable~10|Enforce right of pre-emption|1y|Purchaser takes physical possession (or sale registered if not possible)~11|Establish right after CPC attachment claim/objection order|1y|Date of order~11A|Establish right after order on resistance/obstruction to possession|1y|Date of order~12|Set aside execution, revenue, arrears or patni sale|1y|Sale confirmed / would have become final~13|Alter or set aside Civil Court decision in non-suit proceeding|1y|Final decision by competent Court~14|Set aside act or order of Government officer (not otherwise provided)|1y|Act or order~15|Against Government: set aside revenue attachment, lease or transfer|1y|Attachment, lease or transfer made~16|Against Government: recover money paid under protest to revenue authorities|1y|Payment made~17|Against Government: compensation for land acquired|1y|Compensation determined~18|Compensation where acquisition not completed|1y|Refusal to complete~19|Compensation for false imprisonment|1y|Imprisonment ends~20|Legal Representatives' Suits Act 1855, by representatives|1y|Death of person wronged~21|Fatal Accidents Act 1855, by representatives|1y|Death of person killed~22|Compensation for other injury to the person|1y|Injury committed~23|Compensation for malicious prosecution|1y|Acquittal / prosecution terminated~24|Compensation for libel|1y|Libel published~25|Compensation for slander|1y|Words spoken (or special damage results)~26|Loss of service by seduction of servant or daughter|1y|Loss occurs~27|Inducing a person to break contract|1y|Breach~28|Illegal, irregular or excessive distress|1y|Distress~29|Wrongful seizure of moveable property under legal process|1y|Seizure~30|Against carrier: loss or injury to goods|1y|Loss or injury occurs~31|Against carrier: non-delivery or delay|1y|Goods ought to be delivered~32|Perversion of property held for specific purposes|2y|Perversion first becomes known~33|Legal Representatives' Suits Act 1855, against executor|2y|Wrong complained of is done~34|Same Act, against administrator|2y|Same as Art. 33~35|Same Act, against any other representative|2y|Same as Art. 33~36|Malfeasance, misfeasance or nonfeasance independent of contract|2y|It takes place~37|Obstructing a way or watercourse|3y|Obstruction~38|Diverting a watercourse|3y|Diversion~39|Trespass upon immoveable property|3y|Trespass~40|Infringing copyright or exclusive privilege|3y|Infringement~41|Restrain waste|3y|Waste begins~42|Injury from wrongfully obtained injunction|3y|Injunction ceases~43|Succession Act ss.360/361: refund of legacy or assets|3y|Payment or distribution~44|Ward after majority: set aside guardian's transfer|3y|Ward attains majority~47|Recover property under CrPC possession order|3y|Final order in the case~48|Specific moveable property lost, stolen or misappropriated|3y|Owner first learns who holds it~48-A|Moveable property held in trust/pawn, later bought from trustee|3y|Sale becomes known to plaintiff~48-B|Set aside sale of moveable endowment property by manager|3y|Sale becomes known to plaintiff~49|Other specific moveable property / wrongful taking, injury or detention|3y|Wrongful taking or injury, or detention becomes unlawful~50|Hire of animals, vehicles, boats, household furniture|3y|Hire payable~51|Balance of money advanced for goods to be delivered|3y|Goods ought to be delivered~52|Price of goods sold and delivered, no fixed credit|3y|Delivery~53|Price of goods sold on fixed credit|3y|Credit period expires~54|Price of goods to be paid by bill, none given|3y|Period of proposed bill elapses~55|Price of trees or growing crops, no fixed credit|3y|Date of sale~56|Price of work done, no time fixed for payment|3y|Work done~57|Money lent|3y|Loan made~58|Money lent by cheque|3y|Cheque paid~59|Money lent payable on demand|3y|Loan made~60|Money deposited payable on demand (incl. banker)|3y|Demand made~61|Money paid for the defendant|3y|Money paid~62|Money received by defendant for plaintiff's use|3y|Money received~63|Interest on money due|3y|Interest becomes due~64|Accounts stated in writing|3y|Accounts stated in signed writing (or future payment date)~64A|CPC Order XXXVII summary suit|3y|Debt becomes payable~65|Breach of promise to act at specified time/contingency|3y|Time arrives / contingency happens~66|Single bond, day specified|3y|Day specified~67|Single bond, no day specified|3y|Date of executing bond~68|Bond subject to a condition|3y|Condition broken~69|Bill or note payable at fixed time after date|3y|Bill or note falls due~70|Bill payable at/after sight, no fixed time|3y|Bill presented~71|Accepted bill payable at particular place|3y|Presented at that place~72|Bill or note payable at fixed time after sight/demand|3y|Fixed time expires~73|Bill or note payable on demand, no restraint on right to sue|3y|Date of bill or note~74|Note or bond payable by instalments|3y|End of each instalment term~75|Instalment note/bond with default (acceleration) clause|3y|Default (unless waived; then fresh default)~76|Note given to third person for delivery to payee|3y|Delivery to payee~77|Dishonoured foreign bill, protest and notice|3y|Notice given~78|Payee against drawer, dishonoured by non-acceptance|3y|Refusal to accept~79|Acceptor of accommodation bill against drawer|3y|Acceptor pays the bill~80|Bill, note or bond not otherwise provided for|3y|Becomes payable~81|Surety against principal debtor|3y|Surety pays creditor~82|Surety against co-surety|3y|Surety pays in excess of share~83|Other contract to indemnify|3y|Plaintiff actually damnified~84|Attorney or vakil for costs, no agreement on timing|3y|Termination or proper discontinuance of suit/business~85|Balance on mutual, open and current account|3y|Close of year of last admitted/proved item~86(a)|Insurance policy payable after proof of death|3y|Date of death~86(b)|Insurance policy payable after proof of loss|3y|Date of occurrence causing the loss~87|Recover premia paid on policy voidable by insurers|3y|Insurers elect to avoid policy~88|Against factor for an account|3y|Account demanded and refused / agency terminates~89|Principal against agent for moveable property not accounted for|3y|Same as Art. 88~90|Principal against agent for neglect or misconduct|3y|Neglect or misconduct becomes known~91|Cancel or set aside instrument (not otherwise provided)|3y|Facts entitling relief become known~92|Declare forgery of instrument issued or registered|3y|Issue or registration becomes known~93|Declare forgery of instrument attempted to be enforced|3y|Date of attempt~94|Property conveyed by plaintiff while insane|3y|Restored to sanity with knowledge of conveyance~95|Set aside decree or other relief on ground of fraud|3y|Fraud becomes known~96|Relief on ground of mistake|3y|Mistake becomes known~97|Money paid on consideration that later fails|3y|Failure~98|Loss from breach of trust, out of deceased trustee's estate|3y|Trustee's death (or later date of loss)~99|Contribution: joint decree or joint-estate revenue|3y|Payment in excess of own share~100|Co-trustee contribution against deceased trustee's estate|3y|Right to contribution accrues~101|Seaman's wages|3y|End of voyage~102|Wages not otherwise provided for|3y|Wages accrue due~103|Exigible dower (mu'ajjal)|3y|Demand and refusal, or marriage dissolved by death/divorce~104|Deferred dower (mu'wajjal)|3y|Marriage dissolved by death or divorce~105|Mortgagor: surplus collections after mortgage satisfied|3y|Mortgagor re-enters property~106|Account and profits of dissolved partnership|3y|Dissolution~107|Joint-family manager: contribution for payment made|3y|Payment~108|Lessor: value of trees cut contrary to lease|3y|Trees cut down~109|Profits of immoveable property wrongfully received|3y|Profits received~110|Arrears of rent|3y|Arrears become due~111|Vendor: unpaid purchase-money of immoveable property|3y|Time fixed for completion (or acceptance of title, if later)~112|Call by registered company|3y|Call payable~113|Specific performance of contract|3y|Date fixed, or notice that performance is refused~114|Rescission of contract|3y|Facts entitling rescission become known~115|Breach of contract not in registered writing|3y|Breach (successive: that breach; continuing: when it ceases)~116|Breach of registered written contract|6y|As for a similar unregistered contract (Art. 115)~117|Foreign judgment (CPC)|6y|Date of judgment~118|Declaration that adoption is invalid / did not occur|6y|Adoption becomes known to plaintiff~119|Declaration that adoption is valid|6y|Adopted son's rights interfered with~120|Suit with no period provided elsewhere in the Schedule|6y|Right to sue accrues~121|Avoid incumbrances on estate/tenure sold for arrears|12y|Sale becomes final and conclusive~122|Judgment obtained in Pakistan, or recognisance|12y|Date of judgment or recognisance~123|Legacy, residue share, or intestate distributive share|12y|Legacy or share becomes payable/deliverable~124|Possession of hereditary office|12y|Defendant takes possession adversely~125|Declare female's alienation void beyond her life|12y|Date of alienation~126|Mitakshara Hindu: set aside father's alienation|12y|Alienee takes possession~127|Person excluded from joint family property: enforce share|12y|Exclusion becomes known to plaintiff~128|Hindu: arrears of maintenance|12y|Arrears payable~129|Hindu: declaration of right to maintenance|12y|Right denied~130|Resumption or assessment of rent-free land|12y|Right first accrues~131|Establish periodically recurring right|12y|Plaintiff first refused enjoyment~132|Money charged upon immoveable property|12y|Money sued for becomes due~134|Possession of trust/mortgaged property later transferred for value|12y|Transfer becomes known to plaintiff~134-A|Set aside manager's transfer of endowment immoveable property|12y|Transfer becomes known to plaintiff~134-B|Manager: recover endowment immoveable property transferred by predecessor|12y|Death, resignation or removal of transferor~134-C|Manager: recover endowment moveable property sold by predecessor|12y|Death, resignation or removal of seller~135|Mortgagee: possession of mortgaged immoveable property (non-High Court)|12y|Mortgagor's right to possession determines~136|Purchaser at private sale: possession, vendor out of possession|12y|Vendor first entitled to possession~137|Execution purchaser: possession, judgment-debtor out of possession|12y|Judgment-debtor first entitled to possession~138|Execution purchaser: possession, judgment-debtor in possession|12y|Sale becomes absolute~139|Landlord: possession from tenant|12y|Tenancy determined~140|Remainderman, reversioner or devisee: possession|12y|Estate falls into possession~141|Hindu/Muslim entitled on death of female: possession|12y|Female dies~142|Possession where plaintiff dispossessed or discontinued possession|12y|Dispossession or discontinuance~143|Possession on forfeiture or breach of condition|12y|Forfeiture incurred / condition broken~145|Against depositary or pawnee: moveable property|30y|Date of deposit or pawn~146|High Court original side: mortgagee's possession|30y|Part of principal or interest last paid~146A|Local authority: possession of public street or road|30y|Dispossession or discontinuance~147|Mortgagee: foreclosure or sale|60y|Mortgage money becomes due~148|Against mortgagee: redeem or recover possession|60y|Right to redeem or recover accrues~149|Suit by or on behalf of Federal or Provincial Government|60y|As for a like suit by a private person~150|Appeal: CrPC, sentence of death (Sessions/High Court original)|7d|Date of sentence~151|Appeal: decree/order of High Court original jurisdiction|20d|Date of decree or order~152|Appeal: CPC, to District Judge|30d|Date of decree or order appealed from~153|Appeal: CPC, to High Court from refusal of leave to appeal to Supreme Court|30d|Date of order~154|Appeal: CrPC, to any Court other than High Court|30d|Date of sentence or order appealed from~155|Appeal: CrPC, to High Court (except Arts. 150, 157)|60d|Date of sentence or order appealed from~156|Appeal: CPC, to High Court (except Arts. 151, 153)|90d|Date of decree or order appealed from~157|Appeal: CrPC, from order of acquittal|6m|Date of order appealed from~158|Arbitration Act 1940: set aside or remit award|30d|Service of notice of filing of award~159|Leave to appear and defend (summary procedure / Order XXXVII)|10d|Summons served~160|Restore review application rejected for non-appearance|15d|Review application rejected~161|Review by Small Causes Court|15d|Date of decree or order~162|Review by High Court (original jurisdiction)|20d|Date of decree or order~162-A|Revision, CPC s.115|90d|Date of decision sought to be revised~163|Plaintiff: set aside dismissal for default or non-payment of costs|30d|Date of dismissal~164|Defendant: set aside ex parte decree|30d|Date of decree (or knowledge, if summons not duly served)~165|Person dispossessed: dispute decree-holder's right to possession|30d|Dispossession~166|Set aside execution sale (incl. by judgment-debtor)|30d|Date of sale~167|Complain of resistance/obstruction to delivery of possession|30d|Resistance or obstruction~168|Readmission of appeal dismissed for want of prosecution|30d|Date of dismissal~169|Re-hearing of appeal heard ex parte|30d|Date of appellate decree (or knowledge, if notice not duly served)~170|Leave to appeal as a pauper|30d|Date of decree appealed from~171|Legal representative: set aside order/judgment made in deceased's absence|60d|Date of order or judgment~172|Assignee/receiver of insolvent: set aside dismissal of suit or appeal|60d|Date of order of dismissal~173|Review of judgment (except Arts. 161, 162)|90d|Date of decree or order~174|Notice to show cause why out-of-court payment/adjustment not certified|90d|Payment or adjustment made~175|Payment of decree amount by instalments|6m|Date of decree~176|Make legal representative of deceased plaintiff/appellant a party|90d|Date of death~177|Make legal representative of deceased defendant/respondent a party|90d|Date of death~178|Arbitration Act 1940: file award in Court|90d|Service of notice of making of award~179|Leave to appeal to Supreme Court (CPC)|90d|Date of decree appealed from~180|Execution purchaser: delivery of possession|3y|Sale becomes absolute~181|Applications with no period provided elsewhere|3y|Right to apply accrues~183|Enforce High Court (original side) or Supreme Court judgment/decree/order|6y|Present right to enforce accrues (revived/part-paid/acknowledged: from that date, 12 yrs per proviso text)`;
   const UNIT = { d: [0, 0, 1], m: [0, 1, 0], y: [1, 0, 0] };
   ARTICLES.length = 0;
-  RAW.trim().split('\n').forEach(line => {
+  RAW.trim().split('~').forEach(line => {
     const [id, desc, per, begins] = line.split('|');
     const n = parseInt(id, 10), q = parseInt(per, 10), u = per.slice(-1);
     const y = u === 'y' ? q : 0, m = u === 'm' ? q : 0, d = u === 'd' ? q : 0;
@@ -229,7 +41,6 @@
   const toISO = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const midnight = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 
-  // Bug fix: toISOString() is UTC, so between 00:00 and 05:00 in Pakistan "Today" gave yesterday.
   window.todayStr = () => toISO(new Date());
 
   window.shiftDate = function (field, days) {
@@ -239,7 +50,6 @@
     el.value = toISO(base);
   };
 
-  // Bug fix: 29 Feb + 1 year used to roll into March. Clamp to the last day of the month.
   window.addPeriod = function (date, y, m, d) {
     const t = new Date(date.getFullYear() + y, date.getMonth() + m, 1);
     const last = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
@@ -312,13 +122,12 @@
   const fmtDay = d => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   const val = id => document.getElementById(id).value;
 
-  // Returns excluded days, or an error string. Validates every field the user ticked.
   function exclusion(prefix, label, aId, bId, aName, bName) {
     if (!document.getElementById(prefix + 'toggle').checked) return { days: 0 };
     const a = parseDate(val(aId)), b = parseDate(val(bId));
     if (!a || !b) return { error: `${label}: enter both dates, or untick the exclusion.` };
     if (b <= a) return { error: `${label}: "${bName}" must be after "${aName}".` };
-    return { days: daysBetween(a, b) + (prefix === 's14' ? 1 : 0) }; // s.14 Expl. I: both end days count
+    return { days: daysBetween(a, b) + (prefix === 's14' ? 1 : 0) };
   }
 
   window.calculate = function () {
@@ -380,7 +189,6 @@
       daysEl.textContent = `${plural(remaining)} remaining`;
     }
 
-    // s.4: if the court is closed on the last day, filing is allowed when it reopens.
     const sunday = deadline.getDay() === 0;
     note.className = 'result-note' + (sunday ? ' flag' : '');
     note.textContent = sunday
@@ -399,7 +207,6 @@
   /* ── 4. Table: keyboard access, broader search ───────────────────────────── */
   const baseRender = window.renderTable;
   window.renderTable = function () {
-    // Render everything (division filter still applies), then narrow by search incl. "time begins" text.
     const q = searchQuery.trim().toLowerCase();
     const keep = searchQuery;
     searchQuery = '';
@@ -427,9 +234,9 @@
   const stat = document.querySelector('.masthead-stat-n');
   if (stat) { stat.textContent = ARTICLES.length; stat.nextElementSibling.textContent = 'In-force entries'; }
   const disc = document.querySelector('.disclaimer');
-  if (disc) disc.setAttribute('role', 'note');                 // role=alert interrupted screen readers on load
+  if (disc) disc.setAttribute('role', 'note');                
   const mast = document.querySelector('.masthead');
-  if (mast) mast.removeAttribute('role');                      // banner role is invalid inside <main>
+  if (mast) mast.removeAttribute('role');                     
   const prog = document.getElementById('scroll-progress');
   if (prog) { prog.removeAttribute('role'); prog.setAttribute('aria-hidden', 'true'); }
   document.querySelectorAll('.field-label:not([for])').forEach(l => (l.tagName === 'LABEL') && l.replaceWith(Object.assign(document.createElement('span'), { className: l.className, textContent: l.textContent })));
