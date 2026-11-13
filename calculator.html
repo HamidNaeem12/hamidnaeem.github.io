@@ -206,9 +206,23 @@
   });
   window.onArticleChange = function () {
     const id = document.getElementById('articleSelect').value;
+    toggleCustom();
     document.querySelectorAll('#tableBody tr').forEach(tr => tr.classList.toggle('highlighted', !!id && tr.dataset.art === id));
   };
-  populateArticleSelect(currentDivision);
+  const basePopulate = window.populateArticleSelect;
+  window.populateArticleSelect = function (div) {
+    basePopulate(div);
+    const sel = document.getElementById('articleSelect');
+    const o = document.createElement('option');
+    o.value = 'custom'; o.textContent = 'Custom period…';
+    sel.insertBefore(o, sel.children[1]);
+    toggleCustom();
+  };
+  function toggleCustom() {
+    const box = document.getElementById('customBox');
+    if (box) box.classList.toggle('visible', document.getElementById('articleSelect').value === 'custom');
+  }
+  window.populateArticleSelect(currentDivision);
 
 
   /* ── 1. Date handling: local time, no UTC drift, no month overflow ───────── */
@@ -248,10 +262,24 @@
       text-transform:uppercase;background:var(--white);border:1px solid var(--rule-dk);color:var(--ink-soft);cursor:pointer}
     .copy-btn:hover{background:var(--cream);color:var(--ink)}
     tbody tr:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+    .table-wrap{max-height:calc(100vh - 230px);min-height:320px;overflow:auto;overscroll-behavior:contain}
+    thead{top:0!important;z-index:2}
+    .calc-panel{max-height:calc(100vh - 98px);overflow-y:auto;overscroll-behavior:contain}
+    .custom-box{display:none;margin-top:.6rem;padding:.75rem;background:var(--cream);border:1px solid var(--rule)}
+    .custom-box.visible{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+    .custom-box label{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
+    @media (max-width:960px){.calc-panel{max-height:none;overflow:visible}.table-wrap{max-height:65vh}}
     @media print{nav,.mob-nav,.disclaimer .disclaimer-badge,.reference-panel,.date-shortcuts,.calc-btn,.copy-btn,#cursor,#cursor-ring,#scroll-progress{display:none!important}
       .page-body{display:block;padding:1rem}.calc-panel{position:static}}
   `;
   document.head.appendChild(style);
+
+  const selGroup = document.getElementById('articleSelect').parentNode;
+  const cb = document.createElement('div');
+  cb.className = 'custom-box'; cb.id = 'customBox';
+  cb.innerHTML = ['Years:cY','Months:cM','Days:cD'].map(x => { const [l, i] = x.split(':');
+    return `<div><label for="${i}">${l}</label><input type="number" id="${i}" min="0" max="99" placeholder="0"></div>`; }).join('');
+  selGroup.appendChild(cb);
 
   const calcBtn = document.querySelector('.calc-btn');
   const errBox = document.createElement('div');
@@ -298,15 +326,19 @@
     clearError();
     const artNum = val('articleSelect');
     if (!artNum) return showError('Select an article first.');
-    const art = ARTICLES.find(a => a[0] === artNum);
+    const art = artNum === 'custom'
+      ? ['custom', 'Custom period', +val('cY') || 0, +val('cM') || 0, +val('cD') || 0, currentDivision, 'Custom']
+      : ARTICLES.find(a => a[0] === artNum);
     if (!art) return showError('That article is not in the dataset.');
+    if (art[2] + art[3] + art[4] === 0) return showError('Enter a custom period (years, months and/or days).');
+    const artLabel = artNum === 'custom' ? 'Custom period' : artLabel;
     if (!val('triggerDate')) return showError('Enter the trigger date.');
 
     const trigger = parseDate(val('triggerDate'));
     const ref = val('refDate') ? parseDate(val('refDate')) : midnight(new Date());
     if (ref < trigger) return showError('Reference date is before the trigger date.');
 
-    if (document.getElementById('s12toggle').checked && ARTICLES.find(a => a[0] === artNum)[5] === 'suits')
+    if (document.getElementById('s12toggle').checked && currentDivision === 'suits')
       return showError('s.12 covers appeals, leave to appeal, review and award applications — not suits. Untick it.');
     const s12 = exclusion('s12', 's.12', 's12applied', 's12received', 'Date applied for copy', 'Date copy received');
     if (s12.error) return showError(s12.error);
@@ -327,8 +359,8 @@
     document.getElementById('rPeriod').textContent = periodStr(y, mo, d);
     document.getElementById('rS12').textContent = s12.days ? `${s12.days} days excluded` : '—';
     document.getElementById('rS14').textContent = s14.days ? `${s14.days} days excluded` : '—';
-    document.getElementById('rArticle').textContent = `Art. ${artNum}`;
-    document.getElementById('resultLabel').textContent = `Art. ${artNum} · ${desc.length > 32 ? desc.slice(0, 32) + '…' : desc}`;
+    document.getElementById('rArticle').textContent = artLabel;
+    document.getElementById('resultLabel').textContent = `${artLabel} · ${desc.length > 32 ? desc.slice(0, 32) + '…' : desc}`;
 
     const fill = document.getElementById('timelineFill');
     const badge = document.getElementById('resultBadge');
@@ -356,7 +388,7 @@
       ? 'The last day falls on a Sunday. Under s.4 you may file on the next day the court is open — confirm with the registry.'
       : 'If the court is closed on the last day (holiday or vacation), s.4 lets you file on the day it reopens.';
 
-    lastSummary = `Limitation Act 1908, Art. ${artNum} — ${desc}\n` +
+    lastSummary = `Limitation Act 1908, ${artLabel} — ${desc}\n` +
       `Trigger: ${fmt(trigger)} | Period: ${periodStr(y, mo, d)}` +
       (s12.days ? ` | s.12: +${s12.days}d` : '') + (s14.days ? ` | s.14: +${s14.days}d` : '') +
       `\nLast day to file: ${fmtDay(deadline)} (${remaining < 0 ? 'expired' : plural(remaining) + ' left'} as of ${fmt(ref)})`;
