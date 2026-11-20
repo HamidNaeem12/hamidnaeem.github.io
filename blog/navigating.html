@@ -148,6 +148,32 @@
     .mob-close:hover { color: var(--ink); }
     .mob-nav-label { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 2.5rem; }
 
+    /* ── CHAPTER RAIL (fixed contents, wide screens) ── */
+    .chapter-rail {
+      display: none; position: fixed; top: 50%; left: 2.5rem; transform: translateY(-50%); width: 168px; z-index: 400;
+      opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
+    }
+    .chapter-rail.revealed { opacity: 1; visibility: visible; }
+    .rail-label {
+      font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-muted); padding-bottom: 0.55rem; border-bottom: 1px solid var(--rule); margin-bottom: 0.35rem;
+    }
+    .rail-list { list-style: none; }
+    .rail-link { display: grid; grid-template-columns: 16px 1fr; gap: 0.55rem; align-items: baseline; padding: 0.42rem 0; text-decoration: none; position: relative; }
+    .rail-link::before {
+      content: ''; position: absolute; left: -0.8rem; top: 0.5rem; width: 1px; height: 0;
+      background: var(--red); transition: height 0.35s var(--ease-out);
+    }
+    .rail-num { font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.05em; color: var(--ink-ghost); transition: color 0.25s; }
+    .rail-text {
+      font-family: var(--serif); font-size: 0.86rem; font-style: italic; color: var(--ink-muted); line-height: 1.3;
+      transition: color 0.25s, transform 0.35s var(--ease-out);
+    }
+    .rail-link:hover .rail-text, .rail-link.active .rail-text { color: var(--ink); }
+    .rail-link:hover .rail-num, .rail-link.active .rail-num { color: var(--red); }
+    .rail-link.active .rail-text { transform: translateX(2px); }
+    .rail-link.active::before { height: 100%; }
+
     /* ── COVER ── */
     .cover { background: var(--ink); min-height: 88vh; display: grid; grid-template-rows: 1fr auto; padding: 9.5rem 2.5rem 0; position: relative; overflow: hidden; }
     .cover::before {
@@ -174,13 +200,31 @@
     .cover-title { font-family: var(--serif); font-size: clamp(2.6rem, 6.5vw, 5.2rem); font-weight: 300; line-height: 0.98; color: var(--white); letter-spacing: -0.02em; margin-bottom: 1.4rem; }
     .cover-title em { font-style: italic; color: rgba(248,246,241,0.5); }
     .cover-subtitle { font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: rgba(248,246,241,0.5); line-height: 1.7; max-width: 380px; }
+    .cover-meta {
+      display: flex; flex-wrap: wrap; gap: 0.55rem 1.1rem; margin-top: 1.6rem; padding-top: 1.1rem;
+      border-top: 1px solid rgba(255,255,255,0.09); max-width: 380px;
+    }
+    .cover-meta span { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248,246,241,0.3); }
+    .cover-meta span::before { content: ''; display: inline-block; width: 4px; height: 4px; background: var(--red); margin-right: 0.5rem; vertical-align: middle; }
 
     .cover-right { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 0.4rem; }
     .chapter-index { border-top: 1px solid rgba(255,255,255,0.1); }
     .chapter-index-label { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,246,241,0.3); padding: 0.9rem 0 0.7rem; }
-    .chapter-item { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .chapter-item {
+      display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem; align-items: baseline;
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-decoration: none; transition: padding-left 0.3s var(--ease-out);
+    }
+    .chapter-item:hover { padding-left: 0.4rem; }
+    .chapter-item:last-child { border-bottom: none; }
     .ci-num { font-family: var(--mono); font-size: 0.55rem; color: var(--red); letter-spacing: 0.06em; }
-    .ci-title { font-family: var(--serif); font-size: 0.9rem; font-style: italic; color: rgba(248,246,241,0.45); line-height: 1.4; }
+    .ci-title { font-family: var(--serif); font-size: 0.9rem; font-style: italic; color: rgba(248,246,241,0.45); line-height: 1.4; transition: color 0.2s; }
+    .chapter-item:hover .ci-title, .chapter-item:focus-visible .ci-title { color: var(--white); }
+    .ci-arrow {
+      font-family: var(--mono); font-size: 0.6rem; color: var(--red); opacity: 0; transform: translateX(-5px);
+      transition: opacity 0.2s, transform 0.25s var(--ease-out);
+    }
+    .chapter-item:hover .ci-arrow { opacity: 1; transform: translateX(0); }
 
     .cover-bar { background: var(--red); height: 2px; position: relative; z-index: 1; }
 
@@ -188,10 +232,14 @@
     .body-wrap { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
 
     /* ── CHAPTER STRUCTURE ── */
-    .chapter { padding: 4.5rem 0; border-bottom: 1px solid var(--rule); position: relative; }
+    .chapter { padding: 4.5rem 0; border-bottom: 1px solid var(--rule); position: relative; scroll-margin-top: 74px; }
     .chapter:last-of-type { border-bottom: none; }
     .chapter-header { display: flex; align-items: baseline; gap: 1.25rem; margin-bottom: 2.25rem; }
-    .ch-numeral { font-family: var(--serif); font-size: 4.5rem; font-weight: 300; font-style: italic; color: var(--rule-dk); line-height: 1; letter-spacing: -0.02em; flex-shrink: 0; }
+    .ch-numeral {
+      font-family: var(--serif); font-size: 4.5rem; font-weight: 300; font-style: italic;
+      color: transparent; -webkit-text-stroke: 1px var(--rule-dk); line-height: 1; letter-spacing: -0.02em; flex-shrink: 0;
+    }
+    .chapter:hover .ch-numeral { -webkit-text-stroke-color: rgba(139,32,32,0.45); }
     .ch-label { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem; }
     .ch-heading { font-family: var(--serif); font-size: 1.45rem; font-weight: 400; color: var(--ink); line-height: 1.28; }
 
@@ -240,7 +288,10 @@
     .lesson-row { display: grid; grid-template-columns: 52px 1fr; border-bottom: 1px solid var(--rule); }
     .lesson-row:last-child { border-bottom: none; }
     .lesson-num-col { background: var(--cream); display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--rule); padding: 1.5rem 0; }
-    .lesson-num-col span { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; font-style: italic; color: var(--rule-dk); line-height: 1; }
+    .lesson-num-col span {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 300; font-style: italic;
+      color: transparent; -webkit-text-stroke: 1px var(--rule-dk); line-height: 1;
+    }
     .lesson-content { padding: 1.5rem 1.6rem; }
     .lesson-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
     .lesson-body { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.75; }
@@ -293,13 +344,15 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (min-width: 1240px) { .chapter-rail { display: block; } }
     @media (max-width: 860px) {
       nav { padding: 0 1.25rem; height: 54px; }
       .nav-links { display: none; }
       .nav-burger { display: flex; }
       .cover { padding: 7rem 1.25rem 0; min-height: auto; }
       .cover-inner { grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
-      .cover-right { display: none; }
+      .cover-right { display: flex; padding-top: 2rem; }
+      .cover-meta { margin-top: 1.4rem; }
       .cover-title { font-size: 2.75rem; }
       .body-wrap { padding: 0 1.25rem; }
       .chapter { padding: 3.25rem 0; }
@@ -348,6 +401,19 @@
     </div>
   </div>
 
+  <!-- ── CHAPTER RAIL ── -->
+  <div class="chapter-rail" role="navigation" aria-label="Chapter contents">
+    <p class="rail-label">Contents</p>
+    <ul class="rail-list" role="list">
+      <li><a class="rail-link" href="#ch-1"><span class="rail-num">I</span><span class="rail-text">No roadmap</span></a></li>
+      <li><a class="rail-link" href="#ch-2"><span class="rail-num">II</span><span class="rail-text">Two worlds</span></a></li>
+      <li><a class="rail-link" href="#ch-3"><span class="rail-num">III</span><span class="rail-text">The messy years</span></a></li>
+      <li><a class="rail-link" href="#ch-4"><span class="rail-num">IV</span><span class="rail-text">Before confidence</span></a></li>
+      <li><a class="rail-link" href="#ch-5"><span class="rail-num">V</span><span class="rail-text">Do differently</span></a></li>
+      <li><a class="rail-link" href="#ch-6"><span class="rail-num">VI</span><span class="rail-text">Still open</span></a></li>
+    </ul>
+  </div>
+
   <!-- ── COVER ── -->
   <section class="cover" aria-label="Essay introduction">
     <div class="cover-inner">
@@ -361,16 +427,21 @@
           to exist
         </h1>
         <p class="cover-subtitle">I wish I could tell you there was a plan. There wasn't. Most people pick a lane. I ended up in three — and I'm still figuring out what that means.</p>
+        <div class="cover-meta">
+          <span>Six chapters</span>
+          <span>About nine minutes</span>
+          <span>Personal account</span>
+        </div>
       </div>
       <div class="cover-right">
         <div class="chapter-index">
           <p class="chapter-index-label">In this piece</p>
-          <div class="chapter-item"><span class="ci-num">I</span><span class="ci-title">The advantage of having no roadmap</span></div>
-          <div class="chapter-item"><span class="ci-num">II</span><span class="ci-title">Studying two worlds at once</span></div>
-          <div class="chapter-item"><span class="ci-num">III</span><span class="ci-title">The years that looked messy from outside</span></div>
-          <div class="chapter-item"><span class="ci-num">IV</span><span class="ci-title">Building before confidence arrived</span></div>
-          <div class="chapter-item"><span class="ci-num">V</span><span class="ci-title">Things I'd do differently</span></div>
-          <div class="chapter-item"><span class="ci-num">VI</span><span class="ci-title">What I still don't know</span></div>
+          <a class="chapter-item" href="#ch-1"><span class="ci-num">I</span><span class="ci-title">The advantage of having no roadmap</span><span class="ci-arrow" aria-hidden="true">→</span></a>
+          <a class="chapter-item" href="#ch-2"><span class="ci-num">II</span><span class="ci-title">Studying two worlds at once</span><span class="ci-arrow" aria-hidden="true">→</span></a>
+          <a class="chapter-item" href="#ch-3"><span class="ci-num">III</span><span class="ci-title">The years that looked messy from outside</span><span class="ci-arrow" aria-hidden="true">→</span></a>
+          <a class="chapter-item" href="#ch-4"><span class="ci-num">IV</span><span class="ci-title">Building before confidence arrived</span><span class="ci-arrow" aria-hidden="true">→</span></a>
+          <a class="chapter-item" href="#ch-5"><span class="ci-num">V</span><span class="ci-title">Things I'd do differently</span><span class="ci-arrow" aria-hidden="true">→</span></a>
+          <a class="chapter-item" href="#ch-6"><span class="ci-num">VI</span><span class="ci-title">What I still don't know</span><span class="ci-arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -381,7 +452,7 @@
   <div class="body-wrap">
 
     <!-- CHAPTER I -->
-    <article class="chapter">
+    <article class="chapter" id="ch-1">
       <div class="chapter-header">
         <span class="ch-numeral" aria-hidden="true">I</span>
         <div>
@@ -401,7 +472,7 @@
     </article>
 
     <!-- CHAPTER II -->
-    <article class="chapter">
+    <article class="chapter" id="ch-2">
       <div class="chapter-header">
         <span class="ch-numeral" aria-hidden="true">II</span>
         <div>
@@ -424,7 +495,7 @@
     </article>
 
     <!-- CHAPTER III — browser tabs -->
-    <article class="chapter">
+    <article class="chapter" id="ch-3">
       <div class="chapter-header">
         <span class="ch-numeral" aria-hidden="true">III</span>
         <div>
@@ -461,7 +532,7 @@
     </article>
 
     <!-- CHAPTER IV -->
-    <article class="chapter">
+    <article class="chapter" id="ch-4">
       <div class="chapter-header">
         <span class="ch-numeral" aria-hidden="true">IV</span>
         <div>
@@ -482,7 +553,7 @@
     </article>
 
     <!-- CHAPTER V — LESSONS -->
-    <article class="chapter">
+    <article class="chapter" id="ch-5">
       <div class="chapter-header">
         <span class="ch-numeral" aria-hidden="true">V</span>
         <div>
@@ -529,7 +600,7 @@
     </article>
 
     <!-- CHAPTER VI — QUESTIONS -->
-    <article class="chapter">
+    <article class="chapter" id="ch-6">
       <div class="chapter-header">
         <span class="ch-numeral" aria-hidden="true">VI</span>
         <div>
@@ -613,6 +684,29 @@
     window.addEventListener('scroll', () => {
       navEl.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
+
+    // ── Chapter rail: highlight the chapter in view ──
+    (function initChapterRail() {
+      const links = Array.from(document.querySelectorAll('.rail-link'));
+      const chapters = Array.from(document.querySelectorAll('article.chapter[id]'));
+      if (!links.length || !chapters.length || !('IntersectionObserver' in window)) return;
+      const setActive = id => links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      chapters.forEach(c => io.observe(c));
+      setActive(chapters[0].id);
+
+      const rail = document.querySelector('.chapter-rail');
+      const cover = document.querySelector('.cover');
+      const syncRail = () => {
+        if (!rail || !cover) return;
+        rail.classList.toggle('revealed', cover.getBoundingClientRect().bottom < window.innerHeight * 0.55);
+      };
+      window.addEventListener('scroll', syncRail, { passive: true });
+      window.addEventListener('resize', syncRail);
+      syncRail();
+    })();
 
     // ── Mobile nav ──
     function openMobNav(btn) {
