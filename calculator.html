@@ -231,7 +231,12 @@ nav {
 
 /* ─── CALCULATOR PANEL ───────────────────────────────────────────── */
 .calc-panel { position: sticky; top: 78px; border: 1px solid var(--rule); border-top: 3px solid var(--red); background: var(--white); }
-.calc-panel-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); background: var(--cream); display: flex; align-items: center; justify-content: space-between; }
+/* Once a result is showing the panel can be taller than the screen. Cap it and
+   let its own contents scroll, so the inputs stay reachable and the page never jumps. */
+@media (min-width: 961px) {
+  .calc-panel { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; }
+}
+.calc-panel-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--rule); background: var(--cream); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 2; }
 .calc-panel-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
 .calc-panel-sub { font-family: var(--mono); font-size: 0.52rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-ghost); }
 
@@ -427,6 +432,7 @@ footer {
     <li><a href="/#about">About</a></li>
     <li><a href="/blog">Writing</a></li>
     <li><a href="/calculator" class="active">Calculator</a></li>
+    <li><a href="/eu-ai-act-mapper">AI Act Mapper</a></li>
     <li><a href="/newsletter">Newsletter</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
@@ -444,6 +450,7 @@ footer {
     <a href="/#about" onclick="closeMobNav()">About</a>
     <a href="/blog" onclick="closeMobNav()">Writing</a>
     <a href="/calculator" onclick="closeMobNav()">Calculator</a>
+    <a href="/eu-ai-act-mapper" onclick="closeMobNav()">AI Act Mapper</a>
     <a href="/newsletter" onclick="closeMobNav()">Newsletter</a>
     <a href="/#contact" onclick="closeMobNav()">Contact</a>
   </div>
@@ -1009,7 +1016,14 @@ function calculate() {
   }
 
   onArticleChange();
-  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  // Reveal the result without moving the page. On desktop the panel has its own
+  // scrollbar, so scroll that; only nudge the window when the panel is off-screen.
+  const shell = document.querySelector('.calc-panel');
+  if (shell && shell.scrollHeight > shell.clientHeight + 4) {
+    shell.scrollTop = shell.scrollHeight;
+  } else if (panel.getBoundingClientRect().bottom > window.innerHeight) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 // ── TABLE ─────────────────────────────────────────────────────────────────────

@@ -212,6 +212,35 @@
     .section-eyebrow { font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.2em; color: var(--red); flex-shrink: 0; text-transform: uppercase; }
     .section-title { font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 300; color: var(--ink); letter-spacing: -0.015em; line-height: 1.15; }
 
+    /* ── CONTENTS INDEX ── */
+    .contents { max-width: 1040px; margin: 0 auto; padding: 4rem 2.5rem 0; }
+    .contents-head {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+      border-bottom: 1px solid var(--ink); padding-bottom: 0.7rem;
+    }
+    .contents-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); }
+    .contents-note { font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--ink-muted); }
+    .contents-list { list-style: none; }
+    .contents-list li { border-bottom: 1px solid var(--rule); }
+    .contents-list a {
+      display: grid; grid-template-columns: 44px minmax(0,0.95fr) minmax(0,1.15fr) 132px 18px;
+      align-items: baseline; gap: 1.25rem; padding: 1.2rem 0;
+      text-decoration: none; color: inherit; position: relative;
+      transition: padding-left 0.35s var(--ease-out);
+    }
+    .contents-list a::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+      background: var(--red); transition: width 0.35s var(--ease-out);
+    }
+    .contents-list a:hover { padding-left: 1.1rem; }
+    .contents-list a:hover::before { width: 2px; }
+    .c-folio { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--red); line-height: 1; }
+    .c-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); line-height: 1.15; }
+    .c-desc { font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--ink-muted); line-height: 1.4; }
+    .c-meta { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-ghost); white-space: nowrap; text-align: right; }
+    .c-arrow { font-family: var(--mono); font-size: 0.75rem; color: var(--red); opacity: 0; transform: translateX(-6px); transition: opacity 0.25s, transform 0.25s; }
+    .contents-list a:hover .c-arrow { opacity: 1; transform: translateX(0); }
+
     /* ── CARD A: FIELD GUIDE ── */
     .card-feature {
       display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); background: var(--white);
@@ -225,7 +254,11 @@
       pointer-events: none; user-select: none;
     }
     .card-feature-tag { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
-    .card-feature-num { font-family: var(--serif); font-size: 5.5rem; font-weight: 300; color: rgba(248,246,241,0.85); line-height: 1; margin-top: auto; letter-spacing: -0.03em; }
+    .card-feature-num {
+      font-family: var(--serif); font-size: 6.5rem; font-weight: 300; line-height: 1; margin-top: auto;
+      letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1px rgba(248,246,241,0.45);
+    }
+    .card-feature:hover .card-feature-num { -webkit-text-stroke-color: rgba(232,163,163,0.65); }
     .card-feature-right { padding: 2.75rem; display: flex; flex-direction: column; justify-content: space-between; }
     .card-feature-title { font-family: var(--serif); font-size: 1.55rem; font-weight: 400; line-height: 1.28; color: var(--ink); margin-bottom: 1rem; }
     .card-feature-body { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.8; flex: 1; }
@@ -242,7 +275,11 @@
     .resource-card:hover { background: var(--cream); }
     .resource-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.1rem; }
     .rc-label { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
-    .rc-count { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--rule-dk); line-height: 1; }
+    .rc-count {
+      font-family: var(--serif); font-size: 2.15rem; font-weight: 300; line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px var(--ink-ghost);
+    }
+    .resource-card:hover .rc-count { -webkit-text-stroke-color: var(--red); }
     .resource-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.3; }
     .resource-card p { font-size: 0.83rem; color: var(--ink-soft); line-height: 1.72; }
     .resource-card-footer { margin-top: 1.3rem; padding-top: 0.9rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
@@ -324,6 +361,10 @@
       .newsletter-feature-inner { grid-template-columns: 1fr; gap: 1.5rem; }
       .nf-cta { align-items: flex-start; }
       .section-wrap { padding: 3.5rem 1.25rem; }
+      .contents { padding: 3rem 1.25rem 0; }
+      .contents-list a { grid-template-columns: 34px 1fr auto; gap: 0.9rem; }
+      .c-desc, .c-arrow { display: none; }
+      .c-title { font-size: 1.3rem; }
       .card-feature { grid-template-columns: 1fr; }
       .card-feature-left { min-height: 180px; }
       .resource-grid { grid-template-columns: 1fr; }
@@ -352,6 +393,7 @@
       <li><a href="/#about">About</a></li>
       <li><a href="/blog" class="active">Writing</a></li>
       <li><a href="/calculator">Calculator</a></li>
+      <li><a href="/eu-ai-act-mapper">AI Act Mapper</a></li>
       <li><a href="/newsletter">Newsletter</a></li>
       <li><a href="/#contact">Contact</a></li>
     </ul>
@@ -368,6 +410,7 @@
       <a href="/#about" onclick="closeMobNav()">About</a>
       <a href="/blog" onclick="closeMobNav()">Writing</a>
       <a href="/calculator" onclick="closeMobNav()">Calculator</a>
+      <a href="/eu-ai-act-mapper" onclick="closeMobNav()">AI Act Mapper</a>
       <a href="/newsletter" onclick="closeMobNav()">Newsletter</a>
       <a href="/#contact" onclick="closeMobNav()">Contact</a>
     </div>
@@ -428,6 +471,43 @@
       </div>
     </div>
   </div>
+
+  <!-- ── CONTENTS ── -->
+  <section class="contents reveal-up" aria-label="Contents">
+    <div class="contents-head">
+      <span class="contents-label">Contents</span>
+      <span class="contents-note">Three routes in</span>
+    </div>
+    <ol class="contents-list">
+      <li>
+        <a href="/blog/glossary">
+          <span class="c-folio">01</span>
+          <span class="c-title">Field Guide</span>
+          <span class="c-desc">Terms, frameworks and concepts, plainly explained</span>
+          <span class="c-meta">A–Z</span>
+          <span class="c-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="/blog/resources">
+          <span class="c-folio">02</span>
+          <span class="c-title">Resource Library</span>
+          <span class="c-desc">Primary texts, databases and monitoring tools</span>
+          <span class="c-meta">16 resources</span>
+          <span class="c-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href="/blog/navigating">
+          <span class="c-folio">03</span>
+          <span class="c-title">How I Got Here</span>
+          <span class="c-desc">The long way round, told honestly</span>
+          <span class="c-meta">5 chapters</span>
+          <span class="c-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ol>
+  </section>
 
   <!-- ── SECTION 01 — FIELD GUIDE ── -->
   <div class="section-wrap" style="padding-bottom: 0;">
