@@ -426,6 +426,8 @@ footer {
 }
 .result-pdf-btn:hover { background: var(--red); }
 .result-pdf-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.result-pdf-btn:disabled { background: var(--rule-dk); color: var(--ink-muted); cursor: not-allowed; }
+.result-pdf-btn:disabled:hover { background: var(--rule-dk); }
 .result-pdf-hint { font-family: var(--sans); font-size: 0.66rem; font-weight: 300; color: var(--ink-muted); }
 
 /* ─── PRINT / PDF SHEET ──────────────────────────────────────────── */
@@ -686,10 +688,10 @@ footer {
             </div>
           </div>
           <div class="result-actions">
-            <button class="result-pdf-btn" onclick="downloadPDF()" aria-label="Download this calculation as a PDF">
+            <button class="result-pdf-btn" id="pdfBtn" onclick="downloadPDF()" disabled aria-label="Download this calculation as a PDF">
               Download PDF
             </button>
-            <span class="result-pdf-hint">Opens the print dialog — choose “Save as PDF”.</span>
+            <span class="result-pdf-hint">The address bar holds a link to this calculation. PDF opens the print dialog — choose “Save as PDF”.</span>
           </div>
         </div>
       </div>
@@ -969,6 +971,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setToday('ref');
   populateArticleSelect('suits');
   renderTable();
+  // A shared link (…?art=24&t=2026-01-05&…) reopens the same calculation.
+  if (restoreFromUrl()) calculate({ silent: true });
 });
 
 // ── DIVISION ──────────────────────────────────────────────────────────────────
@@ -1048,7 +1052,8 @@ function toggleExclusion(id) {
 }
 
 // ── CALCULATE ─────────────────────────────────────────────────────────────────
-function calculate() {
+function calculate(opts) {
+  const silent = !!(opts && opts.silent);
   const artNum = parseInt(document.getElementById('articleSelect').value);
   if (!artNum) { alert('Please select a case type.'); return; }
 
@@ -1132,6 +1137,8 @@ function calculate() {
     begins: art[6],
     trigger, ref, deadline, baseDeadline, remaining,
     s12days, s14days,
+    s12on: document.getElementById('s12toggle').checked,
+    s14on: document.getElementById('s14toggle').checked,
     s12applied: document.getElementById('s12applied').value,
     s12received: document.getElementById('s12received').value,
     s14filed: document.getElementById('s14filed').value,
@@ -1140,7 +1147,11 @@ function calculate() {
     statusText: daysEl.textContent
   };
 
+  document.getElementById('pdfBtn').disabled = false;
+  syncUrl();
+
   onArticleChange();
+  if (silent) return;
   // Reveal the result without moving the page. On desktop the panel has its own
   // scrollbar, so scroll that; only nudge the window when the panel is off-screen.
   const shell = document.querySelector('.calc-panel');
@@ -1197,6 +1208,64 @@ function renderTable() {
 
   document.getElementById('tableCount').textContent =
     `${filtered.length} of ${ARTICLES.length} articles`;
+}
+
+// ── URL STATE ─────────────────────────────────────────────────────────────────
+// A calculation is fully described by the article, the trigger and reference
+// dates, and the two exclusion pairs, so all of it can travel in the query
+// string: ?art=24&t=2026-01-05&r=2026-11-20&s12=2026-01-10~2026-01-25
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+function isoDate(d) {
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+function syncUrl() {
+  if (!lastCalc) return;
+  const c = lastCalc;
+  const params = new URLSearchParams();
+  params.set('art', String(c.artNum));
+  params.set('t', isoDate(c.trigger));
+  params.set('r', isoDate(c.ref));
+  if (c.s12on && c.s12applied && c.s12received) params.set('s12', `${c.s12applied}~${c.s12received}`);
+  if (c.s14on && c.s14filed && c.s14dismissed)  params.set('s14', `${c.s14filed}~${c.s14dismissed}`);
+  try {
+    const qs = params.toString().replace(/%7E/g, '~');  // keep the pair separator readable
+    history.replaceState(null, '', `${location.pathname}?${qs}${location.hash}`);
+  } catch (e) { /* file:// and other locked-down contexts */ }
+}
+
+function restoreFromUrl() {
+  const params  = new URLSearchParams(location.search);
+  const artNum  = parseInt(params.get('art'), 10);
+  const trigger = params.get('t');
+  const art     = ARTICLES.find(a => a[0] === artNum);
+  if (!art || !trigger || !ISO_DATE.test(trigger)) return false;
+
+  currentDivision = art[5];
+  document.querySelectorAll('.seg-control button')
+    .forEach(b => b.classList.toggle('active', b.dataset.div === art[5]));
+  populateArticleSelect(art[5]);
+  document.getElementById('articleSelect').value = String(artNum);
+  document.getElementById('triggerDate').value  = trigger;
+
+  const ref = params.get('r');
+  if (ref && ISO_DATE.test(ref)) document.getElementById('refDate').value = ref;
+
+  [['s12', 's12applied', 's12received'],
+   ['s14', 's14filed',   's14dismissed']].forEach(([key, fromId, toId]) => {
+    const raw = params.get(key);
+    if (!raw || !raw.includes('~')) return;
+    const [from, to] = raw.split('~');
+    if (!ISO_DATE.test(from) || !ISO_DATE.test(to)) return;
+    document.getElementById(key + 'toggle').checked = true;
+    document.getElementById(fromId).value = from;
+    document.getElementById(toId).value   = to;
+    toggleExclusion(key);
+  });
+
+  return true;
 }
 
 // ── PDF EXPORT ────────────────────────────────────────────────────────────────
