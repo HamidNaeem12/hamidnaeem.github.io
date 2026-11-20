@@ -417,6 +417,68 @@ footer {
   .ref-controls { width: 100%; }
   footer { padding: 1.5rem 1rem; }
 }
+/* ─── RESULT ACTIONS ─────────────────────────────────────────────── */
+.result-actions { display: flex; align-items: center; gap: 0.65rem; margin-top: 1.1rem; flex-wrap: wrap; }
+.result-pdf-btn {
+  font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.62rem 0.95rem; background: var(--ink); color: var(--paper);
+  border: none; cursor: pointer; transition: background 0.15s;
+}
+.result-pdf-btn:hover { background: var(--red); }
+.result-pdf-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.result-pdf-hint { font-family: var(--sans); font-size: 0.66rem; font-weight: 300; color: var(--ink-muted); }
+
+/* ─── PRINT / PDF SHEET ──────────────────────────────────────────── */
+.print-sheet { display: none; }
+
+@media print {
+  @page { size: A4; margin: 15mm 14mm; }
+
+  html, body { background: #fff !important; }
+  body > *:not(.print-sheet) { display: none !important; }
+
+  .print-sheet {
+    display: block !important;
+    font-family: var(--sans);
+    color: #14120f;
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  .ps-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid #14120f; padding-bottom: 5pt; margin-bottom: 14pt;
+  }
+  .ps-brand { font-family: var(--serif); font-size: 13pt; }
+  .ps-site { font-family: var(--mono); font-size: 7pt; letter-spacing: 0.08em; color: #55514a; }
+
+  .ps-title { font-family: var(--serif); font-weight: 400; font-size: 24pt; line-height: 1.1; margin: 0 0 2pt; letter-spacing: -0.01em; }
+  .ps-kicker { font-family: var(--mono); font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: #8b2020; margin: 0 0 14pt; }
+
+  .ps-hero { border: 1px solid #d9d5cd; border-left: 3pt solid #8b2020; padding: 9pt 11pt; margin-bottom: 14pt; page-break-inside: avoid; }
+  .ps-hero-label { font-family: var(--mono); font-size: 6.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #7a756d; margin-bottom: 2pt; }
+  .ps-hero-date { font-family: var(--serif); font-size: 20pt; line-height: 1.1; margin-bottom: 4pt; }
+  .ps-hero-row { display: flex; align-items: baseline; gap: 8pt; }
+  .ps-hero-status { font-family: var(--sans); font-size: 9pt; color: #55514a; }
+  .ps-badge { font-family: var(--mono); font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; padding: 1.5pt 5pt; border: 1px solid currentColor; }
+  .ps-badge.ok { color: #1f6b3a; }
+  .ps-badge.warn { color: #8a5a06; }
+  .ps-badge.expired { color: #8b2020; }
+
+  .ps-rows { width: 100%; border-collapse: collapse; margin-bottom: 14pt; page-break-inside: avoid; }
+  .ps-rows th, .ps-rows td { text-align: left; padding: 3.5pt 0; border-bottom: 1px solid #e6e2da; vertical-align: baseline; }
+  .ps-rows th { font-family: var(--mono); font-size: 6.5pt; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: #7a756d; width: 34%; }
+  .ps-rows td { font-family: var(--sans); font-size: 9.5pt; }
+
+  .ps-section { margin-bottom: 12pt; page-break-inside: avoid; }
+  .ps-section h2 { font-family: var(--mono); font-size: 6.5pt; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #8b2020; margin: 0 0 4pt; }
+  .ps-section p { margin: 0; font-size: 9.5pt; color: #33302b; }
+
+  .ps-notice { border-top: 1px solid #14120f; padding-top: 7pt; font-size: 8pt; line-height: 1.5; color: #55514a; page-break-inside: avoid; }
+  .ps-notice strong { font-family: var(--mono); font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #8b2020; }
+
+  .ps-foot { display: flex; justify-content: space-between; gap: 10pt; margin-top: 12pt; font-family: var(--mono); font-size: 6.5pt; letter-spacing: 0.06em; color: #8a8680; }
+}
 </style>
 </head>
 <body>
@@ -623,6 +685,12 @@ footer {
               <span class="result-row-val" id="rArticle">—</span>
             </div>
           </div>
+          <div class="result-actions">
+            <button class="result-pdf-btn" onclick="downloadPDF()" aria-label="Download this calculation as a PDF">
+              Download PDF
+            </button>
+            <span class="result-pdf-hint">Opens the print dialog — choose “Save as PDF”.</span>
+          </div>
         </div>
       </div>
 
@@ -676,6 +744,47 @@ footer {
 </div>
 
 </main>
+
+<!-- ── PRINT / PDF SHEET (paper only) ─────────────────────────────── -->
+<section class="print-sheet" id="printSheet" aria-hidden="true">
+  <div class="ps-top">
+    <span class="ps-brand">Muhammad Hamid Naeem</span>
+    <span class="ps-site">hamidnaeem.me/calculator</span>
+  </div>
+
+  <h1 class="ps-title">Limitation Calculation</h1>
+  <p class="ps-kicker">Limitation Act 1908 · First Schedule · Pakistan</p>
+
+  <div class="ps-hero">
+    <div class="ps-hero-label">Filing deadline</div>
+    <div class="ps-hero-date" id="psDeadline">—</div>
+    <div class="ps-hero-row">
+      <span class="ps-hero-status" id="psStatus"></span>
+      <span class="ps-badge" id="psBadge"></span>
+    </div>
+  </div>
+
+  <table class="ps-rows"><tbody id="psRows"></tbody></table>
+
+  <div class="ps-section">
+    <h2>Basis of calculation</h2>
+    <p id="psBasis"></p>
+  </div>
+
+  <div class="ps-section">
+    <h2>Inputs as entered</h2>
+    <p id="psInputs"></p>
+  </div>
+
+  <div class="ps-notice">
+    <strong>Notice.</strong> Limitation runs differently when fraud, disability, acknowledgement, or a stay order is involved. Court closures extend deadlines; registry practice varies by court. Verify against the statute before acting on any result. This sheet is a calculation aid and does not constitute legal advice.
+  </div>
+
+  <div class="ps-foot">
+    <span id="psStamp"></span>
+    <span>Prepared with the Limitation Calculator — hamidnaeem.me/calculator</span>
+  </div>
+</section>
 
 <!-- ── FOOTER ─────────────────────────────────────────────────────── -->
 <footer>
@@ -955,6 +1064,7 @@ function calculate() {
   const [, desc, y, mo, d] = art;
 
   let deadline = addPeriod(trigger, y, mo, d);
+  const baseDeadline = new Date(deadline);
 
   let s12days = 0;
   if (document.getElementById('s12toggle').checked) {
@@ -1015,6 +1125,21 @@ function calculate() {
     fill.style.width = pct + '%';
   }
 
+  lastCalc = {
+    artNum, desc,
+    division: currentDivision,
+    period: periodStr(y, mo, d),
+    begins: art[6],
+    trigger, ref, deadline, baseDeadline, remaining,
+    s12days, s14days,
+    s12applied: document.getElementById('s12applied').value,
+    s12received: document.getElementById('s12received').value,
+    s14filed: document.getElementById('s14filed').value,
+    s14dismissed: document.getElementById('s14dismissed').value,
+    status: badge.textContent,
+    statusText: daysEl.textContent
+  };
+
   onArticleChange();
   // Reveal the result without moving the page. On desktop the panel has its own
   // scrollbar, so scroll that; only nudge the window when the panel is off-screen.
@@ -1072,6 +1197,68 @@ function renderTable() {
 
   document.getElementById('tableCount').textContent =
     `${filtered.length} of ${ARTICLES.length} articles`;
+}
+
+// ── PDF EXPORT ────────────────────────────────────────────────────────────────
+let lastCalc = null;
+
+function downloadPDF() {
+  if (!lastCalc) return;
+  const c = lastCalc;
+  const plus = n => `${n} day${n === 1 ? '' : 's'}`;
+
+  document.getElementById('psDeadline').textContent = formatDate(c.deadline);
+  document.getElementById('psStatus').textContent   = c.statusText;
+  document.getElementById('psBadge').textContent    = c.status;
+  document.getElementById('psBadge').className      = 'ps-badge ' + (c.remaining < 0 ? 'expired' : c.remaining <= 30 ? 'warn' : 'ok');
+
+  const rows = [
+    ['Article',         `Art. ${c.artNum}`],
+    ['Case type',       c.desc],
+    ['Division',        c.division.charAt(0).toUpperCase() + c.division.slice(1)],
+    ['Period allowed',  c.period],
+    ['Time begins',     c.begins],
+    ['Trigger date',    formatDate(c.trigger)],
+    ['Reference date',  formatDate(c.ref)],
+    ['s.12 excluded',   c.s12days ? plus(c.s12days) : 'Not applied'],
+    ['s.14 excluded',   c.s14days ? plus(c.s14days) : 'Not applied'],
+    ['Filing deadline', formatDate(c.deadline)]
+  ];
+  document.getElementById('psRows').innerHTML = rows
+    .map(([k, v]) => `<tr><th scope="row">${k}</th><td>${v}</td></tr>`)
+    .join('');
+
+  const basis = [
+    `Article ${c.artNum} of the First Schedule to the Limitation Act 1908 prescribes ${c.period.toLowerCase()} for this case type. Time begins: ${c.begins.toLowerCase()}.`,
+    `Counting from the trigger date (${formatDate(c.trigger)}) the period would expire on ${formatDate(c.baseDeadline)}.`
+  ];
+  if (c.s12days) {
+    basis.push(`Under s.12(2), ${plus(c.s12days)} between the application for a certified copy (${formatDate(parseDate(c.s12applied))}) and its receipt (${formatDate(parseDate(c.s12received))}) are excluded.`);
+  }
+  if (c.s14days) {
+    basis.push(`Under s.14, ${plus(c.s14days)} spent in the prior proceeding (filed ${formatDate(parseDate(c.s14filed))}, concluded ${formatDate(parseDate(c.s14dismissed))}) are excluded.`);
+  }
+  basis.push(`The extended filing deadline is therefore ${formatDate(c.deadline)}, assessed as of ${formatDate(c.ref)}: ${c.statusText.toLowerCase()}.`);
+  document.getElementById('psBasis').textContent = basis.join(' ');
+
+  const inputs = [];
+  inputs.push(`Division: ${c.division.charAt(0).toUpperCase() + c.division.slice(1)}.`);
+  inputs.push(`Article ${c.artNum} — ${c.desc}.`);
+  inputs.push(`Trigger date: ${formatDate(c.trigger)}.`);
+  inputs.push(`Reference date: ${formatDate(c.ref)}.`);
+  const d = v => v ? formatDate(parseDate(v)) : 'not entered';
+  inputs.push(document.getElementById('s12toggle').checked
+    ? `s.12 toggle on — copy applied for ${d(c.s12applied)}, received ${d(c.s12received)}.`
+    : 's.12 toggle off.');
+  inputs.push(document.getElementById('s14toggle').checked
+    ? `s.14 toggle on — prior proceeding filed ${d(c.s14filed)}, concluded ${d(c.s14dismissed)}.`
+    : 's.14 toggle off.');
+  document.getElementById('psInputs').textContent = inputs.join(' ');
+
+  document.getElementById('psStamp').textContent =
+    'Generated ' + new Date().toLocaleString('en-GB', { dateStyle: 'long', timeStyle: 'short' }) + '.';
+
+  window.print();
 }
 
 function filterTable(val) { searchQuery = val; renderTable(); }
