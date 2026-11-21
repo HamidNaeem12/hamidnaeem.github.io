@@ -163,8 +163,14 @@ def statute_sections(text: str):
     return sections
 
 
+def unit_label(unit: str, default: str = "Section") -> str:
+    """'rule' -> 'Rule', 'paragraph' -> 'Paragraph', 'chapter' -> 'Chapter'."""
+    word = (unit or default).strip() or default
+    return word[:1].upper() + word[1:].lower()
+
+
 def sections_to_chunks(sections, source: str, url: str = "", unit: str = "Section"):
-    label = "Rule" if str(unit).lower().startswith("rule") else "Section"
+    label = unit_label(unit)
     chunks = []
     for number, title, body in sections:
         heading = f"{label} {number}" + (f" — {title}" if title else "")
@@ -184,19 +190,24 @@ def label_numbered_chunks(chunks, unit: str = "Rule"):
     paragraph starts "39. Crop Inspection Register." becomes "Rule 39 — ..."
     and lines up with how the instrument is cited.
     """
-    label = "Rule" if str(unit).lower().startswith("rule") else "Section"
+    label = unit_label(unit, "Rule")
     for chunk in chunks:
         # Only label a chunk when it genuinely opens with a provision number.
         # Carrying the previous number forward drifts (footnote and amendment
         # numbers look identical), and a wrong rule number is worse than none.
-        match = re.match(r"^\s*(\d{1,3})\.\s+\S", chunk["text"])
-        number = int(match.group(1)) if match else None
+        if label.lower() == "paragraph":
+            # Manuals number paragraphs in decimal form: "7.60 Records to be kept".
+            para = re.match(r"^\s*(\d{1,3}\.\d{1,3})\.?\s+\S", chunk["text"])
+            number = para.group(1) if para else None
+        else:
+            match = re.match(r"^\s*(\d{1,3})\.\s+\S", chunk["text"])
+            number = int(match.group(1)) if match else None
         if number is None:
             # Form pages open with "FORM XXIV (See RULE 39)" instead of a number,
             # so take the rule it cites when the chunk points at exactly one.
             refs = {int(n) for n in re.findall(r"\bRULE\s+(\d{1,3})\b", chunk["text"], re.IGNORECASE)}
             number = refs.pop() if len(refs) == 1 else None
-        if number is None or not 1 <= number <= 400:
+        if number is None or (isinstance(number, int) and not 1 <= number <= 400):
             continue
         existing = (chunk.get("heading") or "").strip()
         if label.lower() in existing.lower():
@@ -495,10 +506,11 @@ def main() -> int:
         sections = statute_sections(text) if text.count("\n") < 5 else []
         if sections:
             new = sections_to_chunks(sections, source_name, unit=unit)
-            label = "Rule" if unit.lower().startswith("rule") else "Section"
-            print(f"Reading {path.name} -> {len(new)} chunks from {len(sections)} {label.lower()}s")
+            print(f"Reading {path.name} -> {len(new)} chunks from {len(sections)} {unit_label(unit).lower()}s")
         else:
             new = pack_chunks([(None, p) for p in paragraphs(text)], source_name)
+            if lookup(source_numbering, path):
+                new = label_numbered_chunks(new, unit)
             print(f"Reading {path.name} -> {len(new)} chunks")
         chunks.extend(new)
         sources.append({"title": source_name, "type": "text", "url": ""})

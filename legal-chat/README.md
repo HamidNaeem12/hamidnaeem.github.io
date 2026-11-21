@@ -26,15 +26,18 @@ tokens, so the 8k TPM cap is the real ceiling — roughly 3–4 questions a minu
 ```bash
 pip install pypdf
 
-# Both instruments in one corpus (this is what is currently loaded)
+# All three instruments (this is what is currently loaded)
 python scripts/build_corpus.py \
   --text legal-chat/data/raw/punjab-land-revenue-act-1967.txt \
   --text legal-chat/data/raw/punjab-land-revenue-rules-1968.txt \
+  --text legal-chat/data/raw/punjab-land-records-manual.txt \
   --clean-footnotes \
   --source-title "punjab-land-revenue-act-1967.txt=Punjab Land Revenue Act 1967" \
   --source-title "punjab-land-revenue-rules-1968.txt=Punjab Land Revenue Rules 1968" \
+  --source-title "punjab-land-records-manual.txt=Punjab Land Records Manual (2nd ed., 1958)" \
   --numbering "punjab-land-revenue-rules-1968.txt=rule" \
-  --title "Punjab Land Revenue Act 1967 + Rules 1968"
+  --numbering "punjab-land-records-manual.txt=paragraph" \
+  --title "Punjab Land Revenue Act 1967 + Rules 1968 + Land Records Manual"
 
 # A PDF instead
 python scripts/build_corpus.py --pdf "path/to/statute.pdf" --title "Land Revenue Act 1967"
@@ -43,7 +46,9 @@ python scripts/build_corpus.py --pdf "path/to/statute.pdf" --title "Land Revenue
 `--text` is repeatable. `--source-title FILE=TITLE` names each file in the
 `sources` list, so an answer's citation chip says *which* instrument it came
 from. `--numbering FILE=rule` makes that file's headings `Rule 20` instead of
-`Section 20` (the splitter already handles consecutive numbering). Without
+`Section 20` (the splitter already handles consecutive numbering);
+`--numbering FILE=paragraph` labels decimal paragraph numbers (`Paragraph 7.60`)
+for manuals, which are numbered that way rather than by section. Without
 `--title`, the corpus title defaults to the joined source names.
 
 ```bash
