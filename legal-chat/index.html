@@ -345,7 +345,7 @@
     scrollDown();
   }
 
-  function addBot(text, sources, cases) {
+  function addBot(text, sources, cases, web) {
     const msg = document.createElement('div');
     msg.className = 'msg bot';
     msg.innerHTML = '<span class="who">Assistant</span><div class="bubble"></div>';
@@ -392,6 +392,29 @@
       msg.appendChild(row);
     }
 
+    if (web && web.length) {
+      const row = document.createElement('div');
+      row.className = 'sources';
+      const label = document.createElement('span');
+      label.className = 'chip-label';
+      label.textContent = 'Web';
+      row.appendChild(label);
+      web.forEach(function (item, index) {
+        const chip = document.createElement('a');
+        chip.className = 'chip';
+        chip.href = item.url;
+        chip.target = '_blank';
+        chip.rel = 'noopener';
+        chip.title = (item.title || '') + (item.site ? ' · ' + item.site : '') + ' — ' + item.url;
+        const name = item.title || item.site || item.url;
+        chip.innerHTML =
+          '<b>W' + (index + 1) + '</b>' +
+          esc(name.length > 46 ? name.slice(0, 46).trimEnd() + '…' : name);
+        row.appendChild(chip);
+      });
+      msg.appendChild(row);
+    }
+
     messagesEl.appendChild(msg);
     scrollDown();
   }
@@ -429,7 +452,7 @@
       if (!res.ok || !data.answer) {
         addBot(data.error || 'Something went wrong. Please try again.');
       } else {
-        addBot(data.answer, data.sources, data.cases);
+        addBot(data.answer, data.sources, data.cases, data.web);
         history.push({ role: 'user', content: question });
         history.push({ role: 'assistant', content: data.answer });
       }

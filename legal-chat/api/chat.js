@@ -3,12 +3,16 @@
 
 import { search, corpusMeta, corpusPath } from '../lib/rag.js';
 import { lookupCases } from '../lib/caselaw.js';
+import { searchWeb, webSearchEnabled } from '../lib/websearch.js';
 
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
 const MAX_QUESTION = 600;
 const WINDOW_MS = 60 * 1000;
 const MAX_PER_WINDOW = 12;
+// Below this BM25 score a passage is noise, so the question counts as outside
+// the corpus and the live web search takes over.
+const MIN_SCORE = Number(process.env.MIN_SCORE || 2.5);
 const hits = new Map();
 
 // Lets the GitHub Pages copy of the page (hamidnaeem.me/legal-chat/) talk to this API.
@@ -58,6 +62,7 @@ const SYSTEM = (title) =>
     `You are a legal research assistant for "${title}".`,
     'Answer strictly from the numbered EXCERPTS supplied with each question.',
     'A CASE LAW section may also be supplied, looked up live from Pakistan Case Law.',
+    'A WEB SOURCES section may also be supplied from a live web search. It is used when the excerpts do not cover the question.',
     '',
     'Rules:',
     '- Cite every substantive point with the excerpt number in square brackets, e.g. [2].',
@@ -68,6 +73,11 @@ const SYSTEM = (title) =>
     '- Use a case only if it genuinely bears on the question; if it does not, ignore it silently.',
     '- When you use a case, add one clause on what it decided and its outcome.',
     '- Judgments are not statute: never present a holding as a provision of the Act.',
+    '- Cite a web result as [W1], [W2] and so on. Say plainly that the point comes from the open web, not from the Act.',
+    '- Name the site you are relying on (for example Punjab Laws or the Board of Revenue). Prefer official sources.',
+    '- Never cite a web page for something its snippet does not actually say, and never dress a web claim up as a section of the Act.',
+    '- If the web sources and the excerpts disagree, the statute governs and you say so.',
+    '- If neither the excerpts nor the web results answer the question, say what is missing instead of guessing.',
     '- Be concise: 120-250 words, short paragraphs or a compact numbered list. Plain text only, no markdown headings or tables.',
     '- You are a research aid, not a lawyer; never present a conclusion as legal advice.',
   ].join('\n');
@@ -87,6 +97,15 @@ function caseBlock(cases) {
       const where = [c.court, c.result].filter(Boolean).join(' · ');
       const head = `[C${i + 1}] ${c.title}${c.citation ? ` — ${c.citation}` : ''}${where ? ` (${where})` : ''}`;
       return c.snippet ? `${head}\nMatch: ${c.snippet}` : head;
+    })
+    .join('\n\n');
+}
+
+function webBlock(results) {
+  return results
+    .map((r, i) => {
+      const head = `[W${i + 1}] ${r.title}${r.site ? ` (${r.site})` : ''}`;
+      return `${head}\n${r.url}${r.snippet ? `\n${r.snippet}` : ''}`;
     })
     .join('\n\n');
 }
@@ -171,22 +190,32 @@ export default async function handler(req, res) {
 
   const cases = await casesPromise;
 
-  if (!passages.length && !cases.length) {
+  // Weak or empty retrieval means the question is outside the corpus, so fall
+  // back to a live web search instead of shrugging at the user.
+  const excerpts = passages.filter((p) => p.score >= MIN_SCORE);
+  const web = excerpts.length ? [] : await searchWeb(message);
+
+  if (!excerpts.length && !cases.length && !web.length) {
     const titles = meta.sources.map((s) => s.title).slice(0, 4).join(', ');
     res.status(200).json({
       answer:
         'I could not find that in the documents I have been given, so I will not guess. ' +
         (titles ? `The corpus covers: ${titles}. ` : '') +
-        'Try rephrasing with the words used in the statute, or ask about a specific section.',
+        (webSearchEnabled()
+          ? 'A live web search also came back empty — try naming the statute, rule or record you mean.'
+          : 'Live web search is not configured on this deployment.') +
+        ' Try rephrasing with the words used in the statute, or ask about a specific section.',
       sources: [],
       cases: [],
+      web: [],
       model: MODEL,
     });
     return;
   }
 
   const parts = [];
-  if (passages.length) parts.push(`EXCERPTS:\n\n${contextBlock(passages)}`);
+  if (excerpts.length) parts.push(`EXCERPTS:\n\n${contextBlock(excerpts)}`);
+  if (web.length) parts.push(`WEB SOURCES (live web search, not the Act):\n\n${webBlock(web)}`);
   if (cases.length) parts.push(`CASE LAW (live lookup):\n\n${caseBlock(cases)}`);
   parts.push(`QUESTION: ${message}`);
 
@@ -246,7 +275,7 @@ export default async function handler(req, res) {
   res.status(200).json({
     answer,
     model: data.model || MODEL,
-    sources: passages.map((p) => ({
+    sources: excerpts.map((p) => ({
       n: p.n,
       title: p.source,
       page: p.page,
@@ -261,6 +290,7 @@ export default async function handler(req, res) {
       result: c.result,
       url: c.url,
     })),
+    web: web.map((r, i) => ({ n: `W${i + 1}`, title: r.title, site: r.site, url: r.url })),
   });
 }
 
