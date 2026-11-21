@@ -315,8 +315,8 @@
     let out = esc(text);
     out = out.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     out = out.replace(/(^|\s)\*(?!\s)(.+?)\*(?=\s|$|[.,;:])/g, '$1<em>$2</em>');
-    // Models occasionally emit 【2】 or (2) style markers; normalise the CJK brackets.
-    out = out.replace(/【((?:\d{1,2})|C\d{1,2}|W\d{1,2})】/g, '[$1]');
+    // Models occasionally emit 【2】 or 【3†L30-L33】 style markers; normalise them.
+    out = out.replace(/【((?:\d{1,2})|C\d{1,2}|W\d{1,2})(?:†[^】]*)?】/g, '[$1]');
     out = out.replace(/\[((?:\d{1,2})|C\d{1,2}|W\d{1,2})\]/g, '<cite>[$1]</cite>');
     // numbered lists
     out = out.replace(/(?:^|\n)\s*(\d{1,2})\.\s+(.+)/g, '\n<li>$2</li>');
