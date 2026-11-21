@@ -26,14 +26,27 @@ tokens, so the 8k TPM cap is the real ceiling — roughly 3–4 questions a minu
 ```bash
 pip install pypdf
 
-# The Act, as extracted text (this is what is currently loaded)
+# Both instruments in one corpus (this is what is currently loaded)
 python scripts/build_corpus.py \
   --text legal-chat/data/raw/punjab-land-revenue-act-1967.txt \
+  --text legal-chat/data/raw/punjab-land-revenue-rules-1968.txt \
   --clean-footnotes \
-  --title "Punjab Land Revenue Act 1967"
+  --source-title "punjab-land-revenue-act-1967.txt=Punjab Land Revenue Act 1967" \
+  --source-title "punjab-land-revenue-rules-1968.txt=Punjab Land Revenue Rules 1968" \
+  --numbering "punjab-land-revenue-rules-1968.txt=rule" \
+  --title "Punjab Land Revenue Act 1967 + Rules 1968"
 
 # A PDF instead
 python scripts/build_corpus.py --pdf "path/to/statute.pdf" --title "Land Revenue Act 1967"
+```
+
+`--text` is repeatable. `--source-title FILE=TITLE` names each file in the
+`sources` list, so an answer's citation chip says *which* instrument it came
+from. `--numbering FILE=rule` makes that file's headings `Rule 20` instead of
+`Section 20` (the splitter already handles consecutive numbering). Without
+`--title`, the corpus title defaults to the joined source names.
+
+```bash
 ```
 
 Output: `legal-chat/data/corpus.json` (commit it — the deployed function reads

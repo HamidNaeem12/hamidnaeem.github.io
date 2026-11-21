@@ -73,6 +73,9 @@ const SYSTEM = (title) =>
     '- Use a case only if it genuinely bears on the question; if it does not, ignore it silently.',
     '- When you use a case, add one clause on what it decided and its outcome.',
     '- Judgments are not statute: never present a holding as a provision of the Act.',
+    '- Some excerpts are from subordinate rules; their heading starts "Rule N". Any point taken from one of those must name the rule in the sentence, written like "(Rule 39) [3]", and must never be called a section of the Act.',
+    '- Worked example of the required style: "The Register Girdawari is kept in Form XXIV (Rule 39) [3]."',
+    '- Use plain square brackets for citations: [2], [C1], [W1]. Never use 【】 or other bracket styles.',
     '- Cite a web result as [W1], [W2] and so on. Say plainly that the point comes from the open web, not from the Act.',
     '- Name the site you are relying on (for example Punjab Laws or the Board of Revenue). Prefer official sources.',
     '- Never cite a web page for something its snippet does not actually say, and never dress a web claim up as a section of the Act.',
@@ -232,7 +235,7 @@ export default async function handler(req, res) {
     top_p: 0.9,
     max_completion_tokens: 800,
   };
-  if (MODEL.includes('gpt-oss')) payload.reasoning_effort = 'low';
+  if (MODEL.includes('gpt-oss')) payload.reasoning_effort = process.env.GROQ_REASONING || 'medium';
 
   let upstream;
   try {

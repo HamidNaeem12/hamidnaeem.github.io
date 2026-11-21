@@ -163,16 +163,46 @@ def statute_sections(text: str):
     return sections
 
 
-def sections_to_chunks(sections, source: str, url: str = ""):
+def sections_to_chunks(sections, source: str, url: str = "", unit: str = "Section"):
+    label = "Rule" if str(unit).lower().startswith("rule") else "Section"
     chunks = []
     for number, title, body in sections:
-        heading = f"Section {number}" + (f" — {title}" if title else "")
+        heading = f"{label} {number}" + (f" — {title}" if title else "")
         for piece in split_long(body, MAX_CHUNK_CHARS):
             if len(piece) < 40:
                 continue
             chunks.append(
                 {"text": piece, "source": source, "page": None, "heading": heading[:140], "url": url}
             )
+    return chunks
+
+
+def label_numbered_chunks(chunks, unit: str = "Rule"):
+    """Prefix a chunk heading with the provision number its text opens with.
+
+    PDFs carry no section numbering of their own, so a rules file whose
+    paragraph starts "39. Crop Inspection Register." becomes "Rule 39 — ..."
+    and lines up with how the instrument is cited.
+    """
+    label = "Rule" if str(unit).lower().startswith("rule") else "Section"
+    for chunk in chunks:
+        # Only label a chunk when it genuinely opens with a provision number.
+        # Carrying the previous number forward drifts (footnote and amendment
+        # numbers look identical), and a wrong rule number is worse than none.
+        match = re.match(r"^\s*(\d{1,3})\.\s+\S", chunk["text"])
+        number = int(match.group(1)) if match else None
+        if number is None:
+            # Form pages open with "FORM XXIV (See RULE 39)" instead of a number,
+            # so take the rule it cites when the chunk points at exactly one.
+            refs = {int(n) for n in re.findall(r"\bRULE\s+(\d{1,3})\b", chunk["text"], re.IGNORECASE)}
+            number = refs.pop() if len(refs) == 1 else None
+        if number is None or not 1 <= number <= 400:
+            continue
+        existing = (chunk.get("heading") or "").strip()
+        if label.lower() in existing.lower():
+            continue
+        numbered = f"{label} {number}"
+        chunk["heading"] = (f"{numbered} — {existing}" if existing else numbered)[:140]
     return chunks
 
 
@@ -365,6 +395,22 @@ def crawl(seeds: list[str], max_pages: int, delay: float = 1.0):
         time.sleep(delay)
 
 
+def parse_spec(value: str) -> tuple[str, str]:
+    """Split a repeatable FILE=VALUE option."""
+    if "=" not in value:
+        sys.exit(f"Expected FILE=VALUE, got: {value}")
+    key, _, val = value.partition("=")
+    return key.strip().replace("\\", "/"), val.strip()
+
+
+def lookup(mapping: dict, path: Path):
+    """Find a per-file setting by full path or by bare file name."""
+    for key in (str(path).replace("\\", "/"), path.name):
+        if key in mapping:
+            return mapping[key]
+    return None
+
+
 # ── main ─────────────────────────────────────────────────────────────────────
 
 
@@ -387,7 +433,21 @@ def main() -> int:
         action="store_true",
         help="strip [12]-style footnote markers from --text input",
     )
-    parser.add_argument("--title", default="", help="display title of the corpus")
+    parser.add_argument("--title", default="", help="display title of the whole corpus")
+    parser.add_argument(
+        "--source-title",
+        action="append",
+        default=[],
+        metavar="FILE=TITLE",
+        help="label one --text or --pdf file in the sources list (repeatable)",
+    )
+    parser.add_argument(
+        "--numbering",
+        action="append",
+        default=[],
+        metavar="FILE=rule",
+        help="label numbered provisions of a --text file as Rule instead of Section (repeatable)",
+    )
     parser.add_argument("--out", default=str(DEFAULT_OUT), help="output JSON path")
     args = parser.parse_args()
 
@@ -396,6 +456,8 @@ def main() -> int:
 
     sources = []
     chunks: list[dict] = []
+    source_titles = dict(parse_spec(value) for value in args.source_title)
+    source_numbering = dict(parse_spec(value) for value in args.numbering)
 
     for raw_path in args.pdf:
         path = Path(raw_path)
@@ -403,8 +465,13 @@ def main() -> int:
             sys.exit(f"Not found: {path}")
         print(f"Reading PDF {path.name} …")
         blocks = list(pdf_blocks(path))
-        source_name = path.stem.replace("_", " ").replace("-", " ").strip()
+        source_name = (
+            lookup(source_titles, path) or path.stem.replace("_", " ").replace("-", " ").strip()
+        )
         new = pack_chunks(blocks, source_name)
+        pdf_unit = lookup(source_numbering, path)
+        if pdf_unit:
+            new = label_numbered_chunks(new, pdf_unit)
         print(f"  -> {len(new)} chunks from {len(blocks)} paragraphs")
         chunks.extend(new)
         sources.append({"title": source_name, "type": "pdf", "url": ""})
@@ -418,12 +485,18 @@ def main() -> int:
             raw_text = re.sub(r"\[\d{1,3}\]", "", raw_text)
             raw_text = raw_text.replace("[(", "(").replace(")]", ")")
         text = clean_text(raw_text)
-        source_name = args.title or path.stem.replace("_", " ").replace("-", " ")
+        source_name = (
+            lookup(source_titles, path)
+            or (args.title if len(args.text) == 1 else "")
+            or path.stem.replace("_", " ").replace("-", " ").strip()
+        )
+        unit = lookup(source_numbering, path) or "Section"
 
         sections = statute_sections(text) if text.count("\n") < 5 else []
         if sections:
-            new = sections_to_chunks(sections, source_name)
-            print(f"Reading {path.name} -> {len(new)} chunks from {len(sections)} sections")
+            new = sections_to_chunks(sections, source_name, unit=unit)
+            label = "Rule" if unit.lower().startswith("rule") else "Section"
+            print(f"Reading {path.name} -> {len(new)} chunks from {len(sections)} {label.lower()}s")
         else:
             new = pack_chunks([(None, p) for p in paragraphs(text)], source_name)
             print(f"Reading {path.name} -> {len(new)} chunks")
@@ -454,7 +527,9 @@ def main() -> int:
         sys.exit("No text extracted — check the PDF is text-based (not scanned) or the URLs render server-side HTML.")
 
     corpus = {
-        "title": args.title or (sources[0]["title"] if sources else "Legal corpus"),
+        "title": args.title
+        or " + ".join(dict.fromkeys(s["title"] for s in sources))
+        or "Legal corpus",
         "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "sources": sources,
         "chunk_count": len(unique),
