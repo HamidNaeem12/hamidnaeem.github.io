@@ -4,6 +4,7 @@ node_modules/
 .vercel/
 data/raw/
 .vercel-token
+.groq-key
 
 .vercel
 .env*
