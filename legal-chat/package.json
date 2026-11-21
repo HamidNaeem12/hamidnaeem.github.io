@@ -1,0 +1,13 @@
+{
+  "name": "legal-chat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Retrieval-augmented legal research chatbot powered by Groq",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env.local dev.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

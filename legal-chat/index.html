@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Law & Statute Assistant</title>
+<meta name="description" content="Ask questions about a statute, report or body of case law and get answers that cite the exact section and page." />
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Martian+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #0e0d09;
+    --ink-mid: #38342c;
+    --ink-soft: #5e5a52;
+    --ink-muted: #8a8680;
+    --rule: #e4e0d8;
+    --paper: #f8f6f1;
+    --cream: #f0ece3;
+    --white: #fdfcfa;
+    --red: #8b2020;
+    --red-lt: #f5eaea;
+    --serif: 'Cormorant', Georgia, serif;
+    --sans: 'Instrument Sans', sans-serif;
+    --mono: 'Martian Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a { color: var(--red); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { width: 100%; max-width: 780px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Header */
+  header.site {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .site-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: 1rem 0;
+  }
+  .back {
+    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .back:hover { color: var(--red); text-decoration: none; }
+  .brand {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .brand span { color: var(--red); }
+
+  /* Hero */
+  .hero { padding: 3rem 0 1.75rem; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--red);
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
+  }
+  .eyebrow::after { content: ''; height: 1px; flex: 1; background: var(--rule); }
+  h1 {
+    font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.06; letter-spacing: -0.015em; margin-bottom: 0.85rem;
+  }
+  h1 em { font-style: italic; color: var(--red); }
+  .lede { color: var(--ink-soft); font-size: 0.98rem; max-width: 58ch; }
+
+  /* Chat shell */
+  .chat {
+    border: 1px solid var(--rule);
+    background: var(--white);
+    display: flex; flex-direction: column;
+    margin: 1.25rem 0 1rem;
+    box-shadow: 0 1px 0 var(--rule);
+  }
+  .chat-bar {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--cream);
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #2f7a5a; box-shadow: 0 0 0 3px rgba(47,122,90,0.14);
+  }
+  .chat-bar-title {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .chat-bar-meta {
+    margin-left: auto; font-family: var(--mono); font-size: 0.58rem;
+    color: var(--ink-muted); letter-spacing: 0.05em;
+  }
+
+  .messages {
+    padding: 1.35rem 1rem;
+    display: flex; flex-direction: column; gap: 1.1rem;
+    height: min(58vh, 520px); min-height: 320px;
+    overflow-y: auto; scroll-behavior: smooth;
+  }
+  .msg { display: flex; flex-direction: column; gap: 0.4rem; max-width: 92%; animation: rise 0.22s ease; }
+  @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+  .msg.user { align-self: flex-end; align-items: flex-end; }
+
+  .who {
+    font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-muted);
+  }
+  .bubble {
+    padding: 0.8rem 1rem;
+    font-size: 0.93rem; line-height: 1.7;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink-mid);
+  }
+  .msg.user .bubble {
+    background: var(--ink); color: var(--white); border-color: var(--ink);
+  }
+  .bubble p { margin: 0 0 0.65rem; }
+  .bubble p:last-child { margin-bottom: 0; }
+  .bubble ol, .bubble ul { margin: 0 0 0.65rem 1.15rem; }
+  .bubble li { margin-bottom: 0.25rem; }
+  .bubble strong { font-weight: 500; color: var(--ink); }
+  .bubble cite {
+    font-style: normal; font-family: var(--mono); font-size: 0.62rem;
+    color: var(--red); background: var(--red-lt);
+    padding: 0.05rem 0.3rem; vertical-align: 1px;
+  }
+  .msg.user .bubble cite { color: var(--white); background: rgba(255,255,255,0.14); }
+
+  .sources { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .chip {
+    font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.04em;
+    border: 1px solid var(--rule); color: var(--ink-soft);
+    padding: 0.28rem 0.5rem; background: var(--white);
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    max-width: 100%;
+  }
+  a.chip:hover { border-color: var(--red); color: var(--red); text-decoration: none; }
+  .chip b { color: var(--red); font-weight: 400; }
+  .chip-label {
+    font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-muted); align-self: center;
+  }
+
+  /* Typing */
+  .typing { display: flex; gap: 4px; padding: 0.85rem 1rem; border: 1px solid var(--rule); background: var(--paper); width: fit-content; }
+  .typing i { width: 5px; height: 5px; background: var(--ink-muted); border-radius: 50%; animation: blink 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: 0.18s; }
+  .typing i:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes blink { 0%, 60%, 100% { opacity: 0.25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+  /* Suggestions */
+  .suggest { border-top: 1px solid var(--rule); padding: 0.75rem 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem; background: var(--white); }
+  .suggest-label {
+    width: 100%; font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.15rem;
+  }
+  .suggest button {
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 400;
+    border: 1px solid var(--rule); background: var(--paper); color: var(--ink-soft);
+    padding: 0.32rem 0.65rem; cursor: pointer; transition: 0.15s;
+  }
+  .suggest button:hover { border-color: var(--red); color: var(--red); background: var(--red-lt); }
+
+  /* Composer */
+  .composer { border-top: 1px solid var(--rule); padding: 0.7rem; display: flex; gap: 0.5rem; align-items: flex-end; background: var(--white); }
+  .composer textarea {
+    flex: 1; resize: none; border: 1px solid var(--rule); background: var(--paper);
+    padding: 0.65rem 0.8rem; font-family: var(--sans); font-size: 0.9rem; line-height: 1.5;
+    color: var(--ink); outline: none; max-height: 130px; transition: border-color 0.15s;
+  }
+  .composer textarea:focus { border-color: var(--ink-soft); background: var(--white); }
+  .composer textarea::placeholder { color: var(--ink-muted); }
+  .send {
+    border: 1px solid var(--ink); background: var(--ink); color: var(--white);
+    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.72rem 1rem; cursor: pointer; transition: 0.15s;
+  }
+  .send:hover:not(:disabled) { background: var(--red); border-color: var(--red); }
+  .send:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .note { font-size: 0.76rem; color: var(--ink-muted); line-height: 1.6; margin-bottom: 2.5rem; }
+  footer.site { border-top: 1px solid var(--rule); padding: 1.35rem 0; margin-top: auto; }
+  footer.site .wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+
+  @media (max-width: 560px) {
+    .hero { padding: 2rem 0 1.25rem; }
+    .messages { height: 54vh; }
+    .brand { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-inner">
+    <a class="back" href="/">&larr; hamidnaeem.me</a>
+    <div class="brand">Lex <span>Assistant</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Retrieval-grounded &middot; Cited answers</div>
+    <h1>Ask the statute.<br /><em>Not the internet.</em></h1>
+    <p class="lede" id="lede">
+      Answers are built only from the supplied statute, report and open-access judgments.
+      Every point carries the section and page it came from.
+    </p>
+  </section>
+
+  <section class="chat">
+    <div class="chat-bar">
+      <span class="dot"></span>
+      <span class="chat-bar-title" id="corpusTitle">Legal corpus</span>
+      <span class="chat-bar-meta" id="corpusMeta">ready</span>
+    </div>
+
+    <div class="messages" id="messages" aria-live="polite">
+      <div class="msg bot">
+        <span class="who">Assistant</span>
+        <div class="bubble">
+          <p>Ask about any provision, definition, procedure or holding in the documents I have been given. I will quote the section and page.</p>
+          <p>If something is not in the corpus, I will tell you rather than guess.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="suggest" id="suggest">
+      <span class="suggest-label">Start with</span>
+      <button>What is the scope of the Act?</button>
+      <button>Explain the appeal procedure</button>
+      <button>Which sections deal with penalties?</button>
+      <button>What have the courts held on land revenue appeals?</button>
+    </div>
+
+    <form class="composer" id="composer">
+      <textarea id="input" rows="1" placeholder="Ask a question about the documents…" aria-label="Your question"></textarea>
+      <button class="send" id="send" type="submit">Ask</button>
+    </form>
+  </section>
+
+  <p class="note">
+    Educational research aid only — not legal advice. Statute answers are limited to the ingested
+    documents and can miss provisions. Case law is looked up live from
+    <a href="https://pakistancaselaw.com" target="_blank" rel="noopener">Pakistan Case Law</a>,
+    one search per question, and links to the judgment. Verify every authority against the official
+    report before relying on it.
+  </p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Built by <a href="https://hamidnaeem.me">Hamid Naeem</a></span>
+    <span>Groq &middot; gpt-oss</span>
+  </div>
+</footer>
+
+<script>
+  const messagesEl = document.getElementById('messages');
+  const form = document.getElementById('composer');
+  const inputEl = document.getElementById('input');
+  const sendBtn = document.getElementById('send');
+  const suggestEl = document.getElementById('suggest');
+  const history = [];
+  let busy = false;
+
+  // GitHub Pages also serves this page (hamidnaeem.me/legal-chat/) but has no API,
+  // so fall back to the Vercel deployment when the same-origin call 404s.
+  const API_BASES = ['', 'https://chat.hamidnaeem.me'];
+
+  async function callApi(method, payload) {
+    let lastError = null;
+    for (const base of API_BASES) {
+      try {
+        const res = await fetch(base + '/api/chat', {
+          method: method,
+          headers: payload ? { 'Content-Type': 'application/json' } : undefined,
+          body: payload ? JSON.stringify(payload) : undefined
+        });
+        if (res.status === 404 || res.status === 405) { lastError = new Error('no api here'); continue; }
+        return res;
+      } catch (err) {
+        lastError = err;
+      }
+    }
+    throw lastError || new Error('unreachable');
+  }
+
+  function esc(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function format(text) {
+    let out = esc(text);
+    out = out.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    out = out.replace(/(^|\s)\*(?!\s)(.+?)\*(?=\s|$|[.,;:])/g, '$1<em>$2</em>');
+    out = out.replace(/\[((?:\d{1,2})|C\d{1,2})\]/g, '<cite>[$1]</cite>');
+    // numbered lists
+    out = out.replace(/(?:^|\n)\s*(\d{1,2})\.\s+(.+)/g, '\n<li>$2</li>');
+    out = out.replace(/(?:^|\n)\s*[-•]\s+(.+)/g, '\n<li>$1</li>');
+    const blocks = out.split(/\n{2,}/);
+    return blocks
+      .map(function (block) {
+        const trimmed = block.trim();
+        if (!trimmed) return '';
+        if (/^<li>/.test(trimmed) || /^\n?<li>/.test(trimmed)) {
+          return '<ol>' + trimmed.replace(/^\n+/, '') + '</ol>';
+        }
+        return '<p>' + trimmed.replace(/\n/g, '<br />') + '</p>';
+      })
+      .join('');
+  }
+
+  function scrollDown() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addUser(text) {
+    const msg = document.createElement('div');
+    msg.className = 'msg user';
+    msg.innerHTML = '<span class="who">You</span><div class="bubble"></div>';
+    msg.querySelector('.bubble').textContent = text;
+    messagesEl.appendChild(msg);
+    scrollDown();
+  }
+
+  function addBot(text, sources, cases) {
+    const msg = document.createElement('div');
+    msg.className = 'msg bot';
+    msg.innerHTML = '<span class="who">Assistant</span><div class="bubble"></div>';
+    msg.querySelector('.bubble').innerHTML = format(text);
+
+    if (sources && sources.length) {
+      const row = document.createElement('div');
+      row.className = 'sources';
+      sources.forEach(function (src) {
+        const label = '<b>' + src.n + '</b>' + esc(src.title) + (src.page ? ' · p. ' + src.page : '');
+        let chip;
+        if (src.url) {
+          chip = document.createElement('a');
+          chip.href = src.url;
+          chip.target = '_blank';
+          chip.rel = 'noopener';
+        } else {
+          chip = document.createElement('span');
+        }
+        chip.className = 'chip';
+        chip.innerHTML = label;
+        row.appendChild(chip);
+      });
+      msg.appendChild(row);
+    }
+
+    if (cases && cases.length) {
+      const row = document.createElement('div');
+      row.className = 'sources';
+      const label = document.createElement('span');
+      label.className = 'chip-label';
+      label.textContent = 'Case law';
+      row.appendChild(label);
+      cases.forEach(function (item, index) {
+        const chip = document.createElement('a');
+        chip.className = 'chip';
+        chip.href = item.url || 'https://pakistancaselaw.com';
+        chip.target = '_blank';
+        chip.rel = 'noopener';
+        chip.title = [item.title, item.court, item.disposition].filter(Boolean).join(' · ');
+        chip.innerHTML = '<b>C' + (index + 1) + '</b>' + esc(item.citation || item.title);
+        row.appendChild(chip);
+      });
+      msg.appendChild(row);
+    }
+
+    messagesEl.appendChild(msg);
+    scrollDown();
+  }
+
+  function addTyping() {
+    const msg = document.createElement('div');
+    msg.className = 'msg bot';
+    msg.id = 'typing';
+    msg.innerHTML = '<span class="who">Assistant</span><div class="typing"><i></i><i></i><i></i></div>';
+    messagesEl.appendChild(msg);
+    scrollDown();
+  }
+
+  function stopTyping() {
+    const el = document.getElementById('typing');
+    if (el) el.remove();
+  }
+
+  async function ask(question) {
+    if (busy || !question) return;
+    busy = true;
+    sendBtn.disabled = true;
+    suggestEl.style.display = 'none';
+    addUser(question);
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    addTyping();
+
+    try {
+      const res = await callApi('POST', { message: question, history: history.slice(-6) });
+      let data = {};
+      try { data = await res.json(); } catch (e) { data = {}; }
+      stopTyping();
+
+      if (!res.ok || !data.answer) {
+        addBot(data.error || 'Something went wrong. Please try again.');
+      } else {
+        addBot(data.answer, data.sources, data.cases);
+        history.push({ role: 'user', content: question });
+        history.push({ role: 'assistant', content: data.answer });
+      }
+    } catch (err) {
+      stopTyping();
+      addBot('Could not reach the assistant. Check your connection and try again.');
+    }
+
+    busy = false;
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    ask(inputEl.value.trim());
+  });
+
+  inputEl.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      ask(inputEl.value.trim());
+    }
+  });
+
+  inputEl.addEventListener('input', function () {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 130) + 'px';
+  });
+
+  suggestEl.querySelectorAll('button').forEach(function (button) {
+    button.addEventListener('click', function () {
+      ask(button.textContent.trim());
+    });
+  });
+
+  // Label the page from what the endpoint actually holds.
+  callApi('GET')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (meta) {
+      if (!meta || !meta.title) return;
+      document.title = meta.title + ' — Legal Assistant';
+      document.getElementById('corpusTitle').textContent = meta.title;
+      document.getElementById('corpusMeta').textContent = meta.chunks + ' passages';
+      document.getElementById('lede').textContent =
+        'Statute answers are built only from ' + meta.title + ' (' + meta.chunks +
+        ' passages indexed) and carry the section they came from. Case law is looked up live and linked to the judgment.';
+    })
+    .catch(function () {});
+</script>
+</body>
+</html>
