@@ -283,7 +283,11 @@
 
   // GitHub Pages also serves this page (hamidnaeem.me/legal-chat/) but has no API,
   // so fall back to the Vercel deployment when the same-origin call 404s.
-  const API_BASES = ['', 'https://chat.hamidnaeem.me'];
+  const API_BASES = [
+    '',
+    'https://legal-chat-xi.vercel.app',
+    'https://chat.hamidnaeem.me',
+  ];
 
   async function callApi(method, payload) {
     let lastError = null;
