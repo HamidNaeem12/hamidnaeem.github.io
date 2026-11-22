@@ -51,6 +51,34 @@ function clientIp(req) {
   return req.socket?.remoteAddress || 'unknown';
 }
 
+// Small talk, scope questions and off-topic messages are answered here rather
+// than by the model: no retrieval, no case-law lookup, no tokens, exact copy.
+const OFF_TOPIC = /\b(girlfriend|boyfriend|my ex\b|breakup|broke up|dating|lonely|depressed|feeling (sad|low)|i am sad|i'm sad|bored|tell me a joke|a joke|poem|recipe|weather|cricket score|netflix|movie|song|lyrics|my homework)\b/i;
+const CAPABILITY = /^(what can you do|what do you do|what can i ask( you)?|what are you( for)?|who are you|how do(es)? (this|you) work|help|help me|what is this( site| bot| page)?)\s*[?.!]*$/i;
+const PROVENANCE = /\b(chatgpt|openai|which model|what model)\b|\bare you (a |an )?(ai|bot|robot|human|real|lawyer)\b/i;
+const GREETING = /^(hi|hey|hello|hy|yo|salam|salaam|assalam|as-?salam|good (morning|afternoon|evening)|hola|sup)\b[\s!.,]*$/i;
+const THANKS = /^(thanks|thank you|thx|ok|okay|cool|nice|great|got it|alright)\b[\s!.,]*$/i;
+const GREETING_PREFIX = /^(hi|hey|hello|hy|yo|salam|salaam|assalam|as-?salam)[\s,!.]*/i;
+
+function quickReply(text) {
+  if (OFF_TOPIC.test(text)) {
+    return 'Wrong department. I do land revenue — sections, rules, records. A breakup has no section number, and I am not the friend you text at 2am. Bring me a provision instead.';
+  }
+  if (CAPABILITY.test(text.trim())) {
+    return 'Three things, all of them citing: the Punjab Land Revenue Act 1967, the Rules of 1968, the Land Records Manual. Ask a land-revenue question and you get the section and the page with it. Ask about your ex, your diet or your startup and you get this paragraph instead.';
+  }
+  if (PROVENANCE.test(text)) {
+    return 'Built by Muhammad Hamid Naeem. Groq does the writing; the Act, the Rules and the Manual do the thinking. Not a lawyer, and not legal advice.';
+  }
+  if (GREETING.test(text.trim())) {
+    return 'Hello. I answer land-revenue questions and nothing else — Act 1967, Rules 1968, Land Records Manual. Ask about a section, an intiqal, a girdawari or an appeal, and the provision comes with the answer.';
+  }
+  if (THANKS.test(text.trim())) {
+    return 'Noted. Next question.';
+  }
+  return null;
+}
+
 function readBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string') return JSON.parse(req.body || '{}');
@@ -90,6 +118,8 @@ const SYSTEM = (title) =>
     '- Open with the answer, not with a description of the excerpts. Say "Penalties sit in section 4(1)(b) — the only one the excerpts name [2]." Never "The excerpts indicate that a penalty may be imposed pursuant to the aforementioned provision."',
     '- A refusal is one or two sentences, not a paragraph: name what is missing and which instrument would have it. Example: "Not in the corpus — the Act covers partition, not stamp duty."',
     '- Dryness is allowed about the documents and the law. Never joke about the user, their deadline or their case.',
+    '- If the message opens with a greeting, ignore the greeting and answer the question.',
+    '- Small talk, greetings and questions about your own abilities get one or two dry lines about scope (Punjab land revenue: Act 1967, Rules 1968, Land Records Manual). No citations, no case law.',
   ].join('\n');
 
 function contextBlock(passages) {
@@ -173,6 +203,12 @@ export default async function handler(req, res) {
     return;
   }
 
+  const smallTalk = quickReply(message);
+  if (smallTalk) {
+    res.status(200).json({ answer: smallTalk, sources: [], cases: [], web: [], model: MODEL });
+    return;
+  }
+
   const key = process.env.GROQ_API_KEY;
   if (!key) {
     res.status(500).json({
@@ -181,14 +217,17 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Strip a leading greeting so it cannot pollute retrieval for a real question.
+  const query = message.replace(GREETING_PREFIX, '').trim() || message;
+
   // One live case-law search per question. A failure here must not break the answer.
-  const casesPromise = lookupCases(message).catch(() => []);
+  const casesPromise = lookupCases(query).catch(() => []);
 
   let meta;
   let passages;
   try {
     meta = corpusMeta();
-    ({ passages } = search(message));
+    ({ passages } = search(query));
   } catch (err) {
     if (err && err.code === 'ENOENT') {
       res.status(503).json({ error: 'No corpus built yet. Run: python scripts/build_corpus.py --pdf <file>' });
@@ -203,7 +242,7 @@ export default async function handler(req, res) {
   // Weak or empty retrieval means the question is outside the corpus, so fall
   // back to a live web search instead of shrugging at the user.
   const excerpts = passages.filter((p) => p.score >= MIN_SCORE);
-  const web = excerpts.length ? [] : await searchWeb(message);
+  const web = excerpts.length ? [] : await searchWeb(query);
 
   if (!excerpts.length && !cases.length && !web.length) {
     const titles = meta.sources.map((s) => s.title).slice(0, 4).join(', ');
