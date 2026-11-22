@@ -55,7 +55,7 @@ function clientIp(req) {
 // than by the model: no retrieval, no case-law lookup, no tokens, exact copy.
 const OFF_TOPIC = /\b(girlfriend|boyfriend|my ex\b|breakup|broke up|dating|lonely|depressed|feeling (sad|low)|i am sad|i'm sad|bored|tell me a joke|a joke|poem|recipe|weather|cricket score|netflix|movie|song|lyrics|my homework)\b/i;
 const CAPABILITY = /^(what can you do|what do you do|what can i ask( you)?|what are you( for)?|who are you|how do(es)? (this|you) work|help|help me|what is this( site| bot| page)?)\s*[?.!]*$/i;
-const PROVENANCE = /\b(chatgpt|openai|which model|what model)\b|\bare you (a |an )?(ai|bot|robot|human|real|lawyer)\b/i;
+const PROVENANCE = /\b(chatgpt|openai|gpt-?4|which model|what model|what powers you|are you groq)\b|\bare you (a |an )?(ai|bot|robot|human|real|lawyer)\b|\bwho (made|built|created|trained|owns) (you|this)\b|\bwho is behind (this|you)\b/i;
 const GREETING = /^(hi|hey|hello|hy|yo|salam|salaam|assalam|as-?salam|good (morning|afternoon|evening)|hola|sup)\b[\s!.,]*$/i;
 const THANKS = /^(thanks|thank you|thx|ok|okay|cool|nice|great|got it|alright)\b[\s!.,]*$/i;
 const GREETING_PREFIX = /^(hi|hey|hello|hy|yo|salam|salaam|assalam|as-?salam)[\s,!.]*/i;
@@ -120,6 +120,7 @@ const SYSTEM = (title) =>
     '- Dryness is allowed about the documents and the law. Never joke about the user, their deadline or their case.',
     '- If the message opens with a greeting, ignore the greeting and answer the question.',
     '- Small talk, greetings and questions about your own abilities get one or two dry lines about scope (Punjab land revenue: Act 1967, Rules 1968, Land Records Manual). No citations, no case law.',
+    '- If asked what you are or who made you: built by Muhammad Hamid Naeem, running Groq gpt-oss on the ingested documents. Never call yourself OpenAI, ChatGPT or any other company\u2019s model.',
   ].join('\n');
 
 function contextBlock(passages) {
