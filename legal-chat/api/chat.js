@@ -53,7 +53,83 @@ function clientIp(req) {
 
 // Small talk, scope questions and off-topic messages are answered here rather
 // than by the model: no retrieval, no case-law lookup, no tokens, exact copy.
-const OFF_TOPIC = /\b(girlfriend|boyfriend|my ex\b|breakup|broke up|dating|lonely|depressed|feeling (sad|low)|i am sad|i'm sad|bored|tell me a joke|a joke|poem|recipe|weather|cricket score|netflix|movie|song|lyrics|my homework)\b/i;
+const pick = (list) => list[Math.floor(Math.random() * list.length)];
+
+// Every off-topic lane gets its own comeback, so the bot deflects in character
+// instead of returning the same cold paragraph to every odd question.
+const BANTER = [
+  {
+    test: /\b(girlfriend|boyfriend|my ex\b|breakup|broke up|dating|crush|lonely|depressed|feeling (sad|low)|i am sad|i'm sad|bored)\b/i,
+    replies: [
+      'Wrong department. I do land revenue — sections, rules, records. A breakup has no section number, and I am not the friend you text at 2am.',
+      'Not the vibes desk. I cite statutes, not red flags. Ask about a girdawari and I will lowkey show off.',
+      'I can tell you who owns the land, not why they left. Different register, different heartbreak.',
+    ],
+  },
+  {
+    test: /\b(doctor|medicine|symptoms|fever|covid|pregnan|diagnos|blood pressure)\b/i,
+    replies: [
+      'Not a doctor, and the Act has no dosage schedule. Ask a human for that one.',
+      'Medical questions get a hard no from me — wrong corpus, wrong consequences.',
+    ],
+  },
+  {
+    test: /\b(python|javascript|typescript|java\b|html|css|sql|debug|wifi|excel formula|write (me )?(some )?(code|a script|a program))\b/i,
+    replies: [
+      'I write citations, not Python — though both crash when a semicolon goes missing.',
+      'Wrong repo. I ship statutes with sources, not scripts with stack traces.',
+      'Debug your own code. I have 796 passages and none of them are on Stack Overflow.',
+    ],
+  },
+  {
+    test: /\b(homework|assignment|essay|thesis|dissertation|write my)\b/i,
+    replies: [
+      'Not your ghostwriter. I will cite the Act so you can write the thing yourself — receipts included.',
+      'The assignment is yours, the section number is mine. That is the deal.',
+    ],
+  },
+  {
+    test: /\b(tell me a joke|a joke|joke|poem|story|song|lyrics|netflix|movie|anime|meme|roast me|sing|rap)\b/i,
+    replies: [
+      'No jokes. The funniest thing I own is a penalty schedule, and it is not funny to the person paying.',
+      'I do not do poems. Best I can offer is a rule number and a straight face.',
+      'You want a story? Section 4(1)(b) has one. It ends in a penalty. No cap.',
+    ],
+  },
+  {
+    test: /\b(weather|temperature today|forecast|rain today|cricket|football|fifa|messi|bitcoin|crypto|stock market|psx|nifty)\b/i,
+    replies: [
+      'Weather is outside my jurisdiction. Islamabad: hot, then monsoon, then three nice weeks. Now ask me something with a section number.',
+      'Cricket scores, bitcoin prices, the PSX — all fascinating, none of them cited in the Act.',
+      'I do not do scores or candles. Land records only, and those are volatile enough.',
+    ],
+  },
+  {
+    test: /\b(recipe|cook|biryani|restaurant|calories|diet)\b/i,
+    replies: [
+      'No recipes. The closest thing I have to a menu is a table of penalties.',
+      'Biryani advice? Wrong instrument — though both need the right proportion.',
+    ],
+  },
+  {
+    test: /\b(do you love me|marry me|are you single|you are cute|i love you|be my (girlfriend|boyfriend))\b/i,
+    replies: [
+      'I am a retrieval system with a citation habit. Flattered, unavailable, still not a lawyer.',
+      'Bestie, I am 796 passages of land revenue law. I am not your type.',
+    ],
+  },
+  {
+    test: /\b(you are (stupid|dumb|useless|trash|worthless)|shut up|idiot|nonsense bot)\b/i,
+    replies: [
+      'Noted, and overruled.',
+      'You are entitled to your opinion. It is not in the corpus.',
+    ],
+  },
+];
+
+// Only for short questions: a long comparative answer may legitimately mention
+// another country's statute.
+const JURISDICTION = /\b(india|indian law|uk law|english law|uae|dubai|us law|american law|canada|australia)\b/i;
 const CAPABILITY = /^(what can you do|what do you do|what can i ask( you)?|what are you( for)?|who are you|how do(es)? (this|you) work|help|help me|what is this( site| bot| page)?)\s*[?.!]*$/i;
 const PROVENANCE = /\b(chatgpt|openai|gpt-?4|which model|what model|what powers you|are you groq)\b|\bare you (a |an )?(ai|bot|robot|human|real|lawyer)\b|\bwho (made|built|created|trained|owns) (you|this)\b|\bwho is behind (this|you)\b/i;
 const GREETING = /^(hi|hey|hello|hy|yo|salam|salaam|assalam|as-?salam|good (morning|afternoon|evening)|hola|sup)\b[\s!.,]*$/i;
@@ -61,20 +137,36 @@ const THANKS = /^(thanks|thank you|thx|ok|okay|cool|nice|great|got it|alright)\b
 const GREETING_PREFIX = /^(hi|hey|hello|hy|yo|salam|salaam|assalam|as-?salam)[\s,!.]*/i;
 
 function quickReply(text) {
-  if (OFF_TOPIC.test(text)) {
-    return 'Wrong department. I do land revenue — sections, rules, records. A breakup has no section number, and I am not the friend you text at 2am. Bring me a provision instead.';
+  const t = text.trim();
+  for (const entry of BANTER) {
+    if (entry.test.test(t)) return pick(entry.replies);
   }
-  if (CAPABILITY.test(text.trim())) {
-    return 'Three things, all of them citing: the Punjab Land Revenue Act 1967, the Rules of 1968, the Land Records Manual. Ask a land-revenue question and you get the section and the page with it. Ask about your ex, your diet or your startup and you get this paragraph instead.';
+  if (t.length <= 60 && JURISDICTION.test(t)) {
+    return pick([
+      'Wrong Punjab. My paper is one province: Act 1967, Rules 1968, Land Records Manual. India, UK, UAE — different statute, different headache.',
+      'Different jurisdiction, different headache. I hold Punjab’s land revenue paper and nothing else.',
+    ]);
   }
-  if (PROVENANCE.test(text)) {
-    return 'Built by Muhammad Hamid Naeem. Groq does the writing; the Act, the Rules and the Manual do the thinking. Not a lawyer, and not legal advice.';
+  if (CAPABILITY.test(t)) {
+    return pick([
+      'Three things, all of them citing: the Punjab Land Revenue Act 1967, the Rules of 1968, the Land Records Manual. Ask a land-revenue question and you get the section and the page with it. Ask about your ex, your diet or your startup and you get this paragraph instead.',
+      'Ask about the Act, the Rules or the Manual and you get the provision plus the page. I do not do horoscopes, homework or heartbreak — three things I am asked weekly, apparently.',
+    ]);
   }
-  if (GREETING.test(text.trim())) {
-    return 'Hello. I answer land-revenue questions and nothing else — Act 1967, Rules 1968, Land Records Manual. Ask about a section, an intiqal, a girdawari or an appeal, and the provision comes with the answer.';
+  if (PROVENANCE.test(t)) {
+    return pick([
+      'Built by Muhammad Hamid Naeem. Groq does the writing; the Act, the Rules and the Manual do the thinking. Not a lawyer, and not legal advice.',
+      'Muhammad Hamid Naeem built me, Groq gpt-oss runs me, and the Act, the Rules and the Manual are the only things I actually know. Lowkey the best arrangement.',
+    ]);
   }
-  if (THANKS.test(text.trim())) {
-    return 'Noted. Next question.';
+  if (GREETING.test(t)) {
+    return pick([
+      'Hello. I answer land-revenue questions and nothing else — Act 1967, Rules 1968, Land Records Manual. Ask about a section, an intiqal, a girdawari or an appeal, and the provision comes with the answer.',
+      'Hello. Land revenue only — Act 1967, Rules 1968, Manual. No small talk tax, no vibes, just sections that hold up.',
+    ]);
+  }
+  if (THANKS.test(t)) {
+    return pick(['Noted. Next question.', 'Cool. Ask the next one.', 'Receipts received. What else?']);
   }
   return null;
 }
