@@ -429,9 +429,9 @@
     .svc-icon { color: var(--red); opacity: 0.65; flex-shrink: 0; }
     .svc-content p { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.82; max-width: 460px; }
     .svc-tags {
-      display: flex; flex-direction: column; gap: 0.45rem;
-      align-items: flex-end; padding-top: 0.3rem;
-      position: relative; z-index: 1; min-width: 160px;
+      display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.45rem;
+      align-items: flex-start; justify-content: flex-end; padding-top: 0.45rem;
+      position: relative; z-index: 1; max-width: 400px;
     }
     .svc-tag {
       font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.06em;
