@@ -406,7 +406,7 @@
     .svc-item {
       display: grid; grid-template-columns: 180px 1fr auto;
       align-items: start; border-bottom: 1px solid var(--rule);
-      padding: 2.75rem 0; position: relative; cursor: default;
+      padding: 2.1rem 0; position: relative; cursor: default;
     }
     .svc-item:first-child { border-top: 1px solid var(--rule); }
     .svc-item::before {
@@ -423,7 +423,7 @@
     .svc-content { position: relative; z-index: 1; padding-right: 2rem; }
     .svc-content h3 {
       font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
-      color: var(--ink); margin-bottom: 0.75rem; line-height: 1.2;
+      color: var(--ink); margin-bottom: 0; line-height: 1.2;
       display: flex; align-items: center; gap: 0.75rem;
     }
     .svc-icon { color: var(--red); opacity: 0.65; flex-shrink: 0; }
@@ -444,6 +444,13 @@
 
     /* ── EXPERIENCE ── */
     #experience { background: var(--paper); }
+    .exp-note {
+      margin-top: 1.9rem; font-size: 0.78rem; color: var(--ink-muted);
+      font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .exp-note a { color: var(--red); text-decoration: none; border-bottom: 1px solid rgba(139,32,32,0.25); }
+    .exp-note a:hover { border-bottom-color: var(--red); }
     .exp-timeline { position: relative; }
     .exp-timeline::before {
       content: ''; position: absolute; left: 163px; top: 0; bottom: 0;
@@ -1259,7 +1266,6 @@
           <div class="svc-num" aria-hidden="true">01</div>
           <div class="svc-content">
             <h3><i data-lucide="shield" class="svc-icon" width="18" height="18"></i>AI governance &amp; regulatory analysis</h3>
-            <p>Most organizations deploying AI have no real idea whether they're compliant — because the rules are genuinely complicated and changing fast. I map where their systems sit against the EU AI Act, US executive frameworks, and the emerging Asian regulatory picture, then write it up in a way that doesn't require a law degree to act on.</p>
           </div>
           <div class="svc-tags">
             <span class="svc-tag">Regulatory gap analysis</span>
@@ -1272,7 +1278,6 @@
           <div class="svc-num" aria-hidden="true">02</div>
           <div class="svc-content">
             <h3><i data-lucide="scale" class="svc-icon" width="18" height="18"></i>Legal research &amp; litigation support</h3>
-            <p>I draft for real cases — petitions, legal notices, plaints, sale deeds — across Pakistan and India. Not practice problems, not simulations. Documents that go before courts and get filed with clients' names on them. That changes how carefully you write.</p>
           </div>
           <div class="svc-tags">
             <span class="svc-tag">Plaints &amp; petitions</span>
@@ -1285,7 +1290,6 @@
           <div class="svc-num" aria-hidden="true">03</div>
           <div class="svc-content">
             <h3><i data-lucide="bar-chart-2" class="svc-icon" width="18" height="18"></i>Data analysis &amp; legal intelligence</h3>
-            <p>Courts produce mountains of data. Almost nobody looks at it systematically. I do — case outcomes, enforcement trends, regulatory filings — and turn the findings into dashboards and reports that actually inform decisions, not just decorate a slide deck.</p>
           </div>
           <div class="svc-tags">
             <span class="svc-tag">Dataset analysis</span>
@@ -1298,7 +1302,6 @@
           <div class="svc-num" aria-hidden="true">04</div>
           <div class="svc-content">
             <h3><i data-lucide="pen-tool" class="svc-icon" width="18" height="18"></i>Legal writing &amp; policy communication</h3>
-            <p>Good legal analysis that nobody reads is useless. I write for people who need to make decisions, not for people who want to demonstrate they've read the literature. Stripping jargon without losing substance is harder than it sounds.</p>
           </div>
           <div class="svc-tags">
             <span class="svc-tag">Policy explainers</span>
@@ -1354,22 +1357,6 @@
             </ul>
           </div>
         </div>
-
-        <div class="exp-row reveal-up">
-          <div class="exp-dot" aria-hidden="true"></div>
-          <div class="exp-meta"><span class="exp-date">Jul 2025 — Present</span></div>
-          <div class="exp-body">
-            <h3><i data-lucide="users" width="15" height="15" style="color:var(--red);opacity:0.55"></i>Veritas and Vows</h3>
-            <div class="exp-role">Founder &amp; Lead Researcher</div>
-            <div class="exp-loc"><i data-lucide="map-pin" width="11" height="11"></i>Faisalabad, Pakistan</div>
-            <ul>
-              <li>Founded a legal and policy research platform — Veritas &amp; Vows and The Digital Gavel — read by 570+ professionals across Pakistan, the US and the UK</li>
-              <li>Direct a 5-person editorial team on AI governance, constitutional law and regulatory compliance, and built the review process that keeps the analysis practitioner-readable</li>
-            </ul>
-          </div>
-        </div>
-
-        
 
         <div class="exp-row reveal-up">
           <div class="exp-dot" aria-hidden="true"></div>
@@ -1429,35 +1416,8 @@
           </div>
         </div>
 
-        <div class="exp-row reveal-up">
-          <div class="exp-dot" aria-hidden="true"></div>
-          <div class="exp-meta"><span class="exp-date">Sep 2025</span></div>
-          <div class="exp-body">
-            <h3><i data-lucide="gavel" width="15" height="15" style="color:var(--red);opacity:0.55"></i>NyayaSarthak</h3>
-            <div class="exp-role">Legal Intern</div>
-            <div class="exp-loc"><i data-lucide="map-pin" width="11" height="11"></i>New Delhi, India</div>
-            <ul>
-              <li>Drafted a sale deed, rent deed, divorce petition, and loan recovery petition</li>
-              <li>Hands-on exposure across property, family, and civil recovery law in the Indian jurisdiction</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="exp-row reveal-up">
-          <div class="exp-dot" aria-hidden="true"></div>
-          <div class="exp-meta"><span class="exp-date">Apr – May 2025</span></div>
-          <div class="exp-body">
-            <h3><i data-lucide="trending-up" width="15" height="15" style="color:var(--red);opacity:0.55"></i>Excelerate</h3>
-            <div class="exp-role">Data Analytics Intern</div>
-            <div class="exp-loc"><i data-lucide="globe" width="11" height="11"></i>Dubai, UAE (Remote)</div>
-            <ul>
-              <li>Analyzed 3 datasets end-to-end and produced written reports with actionable findings</li>
-              <li>Built a capstone dashboard in Excel and Looker Studio covering the full analytics workflow</li>
-            </ul>
-          </div>
-        </div>
-
       </div>
+      <p class="exp-note">Six roles here. The full chronology, including earlier internships, is in the <a href="/assets/Muhammad-Hamid-Naeem-CV.pdf">CV</a>.</p>
     </div>
   </section>
 
@@ -1495,7 +1455,7 @@
         <div class="proj-card reveal-up">
           <div class="proj-idx"><i data-lucide="users" width="12" height="12"></i>Editorial platform</div>
           <h3>Veritas &amp; Vows</h3>
-          <p>Built from nothing. Covers AI governance, constitutional law, and human rights — 570+ professionals across Pakistan, the US, and the UK read it. I didn't buy that audience. I wrote for it.</p>
+          <p>Built from nothing: Veritas &amp; Vows and its publication, The Digital Gavel. Covers AI governance, constitutional law and human rights under a five-person editorial team I run — 570+ professionals across Pakistan, the US and the UK read it. I didn't buy that audience. I wrote for it.</p>
           <div class="proj-foot">
             <span class="proj-tag"><i data-lucide="tag" width="11" height="11"></i>Content platform</span>
             <a href="https://www.linkedin.com/company/veritas-and-vows" target="_blank" rel="noopener noreferrer" class="proj-link">
