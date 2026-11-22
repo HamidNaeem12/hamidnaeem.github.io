@@ -1115,20 +1115,20 @@ function calculate(opts) {
   fill.className = 'timeline-fill';
 
   if (remaining < 0) {
-    badge.textContent = 'Expired';
+    badge.textContent = 'Time-barred';
     badge.className   = 'result-badge expired';
-    daysEl.textContent = `Deadline passed ${Math.abs(remaining)} day${Math.abs(remaining) !== 1 ? 's' : ''} ago`;
+    daysEl.textContent = `Passed ${Math.abs(remaining)} day${Math.abs(remaining) !== 1 ? 's' : ''} ago. The Act does not do grace.`;
     fill.classList.add('expired');
   } else if (remaining <= 30) {
     badge.textContent = 'Urgent';
     badge.className   = 'result-badge warn';
-    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining — act promptly`;
+    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''}. Not a lot of days.`;
     fill.classList.add('warn');
     fill.style.width = pct + '%';
   } else {
     badge.textContent = 'Within Time';
     badge.className   = 'result-badge ok';
-    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining`;
+    daysEl.textContent = `${remaining} day${remaining !== 1 ? 's' : ''} remaining. Plenty. Allegedly.`;
     fill.style.width = pct + '%';
   }
 

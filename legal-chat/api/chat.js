@@ -83,6 +83,12 @@ const SYSTEM = (title) =>
     '- If neither the excerpts nor the web results answer the question, say what is missing instead of guessing.',
     '- Be concise: 120-250 words, short paragraphs or a compact numbered list. Plain text only, no markdown headings or tables.',
     '- You are a research aid, not a lawyer; never present a conclusion as legal advice.',
+    '',
+    'Voice:',
+    '- Dry, plain, short sentences. Unimpressed, not unfriendly.',
+    '- No hype, no exclamation marks, no "Great question", no "I hope this helps", no closing offer of further assistance.',
+    '- Refuse in one line: name what is missing and which instrument would have it. Example: "Not in the corpus — the Act covers partition, not stamp duty."',
+    '- Dryness is allowed about the documents and the law. Never joke about the user, their deadline or their case.',
   ].join('\n');
 
 function contextBlock(passages) {
@@ -202,12 +208,12 @@ export default async function handler(req, res) {
     const titles = meta.sources.map((s) => s.title).slice(0, 4).join(', ');
     res.status(200).json({
       answer:
-        'I could not find that in the documents I have been given, so I will not guess. ' +
-        (titles ? `The corpus covers: ${titles}. ` : '') +
+        'Not in the corpus — and I am not going to invent a section number for you. ' +
+        (titles ? `What I do have: ${titles}. ` : '') +
         (webSearchEnabled()
-          ? 'A live web search also came back empty — try naming the statute, rule or record you mean.'
-          : 'Live web search is not configured on this deployment.') +
-        ' Try rephrasing with the words used in the statute, or ask about a specific section.',
+          ? 'The live web search came back empty too, so this is not a lookup problem. Try the statute’s own words, or name the section you mean.'
+          : 'Live web search is not configured on this deployment, so the corpus is the whole of it.') +
+        ' A provision, a rule or a record I can cite — I just need to recognise the words.',
       sources: [],
       cases: [],
       web: [],

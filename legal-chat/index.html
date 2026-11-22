@@ -263,11 +263,12 @@
 
 <main class="wrap">
   <section class="hero">
-    <div class="eyebrow">Retrieval-grounded &middot; Cited answers</div>
+    <div class="eyebrow">Retrieval-grounded &middot; Zero improvisation</div>
     <h1>Ask the statute.<br /><em>Not the internet.</em></h1>
     <p class="lede" id="lede">
-      Answers are built only from the supplied statute, report and open-access judgments.
-      Every point carries the section and page it came from.
+      Built from the Punjab Land Revenue Act 1967, the Rules of 1968 and the Land Records
+      Manual. Every point carries the section and page it came from. If something is not in
+      the corpus, the answer says so instead of dressing up a guess.
     </p>
   </section>
 
@@ -282,18 +283,18 @@
       <div class="msg bot">
         <span class="who">Assistant</span>
         <div class="bubble">
-          <p>Ask about any provision, definition, procedure or holding in the documents I have been given. I will quote the section and page.</p>
-          <p>If something is not in the corpus, I will tell you rather than guess.</p>
+          <p>You bring the question. I bring the receipts.</p>
+          <p>Ask about a provision, a procedure, or the record you are holding. I quote the section and the page. When it is not in the corpus, I say so rather than dress up a guess.</p>
         </div>
       </div>
     </div>
 
     <div class="suggest" id="suggest">
       <span class="suggest-label">Start with</span>
-      <button>What is the scope of the Act?</button>
-      <button>Explain the appeal procedure</button>
-      <button>Which sections deal with penalties?</button>
-      <button>What have the courts held on land revenue appeals?</button>
+      <button>partition of land — how does the Act actually do it</button>
+      <button>what happens if I ignore a revenue officer</button>
+      <button>explain mutation (intiqal) like I'm not a lawyer</button>
+      <button>which sections carry penalties — receipts only</button>
     </div>
 
     <form class="composer" id="composer">
@@ -409,6 +410,10 @@
     if (sources && sources.length) {
       const row = document.createElement('div');
       row.className = 'sources';
+      const label = document.createElement('span');
+      label.className = 'chip-label';
+      label.textContent = 'Receipts';
+      row.appendChild(label);
       sources.forEach(function (src) {
         const label = '<b>' + src.n + '</b>' + esc(src.title) + (src.page ? ' · p. ' + src.page : '');
         let chip;
@@ -505,7 +510,7 @@
       stopTyping();
 
       if (!res.ok || !data.answer) {
-        addBot(data.error || 'Something went wrong. Please try again.');
+        addBot(data.error || 'That did not work. Ask again.');
       } else {
         addBot(data.answer, data.sources, data.cases, data.web);
         history.push({ role: 'user', content: question });
@@ -513,7 +518,7 @@
       }
     } catch (err) {
       stopTyping();
-      addBot('Could not reach the assistant. Check your connection and try again.');
+      addBot('Could not reach the assistant. Check the connection and ask again.');
     }
 
     busy = false;
@@ -553,8 +558,8 @@
       document.getElementById('corpusTitle').textContent = meta.title;
       document.getElementById('corpusMeta').textContent = meta.chunks + ' passages';
       document.getElementById('lede').textContent =
-        'Statute answers are built only from ' + meta.title + ' (' + meta.chunks +
-        ' passages indexed) and carry the section they came from. Case law is looked up live and linked to the judgment.';
+        'Built from ' + meta.title + ' — ' + meta.chunks +
+        ' passages, three instruments, zero improvisation. Every answer carries the section it came from; case law is looked up live and linked to the judgment. If it is not in the corpus, the answer says so.';
     })
     .catch(function () {});
 </script>
